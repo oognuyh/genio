@@ -4,7 +4,7 @@ import com.pinkfactory.genio.domain.Card;
 import com.pinkfactory.genio.domain.Resume;
 
 /**
- * @author <a href="mailto:oognuyh@gmail.com">oognuyh </a>
+ * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
 @FunctionalInterface
 public interface CardGenerator {

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author <a href="mailto:oognuyh@gmail.com">oognuyh </a>
+ * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
 @Configuration
 public class OpenApiConfig {

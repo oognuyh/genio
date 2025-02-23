@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 /**
- * @author <a href="mailto:oognuyh@gmail.com">oognuyh </a>
+ * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
 @Component
 @RequiredArgsConstructor

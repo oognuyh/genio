@@ -7,7 +7,7 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author <a href="mailto:oognuyh@gmail.com">oognuyh </a>
+ * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
 @Data
 @ConfigurationProperties(prefix = "hyper-clova-x")
