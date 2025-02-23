@@ -1,0 +1,21 @@
+server:
+  port: 10000
+
+spring:
+  application:
+    name: genio
+
+  datasource:
+    url: jdbc:h2:file:./db/genio
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+hyper-clova-x:
+  api-key: ${CLOVA_STUDIO_API_KEY}
+  base-url: https://clovastudio.stream.ntruss.com/testapp
