@@ -6,7 +6,7 @@ import com.pinkfactory.genio.port.out.CardGenerator;
 import org.springframework.stereotype.Component;
 
 /**
- * @author <a href="mailto:oognuyh@gmail.com">oognuyh </a>
+ * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
 @Component
 public class HyperClovaXCardGenerator implements CardGenerator {

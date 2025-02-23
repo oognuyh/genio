@@ -8,7 +8,7 @@ import io.github.haibiiin.json.repair.JSONRepair;
 import lombok.experimental.UtilityClass;
 
 /**
- * @author <a href="mailto:oognuyh@gmail.com">oognuyh </a>
+ * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
 @UtilityClass
 public class JsonUtil {

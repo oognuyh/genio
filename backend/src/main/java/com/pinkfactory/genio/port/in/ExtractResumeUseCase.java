@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 import lombok.Builder;
 
 /**
- * @author <a href="mailto:oognuyh@gmail.com">oognuyh </a>
+ * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
 public interface ExtractResumeUseCase {
 

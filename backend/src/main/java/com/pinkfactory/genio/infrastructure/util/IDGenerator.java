@@ -4,7 +4,7 @@ import java.util.UUID;
 import lombok.experimental.UtilityClass;
 
 /**
- * @author <a href="mailto:oognuyh@gmail.com">oognuyh </a>
+ * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
 @UtilityClass
 public class IDGenerator {

@@ -6,7 +6,7 @@ import feign.Param;
 import feign.RequestLine;
 
 /**
- * @author <a href="mailto:oognuyh@gmail.com">oognuyh </a>
+ * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
 public interface HyperClovaXClient {
 
