@@ -1,12 +1,11 @@
 package com.pinkfactory.genio.infrastructure.adapter.in;
 
 import com.pinkfactory.genio.application.CardService;
-import com.pinkfactory.genio.domain.Recommended;
 import com.pinkfactory.genio.infrastructure.adapter.in.dto.CardResponse;
-import com.pinkfactory.genio.infrastructure.adapter.in.dto.CreateCardRequest;
-import com.pinkfactory.genio.infrastructure.adapter.in.spec.V1CardApiSpecification;
+import com.pinkfactory.genio.infrastructure.adapter.in.dto.GenerateCardRequest;
+import com.pinkfactory.genio.infrastructure.adapter.in.spec.V1CardAPISpecification;
+import com.pinkfactory.genio.port.in.GenerateCardUseCase.GenerateCardCommand;
 import jakarta.validation.Valid;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,25 +22,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/cards")
-public class V1CardController implements V1CardApiSpecification {
+public class V1CardController implements V1CardAPISpecification {
 
     private final CardService service;
 
     @Override
     @PostMapping
-    public ResponseEntity<CardResponse> generateCard(@Valid @RequestBody CreateCardRequest request) {
+    public ResponseEntity<CardResponse> generateCard(@Valid @RequestBody GenerateCardRequest request) {
+
+        var command = GenerateCardCommand.builder()
+                .name(request.name())
+                .position(request.position())
+                .skills(request.skills())
+                .experiences(request.experiences())
+                .strengths(request.strengths())
+                .tone(request.tone())
+                .build();
+
+        var card = service.generateCard(command);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(CardResponse.builder()
-                        .cardId("a9b7c243-2640-4d05-ab1c-84ac4f207678")
-                        .slogan("Innovate Together, Grow Forever")
-                        .introduction("We are a creative team dedicated to bringing your ideas to life")
-                        .colors(List.of(Recommended.<String>builder()
-                                .value("#FF5733")
-                                .reason(
-                                        "This vibrant orange represents energy and creativity, matching your company's innovative spirit")
-                                .confidence(0.95)
-                                .build()))
+                        .cardId(card.cardId())
+                        .tagline(card.tagline())
+                        .biography(card.biography())
+                        .hashtags(card.hashtags())
+                        .colors(card.colors())
                         .build());
     }
 }

@@ -2,10 +2,9 @@ package com.pinkfactory.genio.infrastructure.adapter.in;
 
 import com.pinkfactory.genio.application.ResumeService;
 import com.pinkfactory.genio.infrastructure.adapter.in.dto.ResumeResponse;
-import com.pinkfactory.genio.infrastructure.adapter.in.spec.V1ResumeApiSpecification;
+import com.pinkfactory.genio.infrastructure.adapter.in.spec.V1ResumeAPISpecification;
 import com.pinkfactory.genio.port.in.ExtractResumeUseCase.ExtractResumeCommand;
 import java.io.IOException;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -25,7 +24,7 @@ import org.springframework.web.server.ResponseStatusException;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/resumes")
-public class V1ResumeController implements V1ResumeApiSpecification {
+public class V1ResumeController implements V1ResumeAPISpecification {
 
     private final ResumeService service;
 
@@ -45,16 +44,15 @@ public class V1ResumeController implements V1ResumeApiSpecification {
                 })
                 .build();
 
-        service.extractResume(command);
+        var resume = service.extractResume(command);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ResumeResponse.builder()
-                        .resumeId("4fc2a0a8-8080-47be-b4be-a2e70e1fd329")
-                        .skills(List.of("Java", "Spring Boot", "AWS", "Agile Development"))
-                        .strengths(List.of("Problem Solving", "Team Leadership", "Strategic Thinking"))
-                        .experiences(List.of(
-                                "Senior Software Engineer at Tech Corp (2020-Present)",
-                                "Software Developer at Innovation Inc (2018-2020)"))
+                        .resumeId(resume.resumeId())
+                        .name(resume.name())
+                        .position(resume.position())
+                        .skills(resume.skills())
+                        .experiences(resume.experiences())
                         .build());
     }
 }
