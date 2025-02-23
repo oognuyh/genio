@@ -10,15 +10,15 @@ import org.springframework.context.annotation.Configuration;
  * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
 @Configuration
-public class OpenApiConfig {
+public class OpenAPIConfig {
 
     @Bean
-    public GroupedOpenApi v1Api() {
+    GroupedOpenApi v1API() {
         return GroupedOpenApi.builder().group("v1").pathsToMatch("/api/v1/**").build();
     }
 
     @Bean
-    public OpenAPI openAPI() {
+    OpenAPI openAPI() {
         return new OpenAPI().info(new Info().title("Genio API Specification").version("1.0"));
     }
 }

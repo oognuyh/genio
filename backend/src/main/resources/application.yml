@@ -5,6 +5,9 @@ spring:
   application:
     name: genio
 
+  config:
+    import: optional:classpath:./credentials.properties
+
   datasource:
     url: jdbc:h2:file:./db/genio
     username: sa
@@ -16,6 +19,13 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
 
-hyper-clova-x:
-  api-key: ${CLOVA_STUDIO_API_KEY}
-  base-url: https://clovastudio.stream.ntruss.com/testapp
+clova:
+  ocr:
+    secret-key: ${CLOVA_OCR_SECRET_KEY}
+    api-gateway-url: ${CLOVA_OCR_API_GATEWAY_URL}
+
+  studio:
+    api-key: ${CLOVA_STUDIO_API_KEY}
+    base-url: ${CLOVA_STUDIO_BASE_URL}
+    max-tokens: 2048
+    temperature: 0.3

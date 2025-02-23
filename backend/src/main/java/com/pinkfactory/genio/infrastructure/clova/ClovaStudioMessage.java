@@ -1,4 +1,4 @@
-package com.pinkfactory.genio.infrastructure.langchain4j;
+package com.pinkfactory.genio.infrastructure.clova;
 
 import lombok.Builder;
 import lombok.Value;
@@ -8,9 +8,9 @@ import lombok.Value;
  */
 @Value
 @Builder
-public class HyperClovaXMessage {
+public class ClovaStudioMessage {
 
-    private HyperClovaXMessageRole role;
+    private ClovaStudioMessageRole role;
 
     private String content;
 }

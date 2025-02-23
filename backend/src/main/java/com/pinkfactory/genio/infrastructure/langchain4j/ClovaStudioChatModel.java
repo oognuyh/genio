@@ -1,5 +1,11 @@
 package com.pinkfactory.genio.infrastructure.langchain4j;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pinkfactory.genio.infrastructure.clova.ClovaStudioChatCompletionRequest;
+import com.pinkfactory.genio.infrastructure.clova.ClovaStudioClient;
+import com.pinkfactory.genio.infrastructure.clova.ClovaStudioMessage;
+import com.pinkfactory.genio.infrastructure.clova.ClovaStudioMessageRole;
+import com.pinkfactory.genio.infrastructure.clova.ClovaStudioProperties;
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.data.message.ChatMessage;
 import dev.langchain4j.data.message.SystemMessage;
@@ -20,47 +26,47 @@ import org.springframework.stereotype.Component;
  * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
 @Component
-@EnableConfigurationProperties(HyperClovaXProperties.class)
-public class HyperClovaXChatModel implements ChatLanguageModel {
+@EnableConfigurationProperties(ClovaStudioProperties.class)
+public class ClovaStudioChatModel implements ChatLanguageModel {
 
-    private final HyperClovaXProperties properties;
+    private final ClovaStudioProperties properties;
 
-    private final HyperClovaXClient client;
+    private final ClovaStudioClient client;
 
-    public HyperClovaXChatModel(HyperClovaXProperties properties) {
+    public ClovaStudioChatModel(ClovaStudioProperties properties, ObjectMapper binder) {
 
         this.properties = properties;
         this.client = Feign.builder()
-                .encoder(new JacksonEncoder())
-                .decoder(new JacksonDecoder())
+                .encoder(new JacksonEncoder(binder))
+                .decoder(new JacksonDecoder(binder))
                 .requestInterceptor(
-                        template -> template.header(HttpHeaders.AUTHORIZATION, "Bearer " + properties.getApiKey()))
-                .target(HyperClovaXClient.class, properties.getBaseUrl());
+                        template -> template.header(HttpHeaders.AUTHORIZATION, "Bearer " + properties.apiKey()))
+                .target(ClovaStudioClient.class, properties.baseUrl());
     }
 
     @Override
     @SuppressWarnings("java:S5738")
     public Response<AiMessage> generate(List<ChatMessage> messages) {
 
-        var request = HyperClovaXChatCompletionRequest.builder()
+        var request = ClovaStudioChatCompletionRequest.builder()
                 .messages(messages.stream()
                         .map(message -> {
                             if (message instanceof SystemMessage msg) {
 
-                                return HyperClovaXMessage.builder()
-                                        .role(HyperClovaXMessageRole.SYSTEM)
+                                return ClovaStudioMessage.builder()
+                                        .role(ClovaStudioMessageRole.SYSTEM)
                                         .content(msg.text())
                                         .build();
                             } else if (message instanceof AiMessage msg) {
 
-                                return HyperClovaXMessage.builder()
-                                        .role(HyperClovaXMessageRole.ASSISTANT)
+                                return ClovaStudioMessage.builder()
+                                        .role(ClovaStudioMessageRole.ASSISTANT)
                                         .content(msg.text())
                                         .build();
                             } else if (message instanceof UserMessage msg) {
 
-                                return HyperClovaXMessage.builder()
-                                        .role(HyperClovaXMessageRole.USER)
+                                return ClovaStudioMessage.builder()
+                                        .role(ClovaStudioMessageRole.USER)
                                         .content(msg.singleText())
                                         .build();
                             }
@@ -68,16 +74,16 @@ public class HyperClovaXChatModel implements ChatLanguageModel {
                             throw new UnsupportedOperationException("Unsupported message type: " + message.type());
                         })
                         .toList())
-                .temperature(properties.getTemperature())
-                .maxTokens(properties.getMaxTokens())
-                .topK(properties.getTopK())
-                .topP(properties.getTopP())
-                .repeatPenalty(properties.getRepeatPenalty())
-                .stopBefore(properties.getStopBefore())
-                .seed(properties.getSeed())
+                .temperature(properties.temperature())
+                .maxTokens(properties.maxTokens())
+                .topK(properties.topK())
+                .topP(properties.topP())
+                .repeatPenalty(properties.repeatPenalty())
+                .stopBefore(properties.stopBefore())
+                .seed(properties.seed())
                 .build();
 
-        var output = client.chat(properties.getModelName(), request);
+        var output = client.chat(properties.modelName(), request);
 
         var text = output.at("/result/message/content").asText();
         var usage = new TokenUsage(

@@ -9,5 +9,12 @@ import com.pinkfactory.genio.domain.Resume;
 @FunctionalInterface
 public interface CardGenerator {
 
-    public Card generate(Resume resume);
+    /**
+     * Generates a card representation from the given resume.
+     *
+     * @param resume Resume data to be transformed into a card format
+     * @param tone   Tone style to be reflected in the generated card's content and style
+     * @return A card representation of the resume
+     */
+    Card generate(Resume resume, String tone);
 }

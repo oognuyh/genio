@@ -8,5 +8,11 @@ import com.pinkfactory.genio.domain.Resume;
 @FunctionalInterface
 public interface ResumeExtractor {
 
-    public Resume extract(String content);
+    /**
+     * Extracts resume information from the given content.
+     *
+     * @param content String content containing resume information to be extracted
+     * @return A structured Resume object containing the extracted information
+     */
+    Resume extract(String content);
 }

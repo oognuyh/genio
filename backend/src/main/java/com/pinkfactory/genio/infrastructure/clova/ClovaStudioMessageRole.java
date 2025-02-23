@@ -1,11 +1,11 @@
-package com.pinkfactory.genio.infrastructure.langchain4j;
+package com.pinkfactory.genio.infrastructure.clova;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
-public enum HyperClovaXMessageRole {
+public enum ClovaStudioMessageRole {
     @JsonProperty("system")
     SYSTEM,
     @JsonProperty("user")

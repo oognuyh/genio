@@ -44,8 +44,10 @@ dependencies {
 	implementation "org.apache.tika:tika-parsers-standard-package:$tikaVersion"
 
 	implementation "com.github.victools:jsonschema-generator:$jsonschemaGeneratorVersion"
+	implementation "com.github.victools:jsonschema-module-jackson:$jsonschemaGeneratorVersion"
  
 	implementation "io.github.haibiiin:json-repair:$jsonRepairVersion"
+	implementation "org.antlr:antlr4-runtime:4.8"
 
 	compileOnly "org.projectlombok:lombok" 
 	annotationProcessor "org.projectlombok:lombok"

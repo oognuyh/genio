@@ -1,17 +1,19 @@
-package com.pinkfactory.genio.infrastructure.langchain4j;
+package com.pinkfactory.genio.infrastructure.clova;
 
 import java.util.List;
 import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
+import lombok.extern.jackson.Jacksonized;
 
 /**
  * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
-@Value
+@Data
 @Builder
-public class HyperClovaXChatCompletionRequest {
+@Jacksonized
+public class ClovaStudioChatCompletionRequest {
 
-    private List<HyperClovaXMessage> messages;
+    private List<ClovaStudioMessage> messages;
 
     private Integer maxTokens;
 
