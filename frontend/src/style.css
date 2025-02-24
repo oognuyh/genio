@@ -1,0 +1,113 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background-color: #fbffff; /* 연분홍 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.big-text {
+  font-size: 60px; /* 글자 크기 크게 */
+  font-weight: bold;
+  color: hwb(0 0% 100%);
+}
+
+.button-group {
+  margin-top: 40px;
+  display: flex;
+  gap: 30px;
+}
+
+.btn {
+  padding: 20px 50px; /* 버튼 크기 키우기 */
+  font-size: 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #121d33;
+  color: white;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color: #e60050;
+}
+
+.typed-line {
+  white-space: nowrap; /* 줄바꿈 방지 */
+  overflow: hidden; /* 넘치는 글자는 숨김 */
+  text-overflow: ellipsis; /* 넘치면 ... 표시 가능 */
+}
+
+.nowrap-text {
+  white-space: nowrap; /* 줄바꿈 방지 */
+  overflow: hidden; /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis; /* 넘치면 ... 표시 가능 */
+  max-width: 100%; /* 너무 커지지 않도록 제한 */
+}
+
+.resume-container {
+  text-align: center;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.upload-box {
+  width: 600px;
+  height: 200px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  cursor: pointer;
+  position: relative;
+}
+
+.plus-icon {
+  font-size: 40px;
+  color: #999;
+}
+
+.file-text {
+  font-size: 22px;
+  color: #666;
+}
+
+.file-input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
