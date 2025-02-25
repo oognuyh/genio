@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import logo from "../assets/logo.png"; // 로고 이미지 가져오기
+import logo from "../../assets/logo.png"; // 로고 이미지 가져오기
+import "./resumeUpload.css"
 
 const ResumeYes = () => {
   const [file, setFile] = useState(null); // 업로드된 파일 저장
@@ -43,6 +44,7 @@ const ResumeYes = () => {
   };
 
   return (
+    <div className = "resume-body"> 
     <div className="resume-container">
       {/* 로고 및 설명 */}
       <div className="header">
@@ -92,6 +94,7 @@ const ResumeYes = () => {
       <button className="btn">나만의 브랜드 키트 만들기</button>
       <p className="direct-text">이력서가 없어요. 직접 입력할래요.</p>
     </div>
+    </div> 
   );
 };
 

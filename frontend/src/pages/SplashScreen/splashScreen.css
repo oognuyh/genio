@@ -1,0 +1,94 @@
+/* 배경 설정 (위에서 아래로 부드러운 그라데이션) */
+.splash-body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #ffffff, #dce3f4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* 전체 컨테이너 */
+  .splash-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+  }
+  
+  /* 로고 스타일 */
+  .splash-logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .splash-logo {
+    width: 180px; /* 크기 조절 */
+    height: auto;
+    animation: float 3s ease-in-out infinite; /* 🔹 부드러운 흔들림 효과 */
+  }
+  
+  /* 로고 텍스트 스타일 */
+  .logo-text-wrapper {
+    margin-top: -20px;
+  }
+  
+  .logo-text {
+    width: 250px;
+    height: auto;
+  }
+  
+  /* 메시지 스타일 */
+  .message-container {
+    font-size: 28px;
+    font-weight: 500;
+    color: #121D31;
+    margin-top: 20px;
+  }
+  
+  .typed-line {
+    white-space: pre-line;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  
+  /* 버튼 스타일 */
+  .button-group {
+    margin-top: 20px;
+  }
+  
+  .btn {
+    padding: 15px 40px;
+    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #121d33;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .btn:hover {
+    background-color: #fb122f;
+  }
+  
+  /* 🔹 로고 부드러운 흔들림 효과 */
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
