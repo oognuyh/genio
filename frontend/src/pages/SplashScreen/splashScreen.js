@@ -4,17 +4,18 @@ import { ReactTyped } from "react-typed";
 import { motion } from "framer-motion"; // 🔹 애니메이션 효과 추가
 import logoImage from "../../assets/logo.png";
 import logoText from "../../assets/logo-text.png";
-import "./splashScreen.css"
+import "./splashScreen.css";
 
 const SplashScreen = () => {
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lines, setLines] = useState([]);
   const [isComplete, setIsComplete] = useState(false);
+  const [isClicked, setIsClicked] = useState(false); // ✅ 클릭 상태 추가
 
   const sentences = [
-    "안녕하세요! Genio에 오신 것을 환영합니다.✨",
-    "몇 가지 키워드만 입력하면 나만의 셀프 브랜딩 키트가 완성됩니다.\n\n\n\n\n\n\n\n\n\n지금 바로 시작해볼까요?",
+    "AI 브랜딩 파트너 제니오와 함께 <strong>나만의 차별화된 강점</strong>을 찾아서!",
+    "이력서를 업로드하거나 프로필을 작성하면 <strong>퍼스널 브랜딩 키트</strong>를 생성해드려요.",
   ];
 
   useEffect(() => {
@@ -32,15 +33,26 @@ const SplashScreen = () => {
     }
   }, [currentIndex]);
 
+  // ✅ 클릭 시 애니메이션 효과 추가 후 페이지 이동
+  const handleMouseDown = () => {
+    setIsClicked(true);
+  };
+
+  const handleMouseUp = () => {
+    setTimeout(() => {
+      navigate("/resume-check");
+    }, 500); // 클릭 효과 후 페이지 전환
+  };
+
   return (
     <div className="splash-body">
       <div className="splash-container">
         {/* 로고 애니메이션 */}
         <motion.div
           className="splash-logo-wrapper"
-          initial={{ opacity: 0, y: -50 }} // 처음엔 위에 있다가
-          animate={{ opacity: 1, y: 0 }} // 아래로 자연스럽게 내려옴
-          transition={{ duration: 1, ease: "easeOut" }} // 1초 동안 애니메이션
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
         >
           <img src={logoImage} alt="Genio Logo" className="splash-logo" />
         </motion.div>
@@ -48,9 +60,9 @@ const SplashScreen = () => {
         {/* 로고 텍스트 애니메이션 */}
         <motion.div
           className="logo-text-wrapper"
-          initial={{ opacity: 0, y: 30 }} // 처음엔 아래쪽에 있다가
-          animate={{ opacity: 1, y: 0 }} // 위로 올라오면서 나타남
-          transition={{ duration: 1, delay: 0.5, ease: "easeOut" }} // 0.5초 지연 후 1초 동안
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
         >
           <img src={logoText} alt="Genio" className="logo-text" />
         </motion.div>
@@ -59,28 +71,26 @@ const SplashScreen = () => {
         <div className="message-container">
           {lines.map((line, idx) => (
             <div key={idx} className="typed-line">
-              <ReactTyped
-                strings={[line]}
-                typeSpeed={30}
-                showCursor={false}
-                loop={false}
-              />
+              <ReactTyped strings={[line]} typeSpeed={20} showCursor={false} loop={false} />
             </div>
           ))}
         </div>
 
         {/* 버튼 애니메이션 */}
         {isComplete && (
-          <motion.div
-            className="button-group"
-            initial={{ scale: 0 }} // 처음에는 작게
-            animate={{ scale: 1 }} // 점점 커지면서 등장
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
-            <button className="btn" onClick={() => navigate("/resume-check")}>
-              시작하기
-            </button>
-          </motion.div>
+          <div className="button-group">
+            <motion.button
+              className={`btn ${isClicked ? "clicked" : ""}`} // 클릭 시 추가 클래스
+              onMouseDown={handleMouseDown}
+              onMouseUp={handleMouseUp}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              whileTap={{ scale: 0.9 }} // 클릭 시 작아짐 효과
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              키트 생성 시작하기
+            </motion.button>
+          </div>
         )}
       </div>
     </div>
