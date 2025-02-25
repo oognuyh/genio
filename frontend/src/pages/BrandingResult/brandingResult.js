@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import domtoimage from 'dom-to-image';
-import { saveAs } from 'file-saver';
+import React, {useState} from "react";
+import domtoimage from "dom-to-image";
+import { saveAs } from "file-saver";
 import resizer from "react-image-file-resizer";
 
-import './brandingResult.css';
+import "./brandingResult.css";
 
 const BrandingResult = () => {
     const [cardColor, setCardColor] = useState('#00b894');
