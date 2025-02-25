@@ -32,6 +32,7 @@ public class V1JobCategoryController implements V1JobCategoryAPISpecification {
                         .map(category -> JobCategoryResponse.builder()
                                 .name(category.name())
                                 .positions(category.positions())
+                                .skillSet(category.skillSet())
                                 .build())
                         .toList());
     }

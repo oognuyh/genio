@@ -14,4 +14,8 @@ public record JobCategoryResponse(
         @Schema(
                         description = "List of positions within this job category",
                         example = "[\"Backend Developer\", \"Frontend Developer\", \"Mobile Developer\"]")
-                List<String> positions) {}
+                List<String> positions,
+        @Schema(
+                        description = "List of skills associated with this job category",
+                        example = "[\"Java\", \"Spring\", \"React\", \"JavaScript\", \"Docker\", \"AWS\"]")
+                List<String> skillSet) {}
