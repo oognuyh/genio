@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+@SuppressWarnings("unused")
 @Tag(name = "Resumes V1", description = "Resume management API")
 public interface V1ResumeAPISpecification {
 

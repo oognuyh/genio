@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 
+@SuppressWarnings("unused")
 @Tag(name = "Cards V1", description = "Card management API")
 public interface V1CardAPISpecification {
 
