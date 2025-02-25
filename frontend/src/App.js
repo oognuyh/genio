@@ -4,7 +4,7 @@ import SplashScreen from "./pages/SplashScreen/splashScreen";
 import ResumeCheck from "./pages/ResumeCheck/resumeCheck";
 import ResumeUpload from "./pages/ResumeUpload/resumeUpload";
 import ResumeNo from "./components/ResumeNo";
-import BrandingResult from './pages/BrandingResult/brandingResult';
+import BrandingResult from "./pages/BrandingResult/brandingResult";
 
 function App() {
   return (
