@@ -15,9 +15,9 @@ public record ResumeResponse(
         @Schema(description = "Extracted name from resume", example = "John Doe") String name,
         @Schema(description = "Current or most recent position", example = "Backend Developer") String position,
         @Schema(
-                        description = "List of technical and professional skills",
+                        description = "List of technical and professional skill set",
                         example = "[\"Java\", \"Spring Boot\", \"AWS\", \"Agile Development\"]")
-                List<String> skills,
+                List<String> skillSet,
         @Schema(
                         description = "List of work experiences",
                         example =

@@ -51,7 +51,7 @@ public class V1ResumeController implements V1ResumeAPISpecification {
                         .resumeId(resume.resumeId())
                         .name(resume.name())
                         .position(resume.position())
-                        .skills(resume.skills())
+                        .skillSet(resume.skillSet())
                         .experiences(resume.experiences())
                         .build());
     }

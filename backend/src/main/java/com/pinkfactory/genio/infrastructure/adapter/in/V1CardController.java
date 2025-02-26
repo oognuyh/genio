@@ -33,7 +33,7 @@ public class V1CardController implements V1CardAPISpecification {
         var command = GenerateCardCommand.builder()
                 .name(request.name())
                 .position(request.position())
-                .skills(request.skills())
+                .skillSet(request.skillSet())
                 .experiences(request.experiences())
                 .strengths(request.strengths())
                 .tone(request.tone())

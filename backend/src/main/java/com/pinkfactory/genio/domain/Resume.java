@@ -21,7 +21,7 @@ public class Resume {
 
     private List<String> strengths;
 
-    private List<String> skills;
+    private List<String> skillSet;
 
     private List<String> experiences;
 }
