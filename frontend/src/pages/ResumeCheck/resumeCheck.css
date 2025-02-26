@@ -52,53 +52,66 @@
   }
   
   /* 카드 컨테이너 */
-  .card-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    width: 100%;
-    max-width: 800px;
-  }
-  
-  /* 개별 카드 */
-  .card {
-    background: #fbffff;
-    padding: 20px;
-    border-radius: 10px;
-    width: 600px;
-    text-align: center;
-  }
-  
-  .card p {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  /* 빈 흰색 상자 스타일 */
-  .empty-box {
-    width: 100%;
-    height: 80px;
-    background-color: white; /* 흰색 배경 */
-    border: 1px solid #ccc; /* 테두리 */
-    border-radius: 5px; /* 둥근 모서리 */
-    margin-bottom: 15px;
-  }
-  
-  
-  /* 버튼 스타일 */
-  .btn {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: black;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .btn:hover {
-    background-color: #333;
-  }
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  max-width: 2000px; /* 카드 크기 조정 */
+}
+
+/* 개별 카드 */
+.card {
+  background: #fbffff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 🔹 내부 요소 왼쪽 정렬 */
+  text-align: left; /* 🔹 텍스트 왼쪽 정렬 */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 큰 제목 (볼드, 크게) */
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px; /* 간격 조정 */
+}
+
+/* 작은 설명 */
+.card-desc {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px; /* 간격 조정 */
+}
+
+/* 빈 흰색 상자 스타일 */
+.empty-box {
+  width: 100%;
+  height: 80px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+/* 버튼 스타일 */
+.btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+.btn:hover {
+  background-color: #333;
+  transform: scale(1.02);
+}
