@@ -5,6 +5,7 @@ import ResumeCheck from "./pages/ResumeCheck/resumeCheck";
 import ResumeUpload from "./pages/ResumeUpload/resumeUpload";
 import ResumeNo from "./components/ResumeNo";
 import BrandingResult from "./pages/BrandingResult/brandingResult";
+import LoadingScreen from "./components/loadingScreen";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Route path="/resume-check" element={<ResumeCheck />} />
         <Route path="/resume-upload" element={<ResumeUpload />} />
         <Route path="/resume-no" element={<ResumeNo />} />
-        <Route path="result" element={<BrandingResult />} />
+        <Route path="/branding-result" element={<BrandingResult />} />
+        <Route path="/loading-screen" element={<LoadingScreen />} />
       </Routes>
     </Router>
   );

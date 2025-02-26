@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png"; // 로고 이미지 가져오기
 import axios from "axios";
 import "./resumeUpload.css"
 
 const ResumeUpload = () => {
+  const navigate = useNavigate();
+
   const [file, setFile] = useState(null); // 업로드된 파일 저장
   const [error, setError] = useState(""); // 파일 크기 초과 에러 메시지
   const [dragOver, setDragOver] = useState(false); // 드래그 상태 확인
@@ -15,23 +18,18 @@ const ResumeUpload = () => {
   }
 
   // 이력서 전송 API호출 및 분석 정보 받아오기
-  const onGenerateBrandKit = async () => {
+  const onGenerateKit = async () => {
+    try {
+      console.log(file);
 
-    console.log(file);
+      const fileInfo = {
+        file: file
+      };
 
-    const formData = new FormData();
-    formData.append('file', file);
-
-    const resumeInfo = await axios.post("api/v1/resumes", formData, {
-      headers: {
-        'accept': 'application/json',
-        'Content-Type': 'multipart/form-data',
-      }
-    }).catch(err => {
-      console.log(err);
-    });
-    
-    console.log(resumeInfo.data);
+      navigate("/loading-screen", { state: fileInfo });
+    } catch (err) {
+      console.error("이력서 분석 중 오류가 발생했습니다.", err);
+    }
   }
 
   // // 파일 to Base64 변환
@@ -135,7 +133,7 @@ const ResumeUpload = () => {
         </div>
 
         {/* 버튼 */}
-        <button className="btn" onClick={onGenerateBrandKit}>나만의 브랜드 키트 만들기</button>
+        <button className="btn" onClick={onGenerateKit}>나만의 브랜드 키트 만들기</button>
         <p className="direct-text" onClick={onTest}>이력서가 없어요. 직접 입력할래요.</p>
       </div>
     </div>
