@@ -14,7 +14,7 @@ public interface GenerateCardUseCase {
             String name,
             String position,
             List<String> experiences,
-            List<String> skills,
+            List<String> skillSet,
             List<String> strengths,
             String tone) {}
 

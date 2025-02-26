@@ -17,9 +17,9 @@ public record GenerateCardRequest(
                         example = "[\"Problem Solving\", \"Team Leadership\", \"Strategic Thinking\"]")
                 List<String> strengths,
         @Schema(
-                        description = "List of technical and professional skills",
+                        description = "List of technical and professional skill set",
                         example = "[\"Java\", \"Spring Boot\", \"AWS\", \"Agile Development\"]")
-                List<String> skills,
+                List<String> skillSet,
         @Schema(
                         description = "List of work experiences",
                         example =

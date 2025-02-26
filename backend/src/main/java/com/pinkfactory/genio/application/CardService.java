@@ -28,7 +28,7 @@ public class CardService implements GenerateCardUseCase {
                                 .position(command.position())
                                 .experiences(command.experiences())
                                 .strengths(command.strengths())
-                                .skills(command.skills())
+                                .skillSet(command.skillSet())
                                 .build(),
                         command.tone())
                 .toBuilder()
