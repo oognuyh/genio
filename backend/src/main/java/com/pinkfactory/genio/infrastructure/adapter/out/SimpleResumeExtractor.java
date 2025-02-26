@@ -76,7 +76,7 @@ public class SimpleResumeExtractor implements ResumeExtractor {
                   name: string? // 사용자명
                   position: string? // 직무
                   experiences: string[] // 경력사항을 각 회사 단위로 프로젝트를 그룹화하여 Markdown 문자열로 아이템을 배열로 반환한다.
-                  skills: string[] // 사용 도구/기술 스택의 이름을 각 문자열 아이템으로 배열로 반환한다.
+                  skillSet: string[] // 사용 도구/기술 스택의 이름을 각 문자열 아이템으로 배열로 반환한다.
                 }
                 ```
 
