@@ -24,7 +24,7 @@ public record ClovaStudioProperties(
 
     public ClovaStudioProperties {
 
-        modelName = Objects.requireNonNullElse(modelName, "HCX-DASH-001");
+        modelName = Objects.requireNonNullElse(modelName, "HCX-003");
         maxTokens = Objects.requireNonNullElse(maxTokens, 256);
         temperature = Objects.requireNonNullElse(temperature, 0.5);
         repeatPenalty = Objects.requireNonNullElse(repeatPenalty, 5.0);
