@@ -1,0 +1,162 @@
+.strengths-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* ✅ 상단 정렬 */
+  width: 100%;
+  height: 100vh;
+  background: #f8f8f8;
+  padding-top: 40px; /* ✅ 상단 여백 추가 */
+}
+
+.strengths-container {
+  max-width: 1280px;
+  width: 100%;
+  text-align: left; /* ✅ 왼쪽 정렬 */
+  padding: 20px;
+  background: #f8f8f8;
+  box-shadow: none !important;
+  border: none;
+}
+
+/* ✅ 진행 단계 스타일 */
+.progress-steps {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.progress-step {
+  font-size: 16px;
+  font-weight: 600;
+  color: #8995ab;
+}
+
+.progress-step.active {
+  color: #121d31;
+}
+
+/* ✅ 헤더 정렬 */
+h2 {
+  margin-top: 96px;
+  font-size: 42px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.sub-text {
+  font-size: 20px;
+  color: #8995ab;
+  margin-bottom: 30px;
+}
+
+/* 🚀 강점 선택 제한 메시지 스타일 */
+.error-message {
+  color: red;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+/* ✅ 강점 선택 리스트 */
+.strengths-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 1280px;
+  margin-top: 100px;
+
+  max-height: 900px; /* ✅ 최대 높이 제한 */
+  overflow-y: auto; /* ✅ 세로 스크롤 활성화 */
+  padding-right: 30px; /* ✅ 스크롤바와 아이템 간 간격 */
+  overflow-x: hidden;
+}
+
+.strength-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  border-radius: 12px;
+  background: #eceff4;
+  color: #8995ab;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 140%;
+  cursor: pointer;
+  transition: background 0.3s;
+  gap: 24px;
+  width: 1280px;
+  height: 88px;
+  outline: none;
+  border: none;
+}
+
+/* ✅ 체크 아이콘 추가 */
+.strength-item::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  background-image: url("../../assets/check.png"); /* 체크 안된 상태 */
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.strength-item.selected {
+  background: #121d31;
+  color: white;
+}
+
+/* ✅ 체크 아이콘 변경 (선택된 경우) */
+.strength-item.selected::before {
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+  background-image: url("../../assets/check-white.png"); /* 체크된 상태 */
+}
+
+/* 🔹 다음 버튼 (기본적으로 숨김) */
+.st-next-btn {
+  margin-top: 40px;
+  width: 320px;
+  height: 60px;
+  padding: 16px 80px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #121d31;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.st-next-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    258.21deg,
+    #121d31 -85.49%,
+    #0e1221 -58.12%,
+    #455473 -30.76%,
+    #8995ab -3.39%,
+    #455473 39.61%,
+    #0e1221 78.7%,
+    #121d31 106.07%
+  );
+  transform: translateX(-50%);
+}

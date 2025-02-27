@@ -1,0 +1,69 @@
+.progress-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 32px 0;
+  font-family: Arial, sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* 진행 단계를 한 줄로 배치 */
+.step-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 80px);
+  max-width: 1100px;
+  position: relative;
+  padding: 0 40px;
+}
+
+/* 개별 단계 */
+.step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #8995ab;
+  font-weight: bold;
+  position: relative;
+  flex: 1;
+  text-align: center;
+}
+
+/* 동그라미 (단계 번호) */
+.step-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  z-index: 1;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* 현재 단계와 이전 단계까지 색칠 */
+.step.completed .step-number {
+  background-color: #121d31;
+  color: white;
+}
+
+/* 현재 단계와 이전 단계까지 텍스트 강조 */
+.step.completed .step-text {
+  color: #121d31;
+  font-weight: bold;
+}
+
+/* 연결 바도 진행된 단계만큼 색칠 */
+.step.completed .progress-bar {
+  background-color: #121d31;
+}

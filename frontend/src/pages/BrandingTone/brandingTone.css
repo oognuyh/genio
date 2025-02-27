@@ -1,0 +1,183 @@
+.branding-tone-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100vh;
+  background: #f8f8f8;
+  padding-top: 40px;
+}
+
+.branding-tone-container {
+  max-width: 1280px;
+  width: 100%;
+  text-align: left;
+  padding: 20px;
+  background: #f8f8f8;
+  box-shadow: none !important;
+  border: none;
+}
+
+/* ✅ 진행 단계 스타일 */
+.progress-steps {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.progress-step {
+  font-size: 16px;
+  font-weight: 600;
+  color: #8995ab;
+}
+
+.progress-step.active {
+  color: #121d31;
+}
+
+/* ✅ 헤더 정렬 */
+h2 {
+  margin-top: 96px;
+  font-size: 42px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.sub-text {
+  font-size: 20px;
+  color: #8995ab;
+  margin-bottom: 30px;
+}
+
+/* ✅ 브랜드 톤 선택 리스트 */
+.branding-tone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 1280px;
+  margin-top: 100px;
+}
+
+/* ✅ 브랜드 톤 선택 버튼 */
+.branding-tone-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 24px;
+  border-radius: 12px;
+  background: #eceff4;
+  color: #8995ab;
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 140%;
+  cursor: pointer;
+  transition: background 0.3s;
+  gap: 16px;
+  width: 100%;
+  max-width: 1280px;
+  height: 103px;
+  outline: none;
+  border: none;
+}
+
+/* ✅ 선택된 항목의 배경색 적용 */
+.branding-tone-item.selected {
+  background: #121d31 !important; 
+  color: white !important;
+}
+
+/* ✅ 체크 아이콘을 제목 왼쪽으로 이동 */
+.branding-tone-title {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* 체크 아이콘과 제목 간격 */
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 140%;
+  color: #8995ab;
+  position: relative;
+  margin-bottom: -5px;
+}
+
+/* ✅ 기본 체크 아이콘 (회색) */
+.branding-tone-title::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  background-image: url("../../assets/check.png"); /* 체크 안된 상태 */
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: background-image 0.3s ease-in-out;
+}
+
+/* ✅ 선택된 경우 체크 아이콘 (흰색) */
+.branding-tone-item.selected .branding-tone-title::before {
+  background-image: url("../../assets/check-white.png"); /* 체크된 상태 */
+}
+
+/* ✅ 설명 텍스트 스타일 */
+.branding-tone-description {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 140%;
+  color: #8995ab;
+  margin-left: 40px;
+}
+
+/* ✅ 선택되었을 때 제목 & 설명 색상 변경 */
+.branding-tone-item.selected .branding-tone-title {
+  color: white !important;
+}
+
+.branding-tone-item.selected .branding-tone-description {
+  color: white !important;
+}
+
+/* 🔹 다음 버튼 */
+.branding-tone-next-btn {
+  margin-top: 40px;
+  width: 320px;
+  height: 60px;
+  padding: 16px 80px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #121d31;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ✅ 버튼 효과 */
+.branding-tone-next-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    258.21deg,
+    #121d31 -85.49%,
+    #0e1221 -58.12%,
+    #455473 -30.76%,
+    #8995ab -3.39%,
+    #455473 39.61%,
+    #0e1221 78.7%,
+    #121d31 106.07%
+  );
+  transform: translateX(-50%);
+}

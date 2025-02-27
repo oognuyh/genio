@@ -1,0 +1,28 @@
+.loading2-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #f8f8f8;
+  padding: 0 320px; /* ✅ 전체 좌우 여백 320px 설정 */
+  box-sizing: border-box; /* ✅ 패딩 포함하여 크기 유지 */
+}
+
+.loading-text {
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 140%;
+  color: #171717;
+  margin-bottom: 72px;
+  text-align: left;
+  align-items: flex-start;
+  width: 1271px;
+}
+
+.loading-image {
+  width: 1271px;
+  height: 525px;
+}
