@@ -32,13 +32,13 @@ public interface V1ResumeAPISpecification {
 
     @Operation(summary = "Extract resume data", description = "Extract structured data from resume PDF file")
     @ApiResponses(
-        value = {
-            @ApiResponse(
-                responseCode = "200",
-                content =
-                @Content(
-                    mediaType = "text/event-stream",
-                    schema = @Schema(implementation = Event.class)))
-        })
+            value = {
+                @ApiResponse(
+                        responseCode = "200",
+                        content =
+                                @Content(
+                                        mediaType = "text/event-stream",
+                                        schema = @Schema(implementation = Event.class)))
+            })
     SseEmitter extractResumeAsStream(MultipartFile file);
 }
