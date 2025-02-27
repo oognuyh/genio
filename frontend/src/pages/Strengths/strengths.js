@@ -54,7 +54,7 @@ const Strengths = () => {
       <ProgressSteps currentStep={currentStep} />
 
       <div className="strengths-container">
-        <h2>용우님은 일할 때 어떤 모습이세요?</h2>
+        <h2 className="strengths-title">용우님은 일할 때 어떤 모습이세요?</h2>
         <p className="sub-text">용우님이 일할 때의 모습과 가장 가깝다고 생각하는 문장을 2~3개 골라주세요.</p>
 
         {/* 🚀 선택 제한 메시지 표시 */}

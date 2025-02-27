@@ -71,7 +71,7 @@ const Profile = () => {
     <div className="profile-body">
       <ProgressSteps currentStep={currentStep} />
       <div className="profile-container">
-        <h2>용우님의 프로필을 빠르게 완성했어요.</h2>
+        <h2 className="profile-title">용우님의 프로필을 빠르게 완성했어요.</h2>
         <p className="sub-text">
           프로필이 빠짐없이 잘 작성되었는지 확인해주세요.<br />
           제니오가 분석한 정보가 잘못되었다면 수정할 수 있어요.

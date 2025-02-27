@@ -3,91 +3,330 @@
   --brandColor: #2d3436;
 }
 
-.container {
-  max-width: 915px;
-  margin: 20px auto;
-  padding: 0 20px;
+body {
+  background: #F8F8F8;
+}
+
+.result-container {
+  /* genkit-page-default */
+  position: absolute;
+  width: 100vw;
+  height: 91.11vh;
+
+  font-family: Pretendard;
 }
 
 /* 상단 소개글 스타일 */
 .intro-section {
-  margin-bottom: 30px;
+  /* text_set */
+  position: absolute;
+  width: 66.6667vw;
+  /* 1280px → (1280/1920)*100vw */
+  height: 13.6275vh;
+  left: 16.6667vw;
+  top: 16.2602vh;
+
+  /* 자동 레이아웃 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0px;
 }
+
 .intro-title {
-  font-size: 28px;
-  color: #333;
-  margin-bottom: 15px;
+  /* title_text */
+  position: static;
+  /* 위치 속성 없음 → 변환 불필요 */
+  width: 66.6667vw;
+
+  /* 자동 레이아웃 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1.25vw;
+  padding: 0px;
+
+  /* Inside Auto Layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 0;
+
+  /* 폰트 스타일 */
+  color: rgb(23, 23, 23);
+  font-family: Pretendard;
+  font-size: 2.1875vw;
+  font-weight: 700;
+  text-align: left;
 }
+
 .intro-text {
-  font-size: 16px;
-  color: #666;
-  line-height: 1.5;
+  /* description_text */
+  position: static;
+  width: 66.6667vw;
+
+  /* 자동 레이아웃 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0px;
+
+  /* Inside Auto Layout */
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  margin-top: 20px;
+
+  /* Description/Des-20-regular */
+  color: rgb(137, 149, 171);
+  font-size: 1.0417vw;
+  font-weight: 400;
+  line-height: 140%;
+  text-align: left;
 }
 
 /* 플랫폼 버튼 스타일 */
-.platform-buttons {
-  margin-bottom: 25px;
+.platform-btn-list {
+  /* button_list */
+  position: absolute;
+  width: 27.0313vw;
+  height: 4.7059vh;
+  left: 16.6667vw;
+  top: 35.7039vh;
+
+  /* 자동 레이아웃 */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.8333vw;
+  padding: 0px;
 }
+
 .platform-btn {
-  padding: 8px 20px;
-  margin-right: 10px;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  background: white;
-  cursor: pointer;
+  /* chip-button-01 */
+  position: static;
+  height: 35px;
+
+  /* 자동 레이아웃 */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5208vw;
+
+  /* Inside Auto Layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 0 0.8333vw;
+
+  background: #F8F8F8;
+  border: none;
+  border-radius: 36px;
+
+  /* Typo */
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 140%;
+  text-align: center;
+  color: rgb(137, 149, 171);
 }
+
 .platform-btn.active {
-  background: var(--brandColor);
-  color: white;
-  border-color: var(--brandColor);
+  /* chip-button-01 */
+  position: static;
+  height: 4.7059vh;
+
+  /* 자동 레이아웃 */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0.9804vh 1.25vw;
+
+  /* Inside Auto Layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 0;
+
+  border-radius: 36px;
+  background: rgb(18, 29, 49);
+
+  /* Typo */
+  color: rgb(255, 255, 255);
+}
+
+/* 브랜딩 키드 */
+.kit-box {
+  /* background */
+  position: absolute;
+  width: 60.9375vw;
+  height: 42.6353vh;
+  left: 16.6666vw;
+  top: 43.7398vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  border-radius: 10px;
+  /* White */
+  background: rgb(255, 255, 255);
+}
+
+.kit-standard {
+  position: absolute;
+  left: 3.85vw;
+  top: 3.75vh;
+  font-size: 0.87vw;
+
+  color: rgb(69, 84, 115);
+}
+
+/* 프로필 카드 스타일 */
+.kit-container {
+  /* kit-basic */
+  position: absolute;
+  width: 53.125vw;
+  height: 29.6vh;
+  left: 3.85vw;
+  top: 5.0vh;
+
+  /* 자동 레이아웃 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2.1354vw;
+  margin-top: 25px;
+}
+
+.kit-content {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+  /* 저장 버튼 공간 확보 */
+}
+
+.kit-title {
+  /* 자동 레이아웃 */
+  margin-left: 2.83vw;
+  margin-top: 2.83vw;
+
+  font-size: 1.29vw;
+  font-weight: 500;
+  line-height: 140%;
+}
+
+.name-highlight {
+  font-weight: 720;
+}
+
+.kit-description {
+  /* 자동 레이아웃 */
+  margin-left: 2.83vw;
+  /* 1920x1020 가로 기준 */
+  margin-top: 0px;
+
+  font-size: 0.845vw;
+  font-weight: 400;
+  line-height: 165%;
+
+  white-space: pre-line;
 }
 
 /* 컬러 팔레트 스타일 */
 .color-palette {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 30px;
-}
-.color-chip {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-.color-chip:hover {
-  transform: scale(1.1);
-}
+  /* button_list */
+  position: absolute;
+  width: 3.8542vw;
+  height: 39.5098vh;
+  left: 79.4792vw;
+  top: 44.2398vh;
 
-/* 프로필 카드 스타일 */
-.profile-container {
-  width: 100%;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 30px;
-  position: relative;
-}
-.profile-content {
+  /* 자동 레이아웃 */
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-bottom: 40px; /* 저장 버튼 공간 확보 */
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 0px;
+}
+
+.color-palette-icon {
+  width: 35px;
+  height: 35px;
+
+  margin-bottom: 10px;
+}
+
+.color-chip {
+  /* color-palette */
+  width: 3.8542vw;
+  height: 3.5549vh;
+
+  /* Inside Auto Layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.color-chip.active {
+  /* color-palette */
+  height: 7.2549vh;
+}
+
+.color-chip:hover {
+  transform: scale(1);
 }
 
 /* 저장 버튼 하단 배치 */
 .save-button {
-  display: block;
-  margin-top: 30px;
-  margin-left: auto;
-  background: var(--brandColor);
-  color: white;
+  /* button-01 */
+  position: absolute;
+  width: 240px;
+  height: 45px;
+
+  left: 50%;
+  bottom: -47px;
+  transform: translate(-50%, 0);
+
+  /* 자동 레이아웃 */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5208vw;
+  padding: 1.5686vh 4.1667vw;
+
+  /* Inside Auto Layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 0.5208vw 0;
+
   border: none;
-  padding: 12px 30px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
+  border-radius: 9px;
+  /* Primary/Primary-01 */
+  background: rgb(18, 29, 49);
+
+  /* Typo */
+  font-size: 15px;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
 }
+
 .save-button:hover {
   background: #434d50;
 }
