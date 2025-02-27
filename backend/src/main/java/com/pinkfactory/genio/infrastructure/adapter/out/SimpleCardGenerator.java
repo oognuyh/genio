@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.pinkfactory.genio.domain.Card;
 import com.pinkfactory.genio.domain.Resume;
+import com.pinkfactory.genio.domain.Tone;
 import com.pinkfactory.genio.port.out.CardGenerator;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.input.PromptTemplate;
@@ -15,14 +16,12 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
 /**
  * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
 @Slf4j
-@Component
 @RequiredArgsConstructor
 public class SimpleCardGenerator implements CardGenerator {
 
@@ -33,7 +32,7 @@ public class SimpleCardGenerator implements CardGenerator {
     private static final Pattern PATTERN = Pattern.compile("```json\\s*\\n(.*?)```", Pattern.DOTALL);
 
     @Override
-    public Card generate(Resume resume, String tone) {
+    public Card generate(String cardId, Resume resume, Tone tone) {
 
         var prompts = List.of(
                 PromptTemplate.from(

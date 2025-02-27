@@ -1,12 +1,19 @@
 package com.pinkfactory.genio.infrastructure.util;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.json.JsonReadFeature;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.github.victools.jsonschema.generator.SchemaGenerator;
 import com.github.victools.jsonschema.generator.SchemaGeneratorConfigBuilder;
 import com.github.victools.jsonschema.generator.SchemaVersion;
 import com.github.victools.jsonschema.module.jackson.JacksonModule;
 import io.github.haibiiin.json.repair.JSONRepair;
+import io.github.haibiiin.json.repair.JSONRepairConfig;
 import lombok.experimental.UtilityClass;
 
 /**
@@ -15,11 +22,18 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class JsonUtil {
 
-    private static final JSONRepair repairer = new JSONRepair();
+    private static final JSONRepair repairer;
 
     private static final SchemaGeneratorConfigBuilder builder;
 
     private static final SchemaGenerator generator;
+
+    private static final JsonMapper binder = JsonMapper.builder()
+            .enable(JsonReadFeature.ALLOW_TRAILING_COMMA)
+            .enable(JsonReadFeature.ALLOW_SINGLE_QUOTES)
+            .visibility(PropertyAccessor.FIELD, Visibility.ANY)
+            .visibility(PropertyAccessor.GETTER, Visibility.ANY)
+            .build();
 
     static {
         builder = new SchemaGeneratorConfigBuilder(SchemaVersion.DRAFT_2019_09).with(new JacksonModule());
@@ -55,6 +69,10 @@ public class JsonUtil {
                         || method.getName().startsWith("$default"));
 
         generator = new SchemaGenerator(builder.build());
+
+        var config = new JSONRepairConfig();
+        config.enableExtractJSON();
+        repairer = new JSONRepair(config);
     }
 
     /**
@@ -78,5 +96,48 @@ public class JsonUtil {
     public static String repairJson(String target) {
 
         return repairer.handle(target);
+    }
+
+    public static String serialize(Object target) {
+
+        try {
+
+            return binder.writeValueAsString(target);
+        } catch (JsonProcessingException e) {
+
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    public static <T> T deserialize(String value, Class<T> valueType) {
+
+        try {
+
+            return binder.readValue(value, valueType);
+        } catch (JsonProcessingException e) {
+
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    public static <T> T deserialize(String value, TypeReference<T> valueTypeRef) {
+
+        try {
+
+            return binder.readValue(value, valueTypeRef);
+        } catch (JsonProcessingException e) {
+
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    public static <I, O> O convert(I value, Class<O> valueType) {
+
+        return binder.convertValue(value, valueType);
+    }
+
+    public static <I, O> O convert(I value, TypeReference<O> valueTypeRef) {
+
+        return binder.convertValue(value, valueTypeRef);
     }
 }

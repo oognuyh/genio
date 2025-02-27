@@ -11,7 +11,7 @@ import lombok.Builder;
 public interface ExtractResumeUseCase {
 
     @Builder
-    record ExtractResumeCommand(Supplier<InputStream> file) {}
+    record ExtractResumeCommand(String resumeId, Supplier<InputStream> file) {}
 
     /**
      * Extracts resume information from the provided resume file.

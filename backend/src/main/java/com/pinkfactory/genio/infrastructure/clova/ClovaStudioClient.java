@@ -13,4 +13,8 @@ public interface ClovaStudioClient {
     @RequestLine("POST /v1/chat-completions/{model}")
     @Headers("Content-Type: application/json")
     ObjectNode chat(@Param("model") String model, ClovaStudioChatCompletionRequest request);
+
+    @RequestLine("POST /v1/api-tools/chat-tokenize/{model}")
+    @Headers("Content-Type: application/json")
+    ObjectNode tokenize(@Param("model") String model, ClovaStudioTokenizationRequest request);
 }

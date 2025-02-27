@@ -4,12 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pinkfactory.genio.infrastructure.clova.ClovaStudioChatCompletionRequest;
 import com.pinkfactory.genio.infrastructure.clova.ClovaStudioClient;
 import com.pinkfactory.genio.infrastructure.clova.ClovaStudioMessage;
-import com.pinkfactory.genio.infrastructure.clova.ClovaStudioMessageRole;
 import com.pinkfactory.genio.infrastructure.clova.ClovaStudioProperties;
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.data.message.ChatMessage;
-import dev.langchain4j.data.message.SystemMessage;
-import dev.langchain4j.data.message.UserMessage;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.output.FinishReason;
 import dev.langchain4j.model.output.Response;
@@ -45,35 +42,10 @@ public class ClovaStudioChatModel implements ChatLanguageModel {
     }
 
     @Override
-    @SuppressWarnings("java:S5738")
     public Response<AiMessage> generate(List<ChatMessage> messages) {
 
         var request = ClovaStudioChatCompletionRequest.builder()
-                .messages(messages.stream()
-                        .map(message -> {
-                            if (message instanceof SystemMessage msg) {
-
-                                return ClovaStudioMessage.builder()
-                                        .role(ClovaStudioMessageRole.SYSTEM)
-                                        .content(msg.text())
-                                        .build();
-                            } else if (message instanceof AiMessage msg) {
-
-                                return ClovaStudioMessage.builder()
-                                        .role(ClovaStudioMessageRole.ASSISTANT)
-                                        .content(msg.text())
-                                        .build();
-                            } else if (message instanceof UserMessage msg) {
-
-                                return ClovaStudioMessage.builder()
-                                        .role(ClovaStudioMessageRole.USER)
-                                        .content(msg.singleText())
-                                        .build();
-                            }
-
-                            throw new UnsupportedOperationException("Unsupported message type: " + message.type());
-                        })
-                        .toList())
+                .messages(messages.stream().map(ClovaStudioMessage::of).toList())
                 .temperature(properties.temperature())
                 .maxTokens(properties.maxTokens())
                 .topK(properties.topK())

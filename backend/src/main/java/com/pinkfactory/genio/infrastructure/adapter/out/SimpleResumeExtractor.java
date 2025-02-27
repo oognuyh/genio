@@ -14,14 +14,12 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
 /**
  * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
 @Slf4j
-@Component
 @RequiredArgsConstructor
 public class SimpleResumeExtractor implements ResumeExtractor {
 
@@ -32,7 +30,7 @@ public class SimpleResumeExtractor implements ResumeExtractor {
     private static final Pattern PATTERN = Pattern.compile("```json\\s*\\n(.*?)```", Pattern.DOTALL);
 
     @Override
-    public Resume extract(String content) {
+    public Resume extract(String resumeId, String content) {
 
         var prompts = List.of(
                 PromptTemplate.from(
@@ -47,16 +45,43 @@ public class SimpleResumeExtractor implements ResumeExtractor {
                 단, 이력서에 존재하지 않는 내용을 생성하지 않습니다.
 
                 ### 추출할 항목
-                - 이름: 사용자명으로 보통 상단에 존재한다.
+                - 이름: 사용자명으로 보통 상단에 존재한다. 여러 언어가 존재할 때, 한국어를 최우선으로 한다.
                 - 직무: 사용자의 직무로 사용자가 직접 기입한 것을 최우선으로 없다면, 최근 경력사항도 살펴본다.
                 - 경력사항: 일반적으로 회사, 재직 기간, 수행한 프로젝트 목록, 그리고 해당 프로젝트 속 나의 역할과 문제 해결 능력을 기입한다. 있다면 마크다운 문자열로 전부 가져온다.
-                  만약 추출된다면, 다음과 같을 것이다:
-                  [ "### Artbox Studio (2023.04 - 현재)\n\n주요 업무\n- 웹/앱 서비스의 UI/UX 디자인 및 프로토타입 제작\n- 디자인 시스템 구축 및 컴포넌트 라이브러리 제작\n- 사용자 리서치 및 사용성 테스트 진행\n- Figma 기반 디자인 워크플로우 개선\n\n여행 예약 앱 리디자인 (2023.10 - 2023.12)\n- 사용자 여정 지도 작성 및 페인포인트 분석\n- 예약 프로세스 단계 최적화로 전환율 25% 향상\n- 모바일 앱 UI 키트 제작\n- 프로토타입 제작 및 사용성 테스트 진행",
-                  "### Daily UI Challenge (2023.06 - 현재)\n\n- 100일간 매일 UI 요소 디자인 진행\n- 디자인 포트폴리오 웹사이트 제작\n- Dribbble에서 주간 인기 작품 선정\n- Instagram 디자인 계정 운영 (팔로워 2,000+)",
-                  "### UX 리서치 스터디 그룹 운영 (2023.07 - 현재)\n\n- 월 1회 UX 케이스 스터디 진행\n- 업계 실무자 초청 세미나 기획\n- UX 리서치 방법론 가이드 문서 작성\n- 디자인 시스템 워크샵 진행" ]
+                  사용자의 경력사항을 아래와 같은 양식으로 변환해 가져온다:
+                  <start_of_example>
+                  ABC 테크놀로지 (2021.03 - 현재)
+                  수석 프론트엔드 개발자
+                  - React와 TypeScript를 사용한 웹 애플리케이션 개발
+                  - 사용자 경험 최적화로 페이지 로딩 시간 30% 단축
+                  기술: React, TypeScript, Redux, Webpack, Jest
+
+                  프로젝트:
+                  1. 대시보드 리뉴얼 (2022.05 - 2022.12)
+                     - 사용자 인터랙션 개선으로 전환율 15% 상승
+                     - 기술: React, TypeScript, D3.js
+
+                  XYZ 소프트웨어 (2018.07 - 2021.02)
+                  프론트엔드 개발자
+                  - Angular 기반 대시보드 개발
+                  기술: Angular, JavaScript, SCSS, RxJS
+
+                  프로젝트:
+                  1. 데이터 시각화 대시보드 (2019.03 - 2020.12)
+                     - 실시간 데이터 처리 및 시각화 구현
+                     - 기술: Angular, D3.js, RxJS
+                  <end_of_example>
+                  #### 프로젝트명 (시작일 - 종료일)
+                  - 유형: 개인/팀/학교/동아리 프로젝트 중 1개 유형 선정
+                  - 역할: 담당 역할
+                  - 내용: 프로젝트 설명 및 성과 작성
+                  - 사용 기술: 기술1, 기술2, 기술3
+                  <end_format>
                 - 사용 도구/기술 스택 목록: 사용자가 현재까지 사용한 도구, 프레임워크, 라이브러리, 언어 등을 말한다. 존재한다면, 해당 도구/스택의 이름 목록을 가져오고 직접 기입하지 않았다면, 경력사항도 살펴본다.
-                  만약 추출된다면, 다음과 같을 것이다:
+                  만약 추출된다면, 예시는 다음과 같을 것이다:
+                   <start_of_example>
                   [ "Figma", "Sketch", "Zeplin", "Adobe Photoshop" ]
+                  <end_of_example>
                 """)
                         .apply(Map.of())
                         .toSystemMessage(),
@@ -73,14 +98,14 @@ public class SimpleResumeExtractor implements ResumeExtractor {
 
                 ```typescript
                 type Resume = {
-                  name: string? // 사용자명
-                  position: string? // 직무
-                  experiences: string[] // 경력사항을 각 회사 단위로 프로젝트를 그룹화하여 Markdown 문자열로 아이템을 배열로 반환한다.
+                  name: string | null // 사용자명
+                  position: string | null // 직무
+                  experience: string | null // 경력사항을 Markdown 문자열로 반환한다.
                   skillSet: string[] // 사용 도구/기술 스택의 이름을 각 문자열 아이템으로 배열로 반환한다.
                 }
                 ```
 
-                정의된 타입스립트 형식을 준수하여 반드시
+                정의된 타입스립트 형식을 준수하여 예시가 아닌 사용자의 이력서를 기반으로 반드시
                 ```json
                 $RESULT
                 ```으로 감싸 완벽한 JSON을 최종 결과로 반환해야겠다.
@@ -107,8 +132,6 @@ public class SimpleResumeExtractor implements ResumeExtractor {
             try {
 
                 String found = matcher.group(1).trim();
-
-                System.out.println(found);
 
                 return mapper.readValue(found, Resume.class);
             } catch (JsonProcessingException e) {

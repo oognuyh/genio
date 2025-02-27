@@ -17,11 +17,17 @@ public class Resume {
 
     private String name;
 
+    private String jobCategory;
+
     private String position;
 
-    private List<String> strengths;
+    private String stage;
+
+    private List<Strength> strengths;
 
     private List<String> skillSet;
 
-    private List<String> experiences;
+    private Tone tone;
+
+    private String experience;
 }

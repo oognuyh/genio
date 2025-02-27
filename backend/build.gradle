@@ -37,6 +37,10 @@ dependencies {
 	implementation "org.bsc.langgraph4j:langgraph4j-langchain4j:$langgraph4jVersion"
 	implementation "dev.langchain4j:langchain4j:$langchain4jVersion"
 
+	implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
+
+	implementation "com.samskivert:jmustache:$jmustacheVersion"
+
 	implementation "io.github.openfeign:feign-core:$feignVersion"
 	implementation "io.github.openfeign:feign-jackson:$feignVersion"
 

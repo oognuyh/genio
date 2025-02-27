@@ -2,6 +2,7 @@ package com.pinkfactory.genio.port.out;
 
 import com.pinkfactory.genio.domain.Card;
 import com.pinkfactory.genio.domain.Resume;
+import com.pinkfactory.genio.domain.Tone;
 
 /**
  * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
@@ -16,5 +17,5 @@ public interface CardGenerator {
      * @param tone   Tone style to be reflected in the generated card's content and style
      * @return A card representation of the resume
      */
-    Card generate(Resume resume, String tone);
+    Card generate(String cardId, Resume resume, Tone tone);
 }

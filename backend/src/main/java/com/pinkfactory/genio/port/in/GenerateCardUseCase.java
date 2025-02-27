@@ -1,6 +1,8 @@
 package com.pinkfactory.genio.port.in;
 
 import com.pinkfactory.genio.domain.Card;
+import com.pinkfactory.genio.domain.Strength;
+import com.pinkfactory.genio.domain.Tone;
 import java.util.List;
 import lombok.Builder;
 
@@ -11,12 +13,15 @@ public interface GenerateCardUseCase {
 
     @Builder
     record GenerateCardCommand(
+            String cardId,
             String name,
+            String jobCategory,
+            String stage,
             String position,
-            List<String> experiences,
+            String experience,
             List<String> skillSet,
-            List<String> strengths,
-            String tone) {}
+            List<Strength> strengths,
+            Tone tone) {}
 
     /**
      * Generates a card from the provided command data.

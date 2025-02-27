@@ -2,7 +2,6 @@ package com.pinkfactory.genio.application;
 
 import com.pinkfactory.genio.domain.Card;
 import com.pinkfactory.genio.domain.Resume;
-import com.pinkfactory.genio.infrastructure.util.IDGenerator;
 import com.pinkfactory.genio.port.in.GenerateCardUseCase;
 import com.pinkfactory.genio.port.out.CardGenerator;
 import lombok.RequiredArgsConstructor;
@@ -22,17 +21,19 @@ public class CardService implements GenerateCardUseCase {
 
         return generator
                 .generate(
+                        command.cardId(),
                         Resume.builder()
-                                .resumeId(IDGenerator.generate())
                                 .name(command.name())
+                                .stage(command.stage())
+                                .jobCategory(command.jobCategory())
                                 .position(command.position())
-                                .experiences(command.experiences())
+                                .experience(command.experience())
                                 .strengths(command.strengths())
                                 .skillSet(command.skillSet())
                                 .build(),
                         command.tone())
                 .toBuilder()
-                .cardId(IDGenerator.generate())
+                .cardId(command.cardId())
                 .build();
     }
 }
