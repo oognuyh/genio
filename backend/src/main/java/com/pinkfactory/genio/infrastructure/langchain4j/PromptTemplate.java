@@ -6,15 +6,18 @@ import com.pinkfactory.genio.infrastructure.util.JsonUtil;
 import com.samskivert.mustache.Mustache;
 import dev.langchain4j.model.input.Prompt;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.util.Map;
-import org.springframework.util.ResourceUtils;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.util.FileCopyUtils;
 
 /**
  * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
 public class PromptTemplate extends dev.langchain4j.model.input.PromptTemplate {
+
+    private static final String CLASSPATH = "classpath:";
 
     /**
      * Create a new PromptTemplate.
@@ -50,13 +53,16 @@ public class PromptTemplate extends dev.langchain4j.model.input.PromptTemplate {
 
     public static PromptTemplate of(String template) {
 
-        if (template.startsWith("classpath:")) {
+        if (template.startsWith(CLASSPATH)) {
 
             try {
+                var path = template.substring(CLASSPATH.length());
+                var resourceLoader = new DefaultResourceLoader();
+                var resource = resourceLoader.getResource(CLASSPATH + path);
 
-                var path = ResourceUtils.getFile(template).toPath();
-
-                return new PromptTemplate(Files.readString(path, Charset.defaultCharset()));
+                try (var reader = new InputStreamReader(resource.getInputStream(), Charset.defaultCharset())) {
+                    return new PromptTemplate(FileCopyUtils.copyToString(reader));
+                }
             } catch (IOException e) {
 
                 throw new IllegalArgumentException(e);
