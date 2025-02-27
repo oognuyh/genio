@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
-import logo from "../../assets/logo.png"; // 로고 이미지 가져오기
 import fileIcon from "../../assets/file.png";
 import successIcon from "../../assets/success.png";
 import failIcon from "../../assets/fail.png";
+import ProgressSteps from "../../components/ProgressSteps";
 
 import "./resumeUpload.css";
 
 const ResumeUpload = () => {
   const navigate = useNavigate();
+  const currentStep = 1;
 
   const [file, setFile] = useState(null); // 업로드된 파일 저장
   const [error, setError] = useState(""); // 파일 크기 초과 에러 메시지
@@ -93,9 +93,9 @@ const ResumeUpload = () => {
   return (
     <div className="resume-body">
       <div className="resume-container">
+      <ProgressSteps currentStep={currentStep} />
         {/* 로고 및 설명 */}
         <div className="header">
-          <img src={logo} alt="logo" className="resume-logo" />
           <div className="text-box">
             <span className= "title1">
               먼저, 퍼스널 브랜딩 키트 생성을 위해 분석할 프로필 정보가
@@ -162,9 +162,6 @@ const ResumeUpload = () => {
         <button className="upload-btn" onClick={onGenerateKit}>
           나만의 브랜드 키트 만들기
         </button>
-        <p className="direct-text" onClick={onTest}>
-          프로필 직접 입력
-        </p>
       </div>
     </div>
   );

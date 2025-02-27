@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ReactTyped } from "react-typed";
 import { motion } from "framer-motion"; // 🔹 애니메이션 효과 추가
-import logoImage from "../../assets/logo.png";
+import logoImage from "../../assets/big-logo.png";
 import logoText from "../../assets/logo-text.png";
 import "./splashScreen.css";
 

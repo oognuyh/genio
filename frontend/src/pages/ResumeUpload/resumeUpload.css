@@ -5,7 +5,7 @@
   text-align: center;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom, #ffffff, #dce3f4);
+  background: #f8f8f8;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -83,8 +83,8 @@
   
   /* 🔹 드래그 중일 때 스타일 */
   .upload-box.drag-over {
-    border: 2px solid blue;
-    background-color: #8995AB;
+    border: 1.2px solid rgb(0, 204, 82);
+    background-color: rgb(236, 239, 244);
   }
   
   /* 업로드 아이콘 */
