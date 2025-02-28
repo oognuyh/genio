@@ -44,7 +44,10 @@ public class V1CardController implements V1CardAPISpecification {
     @PostMapping
     public ResponseEntity<CardResponse> generateCard(@Valid @RequestBody GenerateCardRequest request) {
 
+        var cardId = IDGenerator.generate();
+
         var command = GenerateCardCommand.builder()
+                .cardId(cardId)
                 .name(request.name())
                 .stage(request.stage())
                 .jobCategory(request.jobCategory())
@@ -60,6 +63,9 @@ public class V1CardController implements V1CardAPISpecification {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(CardResponse.builder()
                         .cardId(card.cardId())
+                        .name(request.name())
+                        .jobCategory(request.jobCategory())
+                        .position(request.position())
                         .tagline(card.tagline())
                         .biography(card.biography())
                         .hashtags(card.hashtags())
@@ -98,6 +104,9 @@ public class V1CardController implements V1CardAPISpecification {
                         .message("퍼스널 브랜딩을 완료했어요.")
                         .result(CardResponse.builder()
                                 .cardId(card.cardId())
+                                .name(request.name())
+                                .jobCategory(request.jobCategory())
+                                .position(request.position())
                                 .tagline(card.tagline())
                                 .biography(card.biography())
                                 .hashtags(card.hashtags())
@@ -109,6 +118,8 @@ public class V1CardController implements V1CardAPISpecification {
             } catch (Exception e) {
 
                 try {
+                    log.error("Failed to generate card: {}", e.getMessage());
+
                     emitter.send(Event.builder()
                             .type(EventType.FAILED)
                             .message(e.getMessage())

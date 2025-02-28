@@ -63,7 +63,6 @@ public class TaglineGenerator implements NodeAction<State> {
                                 """
             사용자의 정보는 다음과 같습니다:
 
-            이름: {{ resume.name }}
             직군: {{ resume.jobCategory }}
             경력: {{ resume.stage }}
             포지션: {{ resume.position }}

@@ -15,6 +15,9 @@ import lombok.Builder;
 public record CardResponse(
         @Schema(description = "Generated card identifier", example = "a9b7c243-2640-4d05-ab1c-84ac4f207678")
                 String cardId,
+        @Schema(description = "Extracted name from resume", example = "John Doe") String name,
+        String jobCategory,
+        @Schema(description = "Current or most recent position", example = "Backend Developer") String position,
         @Schema(description = "Generated tagline for the card", example = "Innovate Together, Grow Forever")
                 String tagline,
         @Schema(
