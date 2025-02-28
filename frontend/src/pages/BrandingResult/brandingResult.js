@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import resizer from "react-image-file-resizer";
@@ -19,6 +20,19 @@ import "./brandingResult.css";
 
 const BrandingResult = () => {
     const currentStep = 5; // ✅ 현재 진행단계 3단계
+
+    const [resumeData, setResumeData] = useState(location?.state || {});
+    const location = useLocation();
+    const strengths = location.state?.strengths || [];
+    const brandingTone = location.state?.brandingTone || "";
+
+    // 🔹 데이터 유지 확인 (콘솔 출력)
+    useEffect(() => {
+        console.log("[resumeData] 최종 이력서 정보 데이터:", resumeData);
+        console.log("[BrandingResult] 최종 강점 데이터:", strengths);
+        console.log("[BrandingResult] 최종 브랜딩 톤 데이터:", brandingTone);
+    }, [strengths, brandingTone]);
+
 
     const userName = '용우';
     const role = 'IT 개발자';

@@ -1,3 +1,4 @@
+/* ✅ 전체 컨테이너 스타일 */
 .strengths-body {
   display: flex;
   flex-direction: column;
@@ -9,6 +10,7 @@
   padding-top: 40px; /* ✅ 상단 여백 추가 */
 }
 
+/* ✅ 내부 컨테이너 */
 .strengths-container {
   max-width: 1280px;
   width: 100%;
@@ -66,13 +68,13 @@
   gap: 24px;
   width: 1280px;
   margin-top: 100px;
-
   max-height: 900px; /* ✅ 최대 높이 제한 */
   overflow-y: auto; /* ✅ 세로 스크롤 활성화 */
   padding-right: 30px; /* ✅ 스크롤바와 아이템 간 간격 */
   overflow-x: hidden;
 }
 
+/* ✅ 강점 선택 버튼 */
 .strength-item {
   display: flex;
   align-items: center;
@@ -95,32 +97,18 @@
   border: none;
 }
 
-/* ✅ 체크 아이콘 추가 */
-.strength-item::before {
-  content: "";
+/* ✅ 체크 아이콘 */
+.check-icon {
   width: 24px;
   height: 24px;
-  background-image: url("../../assets/check.png"); /* 체크 안된 상태 */
-  background-size: contain;
-  background-repeat: no-repeat;
-  margin-right: 36px;
   margin-left: 20px;
   transition: opacity 0.3s ease-in-out;
 }
 
+/* ✅ 선택된 강점 스타일 */
 .strength-item.selected {
   background: #121d31;
   color: white;
-}
-
-/* ✅ 체크 아이콘 변경 (선택된 경우) */
-.strength-item.selected::before {
-  width: 24px;
-  height: 24px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  margin-right: 10px;
-  background-image: url("../../assets/check-white.png"); /* 체크된 상태 */
 }
 
 /* 🔹 다음 버튼 (기본적으로 숨김) */
@@ -143,9 +131,9 @@
   position: absolute;
   bottom: 52px;
   left: 50%;
-  transform: translateX(-50%);
 }
 
+/* ✅ 버튼 호버 효과 */
 .st-next-btn:hover {
   transform: scale(1.05);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
@@ -159,5 +147,4 @@
     #0e1221 78.7%,
     #121d31 106.07%
   );
-  transform: translateX(-50%);
 }

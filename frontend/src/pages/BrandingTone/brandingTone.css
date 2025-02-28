@@ -71,15 +71,12 @@
 /* ✅ 브랜드 톤 선택 버튼 */
 .branding-tone-item {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 24px;
+  align-items: center;
+  padding: 20px;
   border-radius: 12px;
   background: #eceff4;
   color: #8995ab;
   font-family: "Pretendard";
-  font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 140%;
@@ -88,48 +85,23 @@
   gap: 16px;
   width: 100%;
   max-width: 1280px;
-  height: 103px;
+  height: 88px;
   outline: none;
   border: none;
 }
 
-/* ✅ 선택된 항목의 배경색 적용 */
+/* ✅ 체크 아이콘 */
+.check-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+/* ✅ 선택된 항목 스타일 */
 .branding-tone-item.selected {
   background: #121d31 !important;
   color: white !important;
-}
-
-/* ✅ 체크 아이콘을 제목 왼쪽으로 이동 */
-.branding-tone-title {
-  display: flex;
-  align-items: center;
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 140%;
-  color: #8995ab;
-  position: relative;
-  margin-bottom: -5px;
-}
-
-/* ✅ 기본 체크 아이콘 (회색) */
-.branding-tone-title::before {
-  content: "";
-  width: 24px;
-  height: 24px;
-  background-image: url("../../assets/check.png"); /* 체크 안된 상태 */
-  background-size: contain;
-  background-repeat: no-repeat;
-  transition: background-image 0.3s ease-in-out;
-  margin-left: 35px;
-  margin-right: 30px;
-  margin-top: 10px;
-}
-
-/* ✅ 선택된 경우 체크 아이콘 (흰색) */
-.branding-tone-item.selected .branding-tone-title::before {
-  background-image: url("../../assets/check-white.png"); /* 체크된 상태 */
 }
 
 /* ✅ 설명 텍스트 스타일 */
@@ -140,10 +112,10 @@
   font-weight: 500;
   line-height: 140%;
   letter-spacing: 0%;
-  margin-left: 92px;
+  margin-left: 20px;
 }
 
-/* ✅ 선택되었을 때 제목 & 설명 색상 변경 */
+/* ✅ 선택된 경우 색상 변경 */
 .branding-tone-item.selected .branding-tone-title {
   color: white !important;
 }
@@ -172,22 +144,10 @@
   position: absolute;
   bottom: 52px;
   left: 50%;
-  transform: translateX(-50%);
 }
 
 /* ✅ 버튼 효과 */
 .branding-tone-next-btn:hover {
   transform: scale(1.05);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(
-    258.21deg,
-    #121d31 -85.49%,
-    #0e1221 -58.12%,
-    #455473 -30.76%,
-    #8995ab -3.39%,
-    #455473 39.61%,
-    #0e1221 78.7%,
-    #121d31 106.07%
-  );
-  transform: translateX(-50%);
 }

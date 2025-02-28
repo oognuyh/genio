@@ -1,15 +1,43 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ 네비게이션 추가
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import ProgressSteps from "../../components/ProgressSteps";
-
+import checkIcon from "../../assets/check.png";
+import checkWhiteIcon from "../../assets/check-white.png";
 import "./brandingTone.css";
 
 const BrandingTone = () => {
-  const navigate = useNavigate(); // ✅ useNavigate 훅 사용
-  const currentStep = 4; // ✅ 현재 진행단계 4단계
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentStep = 4;
+
+  const [resumeData, setResumeData] = useState(location?.state || {});
+  const strengths = location.state?.strengths || [];
 
   // ✅ 브랜드 톤 선택 상태 관리
   const [selectedTone, setSelectedTone] = useState("");
+  const [brandingTones, setBrandingTones] = useState([]);
+
+  useEffect(() => {
+    console.log("[BrandingTone] 이전 페이지에서 받은 강점 데이터:", strengths);
+  }, [strengths]);
+
+  useEffect(() => {
+    console.log("[BrandingTone] 이전 페이지에서 받은 강점 데이터:", strengths);
+  }, [strengths]);
+
+  // ✅ Axios를 사용하여 브랜드 톤 리스트 가져오기
+  useEffect(() => {
+    axios
+      .get("/api/v1/tones")
+      .then((response) => {
+        console.log("[BrandingTone] Fetched Data:", response.data);
+        setBrandingTones(response.data);
+      })
+      .catch((error) => {
+        console.error("[BrandingTone] Error fetching tones:", error);
+      });
+  }, []);
 
   // ✅ 브랜드 톤 선택 핸들러
   const handleToneSelect = (tone) => {
@@ -22,26 +50,20 @@ const BrandingTone = () => {
       alert("브랜딩 톤을 선택해주세요!");
       return;
     }
-    navigate("/loading2"); // ✅ 다음 페이지로 이동
-  };
+    console.log("[BrandingTone] 선택한 강점 + 브랜딩 톤:", { strengths, selectedTone });
 
-  // ✅ 선택 가능한 브랜드 톤 리스트
-  const brandingTones = [
-    { title: "열정적인", description: "도전과 열정을 강조하고 싶은 경우" },
-    { title: "진정성 있는", description: "상대방과 신뢰를 쌓으며 소통하고 싶은 경우" },
-    { title: "창의적인", description: "나만의 독특한 차별성을 강조하고 싶은 경우" },
-    { title: "전문적인", description: "실력과 노하우를 강조하고 싶은 경우" },
-    { title: "친근한", description: "유쾌하고 다정한 느낌을 강조하고 싶은 경우" },
-  ];
+    navigate("/loading2", { resumeData, state: { strengths, brandingTone: selectedTone } });
+  };
 
   return (
     <div className="branding-tone-body">
       <ProgressSteps currentStep={currentStep} />
 
-      <div className="branding-title">
-        <div className="">
-          마지막으로 브랜딩 톤을 선택해주세요.</div>
-        <p className="sub-text">용우님이 원하는 브랜딩 톤을 선택하세요. 제니오가 느낌을 잘 살려볼게요!</p>
+      <div className="branding-tone-container">
+        <h2 className="branding-title">마지막으로 브랜딩 톤을 선택해주세요.</h2>
+        <p className="sub-text">
+          원하는 브랜딩 톤을 선택하세요. 제니오가 느낌을 잘 살려볼게요!
+        </p>
 
         <div className="branding-tone-list">
           {brandingTones.map((tone, index) => (
@@ -50,6 +72,11 @@ const BrandingTone = () => {
               className={`branding-tone-item ${selectedTone === tone.title ? "selected" : ""}`}
               onClick={() => handleToneSelect(tone.title)}
             >
+              <img
+                src={selectedTone === tone.title ? checkWhiteIcon : checkIcon}
+                alt="check"
+                className="check-icon"
+              />
               <div className="branding-tone-title">{tone.title}</div>
               <div className="branding-tone-description">{tone.description}</div>
             </button>
@@ -57,7 +84,11 @@ const BrandingTone = () => {
         </div>
 
         {/* ✅ 선택한 경우에만 "다음" 버튼 표시 */}
-        {selectedTone && <button className="branding-tone-next-btn" onClick={onNextClick}>다음</button>}
+        {selectedTone && (
+          <button className="branding-tone-next-btn" onClick={onNextClick}>
+            다음
+          </button>
+        )}
       </div>
     </div>
   );
