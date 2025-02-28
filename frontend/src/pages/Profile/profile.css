@@ -4,32 +4,38 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh; /* 100vh 대신 min-height로 변경 */
   background: #f8f8f8;
 }
 
 .profile-container {
   max-width: 1280px;
-  text-align: center;
-  padding: 20px;
-  text-align: left;
-  background: #f8f8f8; /* 배경색이 남아 있다면 유지 */
-  box-shadow: none !important; /* ✅ 그림자 제거 */
-  border: none; /* ✅ 테두리 제거 */
+  width: 100%; /* 화면이 줄어들 때도 대응 */
+  margin: 40px 20px; /* 좌우/상하 여백 */
+  text-align: left; 
+  background: #f8f8f8; 
+  box-shadow: none !important;
+  border: none;
 }
 
 .profile-title {
+  color: rgb(23, 23, 23);
+  font-family: Pretendard;
   font-size: 42px;
-  font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
+  font-weight: 700;
+  line-height: 140%;
+  letter-spacing: 0%;
   margin-bottom: 24px;
+  margin-top: 96px;
 }
 
 .sub-text {
+  color: rgb(137, 149, 171);
+  font-family: Pretendard;
   font-size: 20px;
-  color: #8995ab;
-  margin-bottom: 20px;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: 0%;
 }
 
 /* 🔹 전체 폼 컨테이너 */
@@ -37,138 +43,123 @@
   display: flex;
   gap: 30px;
   justify-content: space-between;
-  align-items: stretch;
+  align-items: flex-start;
   width: 100%;
+  margin-top: 72px;
 }
 
-/* 🔹 왼쪽 패널 */
+/* 🔹 왼쪽 패널 (이름, 직군, 타이틀, 스킬) */
 .left-panel {
   display: flex;
   flex-direction: column;
   width: 50%;
 }
 
-/* 🔹 오른쪽 패널 */
+/* 🔹 오른쪽 패널 (주요 경험) */
 .right-panel {
   display: flex;
   flex-direction: column;
   width: 50%;
 }
 
-/* 📌 입력 필드 그룹 정렬 */
+/* 📌 입력 필드 그룹 정렬: 라벨 위, 입력 아래 */
 .input-group {
-  display: grid; /* ✅ grid 사용하여 라벨과 필드 정렬 */
-  grid-template-columns: 80px 1fr; /* ✅ 라벨 200px, 입력 필드 자동 크기 */
-  align-items: center; /* ✅ 수직 정렬 */
-  gap: 24px; /* ✅ 라벨과 필드 간격 */
+  display: flex;
   margin-bottom: 24px;
+  justify-content: space-between;
+  gap: 24px; 
 }
 
 /* 📌 라벨 스타일 */
 .input-group label {
-  width: 200px; /* ✅ 고정 너비 */
+  margin-bottom: 8px; /* 라벨과 필드 간격 */
+  color: rgb(69, 84, 115);
+  font-family: Pretendard;
   font-size: 20px;
-  font-weight: bold;
-  color: #121d31;
-  text-align: left;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0%;
+  width: 150px;
 }
 
-/* 🔹 공통 스타일: 모든 입력 필드 & 선택 필드에 적용 */
+/* 🔹 공통 스타일: 모든 입력 필드 & 선택 필드 */
 .input-group input,
 .input-group select {
+  flex: 1;
   width: 100%;
   height: 54px;
   border: 1px solid #cbd5e1;
   border-radius: 12px;
   font-size: 20px;
   font-family: "Pretendard", sans-serif;
-  font-style: normal;
   font-weight: 500;
   line-height: 150%;
-  color: black !important; /* ✅ 글자 색상 통일 */
+  color: black;
   padding: 12px 16px;
-  box-sizing: border-box; /* ✅ padding 포함 크기 유지 */
-  text-align: left; /* ✅ 텍스트 왼쪽 정렬 */
-  vertical-align: middle; /* ✅ 수직 중앙 정렬 */
+  box-sizing: border-box;
   background-color: white;
+  text-align: left;
 }
 
-/* 🔹 이름 & 직군 입력 필드 */
-.input-group input[name="name"],
-.input-group select[name="job"] {
-  width: 492px; /* ✅ 크기 고정 */
-}
-
-.input-group input::placeholder {
-  color: black; /* ✅ 플레이스홀더 색상 (연한 회색) */
-}
-
-/* 🔹 타이틀 (경력 선택 필드 + 직무 입력 필드) */
-.input-group .title-container {
+/* 🔹 타이틀 컨테이너 (경력 + 타이틀) */
+.title-container {
   display: flex;
-  gap: 16px; /* ✅ 경력 선택 & 직무 입력 필드 간격 */
+  gap: 16px;
 }
 
-/* 🔹 타이틀 - 경력 선택 필드 */
-.input-group select[name="experience"] {
-  width: 144px; /* ✅ 크기 고정 */
+.title-container select[name="experience"] {
+  width: 144px; /* 경력 드롭다운 고정 폭 */
 }
 
-/* 🔹 타이틀 - 직무 입력 필드 */
-.input-group input[name="title"] {
-  width: 332px; /* ✅ 크기 고정 */
-}
-
-.right-panel .input-group label {
-  height: 54px; /* ✅ 왼쪽 필드와 높이 맞춤 */
-  align-self: flex-start; /* ✅ textarea의 시작점과 맞추기 */
-  display: flex;
-  align-items: center;
+.title-container input[name="title"] {
+  flex: 1; /* 남은 공간을 채움 */
 }
 
 /* 🔹 주요 경험 입력 필드 */
 .right-panel textarea {
-  width: 541px;
-  height: 525px;
+  width: 100%;
+  min-height: 400px; /* 필요 시 높이 조절 */
   resize: none;
   border: 1px solid #cbd5e1;
   border-radius: 12px;
-  font-size: 18px;
+  color: rgb(23, 23, 23);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 150%;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  background-color: white;
+  margin-bottom: 24px;
+}
+
+/* 🔹 스킬 버튼 컨테이너: 5열 그리드 */
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+  /* width: 100%; // 부모 .left-panel이 width: 50%이므로 100%로 설정 */
 }
 
 /* 🔹 스킬 버튼 */
-.skills-container {
-  display: grid;
-  grid-template-columns: repeat(
-    5,
-    minmax(auto, 1fr)
-  ); /* ✅ 정확히 5개씩 배치 */
-  gap: 12px; /* ✅ 버튼 간격 */
-  margin-top: 10px;
-  justify-content: flex-start; /* ✅ 왼쪽 정렬 */
-  max-width: 492px; /* ✅ 입력 필드와 너비 동일하게 설정 */
-}
-
 .skill-btn {
-  height: 45px; /* ✅ 모든 버튼 높이 고정 */
-  width: auto; /* ✅ 글자 수에 맞게 자동 조정 */
-  min-width: 10px; /* ✅ 최소 너비 */
-  max-width: 180px; /* ✅ 너무 길어지지 않도록 제한 */
-  padding: 0 16px; /* ✅ 좌우 여백 추가 */
+  height: 45px;
+  padding: 0 16px;
   background: #eceff4;
   color: #8995ab;
   border: none;
-  border-radius: 36px; /* ✅ 둥근 디자인 */
+  border-radius: 36px;
   font-family: "Pretendard";
-  font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 160%;
   text-align: center;
-  white-space: nowrap; /* ✅ 줄바꿈 방지 */
+  white-space: nowrap;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .skill-btn.selected {
@@ -176,73 +167,69 @@
   color: white;
 }
 
-/* 🔹 다음 버튼 (중앙 정렬 및 애니메이션 추가) */
+/* 🔹 다음 버튼 */
 .next-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 320px; /* ✅ 너비 고정 */
-    height: 60px; /* ✅ 높이 고정 */
-    padding: 16px 80px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    background: #121d31;
-    color: white;
-    font-weight: bold;
-    font-family: "Pretendard", sans-serif;
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 140%;
-    text-align: center;
-    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out,
-      box-shadow 0.3s;
-    margin: 40px auto; /* ✅ 화면 중앙 정렬 */
+  display: block;
+  margin: 40px auto 0 auto; /* 중앙 정렬 */
+  width: 320px;
+  height: 60px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #121d31;
+  color: white;
+  font-weight: bold;
+  font-family: "Pretendard", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 140%;
+  text-align: center;
+  transition: background 0.3s ease-in-out, transform 0.3s ease-in-out,
+    box-shadow 0.3s;
+}
+
+/* 🔹 버튼 호버 효과 */
+.next-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    258.21deg,
+    #121d31 -85.49%,
+    #0e1221 -58.12%,
+    #455473 -30.76%,
+    #8995ab -3.39%,
+    #455473 39.61%,
+    #0e1221 78.7%,
+    #121d31 106.07%
+  );
+  animation: gradientMove 2s infinite linear;
+}
+
+/* 🔹 버튼 클릭 효과 */
+.next-btn:active {
+  transform: scale(0.95);
+  background-size: 300% 300%;
+  animation: gradientMoveClick 0.8s ease-in-out;
+}
+
+/* 배경 그라데이션 애니메이션 */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
   }
-  
-  /* 🔹 버튼 호버 효과 */
-  .next-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(
-      258.21deg,
-      #121d31 -85.49%,
-      #0e1221 -58.12%,
-      #455473 -30.76%,
-      #8995ab -3.39%,
-      #455473 39.61%,
-      #0e1221 78.7%,
-      #121d31 106.07%
-    );
-    animation: gradientMove 2s infinite linear;
+  50% {
+    background-position: 100% 50%;
   }
-  
-  /* 🔹 버튼 클릭 효과 */
-  .next-btn:active {
-    transform: scale(0.95);
-    background-size: 300% 300%;
-    animation: gradientMoveClick 0.8s ease-in-out;
+  100% {
+    background-position: 0% 50%;
   }
-  
-  /* 배경 그라데이션 애니메이션 */
-  @keyframes gradientMove {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+}
+
+@keyframes gradientMoveClick {
+  0% {
+    background-position: 100% 50%;
   }
-  
-  @keyframes gradientMoveClick {
-    0% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+  100% {
+    background-position: 0% 50%;
   }
-  
+}

@@ -1,11 +1,11 @@
 /* 배경 설정 */
 .splash-body {
-  font-family: Arial, sans-serif;
+  font-family: Pretendard, Arial, sans-serif;
   text-align: center;
   margin: 0;
   padding: 0;
-  background: url("../../assets/splash-background.png") no-repeat center center; 
-  background-size: cover; /* 화면에 꽉 차도록 설정 */
+  background: url("../../assets/splash-background.png") no-repeat center center;
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,49 +22,52 @@
   width: 100%;
 }
 
-/* 로고 스타일 */
+/* ✅ 로고와 텍스트를 감싸는 그룹 */
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* ✅ 로고 이미지 (처음에는 가운데 정렬) */
 .splash-logo-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
 }
 
+/* ✅ 로고 이미지 */
 .splash-logo {
-  width: 180px; /* 크기 조절 */
-  height: auto;
-  animation: float 3s ease-in-out infinite; /* 🔹 부드러운 흔들림 효과 */
+  width: 120px;
+  height: 121px;
 }
 
-/* 로고 텍스트 스타일 */
-.logo-text-wrapper {
-  margin-top: -20px;
-}
-
+/* ✅ 로고 텍스트 */
 .logo-text {
   width: 250px;
   height: auto;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
 }
 
-/* 메시지 스타일 */
-.message-container {
-  font-size: 28px;
+/* ✅ 메시지 스타일 */
+.sp-message-container {
+  color: rgb(69, 84, 115);
+  font-family: Pretendard;
+  font-size: 20px;
   font-weight: 500;
-  color: #121d31;
-  margin-top: 20px;
+  letter-spacing: 0%;
+  margin-top: 34px;
+  margin-bottom: 20px;
+}
+
+.message-line {
+  margin-bottom: 10px;
+  line-height: 90%;
 }
 
 .message-container strong {
   font-weight: bold;
-  color: #121d31; /* 강조 색상 */
-}
-
-
-.typed-line {
-  white-space: pre-line;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+  color: rgb(69, 84, 115);
 }
 
 /* 버튼 스타일 */
@@ -72,26 +75,27 @@
   margin-top: 20px;
   display: flex;
   justify-content: center;
-  display: flex;
-  justify-content: center;
   align-items: center;
   padding: 15px 40px;
-  font-size: 20px;
   border: none;
   border-radius: 50px;
   cursor: pointer;
   width: 280px;
   height: 68px;
-
   background: #121d31;
-  color: white;
-  font-weight: bold;
-  transition: background 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s;
+  color: rgb(255, 255, 255);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 140%;
+  letter-spacing: 0%;
+  transition: background 0.3s ease-in-out, transform 0.3s ease-in-out,
+    box-shadow 0.3s;
 }
 
 .btn:hover {
   transform: scale(1.05);
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* 약간의 그림자 추가 */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
   background: linear-gradient(
     258.21deg,
     #121d31 -85.49%,
@@ -102,40 +106,5 @@
     #0e1221 78.7%,
     #121d31 106.07%
   );
-  animation: gradientMove 2s infinite linear;
-}
-
-.btn.clicked {
-  background-size: 300% 300%;
-  animation: gradientMoveClick 0.8s ease-in-out;
-}
-
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes gradientMoveClick {
-  0% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0px); }
-}
-
-/* 🔹 로고 부드러운 흔들림 효과 */
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+  animation: gradientMove 3s infinite linear;
 }

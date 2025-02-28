@@ -127,6 +127,7 @@
 
 /* 카드 설명 */
 .card-desc {
+  font-family: Pretendard;
   font-size: 12px;
   font-weight: 500;
   line-height: 140%;

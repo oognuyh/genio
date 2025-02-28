@@ -22,7 +22,6 @@ const Strengths = () => {
       setSelectedStrengths([...selectedStrengths, strength]);
       setErrorMessage(""); // 🚀 제한 메시지 초기화
     } else {
-      setErrorMessage("최대 3개까지만 선택할 수 있어요!"); // 🚀 안내 메시지 설정
     }
   };
 

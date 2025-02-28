@@ -13,162 +13,183 @@
 }
 
 .resume-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  /* 로고 및 설명 */
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* 왼쪽 정렬 */
-    width: 1280px; /* 업로드 박스와 동일한 너비 */
-    margin-bottom: 30px;
-  }
-  
-  .resume-logo {
-    width: 60px;
-    height: auto;
-    margin-right: 15px;
-  }
-  
-  .text-box {
-    text-align: left;
-  }
-  
-  .title1 {
-    font-size: 42px;
-    font-weight: bold;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    margin-bottom: 30px;
-  }
-  
-  .title2 {
-    font-size: 20px;
-    color: #8995AB;
-    margin: 5px 0 0;
-  }
-  
-  /* 파일 업로드 박스 */
-  .upload-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .upload-box {
-    width: 1280px;
-    height: 430px;
-    border: 2px dashed #ccc;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #fdffff;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
-  }
-  
-  .upload-box:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* 🔹 드래그 중일 때 스타일 */
-  .upload-box.drag-over {
-    border: 1.2px solid rgb(0, 204, 82);
-    background-color: rgb(236, 239, 244);
-  }
-  
-  /* 업로드 아이콘 */
-  .upload-icon {
-    font-size: 30px;
-  }
-  
-  .upload-info {
-    font-size: 20px;
-    color: #8995AB;
-  }
-  
-  /* 에러 메시지 스타일 */
-  .upload-box.error {
-    border-color: red;
-    color: red;
-    background-color: #ffe5e5;
-  }
-  
-  .error-icon {
-    font-size: 24px;
-  }
-  
-  .error-text {
-    font-size: 14px;
-    font-weight: bold;
-  }
-  
-  .retry-text {
-    font-size: 12px;
-    font-weight: bold;
-    color: red;
-    margin-top: 5px;
-  }
-  
-  /* 정상적으로 업로드된 파일 스타일 */
-  .upload-box.success {
-    border: 1px solid black;
-    background-color: white;
-  }
-  
-  .success-icon {
-    font-size: 24px;
-    color: green;
-  }
-  
-  .file-name {
-    width: 512px;
-    height: 34px;
-    font-family: 'Pretendard';
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 140%;
-    text-align: center;
-    margin-bottom: 0px;
-  }
-  
-  .file-size {
-    width: 512px;
-    height: 29px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #666;
-    line-height: 160%;
-    text-align: center;
-  }
-  
-  /* 업로드 버튼 스타일 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  padding: 20px;
+}
+
+.uploadHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  width: 1280px; /* 업로드 박스와 동일한 너비 */
+  margin-bottom: 72px;
+}
+
+.resume-logo {
+  width: 60px;
+  height: auto;
+  margin-right: 15px;
+}
+
+.text-box {
+  width: 100%;
+  text-align: left;
+}
+
+.title1 {
+  color: rgb(23, 23, 23);
+  font-family: Pretendard;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 140%;
+  letter-spacing: 0%;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-bottom: 30px;
+  margin-left: -860px;
+}
+
+.title2 {
+  color: rgb(137, 149, 171);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: 0%;
+  margin-left: -700px;
+}
+
+/* 파일 업로드 박스 */
+.upload-container {
+  display: flex;
+  justify-content: center;
+}
+
+.upload-box {
+  width: 1280px;
+  height: 430px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fdffff;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: 0%;
+}
+
+.upload-box:hover {
+  background-color: #f1f1f1;
+}
+
+/* 🔹 드래그 중일 때 스타일 */
+.upload-box.drag-over {
+  border: 1.2px solid rgb(0, 204, 82);
+  background-color: rgb(236, 239, 244);
+}
+
+/* 업로드 아이콘 */
+.upload-icon {
+  font-size: 30px;
+}
+
+.upload-info {
+  color: #8995ab;
+}
+
+/* 에러 메시지 스타일 */
+.upload-box.error {
+  border-color: red;
+  color: red;
+  background-color: #ffe5e5;
+}
+
+.error-icon {
+  font-size: 24px;
+}
+
+.error-text {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.retry-text {
+  font-size: 12px;
+  font-weight: bold;
+  color: red;
+  margin-top: 5px;
+}
+
+/* 정상적으로 업로드된 파일 스타일 */
+.upload-box.success {
+  box-sizing: border-box;
+  /* Accent/Green */
+  border: 1.2px solid rgb(0, 204, 82);
+  border-radius: 16px;
+  background-color: white;
+}
+
+.success-icon {
+  font-size: 24px;
+  color: green;
+}
+
+.file-name {
+  width: 512px;
+  height: 34px;
+  font-family: "Pretendard";
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 140%;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+.file-size {
+  width: 512px;
+  height: 29px;
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 160%;
+  letter-spacing: 0%;
+  color: rgb(23, 23, 23);
+  text-align: center;
+}
+
+/* 업로드 버튼 스타일 */
 .upload-btn {
   margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 15px 40px;
-  font-size: 20px;
   border: none;
   border-radius: 50px;
   cursor: pointer;
   width: 1280px;
   height: 60px;
   background: #121d31;
-  color: white;
-  font-weight: bold;
-  transition: background 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s;
+
+  color: rgb(255, 255, 255);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: 0%;
+  transition: background 0.3s ease-in-out, transform 0.3s ease-in-out,
+    box-shadow 0.3s;
 }
 
 /* 버튼 호버 효과 */
@@ -197,12 +218,55 @@
 
 /* 배경 그라데이션 애니메이션 */
 @keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes gradientMoveClick {
-  0% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ----------------------- */
+/* 새로 추가된 "다시 올리기" 버튼 스타일 */
+.reupload-box {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  border: none;
+
+  /* 글꼴 스타일 */
+  color: rgb(137, 149, 171);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: 0%;
+
+  width: 140px;
+  height: 48px;
+
+  border-radius: 8px;
+  /* Secondary/Secondary-02 */
+  background: rgb(236, 239, 244);
+
+  display: inline-block; /* 버튼 형태로 표시 */
+}
+
+.reupload-box:hover {
+  background-color: #e2e2e2;
 }

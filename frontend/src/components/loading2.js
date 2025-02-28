@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import loadingImage from "../assets/loading2.png";
+import loadingImage2 from "../assets/loading2.png";
 import "./loading2.css";
 
 const Loading2 = () => {
@@ -16,7 +16,7 @@ const Loading2 = () => {
   return (
     <div className="loading2-body">
       <p className="loading-text">제니오가 빠르게 브랜딩 키트를 생성하고 있어요. ⚒️</p>
-      <img src={loadingImage} alt="로딩 중" className="loading-image" />
+      <img src={loadingImage2} alt="로딩 중" className="loading-image2" />
     </div>
   );
 };

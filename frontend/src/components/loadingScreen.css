@@ -1,0 +1,37 @@
+.loading2-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #f8f8f8;
+    padding: 0 320px; /* 전체 좌우 여백 320px 설정 */
+    box-sizing: border-box;
+  }
+  
+  .loading2-text {
+    font-family: "Pretendard";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 140%;
+    color: #171717;
+    margin-bottom: 72px;
+    text-align: left;
+    width: 1271px;
+  }
+  
+  /* 기존 이미지 크기 (필요에 따라 조정) */
+  .loading-image1 {
+    width: 1280px;
+    height: 525px;
+    /* 읽어오는 듯한 회전 애니메이션 추가 */
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+  }
+  

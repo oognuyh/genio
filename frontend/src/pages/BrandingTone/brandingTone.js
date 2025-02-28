@@ -38,8 +38,9 @@ const BrandingTone = () => {
     <div className="branding-tone-body">
       <ProgressSteps currentStep={currentStep} />
 
-      <div className="branding-tone-container">
-        <h2 className="branding-tone-title">마지막으로 브랜딩 톤을 선택해주세요.</h2>
+      <div className="branding-title">
+        <div className="">
+          마지막으로 브랜딩 톤을 선택해주세요.</div>
         <p className="sub-text">용우님이 원하는 브랜딩 톤을 선택하세요. 제니오가 느낌을 잘 살려볼게요!</p>
 
         <div className="branding-tone-list">

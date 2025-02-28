@@ -9,7 +9,7 @@
   box-sizing: border-box; /* ✅ 패딩 포함하여 크기 유지 */
 }
 
-.loading-text {
+.loading2-text {
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
@@ -22,7 +22,7 @@
   width: 1271px;
 }
 
-.loading-image {
+.loading-image2 {
   width: 1271px;
   height: 525px;
 }
