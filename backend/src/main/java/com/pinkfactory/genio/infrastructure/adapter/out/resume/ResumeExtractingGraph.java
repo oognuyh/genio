@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.bsc.langgraph4j.CompiledGraph;
 import org.bsc.langgraph4j.StateGraph;
-import org.bsc.langgraph4j.action.AsyncEdgeAction;
 import org.bsc.langgraph4j.action.AsyncNodeAction;
 import org.bsc.langgraph4j.state.AgentState;
 import org.springframework.context.annotation.Primary;
@@ -68,25 +67,28 @@ public class ResumeExtractingGraph {
                 .addEdge(START, PersonalInformationExtractor.NAME)
                 .addEdge(START, SkillSetExtractor.NAME)
                 .addEdge(START, ExperienceExtractor.NAME)
-                .addEdge(PersonalInformationExtractor.NAME, ResumeEvaluator.NAME)
-                .addEdge(SkillSetExtractor.NAME, ResumeEvaluator.NAME)
-                .addEdge(ExperienceExtractor.NAME, ResumeEvaluator.NAME)
-                .addConditionalEdges(
-                        ResumeEvaluator.NAME,
-                        AsyncEdgeAction.edge_async(new EvaluationRouter()),
-                        Map.of(
-                                "Continue",
-                                END,
-                                "name",
-                                PersonalInformationExtractor.NAME,
-                                "jobCategory",
-                                PersonalInformationExtractor.NAME,
-                                "position",
-                                PersonalInformationExtractor.NAME,
-                                "experience",
-                                ExperienceExtractor.NAME,
-                                "skillSet",
-                                SkillSetExtractor.NAME))
+                .addEdge(PersonalInformationExtractor.NAME, END)
+                .addEdge(SkillSetExtractor.NAME, END)
+                .addEdge(ExperienceExtractor.NAME, END)
+                //                .addEdge(PersonalInformationExtractor.NAME, ResumeEvaluator.NAME)
+                //                .addEdge(SkillSetExtractor.NAME, ResumeEvaluator.NAME)
+                //                .addEdge(ExperienceExtractor.NAME, ResumeEvaluator.NAME)
+                //                .addConditionalEdges(
+                //                        ResumeEvaluator.NAME,
+                //                        AsyncEdgeAction.edge_async(new EvaluationRouter()),
+                //                        Map.of(
+                //                                "Continue",
+                //                                END,
+                //                                "name",
+                //                                PersonalInformationExtractor.NAME,
+                //                                "jobCategory",
+                //                                PersonalInformationExtractor.NAME,
+                //                                "position",
+                //                                PersonalInformationExtractor.NAME,
+                //                                "experience",
+                //                                ExperienceExtractor.NAME,
+                //                                "skillSet",
+                //                                SkillSetExtractor.NAME))
                 .compile();
     }
 }

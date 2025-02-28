@@ -8,12 +8,14 @@ import com.pinkfactory.genio.infrastructure.sse.SseEmitterRegistry;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.bsc.langgraph4j.action.NodeAction;
 import org.springframework.stereotype.Component;
 
 /**
  * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class BiographyGenerator implements NodeAction<State> {
@@ -63,6 +65,11 @@ public class BiographyGenerator implements NodeAction<State> {
                         """)
                         .apply(Map.of("resume", state.resume()))
                         .toAiMessage());
+
+        log.info(
+                "[{}] 바이오그래피: {}",
+                state.<String>value("cardId").orElse("Unknown"),
+                output.aiMessage().text());
 
         return Map.of("biography", output.aiMessage().text());
     }

@@ -9,12 +9,14 @@ import com.pinkfactory.genio.infrastructure.util.JsonUtil;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.bsc.langgraph4j.action.NodeAction;
 import org.springframework.stereotype.Component;
 
 /**
  * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class HashtagGenerator implements NodeAction<State> {
@@ -64,6 +66,11 @@ public class HashtagGenerator implements NodeAction<State> {
                         """)
                         .apply(Map.of("resume", state.resume()))
                         .toAiMessage());
+
+        log.info(
+            "[{}] 해시태그: {}",
+            state.<String>value("cardId").orElse("Unknown"),
+            output.aiMessage().text());
 
         return Map.of("hashtags", JsonUtil.repairJson(output.aiMessage().text()));
     }

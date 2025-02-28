@@ -9,6 +9,7 @@ import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.bsc.langgraph4j.action.NodeAction;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -16,6 +17,7 @@ import org.springframework.util.StringUtils;
 /**
  * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
  */
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class ExperienceExtractor implements NodeAction<State> {
@@ -66,6 +68,11 @@ public class ExperienceExtractor implements NodeAction<State> {
                 AiMessage.from("""
                 추출 결과:
                 """));
+
+        log.info(
+                "[{}] 경력사항: {}",
+                state.<String>value("resumeId").orElse("Unknown"),
+                output.aiMessage().text());
 
         return Map.of("experience", output.aiMessage().text());
     }
