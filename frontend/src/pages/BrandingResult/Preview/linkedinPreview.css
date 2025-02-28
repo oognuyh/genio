@@ -1,0 +1,117 @@
+/* 프로필 카드 스타일 */
+.linkedin-kit-standard {
+    position: absolute;
+    left: 3.85vw;
+    top: 6.3vh;
+    font-size: 0.87vw;
+  
+    color: rgb(69, 84, 115);
+  }
+
+.linkedin-preview-container {
+    /* kit-basic */
+    position: absolute;
+    width: 53.125vw;
+    height: 24.6vh;
+    left: 3.85vw;
+    top: 7.5vh;
+  
+    /* 자동 레이아웃 */
+    margin-top: 1.75vw;
+  }
+  
+  .linkedin-preview-kit {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+  
+    width: 100%;
+    height: 100%;
+    gap: 0.034vw;
+  }
+  
+  .linkedin-preview-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    margin-right: 1.83vw;
+    color: white;
+  }
+  
+  .linkedin-preview-title {
+    /* 자동 레이아웃 */
+    margin-top: 4.03vw;
+    margin: 0 0 1.3vh 0; /* 하단 마진만 조절 */
+
+    color: rgb(255, 255, 255);
+    font-size: 22.91px;
+    font-weight: 700;
+    line-height: 140%;
+  }
+  
+  .name-highlight {
+    font-weight: 720;
+  }
+  
+  .linkedin-preview-role {
+    /* 자동 레이아웃 */
+    font-size: 1.075vw;
+    font-weight: 500;
+
+    margin-top: 0;
+    margin-bottom: 0.9vh;
+  }
+  
+  /* 해쉬태그 영역 */
+  .linkedin-preview-hashtag-list {
+    /* chip_set (kit-basic) */
+    position: static;
+    height: 2.8431vh;
+    margin-right: 1.83vw;
+    margin-bottom: 1.73vw;
+  
+    /* 자동 레이아웃 */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.425vw;
+    padding: 0px;
+  
+    /* Inside Auto Layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+  
+  .linkedin-preview-hashtag-chip {
+    /* chip (kit-basic) */
+    position: static;
+  
+    /* 자동 레이아웃 */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3703vw;
+    padding: 0.3882vh 0.3567vw;
+  
+    /* Inside Auto Layout */
+    flex: none;
+    flex-grow: 0;
+  
+    border-radius: 2px;
+    /* White */
+    background: rgb(255, 255, 255);
+    opacity: 0.8;
+  
+    /* Typo */
+    font-size: 0.532vw;
+    font-weight: 600;
+    line-height: 140%;
+    letter-spacing: 0%;
+    text-align: left;
+  }

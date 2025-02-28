@@ -1,0 +1,109 @@
+/* 프로필 카드 스타일 */
+.instagram-kit-standard {
+    position: absolute;
+    left: 22.5vw;
+    top: 3.75vh;
+    font-size: 0.87vw;
+
+    color: rgb(69, 84, 115);
+}
+
+.instagram-preview-container {
+    /* kit-basic */
+    position: absolute;
+    width: 15.9375vw;
+    height: 29.6vh;
+    left: 22.5vw;
+    top: 5.0vh;
+
+    /* 자동 레이아웃 */
+    margin-top: 1.75vw;
+
+    color: rgb(255, 255, 255);
+}
+
+.instagram-preview-kit {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.instagram-preview-title {
+    height: 5.8vh;
+    margin: 0;
+    
+    /* 자동 레이아웃 */
+    font-size: 1vw;
+    font-weight: 700;
+    line-height: 140%;
+}
+
+.name-highlight {
+    font-weight: 720;
+}
+
+.instagram-preview-description {
+    width: 13vw;
+    height: 8vh;
+
+    /* 자동 레이아웃 */
+    margin-top: 0px;
+    margin-bottom: 3.8vh;
+
+    font-size: 0.545vw;
+    font-weight: 400;
+    line-height: 165%;
+}
+
+/* 해쉬태그 영역 */
+.instagram-preview-hashtag-list {
+    /* chip_set (kit-instagram) */
+    position: static;
+    height: 2.8431vh;
+
+    /* 자동 레이아웃 */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.2vw;
+    padding: 0px;
+
+    /* Inside Auto Layout */
+    flex: none;
+    flex-grow: 0;
+    margin-bottom: 0.8vh;
+}
+
+.instagram-preview-hashtag-chip {
+    /* chip (kit-instagram) */
+    position: static;
+
+    /* 자동 레이아웃 */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3703vw;
+    padding: 0.2vh 0.2vw;
+
+    /* Inside Auto Layout */
+    flex: none;
+    flex-grow: 0;
+
+    border-radius: 2.5px;
+    /* White */
+    background: rgb(255, 255, 255);
+    opacity: 0.8;
+
+    /* Typo */
+    font-size: 0.37vw;
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: 0%;
+    text-align: left;
+}

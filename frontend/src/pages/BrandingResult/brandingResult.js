@@ -5,14 +5,35 @@ import resizer from "react-image-file-resizer";
 
 import colorPaletteImage from "../../assets/color-palette.png";
 
+import ProgressSteps from "../../components/ProgressSteps";
+
+import BasicPreview from "./Preview/basicPreview";
+import LinkedinPreview from "./Preview/linkedinPreview";
+import InstagramPreview from "./Preview/instagramPreview";
+
+import BasicKit from '../../components/Kits/basicKit';
+import LinkedinKit from '../../components/Kits/linkedinKit';
+import InstagramKit from '../../components/Kits/instagramKit';
+
 import "./brandingResult.css";
 
 const BrandingResult = () => {
-    const [kitColor, setKitColor] = useState('#00b894');
+    const currentStep = 5; // ✅ 현재 진행단계 3단계
 
-    const fileExt = 'png';
-    const fileWidth = 1020;
-    const fileHeight = 306;
+    const userName = '용우';
+    const role = 'IT 개발자';
+    const tagline = '코드 속에 삶을 담는 개발자';
+
+    const [platforms, setPlatforms] = useState(['기본', '링크드인', '인스타그램', '포트폴리오']);
+    const [colors, setColors] = useState(['#2d3436', '#0984e3', '#00b894', '#6c5ce7']);
+    const [hashtags, setHashtags] = useState(['웹개발자', '프론트엔드', '백엔드', 'node.js']);
+
+    const [kitPlatfrom, setKitPlatform] = useState(platforms[0]);
+    const [kitColor, setKitColor] = useState(colors[0]);
+
+    const [fileExt, setFileExt] = useState('png');
+    const [fileWidth, setFileWidth] = useState(1020);
+    const [fileHeight, setFileHeight] = useState(306);
 
     const description = `저는 프론트엔드 및 백엔드 개발에 특화된 풀스택 개발자 이용우입니다. 3개의 프로젝트를 통해 React,
                             Node.js 등 다양한 기술 스택을 활용하여 현 서비스 개발을 주도하는 코드 속에 삶을 담는 개발자입니다.
@@ -20,16 +41,41 @@ const BrandingResult = () => {
 
     const resizeFile = (file, fileInfo) => new Promise(resolve => {
         resizer.imageFileResizer(file, fileInfo.width, fileInfo.height, `${fileInfo.ext}`,
-            100,
+            999,
             0,
             uri => {
                 resolve(uri);
             }, 'blob', fileInfo.width, fileInfo.height);
     });
 
+    const onClickPlatform = (platform) => {
+        setKitPlatform(platform);
+        const platformIdx = platforms.findIndex((e) => e == platform);
+
+        switch (platformIdx) {
+            case 0:
+                setFileWidth(1020);
+                setFileHeight(306);
+                break;
+            case 1:
+                setFileWidth(1584);
+                setFileHeight(396);
+                break;
+            case 2:
+                setFileWidth(1080);
+                setFileHeight(1080);
+                break;
+            case 3:
+                setFileWidth(1920);
+                setFileHeight(1080);
+                break;
+        }
+    }
+
     const onDownloadBtn = () => {
         const kit = document.getElementById('branding-kit');
-        const fileName = 'kit';
+
+        const fileName = 'genio_kit';
         const fileInfo = {
             ext: fileExt,
             width: fileWidth,
@@ -37,74 +83,124 @@ const BrandingResult = () => {
         }
 
         domtoimage.toBlob(kit).then(async blob => {
-            const file = await resizeFile(blob, fileInfo);
-            saveAs(file, `${fileName}.${fileInfo.ext}`);
+            //const file = await resizeFile(blob, fileInfo);
+            saveAs(blob, `${fileName}.${fileInfo.ext}`);
         });
     };
 
-    return (
-        <div className="result-container">
-            {/* 상단 소개글 섹션 */}
-            <div className="intro-section">
-                <h2 className="intro-title">용우님을 위한 퍼스널 브랜딩을 완료했어요</h2>
-                <p className="intro-text">
-                    GenIo가 단 2분만에 용우님에게 맞는 퍼스널 브랜딩 문구와 색상을 완성했어요.<b />
-                    플랫폼 별로 적용할 수 있는 레이아웃과 색상을 선택 후 이미지로 저장해보세요.
-                </p>
-            </div>
+    const renderPreview = () => {
+        const platformIdx = platforms.findIndex((e) => e == kitPlatfrom);
 
-            {/* 플랫폼 선택 버튼 */}
-            <div className="platform-btn-list">
-                <button className="platform-btn active">
-                    기본
-                </button>
-                <button className="platform-btn">
-                    링크드인
-                </button>
-                <button className="platform-btn">
-                    인스타그램
-                </button>
-                <button className="platform-btn">
-                    포트폴리오
-                </button>
-            </div>
-
-            {/* 컬러 팔레트 */}
-            <div className="color-palette">
-                <buuton className="color-palette-btn">
-                    <img className="color-palette-icon" src={colorPaletteImage} onclick="" />
-                </buuton>
-                {['#2d3436', '#0984e3', '#00b894', '#6c5ce7'].map((color) => (
-                    <div
-                        key={color}
-                        className={`color-chip${color == kitColor ? " active" : ""}`}
-                        style={{ background: `linear-gradient(to left, ${color}, #ffffff 140%)` }}
-                        onClick={() => setKitColor(color)}
+        switch (platformIdx) {
+            case 0:
+                return (
+                    <BasicPreview
+                        kitColor={kitColor}
+                        tagline={tagline} description={description}
+                        hashtags={hashtags}
                     />
-                ))}
-            </div>
+                );
+            case 1:
+                return (
+                    <LinkedinPreview
+                        kitColor={kitColor}
+                        tagline={tagline} role={role}
+                        hashtags={hashtags}
+                    />
+                );
+            case 2:
+                return (
+                    <InstagramPreview
+                        kitColor={kitColor}
+                        tagline={tagline} description={description}
+                        hashtags={hashtags}
+                    />
+                );
+        }
+    };
 
+    const renderKit = () => {
+        const platformIdx = platforms.findIndex((e) => e == kitPlatfrom);
 
-            <div className="kit-box">
-                {/* 프로필 카드 */}
-                <p className="kit-standard">1020 x 306</p>
-                <div id="branding-kit" className="kit-container"
-                    style={{ background: `linear-gradient(to left, ${kitColor}, #ffffff 120%)` }}>
-                    <div className="kit-content">
-                        <h1 className="kit-title">
-                            코드 속에 삶을 담는 개발자, <span className="name-highlight">이용우</span>입니다.
-                        </h1>
+        switch (platformIdx) {
+            case 0:
+                return (
+                    <BasicKit
+                        kitColor={kitColor}
+                        tagline={tagline} description={description}
+                        hashtags={hashtags}
+                    />
+                );
+            case 1:
+                return (
+                    <LinkedinKit
+                        kitColor={kitColor}
+                        tagline={tagline} role={role}
+                        hashtags={hashtags}
+                    />
+                );
+            case 2:
+                return (
+                    <InstagramKit
+                        kitColor={kitColor}
+                        tagline={tagline} description={description}
+                        hashtags={hashtags}
+                    />
+                );
+        }
+    };
 
-                        <p className="kit-description">
-                            {description}
-                        </p>
-                    </div>
+    return (
+        <>
+            <ProgressSteps currentStep={currentStep} />
+            <div className="result-container">
+                {/* 상단 소개글 섹션 */}
+                <div className="intro-section">
+                    <h2 className="intro-title">{userName}님을 위한 퍼스널 브랜딩이 완성됐어요!</h2>
+                    <p className="intro-text">
+                        제니오가 맞춤형 브랜딩 키드를 준비했어요.<b />
+                        시그니처 컬러는 취향에 맞게, 레이아웃은 용도에 맞게 선택해보세요.
+                    </p>
                 </div>
-            </div>
 
-            {/* 저장 버튼 */}
-            <button className="save-button" onClick={onDownloadBtn}>이미지로 저장하기</button>
-        </div>
+                {/* 플랫폼 선택 버튼 */}
+                <div className="platform-btn-list">
+                    {platforms.map((platform) => (
+                        <button
+                            className={`platform-btn${platform == kitPlatfrom ? " active" : ""}`}
+                            onClick={() => onClickPlatform(platform)}>
+                            {platform}
+                        </button>
+                    ))}
+                </div>
+
+                {/* 컬러 팔레트 */}
+                <div className="color-palette">
+                    <buuton className="color-palette-btn">
+                        <img className="color-palette-icon" src={colorPaletteImage} onclick="" />
+                    </buuton>
+                    {colors.map((color) => (
+                        <div
+                            className={`color-chip${color == kitColor ? " active" : ""}`}
+                            style={{ background: `linear-gradient(to left, ${color}, #ffffff 140%)` }}
+                            onClick={() => setKitColor(color)}
+                        />
+                    ))}
+                </div>
+
+
+                <div className="kit-box">
+                    {/* 조건부 키트 프리뷰 렌더링 */}
+                    {renderPreview()}
+                </div>
+
+                {/* 저장 버튼 */}
+                <button className="save-button" onClick={onDownloadBtn}>이미지로 저장하기</button>
+
+                {/* 이미지 저장을 위한 히든 컴포넌트 */}
+                {renderKit()}
+            </div>
+        </>
     );
 };
 

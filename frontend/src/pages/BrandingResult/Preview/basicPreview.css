@@ -1,0 +1,113 @@
+/* 프로필 카드 스타일 */
+.basic-kit-standard {
+    position: absolute;
+    left: 3.85vw;
+    top: 3.75vh;
+    font-size: 0.87vw;
+
+    color: rgb(69, 84, 115);
+}
+
+.basic-preview-container {
+    /* kit-basic */
+    position: absolute;
+    width: 53.125vw;
+    height: 29.6vh;
+    left: 3.85vw;
+    top: 5.0vh;
+
+    /* 자동 레이아웃 */
+    margin-top: 1.75vw;
+}
+
+.basic-preview-kit {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 100%;
+    height: 100%;
+    gap: 1.1354vw;
+}
+
+.basic-preview-content {
+    display: flex;
+    flex-direction: column;
+    
+    margin-left: 2.83vw;
+}
+
+.basic-preview-title {
+    /* 자동 레이아웃 */
+    margin-top: 2.83vw;
+
+    font-size: 1.29vw;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+.name-highlight {
+    font-weight: 720;
+}
+
+.basic-preview-description {
+    /* 자동 레이아웃 */
+    margin-top: 0px;
+
+    font-size: 0.845vw;
+    font-weight: 400;
+    line-height: 165%;
+
+    white-space: pre-line;
+}
+
+/* 해쉬태그 영역 */
+.basic-preview-hashtag-list {
+    /* chip_set (kit-basic) */
+    position: static;
+    height: 2.8431vh;
+    margin-left: 2.83vw;
+
+    /* 자동 레이아웃 */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.625vw;
+    padding: 0px;
+
+    /* Inside Auto Layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.basic-preview-hashtag-chip {
+    /* chip (kit-basic) */
+    position: static;
+
+    /* 자동 레이아웃 */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3703vw;
+    padding: 0.5882vh 0.4167vw;
+
+    /* Inside Auto Layout */
+    flex: none;
+    flex-grow: 0;
+
+    border-radius: 4px;
+    /* White */
+    background: rgb(255, 255, 255);
+    opacity: 0.8;
+
+    /* Typo */
+    font-size: 0.62vw;
+    font-weight: 600;
+    line-height: 140%;
+    letter-spacing: 0%;
+    text-align: left;
+}

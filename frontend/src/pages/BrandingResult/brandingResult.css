@@ -94,7 +94,6 @@ body {
 .platform-btn-list {
   /* button_list */
   position: absolute;
-  width: 27.0313vw;
   height: 4.7059vh;
   left: 16.6667vw;
   top: 35.7039vh;
@@ -122,7 +121,6 @@ body {
 
   /* Inside Auto Layout */
   flex: none;
-  order: 1;
   flex-grow: 0;
   margin: 0 0.8333vw;
 
@@ -130,9 +128,11 @@ body {
   border: none;
   border-radius: 36px;
 
+  cursor: pointer;
+
   /* Typo */
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 650;
   line-height: 140%;
   text-align: center;
   color: rgb(137, 149, 171);
@@ -152,7 +152,6 @@ body {
 
   /* Inside Auto Layout */
   flex: none;
-  order: 0;
   flex-grow: 0;
   margin: 0;
 
@@ -178,67 +177,6 @@ body {
   border-radius: 10px;
   /* White */
   background: rgb(255, 255, 255);
-}
-
-.kit-standard {
-  position: absolute;
-  left: 3.85vw;
-  top: 3.75vh;
-  font-size: 0.87vw;
-
-  color: rgb(69, 84, 115);
-}
-
-/* 프로필 카드 스타일 */
-.kit-container {
-  /* kit-basic */
-  position: absolute;
-  width: 53.125vw;
-  height: 29.6vh;
-  left: 3.85vw;
-  top: 5.0vh;
-
-  /* 자동 레이아웃 */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 2.1354vw;
-  margin-top: 25px;
-}
-
-.kit-content {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 40px;
-  /* 저장 버튼 공간 확보 */
-}
-
-.kit-title {
-  /* 자동 레이아웃 */
-  margin-left: 2.83vw;
-  margin-top: 2.83vw;
-
-  font-size: 1.29vw;
-  font-weight: 500;
-  line-height: 140%;
-}
-
-.name-highlight {
-  font-weight: 720;
-}
-
-.kit-description {
-  /* 자동 레이아웃 */
-  margin-left: 2.83vw;
-  /* 1920x1020 가로 기준 */
-  margin-top: 0px;
-
-  font-size: 0.845vw;
-  font-weight: 400;
-  line-height: 165%;
-
-  white-space: pre-line;
 }
 
 /* 컬러 팔레트 스타일 */
@@ -294,7 +232,7 @@ body {
 .save-button {
   /* button-01 */
   position: absolute;
-  width: 240px;
+  width: 16.5vw;
   height: 45px;
 
   left: 50%;
@@ -322,7 +260,7 @@ body {
   background: rgb(18, 29, 49);
 
   /* Typo */
-  font-size: 15px;
+  font-size: 1.05vw;
   font-weight: 700;
   color: rgb(255, 255, 255);
 }

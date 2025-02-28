@@ -1,0 +1,4 @@
+.kit-hidden-container {
+    position: absolute;
+    top: -9999px;
+}

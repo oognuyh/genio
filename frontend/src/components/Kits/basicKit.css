@@ -1,0 +1,73 @@
+.basic-kit {
+    /* kit-basic */
+    width: 1020px;
+    height: 306px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px 54px;
+    box-sizing: border-box;
+}
+
+/* ▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦ 콘텐츠 영역 ▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦ */
+.basic-kit-content {
+    /* text_set (kit-basic) */
+    width: 755px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* 기존 16px → 8px로 축소 */
+    padding: 0px;
+    flex: none;
+}
+
+.basic-kit-title {
+    /* title-text (kit-basic) */
+    width: 650px;
+    height: auto; /* 고정 높이 제거 */
+    margin: 8px 0; /* 16px → 8px 축소 */
+    color: #171717;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+.name-highlight {
+    font-weight: 720;
+}
+
+.basic-kit-description {
+    /* des-text (kit-basic) */
+    width: 650px;
+    height: auto; /* 고정 높이 제거 */
+    margin: 8px 0; /* 16px → 8px 축소 */
+    color: #171717;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 160%;
+}
+
+/* ▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦ 해시태그 영역 ▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦ */
+.basic-hashtag-list {
+    /* chip_set (kit-basic) */
+    display: flex;
+    gap: 8px; /* 기존 12px → 8px 축소 */
+    margin-bottom: 54px;
+    padding: 0px;
+}
+
+.basic-hashtag-chip {
+    /* chip (kit-basic) */
+    height: 29px;
+    padding: 0 8px;
+    margin-right: 8px; /* 12px → 8px 축소 */
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.8);
+    font-family: Pretendard;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+}
