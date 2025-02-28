@@ -66,9 +66,9 @@ public class TaglineGenerator implements NodeAction<State> {
                         .toAiMessage());
 
         log.info(
-            "[{}] 태그라인: {}",
-            state.<String>value("cardId").orElse("Unknown"),
-            output.aiMessage().text());
+                "[{}] 태그라인: {}",
+                state.<String>value("cardId").orElse("Unknown"),
+                output.aiMessage().text());
 
         return Map.of("tagline", output.aiMessage().text());
     }

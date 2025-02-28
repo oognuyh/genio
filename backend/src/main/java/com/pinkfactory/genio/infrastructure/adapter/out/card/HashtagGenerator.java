@@ -68,9 +68,9 @@ public class HashtagGenerator implements NodeAction<State> {
                         .toAiMessage());
 
         log.info(
-            "[{}] 해시태그: {}",
-            state.<String>value("cardId").orElse("Unknown"),
-            output.aiMessage().text());
+                "[{}] 해시태그: {}",
+                state.<String>value("cardId").orElse("Unknown"),
+                output.aiMessage().text());
 
         return Map.of("hashtags", JsonUtil.repairJson(output.aiMessage().text()));
     }

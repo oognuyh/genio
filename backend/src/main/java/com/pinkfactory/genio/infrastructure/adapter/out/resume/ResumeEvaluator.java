@@ -43,7 +43,8 @@ public class ResumeEvaluator implements NodeAction<State> {
 
         var output = model.chat(
                 template.apply(state).toAiMessage(),
-                PromptTemplate.of("""
+                PromptTemplate.of(
+                                """
                         추출된 사용자의 이력서는 다음과 같습니다:
                         이름: {{ name }}
                         직군: {{ jobCategory }}

@@ -68,9 +68,9 @@ public class ColorGenerator implements NodeAction<State> {
                         .toAiMessage());
 
         log.info(
-            "[{}] 컬러: {}",
-            state.<String>value("cardId").orElse("Unknown"),
-            output.aiMessage().text());
+                "[{}] 컬러: {}",
+                state.<String>value("cardId").orElse("Unknown"),
+                output.aiMessage().text());
 
         return Map.of("colors", JsonUtil.repairJson(output.aiMessage().text()));
     }
