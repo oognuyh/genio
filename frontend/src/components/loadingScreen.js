@@ -45,7 +45,7 @@ const LoadingScreen = () => {
       navigate("/profile", { state: data });
     } catch (error) {
       console.error("[LoadingScreen] parseDataInSteps error:", error);
-      navigate("/profile");
+      navigate("/resume-upload");
     }
   };
 

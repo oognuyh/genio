@@ -66,7 +66,6 @@
 .input-group {
   display: flex;
   margin-bottom: 24px;
-  justify-content: space-between;
   gap: 24px; 
 }
 
@@ -135,10 +134,18 @@
 
 /* 🔹 스킬 버튼 컨테이너: 5열 그리드 */
 .skills-container {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  width: 900px;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: space-between;
   gap: 12px;
   margin-top: 10px;
+
+  flex-wrap: wrap;
+  overflow: scroll;
   /* width: 100%; // 부모 .left-panel이 width: 50%이므로 100%로 설정 */
 }
 
