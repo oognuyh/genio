@@ -11,7 +11,6 @@ import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.bsc.langgraph4j.action.NodeAction;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 /**
  * @author <a href="mailto:oognuyh@gmail.com">oognuyh</a>
@@ -31,32 +30,13 @@ public class HashtagGenerator implements NodeAction<State> {
     @Override
     public Map<String, Object> apply(State state) {
 
-        var feedback = state.evaluations().stream()
-                .filter(evaluation -> evaluation.field().equals("hashtags"))
-                .filter(Evaluation::shouldRevise)
-                .findFirst()
-                .map(Evaluation::feedback)
-                .orElse("");
-
-        if (StringUtils.hasText(feedback)) {
-
-            state.<String>value("cardId")
-                    .ifPresent(cardId -> registry.send(
-                            cardId,
-                            Event.builder()
-                                    .type(EventType.RUNNING)
-                                    .message("해시태그를 다시 생성하고 있어요.")
-                                    .build()));
-        } else {
-
-            state.<String>value("cardId")
-                    .ifPresent(cardId -> registry.send(
-                            cardId,
-                            Event.builder()
-                                    .type(EventType.RUNNING)
-                                    .message("해시태그를 생성하고 있어요.")
-                                    .build()));
-        }
+        state.<String>value("cardId")
+                .ifPresent(cardId -> registry.send(
+                        cardId,
+                        Event.builder()
+                                .type(EventType.RUNNING)
+                                .message("키워드를 선택하고 있어요.")
+                                .build()));
 
         var output = model.chat(
                 template.apply(state).toSystemMessage(),
@@ -74,7 +54,7 @@ public class HashtagGenerator implements NodeAction<State> {
                         경험:
                         {{ resume.experience }}
                         """)
-                        .apply(Map.of("resume", state.resume(), "feedback", feedback))
+                        .apply(Map.of("resume", state.resume()))
                         .toUserMessage(),
                 PromptTemplate.of(
                                 """

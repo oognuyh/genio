@@ -98,6 +98,11 @@ public class V1ResumeController implements V1ResumeAPISpecification {
         executorService.execute(() -> {
             try {
 
+                emitter.send(Event.builder()
+                        .type(EventType.RUNNING)
+                        .message("이력서를 확인하고 있어요.")
+                        .build());
+
                 var resume = service.extractResume(command);
 
                 emitter.send(Event.<ResumeResponse>builder()

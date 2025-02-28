@@ -3,10 +3,8 @@ package com.pinkfactory.genio.infrastructure.adapter.out.card;
 import static org.bsc.langgraph4j.StateGraph.END;
 import static org.bsc.langgraph4j.StateGraph.START;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.pinkfactory.genio.domain.Resume;
 import com.pinkfactory.genio.infrastructure.util.JsonUtil;
-import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -35,18 +33,6 @@ public class CardGeneratingGraph {
 
         public State(Map<String, Object> initData) {
             super(initData);
-        }
-
-        public List<Evaluation> evaluations() {
-
-            var evaluations = this.<String>value("evaluations").orElse("[]");
-
-            return JsonUtil.deserialize(evaluations, new TypeReference<>() {});
-        }
-
-        public int iterations() {
-
-            return this.<Integer>value("iterations").orElse(0);
         }
 
         public Resume resume() {

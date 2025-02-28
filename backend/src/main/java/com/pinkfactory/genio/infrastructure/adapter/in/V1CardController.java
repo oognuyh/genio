@@ -97,11 +97,16 @@ public class V1CardController implements V1CardAPISpecification {
         executorService.execute(() -> {
             try {
 
+                emitter.send(Event.builder()
+                        .type(EventType.RUNNING)
+                        .message("슬로건을 만들고 있어요.")
+                        .build());
+
                 var card = service.generateCard(command);
 
                 emitter.send(Event.<CardResponse>builder()
                         .type(EventType.COMPLETED)
-                        .message("퍼스널 브랜딩을 완료했어요.")
+                        .message("퍼스널 브랜딩이 곧 완성돼요.")
                         .result(CardResponse.builder()
                                 .cardId(card.cardId())
                                 .name(request.name())
@@ -127,9 +132,13 @@ public class V1CardController implements V1CardAPISpecification {
 
                     emitter.completeWithError(e);
                 } catch (IOException sendError) {
+
                     log.error("Failed to send error event: {}", sendError.getMessage());
+
                     try {
+
                         emitter.complete();
+
                     } catch (Exception completeError) {
                         log.error("Failed to complete SSE connection: {}", completeError.getMessage());
                     }
