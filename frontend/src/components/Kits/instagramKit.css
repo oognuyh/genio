@@ -12,6 +12,7 @@
 
 /* ▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦ 콘텐츠 영역 ▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦ */
 .instagram-kit-title {
+    width: 881.4px; /* 13vw → 13×67.8 */
     height: 209.62px; /* 5.8vh → 5.8×36.4865 */
     margin: 0;
     font-size: 67.8px; /* 1vw → 67.8px */
