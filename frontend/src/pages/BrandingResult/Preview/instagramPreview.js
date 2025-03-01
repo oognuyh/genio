@@ -7,7 +7,7 @@ const InstagramInPreview = ({ kitColor, tagline, biography, hashtags }) => {
         <>
             <p className="instagram-kit-standard">1080 x 1080</p>
             <div className="instagram-preview-container">
-                <div className="instagram-preview-kit"
+                <div id="branding-preview-kit" className="instagram-preview-kit"
                     style={{ background: `linear-gradient(to top, ${kitColor}, #ffffff 120%)` }}>
                     <h1 className="instagram-preview-title">
                         {tagline}

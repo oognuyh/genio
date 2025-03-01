@@ -7,7 +7,7 @@ const BasicPreview = ({ kitColor, tagline, biography, hashtags }) => {
         <>
             <p className="basic-kit-standard">1020 x 306</p>
             <div className="basic-preview-container">
-                <div className="basic-preview-kit"
+                <div id="branding-preview-kit" className="basic-preview-kit"
                     style={{ background: `linear-gradient(to left, ${kitColor}, #ffffff 120%)` }}>
                     <div className="basic-preview-content">
                         <h1 className="basic-preview-title">

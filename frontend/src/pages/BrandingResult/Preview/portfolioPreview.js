@@ -7,7 +7,7 @@ const PortfolioPreview = ({ kitColor, tagline, hashtags }) => {
         <>
             <p className="portfolio-kit-standard">1920 x 1080</p>
             <div className="portfolio-preview-container">
-                <div className="portfolio-preview-kit"
+                <div id="branding-preview-kit" className="portfolio-preview-kit"
                     style={{ background: `linear-gradient(to right, ${kitColor}, #ffffff 120%)` }}>
                     <div className="portfolio-preview-intro">Portfolio</div>
                     <h1 className="portfolio-preview-title">
