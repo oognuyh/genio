@@ -14,6 +14,10 @@ const Profile = () => {
   // LoadingScreen에서 넘긴 오브젝트
   const [resumeData, setResumeData] = useState(location.state || {});
 
+  const [charCount, setCharCount] = useState(
+    resumeData.experience?.length || 0
+  );
+
   const [categoryInfo, setCategoryInfo] = useState([]);
   const [jobCategories, setJobCategories] = useState([]);
   const [skillSet, setSkillSet] = useState([]);
@@ -41,7 +45,6 @@ const Profile = () => {
       setJobCategories(names);
     };
     fetchCategories();
-    resumeData.stage = "취준생";
   }, []);
 
   useEffect(() => {
@@ -66,9 +69,11 @@ const Profile = () => {
   // 입력 필드 값 변경 핸들러 (즉시 유효성 검사)
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setResumeData({ ...resumeData, [name]: value });
+    if (name === "experience" && value.length > 1000) return; // 최대 1000자 제한
 
-    // 입력값이 비었거나 공백만 있는 경우 즉시 빨간 테두리 적용
+    setResumeData({ ...resumeData, [name]: value });
+    setCharCount(value.length);
+
     setIsValid((prev) => ({
       ...prev,
       [name]: value.trim().length > 0,
@@ -188,6 +193,14 @@ const Profile = () => {
                 onChange={handleChange}
                 className={isValid.experience ? "" : "invalid"}
               />
+              <div className="char-count-container">
+                {charCount > 800 && (
+                  <span className="char-warning">
+                    주요 경험은 최대 1000자까지 작성 가능해요
+                  </span>
+                )}
+                <span className="char-count">{charCount}/1000자</span>
+              </div>
             </div>
           </div>
         </div>

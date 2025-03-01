@@ -132,6 +132,25 @@
   margin-bottom: 24px;
 }
 
+/* Character Count Styles */
+.char-count-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8px;
+  font-size: 16px;
+  color: rgb(137, 149, 171);
+}
+
+.char-warning {
+  color: red;
+  font-weight: 600;
+}
+
+.char-count {
+  font-weight: 500;
+}
+
 /* 🔹 스킬 버튼 컨테이너: 5열 그리드 */
 .skills-container {
   width: 900px;

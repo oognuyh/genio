@@ -96,7 +96,7 @@
 /* 🔹 드래그 중일 때 스타일 */
 .upload-box.drag-over {
   border: 1.2px solid rgb(0, 204, 82);
-  background-color: rgb(236, 239, 244);
+  background: rgb(236, 239, 244);
 }
 
 /* 업로드 아이콘 */
@@ -180,9 +180,9 @@
   cursor: pointer;
   width: 1280px;
   height: 60px;
-  background: #121d31;
+  background: rgb(236, 239, 244);
 
-  color: rgb(255, 255, 255);
+  color: rgb(137, 149, 171);
   font-family: Pretendard;
   font-size: 20px;
   font-weight: 600;
@@ -192,41 +192,11 @@
     box-shadow 0.3s;
 }
 
-/* 버튼 호버 효과 */
-.upload-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(
-    258.21deg,
-    #121d31 -85.49%,
-    #0e1221 -58.12%,
-    #455473 -30.76%,
-    #8995ab -3.39%,
-    #455473 39.61%,
-    #0e1221 78.7%,
-    #121d31 106.07%
-  );
-  animation: gradientMove 2s infinite linear;
-}
-
 /* 버튼 클릭 효과 */
 .upload-btn:active {
   transform: scale(0.95);
   background-size: 300% 300%;
   animation: gradientMoveClick 0.8s ease-in-out;
-}
-
-/* 배경 그라데이션 애니메이션 */
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 @keyframes gradientMoveClick {
@@ -269,4 +239,9 @@
 
 .reupload-box:hover {
   background-color: #e2e2e2;
+}
+
+.upload-btn.uploaded {
+  background: rgb(18, 29, 49);
+  color: white;
 }

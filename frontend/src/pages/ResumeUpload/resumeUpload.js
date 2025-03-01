@@ -26,14 +26,14 @@ const ResumeUpload = () => {
       console.log("[onGenerateKit] Selected file:", file);
 
       const fileInfo = {
-        file: file
+        file: file,
       };
 
-    //   navigate("/loading-screen", { state: { data: fileInfo } });
-    // } catch (err) {
-    //   console.error("이력서 분석 중 오류가 발생했습니다.", err);
-    // }
-    // 2) 여기서 이미 백엔드로 업로드 + 분석 요청
+      //   navigate("/loading-screen", { state: { data: fileInfo } });
+      // } catch (err) {
+      //   console.error("이력서 분석 중 오류가 발생했습니다.", err);
+      // }
+      // 2) 여기서 이미 백엔드로 업로드 + 분석 요청
       const response = await axios.post("/api/v1/resumes", fileInfo, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -93,12 +93,15 @@ const ResumeUpload = () => {
         <div className="uploadHeader">
           <div className="text-box">
             <span className="title1">
-              이력서를 업로드해주세요.<br />
+              이력서를 업로드해주세요.
+              <br />
             </span>
             <span className="title2">
-              먼저, 퍼스널 브랜딩 키트를 생성을 위해 분석할 프로필 정보가 필요해요.
+              먼저, 퍼스널 브랜딩 키트를 생성을 위해 분석할 프로필 정보가
+              필요해요.
               <br />
-              이력서 파일을 업로드하면 제니오가 프로필 정보를 자동으로 입력해드려요.
+              이력서 파일을 업로드하면 제니오가 프로필 정보를 자동으로
+              입력해드려요.
             </span>
           </div>
         </div>
@@ -106,8 +109,9 @@ const ResumeUpload = () => {
         {/* 파일 업로드 박스 */}
         <div className="upload-container">
           <label
-            className={`upload-box ${error ? "error" : file ? "success" : ""} ${dragOver ? "drag-over" : ""
-              }`}
+            className={`upload-box ${error ? "error" : file ? "success" : ""} ${
+              dragOver ? "drag-over" : ""
+            }`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
@@ -130,14 +134,22 @@ const ResumeUpload = () => {
             ) : file ? (
               <>
                 <span className="success-icon">
-                  <img src={successIcon} alt="file" className="upload-success-icon" />
+                  <img
+                    src={successIcon}
+                    alt="file"
+                    className="upload-success-icon"
+                  />
                 </span>
                 <p className="file-name">{file.name}</p>
-                <p className="file-size">{(file.size / (1024 * 1024)).toFixed(1)} MB</p>
+                <p className="file-size">
+                  {(file.size / (1024 * 1024)).toFixed(1)} MB
+                </p>
                 <button
                   type="button"
                   className="reupload-box"
-                  onClick={() => document.getElementById("reupload-input").click()}
+                  onClick={() =>
+                    document.getElementById("reupload-input").click()
+                  }
                 >
                   다시 업로드
                 </button>
