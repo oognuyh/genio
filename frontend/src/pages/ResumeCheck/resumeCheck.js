@@ -11,7 +11,7 @@ const ResumeCheck = () => {
 
   return (
     <div
-      className="resume-body"
+      className="resume-body1"
       style={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover" }}
     >
       {/* 최상단 중앙 로고 */}
