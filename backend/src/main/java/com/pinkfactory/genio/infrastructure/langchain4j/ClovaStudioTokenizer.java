@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pinkfactory.genio.infrastructure.clova.ClovaStudioClient;
 import com.pinkfactory.genio.infrastructure.clova.ClovaStudioMessage;
 import com.pinkfactory.genio.infrastructure.clova.ClovaStudioProperties;
+import com.pinkfactory.genio.infrastructure.clova.ClovaStudioRequestInterceptor;
 import com.pinkfactory.genio.infrastructure.clova.ClovaStudioTokenizationRequest;
 import dev.langchain4j.agent.tool.ToolExecutionRequest;
 import dev.langchain4j.agent.tool.ToolSpecification;
@@ -16,7 +17,6 @@ import feign.jackson.JacksonEncoder;
 import java.util.List;
 import java.util.stream.StreamSupport;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
 /**
@@ -30,14 +30,14 @@ public class ClovaStudioTokenizer implements Tokenizer {
 
     private final ClovaStudioClient client;
 
-    public ClovaStudioTokenizer(ClovaStudioProperties properties, ObjectMapper binder) {
+    public ClovaStudioTokenizer(
+            ClovaStudioProperties properties, ClovaStudioRequestInterceptor requestInterceptor, ObjectMapper binder) {
 
         this.properties = properties;
         this.client = Feign.builder()
                 .encoder(new JacksonEncoder(binder))
                 .decoder(new JacksonDecoder(binder))
-                .requestInterceptor(
-                        template -> template.header(HttpHeaders.AUTHORIZATION, "Bearer " + properties.apiKey()))
+                .requestInterceptor(requestInterceptor)
                 .target(ClovaStudioClient.class, "https://clovastudio.stream.ntruss.com/");
     }
 

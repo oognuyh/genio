@@ -5,6 +5,7 @@ import com.pinkfactory.genio.infrastructure.clova.ClovaStudioChatCompletionReque
 import com.pinkfactory.genio.infrastructure.clova.ClovaStudioClient;
 import com.pinkfactory.genio.infrastructure.clova.ClovaStudioMessage;
 import com.pinkfactory.genio.infrastructure.clova.ClovaStudioProperties;
+import com.pinkfactory.genio.infrastructure.clova.ClovaStudioRequestInterceptor;
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.data.message.ChatMessage;
 import dev.langchain4j.model.chat.ChatLanguageModel;
@@ -26,7 +27,6 @@ import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import java.time.Duration;
 import java.util.List;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
@@ -42,7 +42,8 @@ public class ClovaStudioChatModel implements ChatLanguageModel {
 
     private final ClovaStudioClient client;
 
-    public ClovaStudioChatModel(ClovaStudioProperties properties, ObjectMapper binder) {
+    public ClovaStudioChatModel(
+            ClovaStudioProperties properties, ClovaStudioRequestInterceptor requestInterceptor, ObjectMapper binder) {
 
         this.properties = properties;
         this.client = Resilience4jFeign.builder(FeignDecorators.builder()
@@ -63,8 +64,7 @@ public class ClovaStudioChatModel implements ChatLanguageModel {
                 .encoder(new JacksonEncoder(binder))
                 .decoder(new JacksonDecoder(binder))
                 .retryer(Retryer.NEVER_RETRY)
-                .requestInterceptor(
-                        template -> template.header(HttpHeaders.AUTHORIZATION, "Bearer " + properties.apiKey()))
+                .requestInterceptor(requestInterceptor)
                 .target(ClovaStudioClient.class, properties.baseUrl());
     }
 
