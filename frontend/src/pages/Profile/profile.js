@@ -71,7 +71,7 @@ const Profile = () => {
     const { name, value } = e.target;
 
     if (name === "experience") {
-      if (value.length > 1000) return; // 🔹 1000자 제한
+      // if (value.length > 1000) return; // 🔹 1000자 제한
 
       // 🔹 textarea 높이 자동 조절
       const textarea = e.target;
