@@ -243,9 +243,9 @@ const BrandingResult = () => {
 
         {/* 컬러 팔레트 */}
         <div className="color-palette">
-          <buuton className="color-palette-btn">
+          <buton className="color-palette-btn">
             <img className="color-palette-icon" src={colorPaletteImage} />
-          </buuton>
+          </buton>
           {colors.map((color) => (
             <div
               className={`color-chip${color == kitColor ? " active" : ""}`}
