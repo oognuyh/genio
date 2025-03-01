@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import resizer from "react-image-file-resizer";
 
 import colorPaletteImage from "../../assets/color-palette.png";
+import popCloseImage from "../../assets/popup-close.png";
 
 import ProgressSteps from "../../components/ProgressSteps";
 
@@ -23,8 +24,12 @@ import "./brandingResult.css";
 const BrandingResult = () => {
   const currentStep = 5; // ✅ 현재 진행단계 3단계
 
+  const navigate = useNavigate();
   const location = useLocation();
   const kitData = location.state || [];
+
+  const [isSaved, setIsSaved] = useState(false);
+  const [popupImg, setPopupImg] = useState(null);
 
   const userName = kitData.name;
   const position = kitData.position;
@@ -97,19 +102,30 @@ const BrandingResult = () => {
   };
 
   const onDownloadBtn = () => {
-    const kit = document.getElementById("branding-kit");
+    try {
+      const kit = document.getElementById("branding-kit");
+      const previewKit = document.getElementById("branding-preview-kit");
 
-    const fileName = "genio_kit";
-    const fileInfo = {
-      ext: fileExt,
-      width: fileWidth,
-      height: fileHeight,
-    };
+      const fileName = "genio_kit";
+      const fileInfo = {
+        ext: fileExt,
+        width: previewKit.width * 0.1,
+        height: previewKit.height * 0.1,
+      };
 
-    domtoimage.toBlob(kit).then(async (blob) => {
-      //const file = await resizeFile(blob, fileInfo);
-      saveAs(blob, `${fileName}.${fileInfo.ext}`);
-    });
+      domtoimage.toBlob(kit).then((blob) => {
+        saveAs(blob, `${fileName}.${fileInfo.ext}`);
+      });
+
+      domtoimage.toBlob(previewKit).then(async (blob) => {
+        //const file = await resizeFile(blob, fileInfo);
+        setPopupImg(window.URL.createObjectURL(blob));
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsSaved(true);
+    }
   };
 
   const renderPreview = () => {
@@ -216,9 +232,8 @@ const BrandingResult = () => {
         <div className="platform-btn-list">
           {platforms.map((platform) => (
             <button
-              className={`platform-btn${
-                platform == kitPlatfrom ? " active" : ""
-              }`}
+              className={`platform-btn${platform == kitPlatfrom ? " active" : ""
+                }`}
               onClick={() => onClickPlatform(platform)}
             >
               {platform}
@@ -251,6 +266,25 @@ const BrandingResult = () => {
         <button className="save-button" onClick={onDownloadBtn}>
           이미지로 저장하기
         </button>
+        {isSaved && (
+          <div className="popup-overlay">
+            <div className="popup-save-content">
+              <h3 className="popup-intro1">이미지 저장 완료!</h3>
+              <h3 className="popup-intro2">이제 자신있게 {userName}님을 세상에 보여주세요 💫</h3>
+              <button
+                onClick={() => setIsSaved(false)}
+                className="popup-close-button">
+                <img src={popCloseImage} width="20px" height="20px" />
+              </button>
+              <img src={popupImg} />
+              <button
+                onClick={() => navigate('/')}
+                className="popup-back-button">
+                처음으로 돌아가기
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* 이미지 저장을 위한 히든 컴포넌트 */}
         {renderKit()}
