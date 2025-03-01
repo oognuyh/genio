@@ -1,0 +1,85 @@
+.portfolio-kit {
+    /* kit-portfolio */
+    position: absolute;
+    width: 1920px; /* 28.325vw * 67.7846425419 */
+    height: 1080px; /* 29.6vh * 36.4864864865 */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    color: rgb(255, 255, 255);
+}
+
+/* ▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦ 콘텐츠 영역 ▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦ */
+.portfolio-kit-intro {
+    margin-top: 98.51px; /* 2.7vh * 36.4864864865 */
+    margin-left: 101.68px; /* 1.5vw * 67.7846425419 */
+
+    font-size: 57.07px; /* 0.842vw * 67.7846425419 */
+    font-weight: 600;
+    line-height: 140%;
+}
+
+.portfolio-kit-title {
+    /* 자동 레이아웃 */
+    width: 847.31px; /* 12.5vw * 67.7846425419 */
+    margin: auto;
+    margin-top: 72.97px; /* 2vh * 36.4864864865 */
+    margin-left: 101.68px; /* 1.5vw * 67.7846425419 */
+
+    font-size: 74.56px; /* 1.1vw * 67.7846425419 */
+    font-weight: 700;
+    line-height: 140%;
+}
+
+.name-highlight {
+    font-weight: 720;
+}
+
+/* ▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦ 해시태그 영역 ▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦ */
+.portfolio-hashtag-list {
+    /* chip_set (kit-portfolio) */
+    height: 103.73px; /* 2.8431vh * 36.4864864865 */
+
+    /* 자동 레이아웃 */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 13.56px; /* 0.2vw * 67.7846425419 */
+    padding: 0px;
+
+    /* Inside Auto Layout */
+    flex-grow: 0;
+    margin: auto;
+    margin-left: 101.68px; /* 1.5vw * 67.7846425419 */
+    margin-bottom: 510.81px; /* 14vh * 36.4864864865 */
+}
+
+.portfolio-hashtag-chip {
+    /* 자동 레이아웃 */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 25.11px; /* 0.3703vw * 67.7846425419 */
+    padding: 7.3px 13.56px; /* 0.2vh→7.3px, 0.2vw→13.56px */
+
+    /* Inside Auto Layout */
+    flex: none;
+    flex-grow: 0;
+
+    border-radius: 8px;
+    /* White */
+    background: rgb(255, 255, 255);
+    opacity: 0.8;
+
+    /* Typo */
+    font-size: 25.08px; /* 0.37vw * 67.7846425419 */
+    font-weight: 500;
+    line-height: 140%;
+    letter-spacing: 0%;
+    text-align: left;
+}

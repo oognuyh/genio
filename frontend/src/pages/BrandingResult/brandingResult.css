@@ -186,7 +186,7 @@ body {
   width: 3.8542vw;
   height: 39.5098vh;
   left: 79.4792vw;
-  top: 44.2398vh;
+  top: 43.8398vh;
 
   /* 자동 레이아웃 */
   display: flex;
@@ -198,10 +198,10 @@ body {
 }
 
 .color-palette-icon {
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
 
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .color-chip {
