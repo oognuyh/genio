@@ -145,6 +145,10 @@ const Profile = () => {
     ) {
       return; // Ctrl+Z, Ctrl+C, Ctrl+V 허용
     }
+
+    if (e.key === "Backspace" || e.key === "Delete") {
+      return; // 지우기 키 허용
+    }
   };
 
   const onNextClick = () => {
