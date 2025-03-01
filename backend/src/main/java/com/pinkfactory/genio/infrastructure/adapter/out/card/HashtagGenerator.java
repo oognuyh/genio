@@ -60,8 +60,8 @@ public class HashtagGenerator implements NodeAction<State> {
                         .toUserMessage(),
                 PromptTemplate.of(
                                 """
-                        "{{ resume.tone.title }} - {{ resume.tone.description }}"에 맞춰 생성한다.
-
+                        "
+                        생각: {{ resume.tone.title }} - {{ resume.tone.description }}"에 맞춰 생성해야 겠다. 또한, 정확히 4개 생성해야 겠다.
                         생성 결과:
                         """)
                         .apply(Map.of("resume", state.resume()))

@@ -59,8 +59,7 @@ public class BiographyGenerator implements NodeAction<State> {
                         .toUserMessage(),
                 PromptTemplate.of(
                                 """
-                        "{{ resume.tone.title }} - {{ resume.tone.description }}"에 맞춰 생성한다.
-
+                        "생각: 사용자가 선택한 {{ resume.tone.title }} - {{ resume.tone.description }}" 톤에 맞춰 생성한다. 또한, 요구 사항을 모두 고려하고 핵심만 간결한 **3문장** 내로 3문장의 총 글자 수는 150자 이내가 되게 반드시 생성해야 겠다.
                         생성 결과:
                         """)
                         .apply(Map.of("resume", state.resume()))

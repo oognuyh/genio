@@ -62,12 +62,14 @@ public class ExperienceExtractor implements NodeAction<State> {
 
         try {
             var output = model.chat(
-                    template.apply(state).toAiMessage(),
+                    template.apply(Map.of("feedback", feedback)).toAiMessage(),
                     PromptTemplate.of("사용자의 이력서는 다음과 같습니다:\n{{resume}}")
                             .apply(Map.of(
-                                    "resume", state.<String>value("resume").orElse(""), "feedback", feedback))
+                                    "resume", state.<String>value("resume").orElse("")))
                             .toUserMessage(),
-                    AiMessage.from("""
+                    AiMessage.from(
+                            """
+                    생각: 사용자의 이력서에 대한 분석이 끝났다. 사용자를 가장 돋보일 수 있는 5개의 프로젝트를 주어진 형식에 맞춰 최신순으로 추출해야 겠다.
                     추출 결과:
                     """));
 

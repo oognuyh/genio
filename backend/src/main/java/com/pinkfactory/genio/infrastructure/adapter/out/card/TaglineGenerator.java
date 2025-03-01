@@ -58,8 +58,7 @@ public class TaglineGenerator implements NodeAction<State> {
                         .toUserMessage(),
                 PromptTemplate.of(
                                 """
-            "{{ resume.tone.title }} - {{ resume.tone.description }}"에 맞춰 생성한다.
-
+            생각: "{{ resume.tone.title }} - {{ resume.tone.description }}"에 맞춰 생성해야 겠다. 그리고 반드시 15자 이내로 생성하자.
             생성 결과:
             """)
                         .apply(Map.of("resume", state.resume()))

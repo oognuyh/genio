@@ -10,6 +10,8 @@ import com.pinkfactory.genio.infrastructure.util.JsonUtil;
 import com.pinkfactory.genio.port.in.FindJobCategoriesUseCase;
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.model.chat.ChatLanguageModel;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -73,6 +75,8 @@ public class PersonalInformationExtractor implements NodeAction<State> {
                     template.apply(Map.of(
                                     "jobCategories",
                                     findJobCategoriesUseCase.findJobCategories(),
+                                    "now",
+                                    ZonedDateTime.now(ZoneId.of("Asia/Seoul")),
                                     "feedback",
                                     feedback))
                             .toSystemMessage(),

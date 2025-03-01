@@ -87,7 +87,9 @@ public class SkillSetExtractor implements NodeAction<State> {
                             .apply(Map.of(
                                     "resume", state.<String>value("resume").orElse("")))
                             .toUserMessage(),
-                    AiMessage.from("""
+                    AiMessage.from(
+                            """
+                생각: 주어진 스킬셋 목록 중에서 사용자가 사용한 스킬을 선택해서 형식에 맞춰 반환해야 겠다.
                 추출 결과:
                 """));
 
