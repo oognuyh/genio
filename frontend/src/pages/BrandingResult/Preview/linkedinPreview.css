@@ -42,12 +42,11 @@
   }
   
   .linkedin-preview-title {
-    /* 자동 레이아웃 */
-    margin-top: 4.03vw;
-    margin: 0 0 1.3vh 0; /* 하단 마진만 조절 */
+    /* margin: 0 0 1.3vh 0; */
+    margin: 0 0 3.8vh 0;
 
     color: rgb(255, 255, 255);
-    font-size: 22.91px;
+    font-size: 1.61vw;
     font-weight: 700;
     line-height: 140%;
   }

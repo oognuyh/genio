@@ -3,41 +3,32 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 import loadingImage1 from "../assets/loading1.png";
+import loadingImage2 from "../assets/loading2.png";
 
 import "./loadingScreen.css";
 
-const LoadingScreen = () => {
+const LoadingScreen = ({ currentStep, message }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   // ResumeUpload에서 넘긴 데이터
   //const [resumeData, setResumeData] = useState(location?.state);
   const [fileInfo, setFileInfo] = useState(location.state?.data);
+  const [loadingImg, setLoadingImg] = useState(loadingImage1);
 
   // 단계별 메시지
-  const [loadingMessage, setLoadingMessage] = useState("이력서를 확인하고 있어요.");
+  const [loadingMessage, setLoadingMessage] = useState("");
 
   useEffect(() => {
-    getResumeInfo();
-  }, []);
+    console.log(currentStep);
 
-  // 이력서 전송 API호출 및 분석 정보 받아오기
-  const getResumeInfo = async () => {
-    try {
-      console.log(fileInfo);
-
-      const resumeInfo = await axios.post("api/v1/resumes", fileInfo, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        }
-      });
-
-      console.log(resumeInfo.data);
-      navigate("/profile", { state: resumeInfo.data });
-    } catch (err) {
-      console.log(err);
+    if(currentStep == 1 && !message) {
+      setLoadingMessage("제니오가 매의 눈으로 이력서를 살펴보고 있어요. 👀");
+    } else if(currentStep == 4) {
+      setLoadingImg(loadingImage2);
+      setLoadingMessage("제니오가 맞춤형 브랜딩 키트를 만들고 있어요. 🛠");
     }
-  }
+  }, [])
 
   const fetchSSE = async () => {
     await fetch("api/v1/resumes/stream", {
@@ -125,7 +116,7 @@ const LoadingScreen = () => {
   return (
     <div className="loading2-body">
       <p className="loading2-text">{loadingMessage}</p>
-      <img src={loadingImage1} alt="로딩 중" className="loading-image1" />
+      <img src={loadingImg} alt="로딩 중" className="loading-image1" />
     </div>
   );
 };

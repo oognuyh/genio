@@ -7,9 +7,10 @@ import ProgressSteps from "../../components/ProgressSteps";
 import "./profile.css";
 
 const Profile = () => {
+  const currentStep = 2;
+  
   const navigate = useNavigate();
   const location = useLocation();
-  const currentStep = 2;
 
   // LoadingScreen에서 넘긴 오브젝트
   const [resumeData, setResumeData] = useState(location.state || {});
