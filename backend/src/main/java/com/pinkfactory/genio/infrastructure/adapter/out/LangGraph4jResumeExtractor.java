@@ -47,6 +47,10 @@ public class LangGraph4jResumeExtractor implements ResumeExtractor {
                         .<String>value("jobCategory")
                         .map(name -> name.replace("null", ""))
                         .orElse(null))
+                .stage(generation
+                        .<String>value("stage")
+                        .map(name -> name.replace("null", ""))
+                        .orElse(null))
                 .position(generation
                         .<String>value("position")
                         .map(name -> name.replace("null", ""))

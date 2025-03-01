@@ -41,7 +41,8 @@ public class PersonalInformationExtractor implements NodeAction<State> {
     public Map<String, Object> apply(State state) {
 
         var feedback = state.evaluations().stream()
-                .filter(evaluation -> List.of("name", "jobCategory", "position").contains(evaluation.field()))
+                .filter(evaluation ->
+                        List.of("name", "jobCategory", "stage", "position").contains(evaluation.field()))
                 .filter(Evaluation::shouldRevise)
                 .map(Evaluation::feedback)
                 .collect(Collectors.joining("\n"));

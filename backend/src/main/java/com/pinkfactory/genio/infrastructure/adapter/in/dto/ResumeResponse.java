@@ -14,6 +14,7 @@ public record ResumeResponse(
                 String resumeId,
         @Schema(description = "Extracted name from resume", example = "John Doe") String name,
         String jobCategory,
+        String stage,
         @Schema(description = "Current or most recent position", example = "Backend Developer") String position,
         @Schema(
                         description = "List of technical and professional skill set",
