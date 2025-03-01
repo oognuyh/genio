@@ -58,7 +58,7 @@ const BrandingTone = () => {
       console.log("[onGenerateKit] Server response:", response.data);
 
       navigate("/branding-result", { state: response.data });
-    } catch(err) {
+    } catch (err) {
       setIsLoading(false);
       console.error("[onGenerateKit] 이력서 분석 중 오류 발생:", err);
     }
@@ -70,7 +70,9 @@ const BrandingTone = () => {
         <ProgressSteps currentStep={currentStep} />
 
         <div className="branding-tone-container">
-          <h2 className="branding-title">마지막으로 브랜딩 톤을 선택해주세요.</h2>
+          <h2 className="branding-title">
+            마지막으로 브랜딩 톤을 선택해주세요.
+          </h2>
           <p className="sub-text">
             원하는 브랜딩 톤을 선택하세요. 제니오가 느낌을 잘 살려볼게요!
           </p>
@@ -79,16 +81,27 @@ const BrandingTone = () => {
             {brandingTones.map((tone, index) => (
               <button
                 key={index}
-                className={`branding-tone-item ${selectedTone === tone ? "selected" : ""}`}
+                className={`branding-tone-item ${
+                  selectedTone === tone ? "selected" : ""
+                }`}
                 onClick={() => handleToneSelect(tone)}
               >
+                {/* ✅ 선택되었을 때 checkWhiteIcon으로 변경 */}
                 <img
-                  src={selectedTone === tone.title ? checkWhiteIcon : checkIcon}
+                  src={
+                    selectedTone?.title === tone.title
+                      ? checkWhiteIcon
+                      : checkIcon
+                  }
                   alt="check"
                   className="check-icon"
                 />
-                <div className="branding-tone-title">{tone.title}</div>
-                <div className="branding-tone-description">{tone.description}</div>
+                <div className="branding-tone-content">
+                  <div className="branding-tone-title">{tone.title}</div>
+                  <div className="branding-tone-description">
+                    {tone.description}
+                  </div>
+                </div>
               </button>
             ))}
           </div>
@@ -101,7 +114,7 @@ const BrandingTone = () => {
           )}
         </div>
       </div>
-      {isLoading && (<LoadingScreen currentStep={currentStep} />)}
+      {isLoading && <LoadingScreen currentStep={currentStep} />}
     </>
   );
 };

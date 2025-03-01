@@ -71,7 +71,9 @@
 /* ✅ 브랜드 톤 선택 버튼 */
 .branding-tone-item {
   display: flex;
-  align-items: center;
+  flex-direction: row; /* 🔹 가로 정렬 (체크 아이콘 + 제목+설명) */
+  align-items: center; /* 🔹 아이콘과 텍스트 수직 중앙 정렬 */
+  justify-content: flex-start;
   padding: 20px;
   border-radius: 12px;
   background: #eceff4;
@@ -88,14 +90,15 @@
   height: 88px;
   outline: none;
   border: none;
+  gap: 40px;
 }
 
 /* ✅ 체크 아이콘 */
 .check-icon {
   width: 24px;
   height: 24px;
+  flex-shrink: 0; /* 🔹 크기 고정 */
   margin-left: 10px;
-  margin-right: 20px;
 }
 
 /* ✅ 선택된 항목 스타일 */
@@ -104,15 +107,35 @@
   color: white !important;
 }
 
+/* ✅ 텍스트 컨테이너 (제목 + 설명을 감싸는 div) */
+.branding-tone-text {
+  display: flex;
+  flex-direction: column; /* 🔹 제목과 설명을 수직 정렬 */
+  align-items: flex-start; /* 🔹 왼쪽 정렬 */
+  justify-content: center;
+}
+
+/* ✅ 제목 */
+.branding-tone-title {
+  color: rgb(137, 149, 171);
+  font-family: Pretendard;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: 0%;
+  text-align: left;
+}
+
 /* ✅ 설명 텍스트 스타일 */
 .branding-tone-description {
   color: rgb(137, 149, 171);
   font-family: Pretendard;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 140%;
   letter-spacing: 0%;
-  margin-left: 20px;
+  margin-left: 0;
+  text-align: left;
 }
 
 /* ✅ 선택된 경우 색상 변경 */

@@ -4,7 +4,7 @@
 }
 
 body {
-  background: #F8F8F8;
+  background: #f8f8f8;
 }
 
 .result-container {
@@ -110,7 +110,7 @@ body {
 .platform-btn {
   /* chip-button-01 */
   position: static;
-  height: 35px;
+  height: 48px;
 
   /* 자동 레이아웃 */
   display: flex;
@@ -124,16 +124,16 @@ body {
   flex-grow: 0;
   margin: 0 0.8333vw;
 
-  background: #F8F8F8;
+  background: #f8f8f8;
   border: none;
   border-radius: 36px;
 
   cursor: pointer;
 
   /* Typo */
-  font-size: 15px;
-  font-weight: 650;
-  line-height: 140%;
+  font-size: 17px; /* 🔹 텍스트 크기 20px */
+  font-weight: 600; /* 🔹 Semibold 적용 */
+  line-height: 120%;
   text-align: center;
   color: rgb(137, 149, 171);
 }
@@ -198,8 +198,8 @@ body {
 }
 
 .color-palette-icon {
-  width: 45px;
-  height: 45px;
+  width: 48px;
+  height: 48px;
 
   margin-bottom: 20px;
 }
@@ -233,7 +233,7 @@ body {
   /* button-01 */
   position: absolute;
   width: 16.5vw;
-  height: 45px;
+  height: 5vh; /* 보통 5vh는 45px과 비슷한 크기 */
 
   left: 50%;
   bottom: -47px;
@@ -261,8 +261,9 @@ body {
 
   /* Typo */
   font-size: 1.05vw;
-  font-weight: 700;
+  font-weight: 600;
   color: rgb(255, 255, 255);
+  white-space: nowrap;
 }
 
 .save-button:hover {
