@@ -1,13 +1,11 @@
-package com._ten022.temp;
+package com.pinkfactory.genio;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TempApplicationTests {
+class GenioApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
+    @Test
+    void contextLoads() {}
 }
