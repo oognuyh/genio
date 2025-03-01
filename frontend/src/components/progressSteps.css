@@ -11,16 +11,16 @@
   z-index: 1000;
 }
 
-/* ✅ 진행 단계를 한 줄로 배치 */
+/* ✅ 진행 단계를 한 줄로 배치 (좌우 마진 320px 추가) */
 .step-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(100% - 80px);
+  width: calc(100% - 640px); /* 🔹 좌우 마진 320px (총 640px) */
   max-width: 1280px;
   position: relative;
   padding: 0 40px;
-  gap: 100px;
+  gap: 90px; /* 🔹 각 스텝 간 간격 90px */
 }
 
 /* ✅ 개별 단계 */
@@ -96,4 +96,29 @@
 /* ✅ 연결 바도 진행된 단계만큼 색칠 */
 .step.completed .progress-bar {
   background-color: #121d31;
+}
+
+/* ✅ 반응형 - 작은 화면에서 스텝 간격 및 마진 조정 */
+@media (max-width: 1024px) {
+  .step-wrapper {
+    width: calc(100% - 160px); /* 🔹 좌우 마진 80px씩 */
+    gap: 70px; /* 🔹 스텝 간 간격 축소 */
+  }
+}
+
+@media (max-width: 768px) {
+  .step-wrapper {
+    width: calc(100% - 60px); /* 🔹 좌우 마진 30px씩 */
+    gap: 50px; /* 🔹 모바일에서 스텝 간격 축소 */
+  }
+
+  .step {
+    font-size: 16px;
+  }
+
+  .step-number {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
 }
