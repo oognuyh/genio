@@ -13,7 +13,6 @@ import "./resumeUpload.css";
 
 const ResumeUpload = () => {
   const currentStep = 1;
-
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -32,75 +31,53 @@ const ResumeUpload = () => {
         return;
       }
       setIsLoading(true);
-
       console.log("[onGenerateKit] Selected file:", file);
 
       const formData = new FormData();
-      formData.append('file', file); // 파일 정보를 FormData에 추가
+      formData.append("file", file); // 파일 정보를 FormData에 추가
 
       const response = await fetch("/api/v1/resumes/stream", {
-        method: 'POST',
+        method: "POST",
         body: formData,
-        // headers는 FormData 사용 시 자동으로 설정됨
       });
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
-      let buffer = ''; // 데이터를 임시로 저장할 버퍼
-      const delimiter = '\n'; // 구분자 (예: 줄바꿈, JSON 구분 등)
+      let buffer = "";
+      const delimiter = "\n";
 
-      // 인위적 딜레이 함수
+      // 인위적 딜레이 함수 (필요 시 사용)
       const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-      
-        // 1. 버퍼에 청크 데이터 추가
         buffer += decoder.decode(value, { stream: true });
-      
-        // 2. 'data:'로 시작하는 모든 문자열 찾기
-        const dataEntries = buffer.split('data:'); // 🔑 'data:' 기준 분할
-      
-        // 3. 마지막 항목은 버퍼에 보존 (다음 청크와 합치기 위해)
-        buffer = dataEntries.pop() || '';
-      
-        // 4. 각 항목 처리
-        dataEntries.forEach(async entry => {
+        const dataEntries = buffer.split("data:");
+        buffer = dataEntries.pop() || "";
+        dataEntries.forEach(async (entry) => {
           const trimmedEntry = entry.trim();
           if (!trimmedEntry) return;
-      
           try {
-            // 5. JSON 파싱 후 객체로 변환
             const jsonData = JSON.parse(trimmedEntry);
-            console.log('파싱된 객체:', jsonData);
-
+            console.log("파싱된 객체:", jsonData);
             setProgessMessage(jsonData.message);
-
-            //await wait(10000);
           } catch (error) {
-            console.error('JSON 파싱 실패:', trimmedEntry);
+            console.error("JSON 파싱 실패:", trimmedEntry);
           }
         });
       }
 
-      // 5. 남은 버퍼 처리 (스트림 종료 시)
       if (buffer.trim()) {
         try {
           const jsonData = JSON.parse(buffer.trim());
-          console.log('마지막 데이터:', jsonData);
-
+          console.log("마지막 데이터:", jsonData);
           setProgessMessage(jsonData.message);
-
-          //await wait(10000);
-
           navigate("/profile", { state: jsonData.result });
         } catch (error) {
-          console.error('마지막 데이터 파싱 실패:', buffer);
+          console.error("마지막 데이터 파싱 실패:", buffer);
         }
       }
-
-      //navigate("/profile", { state: response.data });
     } catch (err) {
       setIsLoading(false);
       console.error("[onGenerateKit] 이력서 분석 중 오류 발생:", err);
@@ -121,7 +98,6 @@ const ResumeUpload = () => {
     }
   };
 
-  // 파일 선택 핸들러
   const handleFileUpload = (event) => {
     console.log("[handleFileUpload] File input changed.");
     const uploadedFile = event.target.files[0];
@@ -153,12 +129,15 @@ const ResumeUpload = () => {
           <div className="uploadHeader">
             <div className="text-box">
               <span className="title1">
-                이력서를 업로드해주세요.<br />
+                이력서를 업로드해주세요.
+                <br />
               </span>
               <span className="title2">
-                먼저, 퍼스널 브랜딩 키트를 생성을 위해 분석할 프로필 정보가 필요해요.
+                먼저, 퍼스널 브랜딩 키트를 생성을 위해 분석할 프로필 정보가
+                필요해요.
                 <br />
-                이력서 파일을 업로드하면 제니오가 프로필 정보를 자동으로 입력해드려요.
+                이력서 파일을 업로드하면 제니오가 프로필 정보를 자동으로
+                입력해드려요.
               </span>
             </div>
           </div>
@@ -166,8 +145,9 @@ const ResumeUpload = () => {
           {/* 파일 업로드 박스 */}
           <div className="upload-container">
             <label
-              className={`upload-box ${error ? "error" : file ? "success" : ""} ${dragOver ? "drag-over" : ""
-                }`}
+              className={`upload-box ${
+                error ? "error" : file ? "success" : ""
+              } ${dragOver ? "drag-over" : ""}`}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
@@ -182,22 +162,42 @@ const ResumeUpload = () => {
               {error ? (
                 <>
                   <span className="error-icon">
-                    <img src={failIcon} alt="file" className="upload-fail-icon" />
+                    <img
+                      src={failIcon}
+                      alt="file"
+                      className="upload-fail-icon"
+                    />
                   </span>
                   <p className="error-text">{error}</p>
-                  <p className="retry-text">다시 올리기</p>
+                  <button
+                    type="button"
+                    className="reupload-box"
+                    onClick={() =>
+                      document.getElementById("reupload-input").click()
+                    }
+                  >
+                    다시 올리기
+                  </button>
                 </>
               ) : file ? (
                 <>
                   <span className="success-icon">
-                    <img src={successIcon} alt="file" className="upload-success-icon" />
+                    <img
+                      src={successIcon}
+                      alt="file"
+                      className="upload-success-icon"
+                    />
                   </span>
                   <p className="file-name">{file.name}</p>
-                  <p className="file-size">{(file.size / (1024 * 1024)).toFixed(1)} MB</p>
+                  <p className="file-size">
+                    {(file.size / (1024 * 1024)).toFixed(1)} MB
+                  </p>
                   <button
                     type="button"
                     className="reupload-box"
-                    onClick={() => document.getElementById("reupload-input").click()}
+                    onClick={() =>
+                      document.getElementById("reupload-input").click()
+                    }
                   >
                     다시 업로드
                   </button>
@@ -205,7 +205,11 @@ const ResumeUpload = () => {
               ) : (
                 <>
                   <span className="upload-icon">
-                    <img src={fileIcon} alt="file" className="upload-file-icon" />
+                    <img
+                      src={fileIcon}
+                      alt="file"
+                      className="upload-file-icon"
+                    />
                   </span>
                   <p className="upload-info">
                     여기를 클릭하거나 드래그 앤 드롭으로 파일을 업로드해주세요.
@@ -217,13 +221,18 @@ const ResumeUpload = () => {
             </label>
           </div>
 
-          {/* 버튼 */}
-          <button className="upload-btn" onClick={onGenerateKit}>
+          {/* 업로드 버튼: 파일이 있으면 "uploaded" 클래스 추가 */}
+          <button
+            className={`upload-btn ${file ? "uploaded" : ""}`}
+            onClick={onGenerateKit}
+          >
             나만의 브랜드 키트 만들기
           </button>
         </div>
       </div>
-      {isLoading && (<LoadingScreen currentStep={currentStep} message={progessMessage} />)}
+      {isLoading && (
+        <LoadingScreen currentStep={currentStep} message={progessMessage} />
+      )}
     </>
   );
 };

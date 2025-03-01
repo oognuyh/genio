@@ -30,19 +30,22 @@ const Strengths = () => {
 
   // ✅ 강점 선택 핸들러 (개수 제한 없음)
   const handleStrengthSelect = (strength) => {
-    setSelectedStrengths((prev) =>
-      prev.includes(strength)
-        ? prev.filter((s) => s !== strength.value)
-        : [...prev, {value: strength}]
-    );
-
-    console.log(selectedStrengths);
+    setSelectedStrengths((prev) => {
+      if (prev.some((s) => s.value === strength)) {
+        // 선택 해제 가능
+        return prev.filter((s) => s.value !== strength);
+      } else {
+        // 3개 이상 선택 방지
+        if (prev.length >= 3) return prev;
+        return [...prev, { value: strength }];
+      }
+    });
   };
 
   // ✅ 다음 페이지 이동
   const onNextClick = () => {
-    if (selectedStrengths.length < 2) {
-      alert("최소 2개 이상의 강점을 선택해주세요!");
+    if (2 > selectedStrengths.length) {
+      alert("최소 2개부터 3개까지 강점을 선택해주세요!");
       return;
     }
     resumeData.strengths = selectedStrengths;
@@ -57,17 +60,31 @@ const Strengths = () => {
 
       <div className="strengths-container">
         <h2 className="strengths-title">당신의 강점을 선택하세요</h2>
-        <p className="sub-text">본인의 강점과 가장 가까운 항목을 선택해주세요.</p>
+        <p className="sub-text">
+          본인의 강점과 가장 가까운 항목을 선택해주세요.
+        </p>
 
         <div className="strengths-list">
           {strengthsList.map((strength, index) => (
             <button
               key={index}
-              className={`strength-item ${selectedStrengths.map(s => s.value).includes(strength) ? "selected" : ""}`}
+              className={`strength-item ${
+                selectedStrengths.map((s) => s.value).includes(strength)
+                  ? "selected"
+                  : ""
+              }`}
               onClick={() => handleStrengthSelect(strength)}
+              disabled={
+                selectedStrengths.length >= 3 &&
+                !selectedStrengths.some((s) => s.value === strength)
+              }
             >
               <img
-                src={selectedStrengths.map(s => s.value).includes(strength) ? checkWhiteIcon : checkIcon}
+                src={
+                  selectedStrengths.map((s) => s.value).includes(strength)
+                    ? checkWhiteIcon
+                    : checkIcon
+                }
                 alt="check"
                 className="check-icon"
               />

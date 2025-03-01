@@ -141,13 +141,44 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
   bottom: 52px;
-  left: 50%;
+  left: 45%;
+  position: fixed;
+  z-index: 30;
 }
 
 /* ✅ 버튼 효과 */
 .branding-tone-next-btn:hover {
   transform: scale(1.05);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  /* 내부 컨테이너: 절대 위치 자식(다음 버튼)을 위한 기준 및 패딩 조정 */
+  .branding-tone-container {
+    position: relative;
+    padding: 10px;
+  }
+
+  /* 브랜드 톤 리스트: 고정된 너비 대신 100% 사용 */
+  .branding-tone-list {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 50px; /* 필요에 따라 조정 */
+  }
+
+  /* 브랜드 톤 아이템: 고정 폭 대신 전체 너비 사용 */
+  .branding-tone-item {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* 다음 버튼: 고정된 위치 대신 중앙 정렬 및 유동적 너비 적용 */
+  .branding-tone-next-btn {
+    width: 90%; /* 필요에 따라 조정 (예: 320px 고정 대신) */
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px; /* 화면 하단 여백 조정 */
+    padding: 16px 0; /* 좌우 패딩 제거하여 전체 폭에 맞춤 */
+  }
 }
