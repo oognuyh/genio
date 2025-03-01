@@ -1,4 +1,5 @@
 import React from "react";
+import checkWhiteIcon from "../assets/check-white.png"; 
 import "./progressSteps.css";
 
 const ProgressSteps = ({ currentStep }) => {
@@ -10,10 +11,14 @@ const ProgressSteps = ({ currentStep }) => {
         {steps.map((step, index) => (
           <div
             key={index}
-            className={`step ${index < currentStep ? "completed" : ""}`}
+            className={`step ${index < currentStep ? "completed" : ""} ${index === currentStep ? "current" : ""}`}
           >
-            {index !== 0 && <div className="progress-bar"></div>} {/* 단계 간 연결 바 */}
-            <span className="step-number">{index + 1}</span>
+            {/* ✅ 이미 지난 단계는 체크 아이콘 표시, 현재 단계는 숫자 유지 */}
+            {index < currentStep ? (
+              <img src={checkWhiteIcon} alt="완료" className="step-icon" />
+            ) : (
+              <span className="step-number">{index + 1}</span>
+            )}
             <span className="step-text">{step}</span>
           </div>
         ))}

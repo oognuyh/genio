@@ -11,31 +11,34 @@
   z-index: 1000;
 }
 
-/* 진행 단계를 한 줄로 배치 */
+/* ✅ 진행 단계를 한 줄로 배치 */
 .step-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: calc(100% - 80px);
-  max-width: 1100px;
+  max-width: 1280px;
   position: relative;
   padding: 0 40px;
 }
 
-/* 개별 단계 */
+/* ✅ 개별 단계 */
 .step {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: #8995ab;
-  font-weight: bold;
+  gap: 16px;
+  color: rgb(69, 84, 115);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 160%;
+  letter-spacing: 0%;
   position: relative;
   flex: 1;
   text-align: center;
 }
 
-/* 동그라미 (단계 번호) */
+/* ✅ 동그라미 (단계 번호) */
 .step-number {
   display: flex;
   justify-content: center;
@@ -51,19 +54,45 @@
   transition: background 0.3s, color 0.3s;
 }
 
-/* 현재 단계와 이전 단계까지 색칠 */
-.step.completed .step-number {
+/* ✅ 체크 아이콘 스타일 */
+.step-icon {
+  width: 15px;
+  height: 15px;
   background-color: #121d31;
-  color: white;
+  border-radius: 50%;
+  padding: 9px;
 }
 
-/* 현재 단계와 이전 단계까지 텍스트 강조 */
-.step.completed .step-text {
-  color: #121d31;
-  font-weight: bold;
+/* ✅ 이미 지난 단계는 숫자를 숨기고 체크 아이콘 표시 */
+.step.completed .step-number {
+  display: none;
 }
 
-/* 연결 바도 진행된 단계만큼 색칠 */
+.step.completed .step-icon {
+  display: block;
+}
+
+/* ✅ 현재 단계는 숫자를 유지하고 체크 아이콘 숨김 */
+.step.current .step-number {
+  display: flex;
+}
+
+.step.current .step-icon {
+  display: none;
+}
+
+/* ✅ 현재 단계와 이전 단계까지 텍스트 강조 */
+.step.completed .step-text,
+.step.current .step-text {
+  color: rgb(69, 84, 115);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 160%;
+  letter-spacing: 0%;
+}
+
+/* ✅ 연결 바도 진행된 단계만큼 색칠 */
 .step.completed .progress-bar {
   background-color: #121d31;
 }
