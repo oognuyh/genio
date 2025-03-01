@@ -2,7 +2,7 @@ import React from "react";
 
 import "./linkedinPreview.css"
 
-const LinkedInPreview = ({ kitColor, tagline, role, hashtags }) => {
+const LinkedInPreview = ({ kitColor, tagline, position, hashtags }) => {
     return (
         <>
             <p className="linkedin-kit-standard">1584 x 396</p>
@@ -11,15 +11,15 @@ const LinkedInPreview = ({ kitColor, tagline, role, hashtags }) => {
                     style={{ background: `linear-gradient(to left, ${kitColor}, #ffffff 120%)` }}>
                     <div className="linkedin-preview-content">
                         <h1 className="linkedin-preview-title">
-                            {tagline}, <span className="name-highlight">이용우</span>
+                            {tagline}
                         </h1>
                         <p className="linkedin-preview-role">
-                            {role}
+                            {position}
                         </p>
                     </div>
                     <div className="linkedin-preview-hashtag-list">
                         {hashtags.map((hashtag) => (
-                            <div className="linkedin-preview-hashtag-chip" style={{ color: kitColor }}>#{hashtag}</div>
+                            <div className="linkedin-preview-hashtag-chip" style={{ color: kitColor }}>{hashtag}</div>
                         ))}
                     </div>
                 </div>

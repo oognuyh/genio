@@ -12,13 +12,11 @@ const Profile = () => {
   const currentStep = 2;
 
   // LoadingScreen에서 넘긴 오브젝트
-  const [resumeData, setResumeData] = useState(location?.state || {});
+  const [resumeData, setResumeData] = useState(location.state || {});
 
   const [categoryInfo, setCategoryInfo] = useState([]);
-
   const [jobCategories, setjobCategories] = useState([]);
   const [skillSet, setSkillSet] = useState([]);
-
   const [selectedSkills, setSelectedSkills] = useState(resumeData.skillSet || []);
 
   const [isCategoryLoaded, setIsCategoryLoaded] = useState(false);
@@ -35,6 +33,7 @@ const Profile = () => {
       setjobCategories(names); // 상태 업데이트 트리거
     };
     fetchCategories();
+    resumeData.stage = "취준생";
   }, []);
 
   useEffect(() => {
@@ -85,7 +84,7 @@ const Profile = () => {
   const onNextClick = () => {
     resumeData.skillSet = selectedSkills;
     console.log(resumeData)
-    
+
     navigate("/strengths", { state: resumeData });
   };
 

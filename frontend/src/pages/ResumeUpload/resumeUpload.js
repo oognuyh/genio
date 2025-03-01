@@ -18,7 +18,6 @@ const ResumeUpload = () => {
   // 디버깅 로그를 위한 함수
   const onGenerateKit = async () => {
     try {
-      console.log("[onGenerateKit] Button clicked.");
       if (!file) {
         console.log("[onGenerateKit] No file selected. Showing alert.");
         alert("파일을 선택해주세요.");
@@ -26,13 +25,16 @@ const ResumeUpload = () => {
       }
       console.log("[onGenerateKit] Selected file:", file);
 
-      // 1) FormData 생성
-      const formData = new FormData();
-      formData.append("file", file);
-      console.log("[onGenerateKit] FormData created. Sending to backend...");
+      const fileInfo = {
+        file: file
+      };
 
-      // 2) 여기서 이미 백엔드로 업로드 + 분석 요청
-      const response = await axios.post("/api/v1/resumes", formData, {
+    //   navigate("/loading-screen", { state: { data: fileInfo } });
+    // } catch (err) {
+    //   console.error("이력서 분석 중 오류가 발생했습니다.", err);
+    // }
+    // 2) 여기서 이미 백엔드로 업로드 + 분석 요청
+      const response = await axios.post("/api/v1/resumes", fileInfo, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -40,8 +42,7 @@ const ResumeUpload = () => {
       console.log("[onGenerateKit] Server response:", response.data);
 
       // 3) 응답 JSON만 다음 페이지로 넘김
-      console.log("[onGenerateKit] Navigating to /loading-screen with JSON data...");
-      navigate("/loading-screen", { state: response.data });
+      navigate("/profile", { state: response.data });
     } catch (err) {
       console.error("[onGenerateKit] 이력서 분석 중 오류 발생:", err);
     }
@@ -105,9 +106,8 @@ const ResumeUpload = () => {
         {/* 파일 업로드 박스 */}
         <div className="upload-container">
           <label
-            className={`upload-box ${error ? "error" : file ? "success" : ""} ${
-              dragOver ? "drag-over" : ""
-            }`}
+            className={`upload-box ${error ? "error" : file ? "success" : ""} ${dragOver ? "drag-over" : ""
+              }`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}

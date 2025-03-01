@@ -21,7 +21,6 @@ const Strengths = () => {
     axios
       .get("/api/v1/strengths")
       .then((response) => {
-        console.log("[Strengths] Fetched Data:", response.data);
         setStrengthsList(response.data.map((item) => item.value));
       })
       .catch((error) => {
@@ -33,9 +32,11 @@ const Strengths = () => {
   const handleStrengthSelect = (strength) => {
     setSelectedStrengths((prev) =>
       prev.includes(strength)
-        ? prev.filter((s) => s !== strength)
-        : [...prev, strength]
+        ? prev.filter((s) => s !== strength.value)
+        : [...prev, {value: strength}]
     );
+
+    console.log(selectedStrengths);
   };
 
   // ✅ 다음 페이지 이동
@@ -44,8 +45,10 @@ const Strengths = () => {
       alert("최소 2개 이상의 강점을 선택해주세요!");
       return;
     }
+    resumeData.strengths = selectedStrengths;
+
     console.log("[Strengths] 최종 선택한 강점:", selectedStrengths); // ✅ 선택한 데이터 확인
-    navigate("/branding-tone", { state: {resumeData, strengths: selectedStrengths } });
+    navigate("/branding-tone", { state: resumeData });
   };
 
   return (
@@ -60,11 +63,11 @@ const Strengths = () => {
           {strengthsList.map((strength, index) => (
             <button
               key={index}
-              className={`strength-item ${selectedStrengths.includes(strength) ? "selected" : ""}`}
+              className={`strength-item ${selectedStrengths.map(s => s.value).includes(strength) ? "selected" : ""}`}
               onClick={() => handleStrengthSelect(strength)}
             >
               <img
-                src={selectedStrengths.includes(strength) ? checkWhiteIcon : checkIcon}
+                src={selectedStrengths.map(s => s.value).includes(strength) ? checkWhiteIcon : checkIcon}
                 alt="check"
                 className="check-icon"
               />

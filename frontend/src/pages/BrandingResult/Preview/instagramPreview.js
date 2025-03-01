@@ -2,7 +2,7 @@ import React from "react";
 
 import "./instagramPreview.css"
 
-const InstagramInPreview = ({ kitColor, tagline, description, hashtags }) => {
+const InstagramInPreview = ({ kitColor, tagline, biography, hashtags }) => {
     return (
         <>
             <p className="instagram-kit-standard">1080 x 1080</p>
@@ -14,11 +14,11 @@ const InstagramInPreview = ({ kitColor, tagline, description, hashtags }) => {
                     </h1>
                     <div className="instagram-preview-hashtag-list">
                         {hashtags.map((hashtag) => (
-                            <div className="instagram-preview-hashtag-chip" style={{ color: kitColor }}>#{hashtag}</div>
+                            <div className="instagram-preview-hashtag-chip" style={{ color: kitColor }}>{hashtag}</div>
                         ))}
                     </div>
                     <p className="instagram-preview-description">
-                        {description}
+                        {biography}
                     </p>
                 </div>
             </div>

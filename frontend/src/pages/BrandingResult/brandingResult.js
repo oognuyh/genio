@@ -21,26 +21,16 @@ import "./brandingResult.css";
 const BrandingResult = () => {
     const currentStep = 5; // ✅ 현재 진행단계 3단계
 
-    const [resumeData, setResumeData] = useState(location?.state || {});
     const location = useLocation();
-    const strengths = location.state?.strengths || [];
-    const brandingTone = location.state?.brandingTone || "";
+    const kitData = location.state || [];
 
-    // 🔹 데이터 유지 확인 (콘솔 출력)
-    useEffect(() => {
-        console.log("[resumeData] 최종 이력서 정보 데이터:", resumeData);
-        console.log("[BrandingResult] 최종 강점 데이터:", strengths);
-        console.log("[BrandingResult] 최종 브랜딩 톤 데이터:", brandingTone);
-    }, [strengths, brandingTone]);
-
-
-    const userName = '용우';
-    const role = 'IT 개발자';
-    const tagline = '코드 속에 삶을 담는 개발자';
+    const userName = kitData.name;
+    const position = kitData.position;
+    const tagline = kitData.tagline;
 
     const [platforms, setPlatforms] = useState(['기본', '링크드인', '인스타그램', '포트폴리오']);
-    const [colors, setColors] = useState(['#2d3436', '#0984e3', '#00b894', '#6c5ce7']);
-    const [hashtags, setHashtags] = useState(['웹개발자', '프론트엔드', '백엔드', 'node.js']);
+    const [colors, setColors] = useState(kitData.colors.map(e => e.value));
+    const [hashtags, setHashtags] = useState(kitData.hashtags.map(e => e.value));
 
     const [kitPlatfrom, setKitPlatform] = useState(platforms[0]);
     const [kitColor, setKitColor] = useState(colors[0]);
@@ -49,9 +39,11 @@ const BrandingResult = () => {
     const [fileWidth, setFileWidth] = useState(1020);
     const [fileHeight, setFileHeight] = useState(306);
 
-    const description = `저는 프론트엔드 및 백엔드 개발에 특화된 풀스택 개발자 이용우입니다. 3개의 프로젝트를 통해 React,
-                            Node.js 등 다양한 기술 스택을 활용하여 현 서비스 개발을 주도하는 코드 속에 삶을 담는 개발자입니다.
-                            창업을 통해 시너지를 창출하며, 새로운 기술 학습에 적극적으로 참여합니다.`;
+    const biography = kitData.biography;
+
+    useEffect(() => {
+        console.log(kitData);
+    }, []);
 
     const resizeFile = (file, fileInfo) => new Promise(resolve => {
         resizer.imageFileResizer(file, fileInfo.width, fileInfo.height, `${fileInfo.ext}`,
@@ -110,7 +102,7 @@ const BrandingResult = () => {
                 return (
                     <BasicPreview
                         kitColor={kitColor}
-                        tagline={tagline} description={description}
+                        tagline={tagline} biography={biography}
                         hashtags={hashtags}
                     />
                 );
@@ -118,7 +110,7 @@ const BrandingResult = () => {
                 return (
                     <LinkedinPreview
                         kitColor={kitColor}
-                        tagline={tagline} role={role}
+                        tagline={tagline} position={position}
                         hashtags={hashtags}
                     />
                 );
@@ -126,7 +118,7 @@ const BrandingResult = () => {
                 return (
                     <InstagramPreview
                         kitColor={kitColor}
-                        tagline={tagline} description={description}
+                        tagline={tagline} biography={biography}
                         hashtags={hashtags}
                     />
                 );
@@ -141,7 +133,7 @@ const BrandingResult = () => {
                 return (
                     <BasicKit
                         kitColor={kitColor}
-                        tagline={tagline} description={description}
+                        tagline={tagline} biography={biography}
                         hashtags={hashtags}
                     />
                 );
@@ -149,7 +141,7 @@ const BrandingResult = () => {
                 return (
                     <LinkedinKit
                         kitColor={kitColor}
-                        tagline={tagline} role={role}
+                        tagline={tagline} position={position}
                         hashtags={hashtags}
                     />
                 );
@@ -157,7 +149,7 @@ const BrandingResult = () => {
                 return (
                     <InstagramKit
                         kitColor={kitColor}
-                        tagline={tagline} description={description}
+                        tagline={tagline} biography={biography}
                         hashtags={hashtags}
                     />
                 );
@@ -191,7 +183,7 @@ const BrandingResult = () => {
                 {/* 컬러 팔레트 */}
                 <div className="color-palette">
                     <buuton className="color-palette-btn">
-                        <img className="color-palette-icon" src={colorPaletteImage} onclick="" />
+                        <img className="color-palette-icon" src={colorPaletteImage} />
                     </buuton>
                     {colors.map((color) => (
                         <div

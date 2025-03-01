@@ -1,17 +1,74 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
+
 import loadingImage2 from "../assets/loading2.png";
+
 import "./loading2.css";
 
 const Loading2 = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [resumeData, setResumeData] = useState(location.state?.data || {});
+
+  const sessionData = JSON.parse(sessionStorage.getItem('tempResumeData') || '{}');
+  const resumeInfo = { ...sessionData, ...resumeData };
+
+  // useEffect(() => {
+  //   delete resumeData.resumeId;
+  //   console.log(JSON.stringify(resumeData));
+
+  //   const postBrandingKit = async () => {
+  //     try {
+  //       const response = await axios.post("/api/v1/cards", resumeData);
+  //       console.log("[onGenerateKit] Server response:", response.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   postBrandingKit();
+  // }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate("/branding-result"); // ✅ 로딩 후 키트 생성 페이지로 이동
-    }, 3000); // 3초 후 이동
-    return () => clearTimeout(timer);
-  }, [navigate]);
+    delete resumeInfo.resumeId;
+    console.log(resumeInfo);
+
+    const sendData = async () => {
+      try {
+        const requestOptions = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          },
+          body: JSON.stringify(resumeInfo)
+        };
+        fetch('/api/v1/cards', requestOptions)
+          .then(response => response.json())
+          .then(data => navigate("/branding-result", { state: data }))
+          .catch(e => console.log(e));
+
+        // const response = await axios.post("/api/v1/cards", resumeInfo, {
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //     'Authorization': `Bearer ${localStorage.getItem('token')}`
+        //   }
+        // });
+
+        // 임시 데이터 삭제
+        sessionStorage.removeItem('tempResumeData');
+
+        //console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (Object.keys(resumeInfo).length > 0) {
+      sendData();
+    }
+  }, []);
 
   return (
     <div className="loading2-body">

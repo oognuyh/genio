@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+
 import ProgressSteps from "../../components/ProgressSteps";
+
 import checkIcon from "../../assets/check.png";
 import checkWhiteIcon from "../../assets/check-white.png";
+
 import "./brandingTone.css";
 
 const BrandingTone = () => {
@@ -12,26 +15,16 @@ const BrandingTone = () => {
   const currentStep = 4;
 
   const [resumeData, setResumeData] = useState(location?.state || {});
-  const strengths = location.state?.strengths || [];
 
   // ✅ 브랜드 톤 선택 상태 관리
-  const [selectedTone, setSelectedTone] = useState("");
+  const [selectedTone, setSelectedTone] = useState(null);
   const [brandingTones, setBrandingTones] = useState([]);
-
-  useEffect(() => {
-    console.log("[BrandingTone] 이전 페이지에서 받은 강점 데이터:", strengths);
-  }, [strengths]);
-
-  useEffect(() => {
-    console.log("[BrandingTone] 이전 페이지에서 받은 강점 데이터:", strengths);
-  }, [strengths]);
 
   // ✅ Axios를 사용하여 브랜드 톤 리스트 가져오기
   useEffect(() => {
     axios
       .get("/api/v1/tones")
       .then((response) => {
-        console.log("[BrandingTone] Fetched Data:", response.data);
         setBrandingTones(response.data);
       })
       .catch((error) => {
@@ -41,18 +34,31 @@ const BrandingTone = () => {
 
   // ✅ 브랜드 톤 선택 핸들러
   const handleToneSelect = (tone) => {
+    resumeData.tone = tone;
     setSelectedTone(tone);
   };
 
   // ✅ 다음 페이지 이동
-  const onNextClick = () => {
+  const onNextClick = async () => {
     if (!selectedTone) {
       alert("브랜딩 톤을 선택해주세요!");
       return;
     }
-    console.log("[BrandingTone] 선택한 강점 + 브랜딩 톤:", { strengths, selectedTone });
 
-    navigate("/loading2", { resumeData, state: { strengths, brandingTone: selectedTone } });
+    // 순환 참조 제거
+    const sanitizedData = JSON.parse(JSON.stringify(resumeData));
+    
+    // 세션 스토리지에 임시 저장 (새로고침 대비)
+    sessionStorage.setItem('tempResumeData', JSON.stringify(sanitizedData));
+
+    delete resumeData.resumeId;
+    console.log(resumeData);
+
+    const response = await axios.post("/api/v1/cards", resumeData);
+    console.log("[onGenerateKit] Server response:", response.data);
+
+    navigate("/branding-result", { state: response.data });
+    //navigate("/loading2", { state: { data: resumeData }});
   };
 
   return (
@@ -69,8 +75,8 @@ const BrandingTone = () => {
           {brandingTones.map((tone, index) => (
             <button
               key={index}
-              className={`branding-tone-item ${selectedTone === tone.title ? "selected" : ""}`}
-              onClick={() => handleToneSelect(tone.title)}
+              className={`branding-tone-item ${selectedTone === tone ? "selected" : ""}`}
+              onClick={() => handleToneSelect(tone)}
             >
               <img
                 src={selectedTone === tone.title ? checkWhiteIcon : checkIcon}

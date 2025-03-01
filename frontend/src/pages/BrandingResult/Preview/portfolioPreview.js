@@ -17,7 +17,7 @@ const PortfolioPreview = ({ kitColor, description, hashtags }) => {
                 </div>
                 <div className="portfolio-preview-hashtag-list">
                     {hashtags.map((hashtag) => (
-                        <div className="portfolio-preview-hashtag-chip" style={{color: kitColor}}>#{hashtag}</div>
+                        <div className="portfolio-preview-hashtag-chip" style={{color: kitColor}}>{hashtag}</div>
                     ))}
                 </div>
             </div>
