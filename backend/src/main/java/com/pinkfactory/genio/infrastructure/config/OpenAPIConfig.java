@@ -13,18 +13,18 @@ import org.springframework.web.filter.ForwardedHeaderFilter;
 @Configuration
 public class OpenAPIConfig {
 
-  @Bean
-  GroupedOpenApi v1API() {
-    return GroupedOpenApi.builder().group("v1").pathsToMatch("/api/v1/**").build();
-  }
+    @Bean
+    GroupedOpenApi v1API() {
+        return GroupedOpenApi.builder().group("v1").pathsToMatch("/api/v1/**").build();
+    }
 
-  @Bean
-  OpenAPI openAPI() {
-    return new OpenAPI().info(new Info().title("Genio API Specification").version("1.0"));
-  }
+    @Bean
+    OpenAPI openAPI() {
+        return new OpenAPI().info(new Info().title("Genio API Specification").version("1.0"));
+    }
 
-  @Bean
-  ForwardedHeaderFilter forwardedHeaderFilter() {
-    return new ForwardedHeaderFilter();
-  }
+    @Bean
+    ForwardedHeaderFilter forwardedHeaderFilter() {
+        return new ForwardedHeaderFilter();
+    }
 }
