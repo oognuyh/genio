@@ -41,19 +41,19 @@ public class LangGraph4jResumeExtractor implements ResumeExtractor {
                 .resumeId(IDGenerator.generate())
                 .name(generation
                         .<String>value("name")
-                        .map(name -> name.replace("null", ""))
+                        .map(name -> name.replace("null", "").trim())
                         .orElse(null))
                 .jobCategory(generation
                         .<String>value("jobCategory")
-                        .map(name -> name.replace("null", ""))
+                        .map(name -> name.replace("null", "").trim())
                         .orElse(null))
                 .stage(generation
                         .<String>value("stage")
-                        .map(name -> name.replace("null", ""))
+                        .map(name -> name.replace("null", "").replace(" 이상", ""))
                         .orElse(null))
                 .position(generation
                         .<String>value("position")
-                        .map(name -> name.replace("null", ""))
+                        .map(name -> name.replace("null", "").trim())
                         .orElse(null))
                 .experience(generation
                         .<String>value("experience")
