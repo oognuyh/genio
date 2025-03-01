@@ -201,7 +201,7 @@ const BrandingTone = () => {
           )}
         </div>
       </div>
-      {isLoading && <LoadingScreen currentStep={currentStep} />}
+      {isLoading && <LoadingScreen currentStep={currentStep} message={progessMessage} />}
     </>
   );
 };
