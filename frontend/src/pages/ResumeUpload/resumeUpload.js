@@ -90,7 +90,7 @@ const ResumeUpload = () => {
       console.log("[handleFile] Uploaded file detected:", uploadedFile);
       if (uploadedFile.size > 10 * 1024 * 1024) {
         setFile(null);
-        setError("10MB 미만의 PDF 파일만 업로드 가능해요.");
+        setError("10MB 미만의 파일만 가능해요.");
       } else {
         setFile(uploadedFile);
         setError("");
@@ -133,11 +133,9 @@ const ResumeUpload = () => {
                 <br />
               </span>
               <span className="title2">
-                먼저, 퍼스널 브랜딩 키트를 생성을 위해 분석할 프로필 정보가
-                필요해요.
+                퍼스널 브랜딩 키트를 만들기 위해 프로필 정보가 필요해요.
                 <br />
-                이력서 파일을 업로드하면 제니오가 프로필 정보를 자동으로
-                입력해드려요.
+                이력서를 업로드하면 제니오가 자동으로 분석해 입력해드릴게요.
               </span>
             </div>
           </div>
@@ -176,7 +174,7 @@ const ResumeUpload = () => {
                       document.getElementById("reupload-input").click()
                     }
                   >
-                    다시 올리기
+                    다시 업로드
                   </button>
                 </>
               ) : file ? (
@@ -226,7 +224,7 @@ const ResumeUpload = () => {
             className={`upload-btn ${file ? "uploaded" : ""}`}
             onClick={onGenerateKit}
           >
-            나만의 브랜드 키트 만들기
+            다음
           </button>
         </div>
       </div>

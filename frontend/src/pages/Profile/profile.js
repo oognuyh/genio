@@ -14,7 +14,6 @@ const Profile = () => {
 
   // LoadingScreen에서 넘긴 오브젝트
   const [resumeData, setResumeData] = useState(location.state || {});
-
   const [charCount, setCharCount] = useState(
     resumeData.experience?.length || 0
   );
@@ -70,15 +69,63 @@ const Profile = () => {
   // 입력 필드 값 변경 핸들러 (즉시 유효성 검사)
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "experience" && value.length > 1000) return; // 최대 1000자 제한
 
-    setResumeData({ ...resumeData, [name]: value });
-    setCharCount(value.length);
+    if (name === "experience") {
+      if (value.length > 1000) return; // 🔹 1000자 제한
+
+      // 🔹 textarea 높이 자동 조절
+      const textarea = e.target;
+      textarea.style.height = "auto";
+      textarea.style.height = textarea.scrollHeight + "px";
+
+      setResumeData((prev) => {
+        const updatedData = { ...prev, [name]: value };
+        setCharCount(updatedData.experience.length); // 🔹 글자 수 업데이트
+        return updatedData;
+      });
+    } else {
+      setResumeData((prev) => ({ ...prev, [name]: value }));
+    }
 
     setIsValid((prev) => ({
       ...prev,
       [name]: value.trim().length > 0,
     }));
+  };
+
+  // 🔹 Ctrl+V(붙여넣기) 이벤트 추가
+  const handlePaste = (e) => {
+    e.preventDefault();
+
+    const pastedText = e.clipboardData.getData("text");
+    const textarea = e.target;
+    const selectionStart = textarea.selectionStart;
+    const selectionEnd = textarea.selectionEnd;
+
+    let newPastedText = "";
+
+    setResumeData((prev) => {
+      const currentText = prev.experience || "";
+      const beforeCursor = currentText.substring(0, selectionStart);
+      const afterCursor = currentText.substring(selectionEnd);
+
+      const availableSpace = 1000 - currentText.length;
+      newPastedText = pastedText.substring(0, availableSpace);
+
+      const finalText = beforeCursor + newPastedText + afterCursor;
+
+      return { ...prev, experience: finalText };
+    });
+
+    setTimeout(() => {
+      setResumeData((prev) => {
+        const updatedExperience = prev.experience || "";
+        textarea.selectionStart = selectionStart + newPastedText.length;
+        textarea.selectionEnd = selectionStart + newPastedText.length;
+        setCharCount(updatedExperience.length); // 🔹 글자 수 업데이트
+        return { ...prev, experience: updatedExperience };
+      });
+    }, 0);
   };
 
   // 스킬 선택 핸들러
@@ -90,10 +137,22 @@ const Profile = () => {
     );
   };
 
+  // Ctrl+Z 및 Ctrl+C/V 허용
+  const handleKeyDown = (e) => {
+    if (
+      (e.ctrlKey || e.metaKey) &&
+      ["z", "c", "v"].includes(e.key.toLowerCase())
+    ) {
+      return; // Ctrl+Z, Ctrl+C, Ctrl+V 허용
+    }
+  };
+
   const onNextClick = () => {
+    if (charCount > 1000) return; // 🔹 1000자 초과 시 아무 동작 안 함
+
     resumeData.skillSet = selectedSkills;
 
-    // 빈 필드가 있는지 최종 체크 (페이지 이동 막음)
+    // 🔹 빈 필드 체크
     const newValidity = {
       name: resumeData.name?.trim().length > 0,
       position: resumeData.position?.trim().length > 0,
@@ -111,9 +170,11 @@ const Profile = () => {
     <div className="profile-body">
       <ProgressSteps currentStep={currentStep} />
       <div className="profile-container">
-        <h2 className="profile-title">프로필 확인</h2>
+        <h2 className="profile-title">프로필이 완성됐어요!</h2>
         <p className="sub-text">
-          분석된 정보를 확인하고 필요하다면 수정하세요.
+          내용이 정확한지 확인해주세요. <br />
+          빠진 내용이 있거나 잘못된 정보가 있다면 각 항목을 직접 수정할 수
+          있어요.
         </p>
 
         <div className="form-container">
@@ -192,12 +253,14 @@ const Profile = () => {
                 name="experience"
                 value={resumeData.experience || ""}
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
+                onPaste={handlePaste}
                 className={isValid.experience ? "" : "invalid"}
               />
               <div className="char-count-container">
-                {charCount > 800 && (
+                {charCount >= 1000 && (
                   <span className="char-warning">
-                    주요 경험은 최대 1000자까지 작성 가능해요
+                    주요 경험은 최대 1,000자까지 작성 가능해요!
                   </span>
                 )}
                 <span className="char-count">{charCount}/1000자</span>
@@ -206,7 +269,11 @@ const Profile = () => {
           </div>
         </div>
 
-        <button className="next-btn" onClick={onNextClick}>
+        <button
+          className="next-btn"
+          onClick={onNextClick}
+          disabled={charCount > 1000}
+        >
           다음
         </button>
       </div>
