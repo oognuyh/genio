@@ -1,4 +1,4 @@
-package com.pinkfactory.genio.infrastructure.sse;
+package com.pinkfactory.genio.infrastructure.websocket;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.ZonedDateTime;

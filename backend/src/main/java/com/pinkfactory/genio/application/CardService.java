@@ -5,6 +5,7 @@ import com.pinkfactory.genio.domain.Resume;
 import com.pinkfactory.genio.port.in.GenerateCardUseCase;
 import com.pinkfactory.genio.port.out.CardGenerator;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,7 +18,10 @@ public class CardService implements GenerateCardUseCase {
     private final CardGenerator generator;
 
     @Override
+    @SneakyThrows(InterruptedException.class)
     public Card generateCard(GenerateCardCommand command) {
+
+        Thread.sleep(1000);
 
         return generator
                 .generate(

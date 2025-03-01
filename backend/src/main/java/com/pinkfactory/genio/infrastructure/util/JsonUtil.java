@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.victools.jsonschema.generator.SchemaGenerator;
 import com.github.victools.jsonschema.generator.SchemaGeneratorConfigBuilder;
 import com.github.victools.jsonschema.generator.SchemaVersion;
@@ -33,6 +34,7 @@ public class JsonUtil {
             .enable(JsonReadFeature.ALLOW_SINGLE_QUOTES)
             .visibility(PropertyAccessor.FIELD, Visibility.ANY)
             .visibility(PropertyAccessor.GETTER, Visibility.ANY)
+            .addModule(new JavaTimeModule())
             .build();
 
     static {

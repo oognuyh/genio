@@ -2,10 +2,10 @@ package com.pinkfactory.genio.infrastructure.adapter.out.resume;
 
 import com.pinkfactory.genio.infrastructure.adapter.out.resume.ResumeExtractingGraph.State;
 import com.pinkfactory.genio.infrastructure.langchain4j.PromptTemplate;
-import com.pinkfactory.genio.infrastructure.sse.Event;
-import com.pinkfactory.genio.infrastructure.sse.Event.EventType;
-import com.pinkfactory.genio.infrastructure.sse.SseEmitterRegistry;
 import com.pinkfactory.genio.infrastructure.util.JsonUtil;
+import com.pinkfactory.genio.infrastructure.websocket.Event;
+import com.pinkfactory.genio.infrastructure.websocket.Event.EventType;
+import com.pinkfactory.genio.infrastructure.websocket.WebSocketSessionRegistry;
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import java.util.Map;
@@ -28,7 +28,7 @@ public class ResumeEvaluator implements NodeAction<State> {
 
     private final PromptTemplate template = PromptTemplate.of("classpath:prompts/resume-evaluator.md");
 
-    private final SseEmitterRegistry registry;
+    private final WebSocketSessionRegistry registry;
 
     @Override
     public Map<String, Object> apply(State state) {

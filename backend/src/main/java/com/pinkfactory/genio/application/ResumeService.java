@@ -1,16 +1,17 @@
 package com.pinkfactory.genio.application;
 
 import com.pinkfactory.genio.domain.Resume;
-import com.pinkfactory.genio.infrastructure.sse.Event;
-import com.pinkfactory.genio.infrastructure.sse.Event.EventType;
-import com.pinkfactory.genio.infrastructure.sse.SseEmitterRegistry;
 import com.pinkfactory.genio.infrastructure.util.IDGenerator;
+import com.pinkfactory.genio.infrastructure.websocket.Event;
+import com.pinkfactory.genio.infrastructure.websocket.Event.EventType;
+import com.pinkfactory.genio.infrastructure.websocket.WebSocketSessionRegistry;
 import com.pinkfactory.genio.port.in.ExtractResumeUseCase;
 import com.pinkfactory.genio.port.out.MimeTypeDetector;
 import com.pinkfactory.genio.port.out.ResumeExtractor;
 import com.pinkfactory.genio.port.out.TokenEstimator;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +31,10 @@ public class ResumeService implements ExtractResumeUseCase {
 
     private final TokenEstimator estimator;
 
-    private final SseEmitterRegistry registry;
+    private final WebSocketSessionRegistry registry;
 
     @Override
+    @SneakyThrows({InterruptedException.class})
     public Resume extractResume(ExtractResumeCommand command) {
 
         var resumeId = Objects.requireNonNullElse(command.resumeId(), IDGenerator.generate());
@@ -46,6 +48,8 @@ public class ResumeService implements ExtractResumeUseCase {
         log.info("[{}] 추출된 문서 내용:\n {}", resumeId, content);
 
         var count = estimator.estimate(content);
+
+        Thread.sleep(1000);
 
         registry.send(
                 resumeId,

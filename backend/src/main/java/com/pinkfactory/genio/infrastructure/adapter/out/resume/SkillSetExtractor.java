@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.pinkfactory.genio.domain.JobCategory;
 import com.pinkfactory.genio.infrastructure.adapter.out.resume.ResumeExtractingGraph.State;
 import com.pinkfactory.genio.infrastructure.langchain4j.PromptTemplate;
-import com.pinkfactory.genio.infrastructure.sse.Event;
-import com.pinkfactory.genio.infrastructure.sse.Event.EventType;
-import com.pinkfactory.genio.infrastructure.sse.SseEmitterRegistry;
 import com.pinkfactory.genio.infrastructure.util.JsonUtil;
+import com.pinkfactory.genio.infrastructure.websocket.Event;
+import com.pinkfactory.genio.infrastructure.websocket.Event.EventType;
+import com.pinkfactory.genio.infrastructure.websocket.WebSocketSessionRegistry;
 import com.pinkfactory.genio.port.in.FindJobCategoriesUseCase;
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.model.chat.ChatLanguageModel;
@@ -33,7 +33,7 @@ public class SkillSetExtractor implements NodeAction<State> {
 
     private final PromptTemplate template = PromptTemplate.of("classpath:prompts/skill-set-extractor.md");
 
-    private final SseEmitterRegistry registry;
+    private final WebSocketSessionRegistry registry;
 
     private final FindJobCategoriesUseCase findJobCategoriesUseCase;
 
