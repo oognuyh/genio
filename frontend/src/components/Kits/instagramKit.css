@@ -12,6 +12,7 @@
 
 /* ▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦ 콘텐츠 영역 ▦▦▦▦▦▦▦▦▦▦▦▦▦▦▦ */
 .instagram-kit-title {
+    width: 881.4px; /* 13vw → 13×67.8 */
     height: 209.62px; /* 5.8vh → 5.8×36.4865 */
     margin: 0;
     font-size: 67.8px; /* 1vw → 67.8px */
@@ -60,7 +61,7 @@
     padding: 7.3px 13.56px; /* 0.2vh/0.2vw → 0.2×36.4865 / 0.2×67.8 */
     flex: none;
     flex-grow: 0;
-    border-radius: 2.5px;
+    border-radius: 8px;
     background: rgb(255, 255, 255);
     opacity: 0.8;
     font-size: 25.12px; /* 0.37vw → 0.37×67.8 */

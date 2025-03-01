@@ -1,4 +1,10 @@
 .loading2-body {
+  position: fixed; /* 화면 전체를 덮도록 고정 */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,6 +13,7 @@
   background: #f8f8f8;
   padding: 0 320px; /* ✅ 전체 좌우 여백 320px 설정 */
   box-sizing: border-box; /* ✅ 패딩 포함하여 크기 유지 */
+  z-index: 9999;
 }
 
 .loading2-text {

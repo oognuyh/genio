@@ -13,7 +13,7 @@ const LinkedinKit = ({ kitColor, tagline, position, hashtags }) => {
                         {tagline}
                     </h1>
                     <p className="linkedin-kit-role">
-                        {position}
+                        {/*position*/}
                     </p>
                 </div>
                 <div className="linkedin-hashtag-list">

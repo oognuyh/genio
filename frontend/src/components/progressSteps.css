@@ -20,6 +20,7 @@
   max-width: 1280px;
   position: relative;
   padding: 0 40px;
+  gap: 100px;
 }
 
 /* ✅ 개별 단계 */

@@ -4,35 +4,37 @@
   font-family: Arial, sans-serif;
   text-align: center;
   margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  /* 상단 여백을 뷰포트 단위로 지정 */
+  padding-top: 15vh;
+  min-height: 110vh;
   background-size: cover;
   background-position: center;
+  box-sizing: border-box;
 }
 
 .resume-logo {
-  width: 48px; /* 원하는 크기로 조정 */
+  width: 48px;
   height: 48px;
   display: block;
-  margin: 0 auto; /* 가로 중앙 정렬 */
+  margin: 0 auto;
   position: absolute;
-  top: 24px;
+  /* 로고의 위치도 뷰포트 단위로 조정 */
+  top: 2vh;
   left: 50%;
-  transform: translateX(-50%); /* 정확한 중앙 정렬 */
+  transform: translateX(-50%);
 }
 
 .resume-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
+  /* 상단 여백만큼 컨텐츠를 아래로 밀어내도록 margin-top 추가 */
+  margin-top: 15vh;
+  min-height: calc(100vh - 15vh);
   text-align: center;
   padding: 10px 20px;
   gap: 104px;
+  box-sizing: border-box;
 }
 
 /* 상단 로고 및 텍스트 정렬 */
@@ -142,7 +144,6 @@
   mix-blend-mode: normal; /* 🔹 배경과 글자 색상 자연스럽게 블렌딩 */
 }
 
-
 /* 버튼 */
 .btnF {
   width: 320px;
@@ -185,3 +186,76 @@
   background: rgb(69, 84, 115);
 }
 
+@media (max-width: 768px) {
+  /* 전체 배경 및 컨테이너 */
+  .resume-body {
+    /* 상단 여백을 조금 줄이고, 최소 높이를 자동으로 */
+    padding-top: 10vh;
+    min-height: auto;
+  }
+
+  .resume-container {
+    /* 상단 마진 및 패딩을 줄여 내용이 너무 아래로 밀리지 않도록 함 */
+    margin-top: 10vh;
+    padding: 10px;
+    gap: 40px;
+    min-height: auto;
+  }
+
+  /* 텍스트 관련 */
+  .header {
+    margin-top: 40px;
+  }
+  .text-box h2 {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+  .text-box p {
+    font-size: 16px;
+  }
+
+  /* 카드 컨테이너와 카드 */
+  .card-container {
+    flex-direction: column;
+    gap: 20px;
+    max-width: 100%;
+    margin-bottom: 100px;
+    padding: 0 10px;
+  }
+  .card {
+    width: 90% !important;
+    height: auto !important;
+    padding: 20px;
+  }
+  .card img {
+    /* 이미지 크기를 줄여 여백도 축소 */
+    width: 100px;
+    height: 100px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  /* 버튼 */
+  .btnF {
+    width: 90%;
+    height: 50px;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+}
+
+/* 추가로 아주 작은 화면 대응 (예: 모바일 480px 이하) */
+@media (max-width: 480px) {
+  .text-box h2 {
+    font-size: 28px;
+  }
+  .text-box p {
+    font-size: 14px;
+  }
+  .btnF {
+    width: 95%;
+    height: 45px;
+    font-size: 14px;
+  }
+}

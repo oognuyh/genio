@@ -14,7 +14,7 @@ const LinkedInPreview = ({ kitColor, tagline, position, hashtags }) => {
                             {tagline}
                         </h1>
                         <p className="linkedin-preview-role">
-                            {position}
+                            {/*position*/}
                         </p>
                     </div>
                     <div className="linkedin-preview-hashtag-list">

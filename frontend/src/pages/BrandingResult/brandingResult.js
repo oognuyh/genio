@@ -11,10 +11,12 @@ import ProgressSteps from "../../components/ProgressSteps";
 import BasicPreview from "./Preview/basicPreview";
 import LinkedinPreview from "./Preview/linkedinPreview";
 import InstagramPreview from "./Preview/instagramPreview";
+import PortfolioPreview from "./Preview/portfolioPreview";
 
 import BasicKit from "../../components/Kits/basicKit";
 import LinkedinKit from "../../components/Kits/linkedinKit";
 import InstagramKit from "../../components/Kits/instagramKit";
+import PortfolioKit from "../../components/Kits/portfolioKit";
 
 import "./brandingResult.css";
 
@@ -141,6 +143,14 @@ const BrandingResult = () => {
             hashtags={hashtags}
           />
         );
+      case 3:
+        return (
+          <PortfolioPreview
+            kitColor={kitColor}
+            tagline={tagline}
+            hashtags={hashtags}
+          />
+        );
     }
   };
 
@@ -172,6 +182,14 @@ const BrandingResult = () => {
             kitColor={kitColor}
             tagline={tagline}
             biography={biography}
+            hashtags={hashtags}
+          />
+        );
+      case 3:
+        return (
+          <PortfolioKit
+            kitColor={kitColor}
+            tagline={tagline}
             hashtags={hashtags}
           />
         );
