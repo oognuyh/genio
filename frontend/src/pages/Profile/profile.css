@@ -12,8 +12,8 @@
   max-width: 1280px;
   width: 100%; /* 화면이 줄어들 때도 대응 */
   margin: 40px 20px; /* 좌우/상하 여백 */
-  text-align: left; 
-  background: #f8f8f8; 
+  text-align: left;
+  background: #f8f8f8;
   box-shadow: none !important;
   border: none;
 }
@@ -66,7 +66,7 @@
 .input-group {
   display: flex;
   margin-bottom: 24px;
-  gap: 24px; 
+  gap: 24px;
 }
 
 /* 📌 라벨 스타일 */
@@ -172,6 +172,27 @@
 .skill-btn.selected {
   background: #121d31;
   color: white;
+}
+
+.invalid {
+  border: 2px solid red !important;
+  background-color: #ffe6e6;
+  transition: border 0.2s ease-in-out;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input.invalid,
+textarea.invalid {
+  border: 2px solid red !important;
 }
 
 /* 🔹 다음 버튼 */

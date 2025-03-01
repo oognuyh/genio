@@ -16,22 +16,30 @@ const Profile = () => {
   const [resumeData, setResumeData] = useState(location.state || {});
 
   const [categoryInfo, setCategoryInfo] = useState([]);
-  const [jobCategories, setjobCategories] = useState([]);
+  const [jobCategories, setJobCategories] = useState([]);
   const [skillSet, setSkillSet] = useState([]);
-  const [selectedSkills, setSelectedSkills] = useState(resumeData.skillSet || []);
-
+  const [selectedSkills, setSelectedSkills] = useState(
+    resumeData.skillSet || []
+  );
   const [isCategoryLoaded, setIsCategoryLoaded] = useState(false);
+
+  // 유효성 검사 상태
+  const [isValid, setIsValid] = useState({
+    name: true,
+    position: true,
+    experience: true,
+  });
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const response = await axios.get('/api/v1/job-categories');
+      const response = await axios.get("/api/v1/job-categories");
       const categories = response.data;
 
       setCategoryInfo(categories);
-      setIsCategoryLoaded(true); // ✅ 로딩 완료
+      setIsCategoryLoaded(true);
 
-      const names = categories.map(category => category.name);
-      setjobCategories(names); // 상태 업데이트 트리거
+      const names = categories.map((category) => category.name);
+      setJobCategories(names);
     };
     fetchCategories();
     resumeData.stage = "취준생";
@@ -41,7 +49,7 @@ const Profile = () => {
     if (!isCategoryLoaded || !resumeData.jobCategory) return;
 
     const selectedCategory = categoryInfo.find(
-      cat => cat.name === resumeData.jobCategory
+      (cat) => cat.name === resumeData.jobCategory
     );
 
     if (!selectedCategory) {
@@ -53,28 +61,23 @@ const Profile = () => {
     setSkillSet(skills);
 
     // 기존 선택된 스킬 중 유효한 것만 필터링
-    setSelectedSkills(prev => prev.filter(skill => skills.includes(skill)));
-  }, [resumeData.jobCategory, categoryInfo, isCategoryLoaded]); // ✅ 의존성 추가
+    setSelectedSkills((prev) => prev.filter((skill) => skills.includes(skill)));
+  }, [resumeData.jobCategory, categoryInfo, isCategoryLoaded]);
 
-  const getcategoryInfo = async () => {
-    const response = await axios.get("/api/v1/job-categories");
-    const categories = response.data;
-
-    setCategoryInfo(categories);
-
-    const names = categories.map(category => category.name);
-    setjobCategories(names); // 상태 업데이트 트리거
-  }
-
-  // 입력 필드 변경 핸들러
+  // 입력 필드 값 변경 핸들러 (즉시 유효성 검사)
   const handleChange = (e) => {
-    setResumeData({ ...resumeData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setResumeData({ ...resumeData, [name]: value });
+
+    // 입력값이 비었거나 공백만 있는 경우 즉시 빨간 테두리 적용
+    setIsValid((prev) => ({
+      ...prev,
+      [name]: value.trim().length > 0,
+    }));
   };
 
   // 스킬 선택 핸들러
   const toggleSkill = (skill) => {
-    console.log(selectedSkills);
-
     setSelectedSkills((prevSkills) =>
       prevSkills.includes(skill)
         ? prevSkills.filter((s) => s !== skill)
@@ -84,7 +87,17 @@ const Profile = () => {
 
   const onNextClick = () => {
     resumeData.skillSet = selectedSkills;
-    console.log(resumeData)
+
+    // 빈 필드가 있는지 최종 체크 (페이지 이동 막음)
+    const newValidity = {
+      name: resumeData.name?.trim().length > 0,
+      position: resumeData.position?.trim().length > 0,
+      experience: resumeData.experience?.trim().length > 0,
+    };
+
+    setIsValid(newValidity);
+
+    if (Object.values(newValidity).includes(false)) return;
 
     navigate("/strengths", { state: resumeData });
   };
@@ -94,20 +107,31 @@ const Profile = () => {
       <ProgressSteps currentStep={currentStep} />
       <div className="profile-container">
         <h2 className="profile-title">프로필 확인</h2>
-        <p className="sub-text">분석된 정보를 확인하고 필요하다면 수정하세요.</p>
+        <p className="sub-text">
+          분석된 정보를 확인하고 필요하다면 수정하세요.
+        </p>
 
         <div className="form-container">
           {/* 왼쪽 패널 */}
           <div className="left-panel">
             <div className="input-group">
               <label>이름</label>
-              <input type="text" name="name" value={resumeData.name || ""} onChange={handleChange} />
+              <input
+                type="text"
+                name="name"
+                value={resumeData.name || ""}
+                onChange={handleChange}
+                className={isValid.name ? "" : "invalid"}
+              />
             </div>
             <div className="input-group">
               <label>직군</label>
-              <select name="jobCategory" value={resumeData.jobCategory || ""} onChange={handleChange}>
+              <select
+                name="jobCategory"
+                value={resumeData.jobCategory || ""}
+                onChange={handleChange}
+              >
                 {jobCategories.map((position, i) => (
-                  // ✅ 화살표 함수의 암시적 반환 사용 (소괄호)
                   <option key={i} value={position}>
                     {position}
                   </option>
@@ -116,14 +140,26 @@ const Profile = () => {
             </div>
             <div className="input-group title-group">
               <label>타이틀</label>
-              <select name="stage" value={resumeData.stage || ""} onChange={handleChange}>
+              <select
+                name="stage"
+                value={resumeData.stage || ""}
+                onChange={handleChange}
+              >
                 <option value="취준생">취준생</option>
                 <option value="신입">신입</option>
                 {[...Array(10)].map((_, i) => (
-                  <option key={i} value={`${i + 1}년차`}>{`${i + 1}년차`}</option>
+                  <option key={i} value={`${i + 1}년차`}>{`${
+                    i + 1
+                  }년차`}</option>
                 ))}
               </select>
-              <input type="text" name="position" value={resumeData.position || ""} onChange={handleChange} />
+              <input
+                type="text"
+                name="position"
+                value={resumeData.position || ""}
+                onChange={handleChange}
+                className={isValid.position ? "" : "invalid"}
+              />
             </div>
             <div className="input-group">
               <label>스킬</label>
@@ -131,8 +167,11 @@ const Profile = () => {
                 {skillSet.map((skill) => (
                   <button
                     key={skill}
-                    className={`skill-btn ${selectedSkills.includes(skill) ? 'selected' : ''}`}
-                    onClick={() => toggleSkill(skill)}>
+                    className={`skill-btn ${
+                      selectedSkills.includes(skill) ? "selected" : ""
+                    }`}
+                    onClick={() => toggleSkill(skill)}
+                  >
                     {skill}
                   </button>
                 ))}
@@ -144,12 +183,19 @@ const Profile = () => {
           <div className="right-panel">
             <div className="input-group">
               <label>주요 경험</label>
-              <textarea name="experience" value={resumeData.experience || ""} onChange={handleChange} />
+              <textarea
+                name="experience"
+                value={resumeData.experience || ""}
+                onChange={handleChange}
+                className={isValid.experience ? "" : "invalid"}
+              />
             </div>
           </div>
         </div>
 
-        <button className="next-btn" onClick={onNextClick}>다음</button>
+        <button className="next-btn" onClick={onNextClick}>
+          다음
+        </button>
       </div>
     </div>
   );
