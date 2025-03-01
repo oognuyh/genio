@@ -7,6 +7,7 @@ import com.pinkfactory.genio.infrastructure.sse.Event;
 import com.pinkfactory.genio.infrastructure.sse.Event.EventType;
 import com.pinkfactory.genio.infrastructure.sse.SseEmitterRegistry;
 import com.pinkfactory.genio.infrastructure.util.JsonUtil;
+import com.pinkfactory.genio.port.in.FindJobCategoriesUseCase;
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import java.util.List;
@@ -33,6 +34,8 @@ public class PersonalInformationExtractor implements NodeAction<State> {
     private final PromptTemplate template = PromptTemplate.of("classpath:prompts/personal-information-extractor.md");
 
     private final SseEmitterRegistry registry;
+
+    private final FindJobCategoriesUseCase findJobCategoriesUseCase;
 
     @Override
     public Map<String, Object> apply(State state) {
@@ -63,20 +66,35 @@ public class PersonalInformationExtractor implements NodeAction<State> {
                                     .build()));
         }
 
-        var output = model.chat(
-                template.apply(state).toSystemMessage(),
-                PromptTemplate.of("사용자의 이력서는 다음과 같습니다:\n{{resume}}")
-                        .apply(Map.of("resume", state.<String>value("resume").orElse(""), "feedback", feedback))
-                        .toUserMessage(),
-                AiMessage.from("""
+        try {
+
+            var output = model.chat(
+                    template.apply(Map.of(
+                                    "jobCategories",
+                                    findJobCategoriesUseCase.findJobCategories(),
+                                    "feedback",
+                                    feedback))
+                            .toSystemMessage(),
+                    PromptTemplate.of("사용자의 이력서는 다음과 같습니다:\n{{resume}}")
+                            .apply(Map.of(
+                                    "resume", state.<String>value("resume").orElse("")))
+                            .toUserMessage(),
+                    AiMessage.from("""
                 추출 결과:
                 """));
 
-        log.info(
-                "[{}] 기본 정보: {}",
-                state.<String>value("resumeId").orElse("Unknown"),
-                output.aiMessage().text());
+            log.info(
+                    "[{}][{}]\n{}",
+                    state.<String>value("resumeId").orElse("Unknown"),
+                    NAME,
+                    output.aiMessage().text());
 
-        return JsonUtil.deserialize(JsonUtil.repairJson(output.aiMessage().text()), new TypeReference<>() {});
+            return JsonUtil.deserialize(JsonUtil.repairJson(output.aiMessage().text()), new TypeReference<>() {});
+        } catch (Exception e) {
+
+            log.error("[{}][{}] {}", state.<String>value("resumeId").orElse("Unknown"), NAME, e.getMessage());
+
+            throw e;
+        }
     }
 }

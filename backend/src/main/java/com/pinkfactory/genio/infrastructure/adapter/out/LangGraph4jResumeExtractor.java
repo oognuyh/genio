@@ -8,7 +8,9 @@ import com.pinkfactory.genio.port.out.ResumeExtractor;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletionException;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,6 +19,7 @@ public class LangGraph4jResumeExtractor implements ResumeExtractor {
 
     private final ResumeExtractingGraph graph;
 
+    @SneakyThrows
     @Override
     public Resume extract(String resumeId, String content) {
 
@@ -24,9 +27,14 @@ public class LangGraph4jResumeExtractor implements ResumeExtractor {
 
         State generation = new State(Map.of());
 
-        for (var r : result) {
+        try {
+            for (var r : result) {
 
-            generation = r.state();
+                generation = r.state();
+            }
+        } catch (CompletionException e) {
+
+            throw e.getCause().getCause();
         }
 
         return Resume.builder()

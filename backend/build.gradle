@@ -41,6 +41,8 @@ dependencies {
 
 	implementation "com.samskivert:jmustache:$jmustacheVersion"
 
+	implementation "io.github.resilience4j:resilience4j-all:${resilience4jVersion}"
+	implementation "io.github.resilience4j:resilience4j-feign:${resilience4jVersion}"
 	implementation "io.github.openfeign:feign-core:$feignVersion"
 	implementation "io.github.openfeign:feign-jackson:$feignVersion"
 

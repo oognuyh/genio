@@ -122,10 +122,19 @@ public class V1ResumeController implements V1ResumeAPISpecification {
             } catch (Exception e) {
 
                 try {
-                    emitter.send(Event.builder()
-                            .type(EventType.FAILED)
-                            .message(e.getMessage())
-                            .build());
+                    if (e instanceof ResponseStatusException e2) {
+
+                        emitter.send(Event.builder()
+                                .type(EventType.FAILED)
+                                .message(e2.getReason())
+                                .build());
+                    } else {
+
+                        emitter.send(Event.builder()
+                                .type(EventType.FAILED)
+                                .message(e.getMessage())
+                                .build());
+                    }
 
                     emitter.completeWithError(e);
                 } catch (IOException sendError) {

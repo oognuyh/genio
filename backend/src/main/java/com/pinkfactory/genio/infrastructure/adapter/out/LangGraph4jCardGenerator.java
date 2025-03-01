@@ -10,7 +10,9 @@ import com.pinkfactory.genio.infrastructure.util.IDGenerator;
 import com.pinkfactory.genio.infrastructure.util.JsonUtil;
 import com.pinkfactory.genio.port.out.CardGenerator;
 import java.util.Map;
+import java.util.concurrent.CompletionException;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,6 +21,7 @@ public class LangGraph4jCardGenerator implements CardGenerator {
 
     private final CardGeneratingGraph graph;
 
+    @SneakyThrows
     @Override
     public Card generate(String cardId, Resume resume, Tone tone) {
 
@@ -26,9 +29,14 @@ public class LangGraph4jCardGenerator implements CardGenerator {
 
         State generation = new State(Map.of());
 
-        for (var r : result) {
+        try {
+            for (var r : result) {
 
-            generation = r.state();
+                generation = r.state();
+            }
+        } catch (CompletionException e) {
+
+            throw e.getCause().getCause();
         }
 
         return Card.builder()

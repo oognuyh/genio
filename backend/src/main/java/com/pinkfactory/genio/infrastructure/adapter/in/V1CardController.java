@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 /**
@@ -125,10 +126,19 @@ public class V1CardController implements V1CardAPISpecification {
                 try {
                     log.error("Failed to generate card: {}", e.getMessage());
 
-                    emitter.send(Event.builder()
-                            .type(EventType.FAILED)
-                            .message(e.getMessage())
-                            .build());
+                    if (e instanceof ResponseStatusException e2) {
+
+                        emitter.send(Event.builder()
+                                .type(EventType.FAILED)
+                                .message(e2.getReason())
+                                .build());
+                    } else {
+
+                        emitter.send(Event.builder()
+                                .type(EventType.FAILED)
+                                .message(e.getMessage())
+                                .build());
+                    }
 
                     emitter.completeWithError(e);
                 } catch (IOException sendError) {

@@ -67,31 +67,45 @@ public class SkillSetExtractor implements NodeAction<State> {
                                     .build()));
         }
 
-        var output = model.chat(
-                template.apply(Map.of(
-                                "candidates",
-                                findJobCategoriesUseCase.findJobCategories().stream()
-                                        .map(JobCategory::skillSet)
-                                        .flatMap(List::stream)
-                                        .toList(),
-                                "feedback",
-                                feedback))
-                        .toAiMessage(),
-                PromptTemplate.of("사용자의 이력서는 다음과 같습니다:\n{{resume}}")
-                        .apply(Map.of("resume", state.<String>value("resume").orElse("")))
-                        .toUserMessage(),
-                AiMessage.from("""
+        try {
+
+            var position = state.<String>value("position").orElse("Unknown");
+
+            var output = model.chat(
+                    template.apply(Map.of(
+                                    "candidates",
+                                    findJobCategoriesUseCase.findJobCategories().stream()
+                                            .filter(category ->
+                                                    category.positions().contains(position))
+                                            .map(JobCategory::skillSet)
+                                            .flatMap(List::stream)
+                                            .toList(),
+                                    "feedback",
+                                    feedback))
+                            .toAiMessage(),
+                    PromptTemplate.of("사용자의 이력서는 다음과 같습니다:\n{{resume}}")
+                            .apply(Map.of(
+                                    "resume", state.<String>value("resume").orElse("")))
+                            .toUserMessage(),
+                    AiMessage.from("""
                 추출 결과:
                 """));
 
-        log.info(
-                "[{}] 스킬셋: {}",
-                state.<String>value("resumeId").orElse("Unknown"),
-                output.aiMessage().text());
+            log.info(
+                    "[{}][{}]\n{}",
+                    state.<String>value("resumeId").orElse("Unknown"),
+                    NAME,
+                    output.aiMessage().text());
 
-        return Map.of(
-                "skillSet",
-                JsonUtil.deserialize(
-                        JsonUtil.repairJson(output.aiMessage().text()), new TypeReference<List<String>>() {}));
+            return Map.of(
+                    "skillSet",
+                    JsonUtil.deserialize(
+                            JsonUtil.repairJson(output.aiMessage().text()), new TypeReference<List<String>>() {}));
+        } catch (Exception e) {
+
+            log.error("[{}][{}] {}", state.<String>value("resumeId").orElse("Unknown"), NAME, e.getMessage());
+
+            throw e;
+        }
     }
 }

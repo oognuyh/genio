@@ -60,20 +60,29 @@ public class ExperienceExtractor implements NodeAction<State> {
                                     .build()));
         }
 
-        var output = model.chat(
-                template.apply(state).toAiMessage(),
-                PromptTemplate.of("사용자의 이력서는 다음과 같습니다:\n{{resume}}")
-                        .apply(Map.of("resume", state.<String>value("resume").orElse(""), "feedback", feedback))
-                        .toUserMessage(),
-                AiMessage.from("""
-                추출 결과:
-                """));
+        try {
+            var output = model.chat(
+                    template.apply(state).toAiMessage(),
+                    PromptTemplate.of("사용자의 이력서는 다음과 같습니다:\n{{resume}}")
+                            .apply(Map.of(
+                                    "resume", state.<String>value("resume").orElse(""), "feedback", feedback))
+                            .toUserMessage(),
+                    AiMessage.from("""
+                    추출 결과:
+                    """));
 
-        log.info(
-                "[{}] 경력사항: {}",
-                state.<String>value("resumeId").orElse("Unknown"),
-                output.aiMessage().text());
+            log.info(
+                    "[{}][{}]\n{}",
+                    state.<String>value("resumeId").orElse("Unknown"),
+                    NAME,
+                    output.aiMessage().text());
 
-        return Map.of("experience", output.aiMessage().text());
+            return Map.of("experience", output.aiMessage().text());
+        } catch (Exception e) {
+
+            log.error("[{}][{}] {}", state.<String>value("resumeId").orElse("Unknown"), NAME, e.getMessage());
+
+            throw e;
+        }
     }
 }
