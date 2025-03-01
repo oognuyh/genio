@@ -128,9 +128,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
+  z-index: 30;
   bottom: 52px;
-  left: 50%;
+  left: 45%;
 }
 
 /* ✅ 버튼 호버 효과 */
@@ -147,4 +148,34 @@
     #0e1221 78.7%,
     #121d31 106.07%
   );
+}
+
+@media (max-width: 768px) {
+  /* 내부 컨테이너 패딩 및 여백 조정 */
+  .strengths-container {
+    padding: 10px;
+  }
+
+  /* 강점 선택 리스트: 고정된 1280px 대신 100% 너비 사용 */
+  .strengths-list {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 50px; /* 필요에 따라 조정 */
+    padding-right: 15px; /* 스크롤바 간격 줄임 */
+  }
+
+  /* 강점 선택 버튼: 1280px 고정 대신 100% 너비로 */
+  .strength-item {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* 다음 버튼: 중앙 고정 + 유동적 너비로 변경 */
+  .st-next-btn {
+    width: 90%; /* 필요에 따라 조정 (예: 320px 고정 대신) */
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px; /* 화면 하단 여백 조정 */
+    padding: 16px 0; /* 좌우 패딩 제거해서 폭에 맞춤 */
+  }
 }
