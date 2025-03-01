@@ -257,7 +257,6 @@ const Profile = () => {
                 name="experience"
                 value={resumeData.experience || ""}
                 onChange={handleChange}
-                onKeyDown={handleKeyDown}
                 onPaste={handlePaste}
                 className={isValid.experience ? "" : "invalid"}
               />
