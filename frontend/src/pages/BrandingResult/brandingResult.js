@@ -18,6 +18,7 @@ import BasicKit from "../../components/Kits/basicKit";
 import LinkedinKit from "../../components/Kits/linkedinKit";
 import InstagramKit from "../../components/Kits/instagramKit";
 import PortfolioKit from "../../components/Kits/portfolioKit";
+import loadingImage2 from "../../assets/loading2.png";
 
 import "./brandingResult.css";
 
@@ -52,6 +53,8 @@ const BrandingResult = () => {
   const [fileExt, setFileExt] = useState("png");
   const [fileWidth, setFileWidth] = useState(1020);
   const [fileHeight, setFileHeight] = useState(306);
+  const [isGenerating, setIsGenerating] = useState(false)
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false)
 
   const biography = kitData.biography;
 
@@ -101,8 +104,10 @@ const BrandingResult = () => {
     }
   };
 
-  const onDownloadBtn = () => {
+  const onDownloadBtn = async () => {
     try {
+      setIsPreviewOpen(true)
+
       const kit = document.getElementById("branding-kit");
       const previewKit = document.getElementById("branding-preview-kit");
 
@@ -113,19 +118,23 @@ const BrandingResult = () => {
         height: previewKit.height * 0.1,
       };
 
-      domtoimage.toBlob(kit).then((blob) => {
-        saveAs(blob, `${fileName}.${fileInfo.ext}`);
-      });
+      setIsSaved(false);
+      setIsGenerating(true)
 
-      domtoimage.toBlob(previewKit).then(async (blob) => {
-        //const file = await resizeFile(blob, fileInfo);
-        setPopupImg(window.URL.createObjectURL(blob));
-      });
+      const [kitBlob, previewBlob] = await Promise.all([
+        domtoimage.toBlob(kit),
+        domtoimage.toBlob(previewKit)
+      ]);
+
+      
+      setPopupImg(window.URL.createObjectURL(previewBlob));
+      setIsGenerating(false)
+      
+      saveAs(kitBlob, `${fileName}.${fileInfo.ext}`);
+      setIsSaved(true);
     } catch (err) {
       console.log(err);
-    } finally {
-      setIsSaved(true);
-    }
+    } 
   };
 
   const renderPreview = () => {
@@ -266,17 +275,26 @@ const BrandingResult = () => {
         <button className="save-button" onClick={onDownloadBtn}>
           이미지로 저장하기
         </button>
-        {isSaved && (
+
+        {isPreviewOpen && (
           <div className="popup-overlay">
             <div className="popup-save-content">
-              <h3 className="popup-intro1">이미지 저장 완료!</h3>
-              <h3 className="popup-intro2">이제 자신있게 {userName}님을 세상에 보여주세요 💫</h3>
+              <h3 className="popup-intro1">{ isGenerating ? '이미지 생성 중' : '이미지 저장 완료!' }</h3>
+              <h3 className="popup-intro2">{ isGenerating ? '제니오가 열심히 이미지를 만들고 있어요!' : `이제 자신있게 ${userName}님을 세상에 보여주세요 💫` }</h3>
               <button
-                onClick={() => setIsSaved(false)}
+                onClick={() => setIsPreviewOpen(false)}
                 className="popup-close-button">
-                <img src={popCloseImage} width="20px" height="20px" />
+                <img src={popCloseImage} width="20px" height="20px" alt="close" />
               </button>
-              <img src={popupImg} />
+
+              {isGenerating ?   
+                (<div>
+                  <img src={loadingImage2} alt="생성 중" className="loading-image1" style={{maxWidth: '80%',
+                    maxHeight: '80%',
+                    objectFit: 'contain' }} />
+                </div>) :
+                <img src={popupImg} alt="card" />}
+
               <button
                 onClick={() => navigate('/')}
                 className="popup-back-button">
