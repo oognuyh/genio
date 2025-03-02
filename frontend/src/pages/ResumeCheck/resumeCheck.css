@@ -118,6 +118,32 @@
   transition: filter 0.3s ease-in-out;
 }
 
+.card-disabled img {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 70.03px;
+  margin-top: 100px;
+  transition: filter 0.3s ease-in-out;
+}
+
+.card-disabled {
+  background: #eceff4;
+  padding: 30px;
+  border-radius: 16px;
+  width: 455px !important;
+  height: 477px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
 /* 카드 내부 텍스트 */
 .card-title,
 .card-desc {
@@ -142,6 +168,25 @@
   background-color: transparent !important; /* 🔹 검은 배경이 생기지 않도록 강제 설정 */
   text-shadow: 0 0 0 white; /* 🔹 폰트 번짐 방지 */
   mix-blend-mode: normal; /* 🔹 배경과 글자 색상 자연스럽게 블렌딩 */
+}
+
+.btnF-disabled {
+  width: 320px;
+  height: 60px;
+  padding: 12px;
+  color: rgb(137, 149, 171);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: 0%;
+  text-align: center;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: white;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+  margin-bottom: 5px;
 }
 
 /* 버튼 */

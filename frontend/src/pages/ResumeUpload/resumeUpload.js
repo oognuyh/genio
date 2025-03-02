@@ -278,6 +278,7 @@ const ResumeUpload = () => {
           <button
             className={`upload-btn ${file ? "uploaded" : ""}`}
             onClick={onGenerateKit}
+            disabled={!file}
           >
             다음
           </button>

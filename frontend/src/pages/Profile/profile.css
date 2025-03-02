@@ -288,6 +288,26 @@ textarea.invalid {
     box-shadow 0.3s;
 }
 
+.next-btn-disabled {
+  display: block;
+  margin: 40px auto 0 auto; /* 중앙 정렬 */
+  width: 320px;
+  height: 60px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #eceff4;
+  color: #8995ab;
+  font-weight: bold;
+  font-family: "Pretendard", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 140%;
+  text-align: center;
+  transition: background 0.3s ease-in-out, transform 0.3s ease-in-out,
+    box-shadow 0.3s;
+}
+
 /* 🔹 버튼 호버 효과 */
 .next-btn:hover {
   transform: scale(1.05);

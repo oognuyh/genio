@@ -5,11 +5,9 @@ import bgImage from "../../assets/resumeCheck-background.png";
 import bt1Image from "../../assets/resume-button.png";
 import bt2Image from "../../assets/direct-button.png";
 import "./resumeCheck.css";
-import popCloseImage from "../../assets/popup-close.png";
 
 const ResumeCheck = () => {
   const navigate = useNavigate();
-  const [isDirectWayClicked, setIsDirectWayClicked] = useState(false)
 
   return (
     <div
@@ -46,9 +44,9 @@ const ResumeCheck = () => {
           </div>
 
           {/* 두 번째 카드 */}
-          <div className="card">
+          <div className="card-disabled">
             <img src={bt2Image} alt="Manual Entry" />
-            <button onClick={() => setIsDirectWayClicked(true)} className="btnF">
+            <button className="btnF-disabled">
               직접 입력하기
             </button>
             <p className="card-desc">
@@ -56,18 +54,6 @@ const ResumeCheck = () => {
             </p>
           </div>
         </div>
-         {isDirectWayClicked && (
-            <div className="popup-overlay">
-              <div className="popup-save-content">
-                <h3 className="popup-intro2">직접 입력 기능은 준비중이에요.</h3>
-                <button
-                  onClick={() => setIsDirectWayClicked(false)}
-                  className="popup-close-button">
-                  <img src={popCloseImage} width="20px" height="20px" alt="close" />
-                </button>
-              </div>
-            </div>
-          )}
       </div>
     </div>
   );
