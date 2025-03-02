@@ -106,7 +106,7 @@ const SplashScreen = () => {
               whileTap={{ scale: 0.9 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              키트 생성 시작하기
+              시작하기
             </motion.button>
           </div>
         )}
