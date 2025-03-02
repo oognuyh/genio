@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import bgImage from "../../assets/resumeCheck-background.png";
@@ -44,9 +44,9 @@ const ResumeCheck = () => {
           </div>
 
           {/* 두 번째 카드 */}
-          <div className="card">
+          <div className="card-disabled">
             <img src={bt2Image} alt="Manual Entry" />
-            <button onClick={() => navigate("")} className="btnF">
+            <button className="btnF-disabled">
               직접 입력하기
             </button>
             <p className="card-desc">

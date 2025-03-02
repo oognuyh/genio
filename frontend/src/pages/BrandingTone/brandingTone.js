@@ -161,7 +161,7 @@ const BrandingTone = () => {
             마지막으로 브랜딩 톤을 선택해주세요.
           </h2>
           <p className="sub-text">
-            원하는 브랜딩 톤을 선택하세요. 제니오가 느낌을 잘 살려볼게요!
+            원하는 브랜딩 톤을 1개 골라주세요. 제니오가 느낌을 잘 살려볼게요!
           </p>
 
           <div className="branding-tone-list">

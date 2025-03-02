@@ -118,6 +118,32 @@
   transition: filter 0.3s ease-in-out;
 }
 
+.card-disabled img {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 70.03px;
+  margin-top: 100px;
+  transition: filter 0.3s ease-in-out;
+}
+
+.card-disabled {
+  background: #eceff4;
+  padding: 30px;
+  border-radius: 16px;
+  width: 455px !important;
+  height: 477px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
 /* 카드 내부 텍스트 */
 .card-title,
 .card-desc {
@@ -142,6 +168,25 @@
   background-color: transparent !important; /* 🔹 검은 배경이 생기지 않도록 강제 설정 */
   text-shadow: 0 0 0 white; /* 🔹 폰트 번짐 방지 */
   mix-blend-mode: normal; /* 🔹 배경과 글자 색상 자연스럽게 블렌딩 */
+}
+
+.btnF-disabled {
+  width: 320px;
+  height: 60px;
+  padding: 12px;
+  color: rgb(137, 149, 171);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: 0%;
+  text-align: center;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: white;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+  margin-bottom: 5px;
 }
 
 /* 버튼 */
@@ -258,4 +303,91 @@
     height: 45px;
     font-size: 14px;
   }
+}
+
+/* 팝업 */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(23, 23, 23, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-save-content {
+  /* 부모 컨테이너에 relative 추가 */
+  position: relative;
+  width: 512px;
+  max-height: 70vh;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  background-color: #fff;
+}
+
+.popup-close-button {
+  position: absolute;
+  /* 절대 위치 지정 */
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  padding: 3px 3px 0px 3px;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.popup-close-button:hover {
+  background: #eee;
+}
+
+.popup-intro1 {
+  margin: 0;
+  margin-top: 80px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 150%;
+  color: #455473;
+}
+
+.popup-intro2 {
+  margin: 50px 0;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 150%;
+  color: #455473;
+}
+
+.popup-back-button {
+  width: 282px;
+  height: 68px;
+  margin: 40px;
+  padding: 12px;
+  background: #121d31;
+  font-size: 18px;
+  font-weight: 750;
+  color: white;
+  border: none;
+  border-radius: 36px;
+  cursor: pointer;
+}
+
+.popup-back-button:hover {
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(258.21deg,
+      #121d31 -85.49%,
+      #0e1221 -58.12%,
+      #455473 -30.76%,
+      #8995ab -3.39%,
+      #455473 39.61%,
+      #0e1221 78.7%,
+      #121d31 106.07%);
+  animation: gradientMove 3s infinite linear;
 }

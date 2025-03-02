@@ -48,6 +48,23 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
+    const newValidity = {
+      name: resumeData.name?.trim().length > 0,
+      position: resumeData.position?.trim().length > 0,
+      experience: resumeData.experience?.trim().length > 0 && resumeData.experience.trim().length <= 1000,
+    };
+
+    setIsValid(newValidity)
+
+    console.log(resumeData.experience?.trim().length )
+    console.log( resumeData.experience?.trim().length > 0 && resumeData.experience.trim().length <= 1000)
+    if (resumeData.experience?.length > 0) {
+      
+      setCharCount(resumeData.experience.length)
+    }
+  }, [resumeData])
+
+  useEffect(() => {
     if (!isCategoryLoaded || !resumeData.jobCategory) return;
 
     const selectedCategory = categoryInfo.find(
@@ -261,7 +278,7 @@ const Profile = () => {
                 className={isValid.experience ? "" : "invalid"}
               />
               <div className="char-count-container">
-                {charCount >= 1000 && (
+                {charCount >= 800 && (
                   <span className="char-warning">
                     주요 경험은 최대 1,000자까지 작성 가능해요!
                   </span>
@@ -273,7 +290,7 @@ const Profile = () => {
         </div>
 
         <button
-          className="next-btn"
+          className={`next-btn${Object.values(isValid).every(isValid => isValid) ? '' : '-disabled'}`}
           onClick={onNextClick}
           disabled={charCount > 1000}
         >
