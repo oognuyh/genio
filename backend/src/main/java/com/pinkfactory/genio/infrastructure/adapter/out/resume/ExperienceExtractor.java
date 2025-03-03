@@ -69,7 +69,7 @@ public class ExperienceExtractor implements NodeAction<State> {
                             .toUserMessage(),
                     AiMessage.from(
                             """
-                    생각: 사용자의 이력서에 대한 분석이 끝났다. 사용자를 가장 돋보일 수 있는 5개의 프로젝트를 주어진 형식에 맞춰 최신순으로 추출해야 겠다.
+                    생각: 사용자의 이력서에 대한 분석이 끝났다. 이력서에 있는 내용을 기반으로 사용자를 가장 돋보일 수 있는 최대 5개의 프로젝트를 주어진 형식에 맞춰 최신순으로 추출해야 겠다.
                     추출 결과:
                     """));
 

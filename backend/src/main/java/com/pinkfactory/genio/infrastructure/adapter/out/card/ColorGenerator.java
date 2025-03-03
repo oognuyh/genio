@@ -60,7 +60,7 @@ public class ColorGenerator implements NodeAction<State> {
                         .toUserMessage(),
                 PromptTemplate.of(
                                 """
-                        생각: "{{ resume.tone.title }} - {{ resume.tone.description }}"에 맞춰 생성해야 겠다. 또한, 어울리는 색상 5개를 형식에 맞춰 생성해야 겠다.
+                        생각: "{{ resume.tone.title }} - {{ resume.tone.description }}"에 맞춰 생성해야 겠다. 또한, 흰색/검은 계열을 제외하고 어울리는 색상 5개를 형식에 맞춰 생성해야 겠다.
                         생성 결과:
                         """)
                         .apply(Map.of("resume", state.resume()))
