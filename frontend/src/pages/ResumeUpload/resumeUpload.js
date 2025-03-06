@@ -31,16 +31,24 @@ const ResumeUpload = () => {
   
       setIsLoading(true);
       console.log("[onGenerateKit] Selected file:", file);
-      
-      // WebSocket 및 상태 관리
-      let socket = null;
+
+      const formData = new FormData()
+
+      formData.append('file', file)
+
+      const response = await fetch(`/api/v1/resumes/stream`, {
+        method: 'POST',
+        body: formData
+      })
+      const reader = response.body
+        .pipeThrough(new TextDecoderStream())
+        .getReader();
+
       const messageQueue = [];
       let isProcessing = false;
       
-      // 지연 함수
       const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
       
-      // 메시지 처리 함수
       const processMessageQueue = async () => {
         if (isProcessing || messageQueue.length === 0) return;
         
@@ -50,24 +58,19 @@ const ResumeUpload = () => {
           const data = messageQueue.shift();
           
           try {
+
             const response = JSON.parse(data);
+
             console.log("파싱된 객체:", response);
             
-            // 메시지 표시
             setProgessMessage(response.message);
             
-            // 메시지 타입에 따른 처리
             if (response.type === 'completed' || response.type === 'failed') {
-              // 마지막 메시지 표시를 위한 딜레이
+  
               await delay(1500);
-              
-              // 소켓 종료 및 로딩 상태 해제
-              if (socket && socket.readyState === WebSocket.OPEN) {
-                socket.close();
-              }
+
               setIsLoading(false);
               
-              // completed인 경우 페이지 이동
               if (response.type === 'completed' && response.result) {
                 navigate("/profile", { state: response.result });
               }
@@ -75,7 +78,6 @@ const ResumeUpload = () => {
               break;
             }
             
-            // running 메시지는 딜레이 후 다음 처리
             await delay(1500);
             
           } catch (err) {
@@ -83,9 +85,6 @@ const ResumeUpload = () => {
             setProgessMessage("알 수 없는 오류가 발생했어요. 다시 시도해주세요.");
             await delay(1500);
             
-            if (socket && socket.readyState === WebSocket.OPEN) {
-              socket.close();
-            }
             setIsLoading(false);
             break;
           }
@@ -94,45 +93,28 @@ const ResumeUpload = () => {
         isProcessing = false;
       };
       
-      // WebSocket 연결 및 이벤트 핸들러 설정
-      socket = new WebSocket( `${window.location.protocol === "https:" ? "wss" : "ws"}://${window.location.host}/api/v1/resumes/stream`);
-      
-      socket.onopen = () => {
-        console.log("WebSocket 연결됨");
+      let buffer = '';
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        buffer += value;
+  
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || ''; 
         
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          console.log("파일 읽기 완료, 전송 시작");
-          socket.send(e.target.result);
-        };
-        reader.onerror = (error) => {
-          console.error("파일 읽기 오류:", error);
-          setProgessMessage("파일을 읽는 중 오류가 발생했어요.");
-          setIsLoading(false);
-        };
-        reader.readAsArrayBuffer(file);
-      };
-      
-      socket.onmessage = (event) => {
-        if (typeof event.data === 'string') {
-          console.log("메시지 수신");
-          messageQueue.push(event.data);
-          if (!isProcessing) {
-            processMessageQueue();
+        for (const line of lines) {
+          console.log(line)
+          if (line.startsWith('data:')) {
+              
+            messageQueue.push(line.substring(5));
           }
         }
-      };
-      
-      socket.onerror = (error) => {
-        console.error("WebSocket 오류:", error);
-        setProgessMessage("연결 중 오류가 발생했어요.");
-        setIsLoading(false);
-      };
-      
-      socket.onclose = (event) => {
-        console.log("WebSocket 연결 종료:", event.code, event.reason);
-      };
-      
+        if (!isProcessing) {
+          processMessageQueue();
+        }
+      }      
     } catch (err) {
       console.error("[onGenerateKit] 이력서 분석 중 오류 발생:", err);
       setIsLoading(false);
