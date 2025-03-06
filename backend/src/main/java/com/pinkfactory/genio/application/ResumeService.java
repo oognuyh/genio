@@ -4,7 +4,7 @@ import com.pinkfactory.genio.domain.Resume;
 import com.pinkfactory.genio.infrastructure.util.IDGenerator;
 import com.pinkfactory.genio.infrastructure.websocket.Event;
 import com.pinkfactory.genio.infrastructure.websocket.Event.EventType;
-import com.pinkfactory.genio.infrastructure.websocket.WebSocketSessionRegistry;
+import com.pinkfactory.genio.infrastructure.websocket.SseEmitterRegistry;
 import com.pinkfactory.genio.port.in.ExtractResumeUseCase;
 import com.pinkfactory.genio.port.out.MimeTypeDetector;
 import com.pinkfactory.genio.port.out.ResumeExtractor;
@@ -31,7 +31,7 @@ public class ResumeService implements ExtractResumeUseCase {
 
     private final TokenEstimator estimator;
 
-    private final WebSocketSessionRegistry registry;
+    private final SseEmitterRegistry registry;
 
     @Override
     @SneakyThrows({InterruptedException.class})

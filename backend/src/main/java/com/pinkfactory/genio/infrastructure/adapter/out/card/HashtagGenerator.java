@@ -5,7 +5,7 @@ import com.pinkfactory.genio.infrastructure.langchain4j.PromptTemplate;
 import com.pinkfactory.genio.infrastructure.util.JsonUtil;
 import com.pinkfactory.genio.infrastructure.websocket.Event;
 import com.pinkfactory.genio.infrastructure.websocket.Event.EventType;
-import com.pinkfactory.genio.infrastructure.websocket.WebSocketSessionRegistry;
+import com.pinkfactory.genio.infrastructure.websocket.SseEmitterRegistry;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ public class HashtagGenerator implements NodeAction<State> {
 
     private final PromptTemplate template = PromptTemplate.of("classpath:prompts/hashtag-generator.md");
 
-    private final WebSocketSessionRegistry registry;
+    private final SseEmitterRegistry registry;
 
     @Override
     public Map<String, Object> apply(State state) {
