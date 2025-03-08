@@ -1,18 +1,18 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import { FileProvider } from "./contexts/FileContext";
 
-import SplashScreen from "./pages/SplashScreen/splashScreen";
-import ResumeCheck from "./pages/ResumeCheck/resumeCheck";
-import ResumeUpload from "./pages/ResumeUpload/resumeUpload";
+import Loading2 from "./components/loading2";
+import LoadingScreen from "./components/loadingScreen";
 import ResumeNo from "./components/ResumeNo";
 import BrandingResult from "./pages/BrandingResult/brandingResult";
-import LoadingScreen from "./components/loadingScreen";
-import Profile from "./pages/Profile/profile";
-import Strengths from "./pages/Strengths/strengths";
 import BrandingTone from "./pages/BrandingTone/brandingTone";
-import Loading2 from "./components/loading2";
+import Profile from "./pages/Profile/profile";
+import ResumeCheck from "./pages/ResumeCheck/resumeCheck";
+import ResumeUpload from "./pages/ResumeUpload/resumeUpload";
+import SplashScreen from "./pages/SplashScreen/splashScreen";
+import Strengths from "./pages/Strengths/strengths";
 
 function App() {
   return (
