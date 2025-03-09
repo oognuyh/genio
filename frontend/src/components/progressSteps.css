@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 32px 0;
+  padding: 3.3vh 0;
   font-family: Arial, sans-serif;
   position: fixed;
   top: 0;
@@ -14,13 +14,15 @@
 /* ✅ 진행 단계를 한 줄로 배치 (좌우 마진 320px 추가) */
 .step-wrapper {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: calc(100% - 640px); /* 🔹 좌우 마진 320px (총 640px) */
+  width: 65vw;
+  /* 🔹 좌우 마진 320px (총 640px) */
+  margin: auto;
   max-width: 1280px;
   position: relative;
-  padding: 0 40px;
-  gap: 90px; /* 🔹 각 스텝 간 간격 90px */
+  padding: 0 0;
+  gap: 5vw;
+  /* 🔹 각 스텝 간 간격 90px */
 }
 
 /* ✅ 개별 단계 */
@@ -83,10 +85,10 @@
 }
 
 /* ✅ 현재 단계와 이전 단계까지 텍스트 강조 */
+.step-text,
 .step.completed .step-text,
 .step.current .step-text {
   color: rgb(69, 84, 115);
-  font-family: Pretendard;
   font-size: 18px;
   font-weight: 600;
   line-height: 160%;
@@ -98,21 +100,27 @@
   background-color: #121d31;
 }
 
-/* ✅ 반응형 - 작은 화면에서 스텝 간격 및 마진 조정 */
-@media (max-width: 1024px) {
-  .step-wrapper {
-    width: calc(100% - 160px); /* 🔹 좌우 마진 80px씩 */
-    gap: 70px; /* 🔹 스텝 간 간격 축소 */
+@media (min-width: 1279px) and (max-width: 1460px) {
+  .step-text,
+  .step.completed .step-text,
+  .step.current .step-text {
+    width: 6vw;
+    text-align: left;
+    font-size: 16.5px;
   }
 }
 
-@media (max-width: 768px) {
+/* ✅ 반응형 - 작은 화면에서 스텝 간격 및 마진 조정 */
+@media (min-width: 769px) and (max-width: 1279px) {
   .step-wrapper {
-    width: calc(100% - 60px); /* 🔹 좌우 마진 30px씩 */
-    gap: 50px; /* 🔹 모바일에서 스텝 간격 축소 */
+    width: calc(100% - 160px);
+    /* 🔹 좌우 마진 80px씩 */
+    gap: 60px;
+    /* 🔹 스텝 간 간격 축소 */
   }
 
   .step {
+    flex-direction: column;
     font-size: 16px;
   }
 
@@ -120,5 +128,45 @@
     width: 28px;
     height: 28px;
     font-size: 14px;
+  }
+
+  .step-icon {
+    width: 10px;
+    height: 10px;
+  }
+
+  .step-text,
+  .step.completed .step-text,
+  .step.current .step-text {
+    font-size: 16.5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .step-wrapper {
+    width: calc(100% - 60px);
+    /* 🔹 좌우 마진 30px씩 */
+  }
+
+  .step {
+    flex-direction: column;
+    font-size: 16px;
+  }
+
+  .step-number {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .step-icon {
+    width: 9px;
+    height: 9px;
+  }
+
+  .step-text,
+  .step.completed .step-text,
+  .step.current .step-text {
+    visibility: hidden;
   }
 }
