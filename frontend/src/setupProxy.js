@@ -7,8 +7,9 @@ module.exports = function(app) {
     createProxyMiddleware({
       target: 'https://dev.oognuyh.com/api',
       changeOrigin: true,
-      buffer: false,
-      selfHandleResponse: false
+      pathRewrite: {
+        '^/api': '' // '/api'를 ''로 치환
+      }
     })
   );
 };

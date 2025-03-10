@@ -26,12 +26,17 @@ const Profile = () => {
   );
   const [isCategoryLoaded, setIsCategoryLoaded] = useState(false);
 
-  // 유효성 검사 상태
+  // 유효성 검사 상태 (영문이름, stage 필드 추가)
   const [isValid, setIsValid] = useState({
     name: true,
+    englishName: true,
     position: true,
     experience: true,
+    stage: true,
   });
+
+  // 직접입력 모드 여부 (타이틀 select 대신 input 렌더링)
+  const [isCustomStage, setIsCustomStage] = useState(false);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -48,21 +53,23 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
+    // resumeData 변경 시 모든 필드에 대해 유효성 검사 (englishName, stage 포함)
     const newValidity = {
       name: resumeData.name?.trim().length > 0,
+      englishName: resumeData.englishName?.trim().length > 0,
       position: resumeData.position?.trim().length > 0,
-      experience: resumeData.experience?.trim().length > 0 && resumeData.experience.trim().length <= 1000,
+      experience:
+        resumeData.experience?.trim().length > 0 &&
+        resumeData.experience.trim().length <= 3000,
+      stage: resumeData.stage?.trim().length > 0,
     };
 
-    setIsValid(newValidity)
+    setIsValid(newValidity);
 
-    console.log(resumeData.experience?.trim().length )
-    console.log( resumeData.experience?.trim().length > 0 && resumeData.experience.trim().length <= 1000)
     if (resumeData.experience?.length > 0) {
-      
-      setCharCount(resumeData.experience.length)
+      setCharCount(resumeData.experience.length);
     }
-  }, [resumeData])
+  }, [resumeData]);
 
   useEffect(() => {
     if (!isCategoryLoaded || !resumeData.jobCategory) return;
@@ -87,9 +94,25 @@ const Profile = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "experience") {
-      // if (value.length > 1000) return; // 🔹 1000자 제한
-
+    if (name === "stage") {
+      // stage 필드는 select와 input으로 나뉨
+      if (e.target.tagName === "SELECT") {
+        if (value === "custom") {
+          setIsCustomStage(true);
+          setResumeData((prev) => ({ ...prev, stage: "" }));
+          setIsValid((prev) => ({ ...prev, stage: false }));
+        } else {
+          setIsCustomStage(false);
+          setResumeData((prev) => ({ ...prev, stage: value }));
+          setIsValid((prev) => ({ ...prev, stage: true }));
+        }
+      } else {
+        // 직접입력 input인 경우
+        setResumeData((prev) => ({ ...prev, stage: value }));
+        setIsValid((prev) => ({ ...prev, stage: value.trim().length > 0 }));
+      }
+      return; // stage 필드는 여기서 처리하고 종료
+    } else if (name === "experience") {
       // 🔹 textarea 높이 자동 조절
       const textarea = e.target;
       textarea.style.height = "auto";
@@ -97,13 +120,14 @@ const Profile = () => {
 
       setResumeData((prev) => {
         const updatedData = { ...prev, [name]: value };
-        setCharCount(updatedData.experience.length); // 🔹 글자 수 업데이트
+        setCharCount(updatedData.experience.length); // 글자 수 업데이트
         return updatedData;
       });
     } else {
       setResumeData((prev) => ({ ...prev, [name]: value }));
     }
 
+    // stage 외의 필드에 대한 유효성 업데이트
     setIsValid((prev) => ({
       ...prev,
       [name]: value.trim().length > 0,
@@ -126,7 +150,7 @@ const Profile = () => {
       const beforeCursor = currentText.substring(0, selectionStart);
       const afterCursor = currentText.substring(selectionEnd);
 
-      const availableSpace = 1000 - currentText.length;
+      const availableSpace = 3000 - currentText.length;
       newPastedText = pastedText.substring(0, availableSpace);
 
       const finalText = beforeCursor + newPastedText + afterCursor;
@@ -139,7 +163,7 @@ const Profile = () => {
         const updatedExperience = prev.experience || "";
         textarea.selectionStart = selectionStart + newPastedText.length;
         textarea.selectionEnd = selectionStart + newPastedText.length;
-        setCharCount(updatedExperience.length); // 🔹 글자 수 업데이트
+        setCharCount(updatedExperience.length); // 글자 수 업데이트
         return { ...prev, experience: updatedExperience };
       });
     }, 0);
@@ -169,15 +193,17 @@ const Profile = () => {
   };
 
   const onNextClick = () => {
-    if (charCount > 1000) return; // 🔹 1000자 초과 시 아무 동작 안 함
+    if (charCount > 3000) return; // 3000자 초과 시 아무 동작 안 함
 
     resumeData.skillSet = selectedSkills;
 
-    // 🔹 빈 필드 체크
+    // 🔹 빈 필드 체크 (englishName, stage 추가)
     const newValidity = {
       name: resumeData.name?.trim().length > 0,
+      englishName: resumeData.englishName?.trim().length > 0,
       position: resumeData.position?.trim().length > 0,
       experience: resumeData.experience?.trim().length > 0,
+      stage: resumeData.stage?.trim().length > 0,
     };
 
     setIsValid(newValidity);
@@ -201,7 +227,7 @@ const Profile = () => {
         <div className="form-container">
           {/* 왼쪽 패널 */}
           <div className="left-panel">
-            <div className="input-group">
+            <div className="input-group double-input">
               <label>이름</label>
               <input
                 type="text"
@@ -210,7 +236,16 @@ const Profile = () => {
                 onChange={handleChange}
                 className={isValid.name ? "" : "invalid"}
               />
+              <input
+                type="text"
+                name="englishName"
+                placeholder="영문이름"
+                value={resumeData.englishName || ""}
+                onChange={handleChange}
+                className={isValid.englishName ? "" : "invalid"}
+              />
             </div>
+
             <div className="input-group">
               <label>직군</label>
               <select
@@ -227,19 +262,32 @@ const Profile = () => {
             </div>
             <div className="input-group title-group">
               <label>타이틀</label>
-              <select
-                name="stage"
-                value={resumeData.stage || ""}
-                onChange={handleChange}
-              >
-                <option value="취준생">취준생</option>
-                <option value="신입">신입</option>
-                {[...Array(10)].map((_, i) => (
-                  <option key={i} value={`${i + 1}년차`}>{`${
-                    i + 1
-                  }년차`}</option>
-                ))}
-              </select>
+              {/* stage 필드: 직접입력 모드에 따라 select 또는 input 렌더링 */}
+              {isCustomStage ? (
+                <input
+                  type="text"
+                  name="stage"
+                  value={resumeData.stage || ""}
+                  onChange={handleChange}
+                  className={isValid.stage ? "" : "invalid"}
+                />
+              ) : (
+                <select
+                  name="stage"
+                  value={resumeData.stage || ""}
+                  onChange={handleChange}
+                  className={isValid.stage ? "" : "invalid"}
+                >
+                  <option value="취준생">취준생</option>
+                  <option value="신입">신입</option>
+                  {[...Array(10)].map((_, i) => (
+                    <option key={i} value={`${i + 1}년차`}>
+                      {`${i + 1}년차`}
+                    </option>
+                  ))}
+                  <option value="custom">직접입력</option>
+                </select>
+              )}
               <input
                 type="text"
                 name="position"
@@ -278,21 +326,25 @@ const Profile = () => {
                 className={isValid.experience ? "" : "invalid"}
               />
               <div className="char-count-container">
-                {charCount >= 800 && (
+                {charCount >= 2800 && (
                   <span className="char-warning">
-                    주요 경험은 최대 1,000자까지 작성 가능해요!
+                    주요 경험은 최대 3,000자까지 작성 가능해요!
                   </span>
                 )}
-                <span className="char-count">{charCount}/1000자</span>
+                <span className="char-count">{charCount}/3000</span>
               </div>
             </div>
           </div>
         </div>
 
         <button
-          className={`next-btn${Object.values(isValid).every(isValid => isValid) ? '' : '-disabled'}`}
+          className={`next-btn${
+            Object.values(isValid).every((valid) => valid) ? "" : "-disabled"
+          }`}
           onClick={onNextClick}
-          disabled={charCount > 1000}
+          disabled={
+            charCount > 3000 || !Object.values(isValid).every((valid) => valid)
+          }
         >
           다음
         </button>
