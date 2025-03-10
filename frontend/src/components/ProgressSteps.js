@@ -18,11 +18,16 @@ const ProgressSteps = ({ currentStep }) => {
           <div
             key={index}
             className={`step ${index < currentStep ? "completed" : ""} ${
-              index === currentStep ? "current" : ""
+              index + 1 === currentStep ? "current" : ""
+            } ${
+              index + 1 === 1 ? " first" : ""
+            } ${
+              index + 1 === steps.length ? " last" : ""
             }`}
           >
-            {index < currentStep ? (
-              <img src={checkWhiteIcon} alt="완료" className="step-icon" />
+            {index + 1 < currentStep ? (
+              // <img src={checkWhiteIcon} alt="완료" className="step-icon" />
+              <span className="step-icon">✓</span>
             ) : (
               <span className="step-number">{index + 1}</span>
             )}

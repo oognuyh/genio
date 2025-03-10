@@ -8,6 +8,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  background-color: #f8f8f8;
   z-index: 1000;
 }
 
@@ -59,12 +60,34 @@
 
 /* ✅ 체크 아이콘 스타일 */
 .step-icon {
-  width: 15px;
-  height: 15px;
-  background-color: #121d31;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  padding: 9px;
+  background-color: #121d31;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  z-index: 1;
+  transition: background 0.3s, color 0.3s;
 }
+
+/* .step-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #121d31;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  z-index: 1;
+  transition: background 0.3s, color 0.3s;
+} */
 
 /* ✅ 이미 지난 단계는 숫자를 숨기고 체크 아이콘 표시 */
 .step.completed .step-number {
@@ -78,6 +101,7 @@
 /* ✅ 현재 단계는 숫자를 유지하고 체크 아이콘 숨김 */
 .step.current .step-number {
   display: flex;
+  background-color: #455473;
 }
 
 .step.current .step-icon {
@@ -112,6 +136,10 @@
 
 /* ✅ 반응형 - 작은 화면에서 스텝 간격 및 마진 조정 */
 @media (min-width: 769px) and (max-width: 1279px) {
+  .progress-container {
+    padding: 1.6vh 0;
+  }
+
   .step-wrapper {
     width: calc(100% - 160px);
     /* 🔹 좌우 마진 80px씩 */
@@ -131,21 +159,28 @@
   }
 
   .step-icon {
-    width: 10px;
-    height: 10px;
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
   }
 
   .step-text,
   .step.completed .step-text,
   .step.current .step-text {
-    font-size: 16.5px;
+    font-size: 16px;
   }
 }
 
 @media (max-width: 768px) {
+  .progress-container {
+    padding: 1.8vh 0px;
+  }
+
   .step-wrapper {
-    width: calc(100% - 60px);
+    width: 90vw;
     /* 🔹 좌우 마진 30px씩 */
+    margin: 0;
+    gap: 0;
   }
 
   .step {
@@ -154,19 +189,64 @@
   }
 
   .step-number {
-    width: 28px;
-    height: 28px;
-    font-size: 14px;
+    width: 18vw;
+    height: 7px;
+    font-size: 0px;
+    border-radius: 0;
+    margin-top: 40px;
+    background-color: #ECEFF4;
   }
 
+  .step.last .step-number {
+    border-radius: 0;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .step.first .step-number,
+  .step.first .step-icon {
+    border-radius: 0;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+  
   .step-icon {
-    width: 9px;
-    height: 9px;
+    width: 18vw;
+    height: 7px;
+    font-size: 0px;
+    border-radius: 0;
+    margin-top: 40px;
+    background-color: #455473;
   }
 
-  .step-text,
-  .step.completed .step-text,
+  .step-text {
+    display: none;
+  }
+
   .step.current .step-text {
-    visibility: hidden;
+    display: flex;
+    width: 92px;
+    position: fixed;
+    left: 50vw;
+    transform: translate(-46px, 0);
+    font-size: 20px;
   }
 }
+
+/* .step-number {
+  width: 18vw;
+  height: 7px;
+  font-size: 0px;
+  border-radius: 5%;
+  margin-top: 40px;
+  background-color: #ECEFF4;
+}
+
+.step-icon {
+  width: 18vw;
+  height: 7px;
+  font-size: 0px;
+  border-radius: 5%;
+  margin-top: 40px;
+  background-color: #455473;
+} */
