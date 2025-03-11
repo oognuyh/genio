@@ -82,7 +82,11 @@ const ResumeCheck = () => {
 
           <Card>
             <Card.Image src={bt2Image} alt="Manual Entry" />
-            <Card.Button onClick={() => navigate("/profile")}>
+            <Card.Button
+              onClick={() =>
+                navigate("/profile", { state: { jobCategory: "개발" } })
+              }
+            >
               직접 입력하기
             </Card.Button>
             <Card.Description>

@@ -6,6 +6,62 @@ import ProgressSteps from "../../components/ProgressSteps";
 
 import "./profile.css";
 
+/* =========================
+   유효성 검사 관련 함수들
+========================= */
+
+/**
+ * 부분 자모(초성/중성/종성) 검사 정규식
+ * U+1100 ~ U+11FF 범위
+ */
+const partialJamoRegex = /[\u1100-\u11FF]/;
+
+/**
+ * 완성된 한글(가-힣)만 허용 (공백 가능)
+ * ^[가-힣\s]+$
+ */
+const fullHangulRegex = /^[가-힣\s]+$/;
+
+/**
+ * 영문만 허용 (공백 가능)
+ * ^[A-Za-z\s]+$
+ */
+const englishRegex = /^[A-Za-z\s]+$/;
+
+/**
+ * 한글 이름/position 유효성 검사:
+ * 1) 부분 자모가 있으면 => "정자로 입력해주세요."
+ * 2) 숫자, 영문, 특수문자 => "숫자, 영문, 특수문자는 입력할 수 없어요."
+ */
+function validateKoreanField(value) {
+  if (!value.trim()) return ""; // 빈 값이면 별도 처리 X
+
+  // 1) 부분 자모(초성/중성/종성) 검사
+  if (partialJamoRegex.test(value)) {
+    return "정자로 입력해주세요.";
+  }
+
+  // 2) 완성형 한글(공백 포함)만 허용
+  if (!fullHangulRegex.test(value)) {
+    return "숫자, 영문, 특수문자는 입력할 수 없어요.";
+  }
+  return "";
+}
+
+/**
+ * 영문 이름 필드 유효성 검사:
+ * 한글이 섞이면 => "영문만 입력해주세요."
+ * (숫자/특수문자도 허용하지 않는다고 가정)
+ */
+function validateEnglishField(value) {
+  if (!value.trim()) return ""; // 빈 값이면 별도 처리 X
+
+  if (!englishRegex.test(value)) {
+    return "영문만 입력해주세요.";
+  }
+  return "";
+}
+
 const Profile = () => {
   const currentStep = 2;
 
@@ -35,6 +91,13 @@ const Profile = () => {
     stage: true,
   });
 
+  // 각 필드별 에러 메시지 상태
+  const [fieldErrors, setFieldErrors] = useState({
+    name: "",
+    englishName: "",
+    position: "",
+  });
+
   // 직접입력 모드 여부 (타이틀 select 대신 input 렌더링)
   const [isCustomStage, setIsCustomStage] = useState(false);
 
@@ -55,9 +118,10 @@ const Profile = () => {
   useEffect(() => {
     // resumeData 변경 시 모든 필드에 대해 유효성 검사 (englishName, stage 포함)
     const newValidity = {
-      name: resumeData.name?.trim().length > 0,
-      englishName: resumeData.englishName?.trim().length > 0,
-      position: resumeData.position?.trim().length > 0,
+      name: resumeData.name?.trim().length > 0 && !fieldErrors.name,
+      englishName:
+        resumeData.englishName?.trim().length > 0 && !fieldErrors.englishName,
+      position: resumeData.position?.trim().length > 0 && !fieldErrors.position,
       experience:
         resumeData.experience?.trim().length > 0 &&
         resumeData.experience.trim().length <= 3000,
@@ -69,7 +133,7 @@ const Profile = () => {
     if (resumeData.experience?.length > 0) {
       setCharCount(resumeData.experience.length);
     }
-  }, [resumeData]);
+  }, [resumeData, fieldErrors]);
 
   useEffect(() => {
     if (!isCategoryLoaded || !resumeData.jobCategory) return;
@@ -93,6 +157,22 @@ const Profile = () => {
   // 입력 필드 값 변경 핸들러 (즉시 유효성 검사)
   const handleChange = (e) => {
     const { name, value } = e.target;
+    let errorMsg = "";
+
+    // 필드별로 별도 유효성 검사
+    if (name === "name") {
+      // 한글 이름 필드
+      errorMsg = validateKoreanField(value);
+      setFieldErrors((prev) => ({ ...prev, name: errorMsg }));
+    } else if (name === "englishName") {
+      // 영문 이름 필드
+      errorMsg = validateEnglishField(value);
+      setFieldErrors((prev) => ({ ...prev, englishName: errorMsg }));
+    } else if (name === "position") {
+      // position 필드도 한글만 허용
+      errorMsg = validateKoreanField(value);
+      setFieldErrors((prev) => ({ ...prev, position: errorMsg }));
+    }
 
     if (name === "stage") {
       // stage 필드는 select와 input으로 나뉨
@@ -111,7 +191,7 @@ const Profile = () => {
         setResumeData((prev) => ({ ...prev, stage: value }));
         setIsValid((prev) => ({ ...prev, stage: value.trim().length > 0 }));
       }
-      return; // stage 필드는 여기서 처리하고 종료
+      return;
     } else if (name === "experience") {
       // 🔹 textarea 높이 자동 조절
       const textarea = e.target;
@@ -124,14 +204,9 @@ const Profile = () => {
         return updatedData;
       });
     } else {
+      // 일반 텍스트 필드
       setResumeData((prev) => ({ ...prev, [name]: value }));
     }
-
-    // stage 외의 필드에 대한 유효성 업데이트
-    setIsValid((prev) => ({
-      ...prev,
-      [name]: value.trim().length > 0,
-    }));
   };
 
   // 🔹 Ctrl+V(붙여넣기) 이벤트 추가
@@ -197,11 +272,12 @@ const Profile = () => {
 
     resumeData.skillSet = selectedSkills;
 
-    // 🔹 빈 필드 체크 (englishName, stage 추가)
+    // 🔹 빈 필드 체크 + 에러 메시지 체크
     const newValidity = {
-      name: resumeData.name?.trim().length > 0,
-      englishName: resumeData.englishName?.trim().length > 0,
-      position: resumeData.position?.trim().length > 0,
+      name: resumeData.name?.trim().length > 0 && !fieldErrors.name,
+      englishName:
+        resumeData.englishName?.trim().length > 0 && !fieldErrors.englishName,
+      position: resumeData.position?.trim().length > 0 && !fieldErrors.position,
       experience: resumeData.experience?.trim().length > 0,
       stage: resumeData.stage?.trim().length > 0,
     };
@@ -227,29 +303,52 @@ const Profile = () => {
         <div className="form-container">
           {/* 왼쪽 패널 */}
           <div className="left-panel">
+            {/* 이름 + 영문이름 (double-input) */}
             <div className="input-group double-input">
               <label>이름</label>
-              <input
-                type="text"
-                name="name"
-                value={resumeData.name || ""}
-                onChange={handleChange}
-                className={isValid.name ? "" : "invalid"}
-              />
-              <input
-                type="text"
-                name="englishName"
-                placeholder="영문이름"
-                value={resumeData.englishName || ""}
-                onChange={handleChange}
-                className={isValid.englishName ? "" : "invalid"}
-              />
+
+              {/* 두 필드를 나란히 배치할 컨테이너 */}
+              <div className="double-input-field">
+                {/* 한글 이름 */}
+                <div className="input-wrapper">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="한글이름"
+                    value={resumeData.name || ""}
+                    onChange={handleChange}
+                    className={`${isValid.name ? "" : "invalid"}`}
+                  />
+                  {fieldErrors.name && (
+                    <span className="error-message">{fieldErrors.name}</span>
+                  )}
+                </div>
+
+                {/* 영문 이름 */}
+                <div className="input-wrapper">
+                  <input
+                    type="text"
+                    name="englishName"
+                    placeholder="영어이름"
+                    value={resumeData.englishName || ""}
+                    onChange={handleChange}
+                    className={`${isValid.englishName ? "" : "invalid"}`}
+                  />
+                  {fieldErrors.englishName && (
+                    <span className="error-message">
+                      {fieldErrors.englishName}
+                    </span>
+                  )}
+                </div>
+              </div>
             </div>
 
+            {/* 직군 */}
             <div className="input-group">
               <label>직군</label>
               <select
                 name="jobCategory"
+                placeholder="직군선택"
                 value={resumeData.jobCategory || ""}
                 onChange={handleChange}
               >
@@ -260,9 +359,11 @@ const Profile = () => {
                 ))}
               </select>
             </div>
+
+            {/* 타이틀 (stage + position) */}
             <div className="input-group title-group">
               <label>타이틀</label>
-              {/* stage 필드: 직접입력 모드에 따라 select 또는 input 렌더링 */}
+              {/* stage */}
               {isCustomStage ? (
                 <input
                   type="text"
@@ -274,6 +375,7 @@ const Profile = () => {
               ) : (
                 <select
                   name="stage"
+                  placeholder="0년차"
                   value={resumeData.stage || ""}
                   onChange={handleChange}
                   className={isValid.stage ? "" : "invalid"}
@@ -288,14 +390,24 @@ const Profile = () => {
                   <option value="custom">직접입력</option>
                 </select>
               )}
-              <input
-                type="text"
-                name="position"
-                value={resumeData.position || ""}
-                onChange={handleChange}
-                className={isValid.position ? "" : "invalid"}
-              />
+              {/* position */}
+              <div className="input-wrapper">
+                <input
+                  type="text"
+                  name="position"
+                  placeholder="타이틀 입력"
+                  value={resumeData.position || ""}
+                  onChange={handleChange}
+                  className={`${isValid.position ? "" : "invalid"}`}
+                />
+                {/* 에러 메시지 */}
+                {fieldErrors.position && (
+                  <span className="error-message">{fieldErrors.position}</span>
+                )}
+              </div>
             </div>
+
+            {/* 스킬 */}
             <div className="input-group">
               <label>스킬</label>
               <div className="skills-container">
@@ -321,6 +433,12 @@ const Profile = () => {
               <textarea
                 name="experience"
                 value={resumeData.experience || ""}
+                placeholder="API 개발 및 서버 최적화
+                            · 사용자 인증 및 결제 API 개발 주도, 응답 속도 30% 개선
+                            · 서버 부하 테스트 수행 후 성능 최적화, 트래픽 처리량 2배 증가
+                            서비스 출시 및 운영 경험
+                            · 신규 웹 서비스 런칭 참여, 초기 사용자 피드백 반영으로 버그 발생률 40% 감소
+                            · 출시 후 서비스 안정화 작업 및 장애 대응, 다운타임 99.9% 유지"
                 onChange={handleChange}
                 onPaste={handlePaste}
                 className={isValid.experience ? "" : "invalid"}

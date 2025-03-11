@@ -1,243 +1,246 @@
 /* =========================================
    기본(데스크탑: 1280px 이상) 스타일
    ========================================= */
-   .branding-tone-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    height: 100vh;
-    background: #f8f8f8;
-    padding-top: 40px;
-  }
-  
-  .branding-tone-container {
-    max-width: 1280px;
-    width: 100%;
-    text-align: left;
-    padding: 20px;
-    background: #f8f8f8;
-    box-shadow: none !important;
-    border: none;
-  }
-  
-  /* 진행 단계 */
-  .progress-steps {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 30px;
-  }
-  
-  .progress-step {
-    font-size: 16px;
-    font-weight: 600;
-    color: #8995ab;
-  }
-  
-  .progress-step.active {
-    color: #121d31;
-  }
-  
-  /* 타이틀 & 서브텍스트 */
-  .branding-title {
-    margin-top: 96px;
-    color: rgb(23, 23, 23);
-    font-family: Pretendard;
-    font-size: 42px;
-    font-weight: 700;
-    line-height: 140%;
-    letter-spacing: 0%;
-    margin-bottom: 24px;
-  }
-  
-  .sub-text {
-    color: rgb(137, 149, 171);
-    font-family: Pretendard;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 140%;
-    letter-spacing: 0%;
-    margin-bottom: 30px;
-  }
-  
-  /* 브랜드 톤 리스트 */
-  .branding-tone-list {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    width: 1280px; /* 데스크탑 기준 고정 */
-    margin-top: 100px;
-  }
-  
-  /* 브랜드 톤 선택 버튼 */
-  .branding-tone-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 20px;
-    border-radius: 12px;
-    background: #eceff4;
-    color: #8995ab;
-    font-family: "Pretendard";
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 140%;
-    cursor: pointer;
-    transition: background 0.3s;
-    gap: 40px;
-    width: 100%;
-    max-width: 1280px; /* 데스크탑에서 고정 너비 */
-    height: 88px;
-    outline: none;
-    border: none;
-  }
-  
-  /* 체크 아이콘 */
-  .check-icon {
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-    margin-left: 10px;
-  }
-  
-  /* 선택된 항목 */
-  .branding-tone-item.selected {
-    background: #121d31 !important;
-    color: white !important;
-  }
-  
-  .branding-tone-item.selected .branding-tone-title {
-    color: white !important;
-  }
-  
-  .branding-tone-item.selected .branding-tone-description {
-    color: white !important;
-  }
-  
-  /* 브랜드 톤 텍스트(제목+설명) */
-  .branding-tone-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-  }
-  
-  .branding-tone-title {
-    color: rgb(137, 149, 171);
-    font-family: Pretendard;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 140%;
-    letter-spacing: 0%;
-    text-align: left;
-  }
-  
-  .branding-tone-description {
-    color: rgb(137, 149, 171);
-    font-family: Pretendard;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 140%;
-    letter-spacing: 0%;
-    text-align: left;
-  }
-  
-  /* 다음 버튼 (화면 하단 고정) */
-  .branding-tone-next-btn {
-    margin-top: 40px;
-    width: 320px; /* 데스크탑 기본 너비 */
-    height: 60px;
-    padding: 16px 80px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    background: #121d31;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    z-index: 30;
-    bottom: 52px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  /* 버튼 호버 효과 */
-  .branding-tone-next-btn:hover {
-    transform: scale(1.05) translateX(-50%);
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* =======================================
+.branding-tone-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100vh;
+  background: #f8f8f8;
+  padding-top: 40px;
+}
+
+.branding-tone-container {
+  max-width: 1280px;
+  width: 100%;
+  text-align: left;
+  padding: 20px;
+  background: #f8f8f8;
+  box-shadow: none !important;
+  border: none;
+}
+
+/* 진행 단계 */
+.progress-steps {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.progress-step {
+  font-size: 16px;
+  font-weight: 600;
+  color: #8995ab;
+}
+
+.progress-step.active {
+  color: #121d31;
+}
+
+/* 타이틀 & 서브텍스트 */
+.branding-title {
+  margin-top: 96px;
+  color: rgb(23, 23, 23);
+  font-family: Pretendard;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 140%;
+  letter-spacing: 0%;
+  margin-bottom: 24px;
+}
+
+.sub-text {
+  color: rgb(137, 149, 171);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: 0%;
+  margin-bottom: 30px;
+}
+
+/* 브랜드 톤 리스트 */
+.branding-tone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 1280px; /* 데스크탑 기준 고정 */
+  margin-top: 100px;
+}
+
+/* 브랜드 톤 선택 버튼 */
+.branding-tone-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  border-radius: 12px;
+  background: #eceff4;
+  color: #8995ab;
+  font-family: "Pretendard";
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 140%;
+  cursor: pointer;
+  transition: background 0.3s;
+  gap: 40px;
+  width: 100%;
+  max-width: 1280px; /* 데스크탑에서 고정 너비 */
+  height: 88px;
+  outline: none;
+  border: none;
+}
+
+/* 체크 아이콘 */
+.check-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+/* 선택된 항목 */
+.branding-tone-item.selected {
+  background: #121d31 !important;
+  color: white !important;
+}
+
+.branding-tone-item.selected .branding-tone-title {
+  color: white !important;
+}
+
+.branding-tone-item.selected .branding-tone-description {
+  color: white !important;
+}
+
+/* 브랜드 톤 텍스트(제목+설명) */
+.branding-tone-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.branding-tone-title {
+  color: rgb(137, 149, 171);
+  font-family: Pretendard;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: 0%;
+  text-align: left;
+}
+
+.branding-tone-description {
+  color: rgb(137, 149, 171);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: 0%;
+  text-align: left;
+}
+
+/* 다음 버튼 (화면 하단 고정) */
+.branding-tone-next-btn {
+  margin-top: 40px;
+  width: 320px; /* 데스크탑 기본 너비 */
+  height: 60px;
+  padding: 16px 80px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #121d31;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 30;
+  bottom: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 버튼 호버 효과 */
+.branding-tone-next-btn:hover {
+  transform: scale(1.05) translateX(-50%);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* =======================================
      모바일(390px ~ 767px) 반응형
      ======================================= */
-  @media (max-width: 767px) {
-    /* 내부 컨테이너 패딩 조정: 좌우 20px */
-    .branding-tone-container {
-      padding: 0 20px;
-    }
-  
-    /* 브랜드 톤 리스트: 100% 너비 */
-    .branding-tone-list {
-      width: 100%;
-      max-width: 100%;
-      margin-top: 50px;
-    }
-  
-    /* 브랜드 톤 아이템: 100% 너비 */
-    .branding-tone-item {
-      width: 100%;
-      max-width: 100%;
-    }
-  
-    /* 다음 버튼: 화면 폭에 맞춰 유동적으로 (여기서는 예: 100% - 40px) */
-    .branding-tone-next-btn {
-      width: calc(100% - 40px) !important; /* 좌우 20px씩 간격 */
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      margin-top: 0;
-      padding: 16px 0; /* 폭에 맞춰 좌우 패딩 제거 */
-    }
+@media (max-width: 767px) {
+  /* 내부 컨테이너 패딩 조정: 좌우 20px */
+  .branding-tone-container {
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+    max-width: 100% !important;
   }
-  
-  /* =======================================
+
+  /* 브랜드 톤 리스트: 100% 너비 */
+  .branding-tone-list {
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  /* 브랜드 톤 아이템: 100% 너비 */
+  .branding-tone-item {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* 다음 버튼: 화면 폭에 맞춰 유동적으로 (여기서는 예: 100% - 40px) */
+  .branding-tone-next-btn {
+    width: calc(100% - 40px) !important; /* 좌우 20px씩 간격 */
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0;
+    padding: 16px 0; /* 폭에 맞춰 좌우 패딩 제거 */
+  }
+}
+
+/* =======================================
      태블릿(768px ~ 1279px) 반응형
      ======================================= */
-  @media (min-width: 768px) and (max-width: 1279px) {
-    /* 내부 컨테이너 패딩 조정: 좌우 32px */
-    .branding-tone-container {
-      max-width: 90%; /* 필요 시 고정 px 또는 % */
-      margin: 0 auto;
-      padding: 0 32px;
-    }
-  
-    .branding-tone-list {
-      width: 100%;
-      max-width: 100%;
-      margin-top: 60px;
-    }
-  
-    .branding-tone-item {
-      width: 100%;
-      max-width: 100%;
-    }
-  
-    /* 버튼 너비 320px 고정 */
-    .branding-tone-next-btn {
-      width: 320px !important; /* 태블릿에서 고정 */
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      margin-top: 0;
-      padding: 16px 0;
-    }
+@media (min-width: 768px) and (max-width: 1279px) {
+  /* 내부 컨테이너 패딩 조정: 좌우 32px */
+  .branding-tone-container {
+    max-width: 90%; /* 필요에 따라 320px, 360px 등으로 지정 가능 */
+    margin: 0 auto;
+    padding-left: 32px;
+    padding-right: 32px;
   }
-  
+
+  .branding-tone-list {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 60px;
+  }
+
+  .branding-tone-item {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* 버튼 너비 320px 고정 */
+  .branding-tone-next-btn {
+    width: 320px !important; /* 태블릿에서 고정 */
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0;
+    padding: 16px 0;
+  }
+}

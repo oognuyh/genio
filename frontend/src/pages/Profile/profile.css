@@ -93,17 +93,70 @@
   padding: 12px 16px;
   box-sizing: border-box;
   background-color: white;
-  /* 데스크탑에서 약간 왼쪽으로 들여쓰기 */
+  /* 데스크탑에서 약간 왼쪽으로 들여쓰기 (원하면 제거 가능) */
   margin-left: -100px;
 }
 
-/* 영문이름(input[name="englishName"])에 적용할 CSS */
-input[name="englishName"] {
-  width: calc(
-    50% - 12px
-  ) !important; /* 원하는 너비로 조절 (여기선 부모의 50%에서 간격 고려) */
-  margin-left: 12px; /* 이름 필드와의 간격 */
-  padding: 8px;
+.input-group select {
+  /* 추가: 기본 드롭다운 화살표 제거 */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("../../assets/down-arrow.png"); /* 화살표 이미지 경로 */
+  background-repeat: no-repeat;
+  background-position: right 16px center; /* 오른쪽 16px, 수직 중앙 */
+  background-size: 20px 20px; /* 화살표 크기 조절 */
+  /* 드롭다운 아이콘과 텍스트가 겹치지 않도록 패딩 우측 여유 */
+  padding-right: 40px;
+}
+
+/* 구형 IE (옵션): 기본 화살표 제거 */
+select::-ms-expand {
+  display: none;
+}
+
+/* ===============================
+     double-input (이름 + 영문이름)
+     =============================== */
+
+/* .input-group.double-input: 라벨 + 2개 필드 배치 */
+.input-group.double-input {
+  display: flex;
+  align-items: center;
+  gap: 24px; /* 라벨과 필드 사이 */
+}
+
+/* 라벨 옆에 두 필드를 배치할 컨테이너 */
+.double-input-field {
+  display: flex;
+  align-items: flex-start; /* 에러 메시지로 높이 달라져도 위쪽 정렬 */
+  gap: 12px;
+  flex: 1; /* 라벨 제외 나머지 공간 차지 */
+  margin-left: -100px; 
+}
+
+/* 각각의 필드를 세로로 쌓아 에러 메시지를 아래에 표시 */
+.double-input-field .input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  position: relative;
+}
+
+/* 이름 인풋 (name) */
+.double-input-field .input-wrapper input[name="name"] {
+  height: 54px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: 20px;
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+/* 영문이름 필드 */
+.double-input-field .input-wrapper input[name="englishName"] {
+  height: 54px;
   border: 1px solid #cbd5e1;
   border-radius: 12px;
   font-size: 20px;
@@ -111,7 +164,12 @@ input[name="englishName"] {
   font-weight: 500;
   line-height: 150%;
   color: black;
+  padding: 12px 16px;
+  margin-left: 0 !important;
+  width: 100% !important;
 }
+
+/* 영문이름 필드에 대한 border, padding 등은 기존과 동일 */
 
 /* 타이틀 그룹 (stage + position) */
 .title-group select[name="stage"] {
@@ -264,6 +322,22 @@ textarea.invalid {
   border: 2px solid red !important;
 }
 
+/* 에러 메시지 스타일 */
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block; /* 줄바꿈 */
+}
+
+/* 인풋을 각각 감싸기 위한 래퍼 (중첩 인풋의 에러 표시용) */
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+}
+
 /* 다음 버튼 */
 .next-btn {
   display: block;
@@ -349,12 +423,12 @@ textarea.invalid {
 }
 
 /* =======================================
-   태블릿(768px ~ 1279px) 반응형 처리
-   ======================================= */
+     태블릿(768px ~ 1279px) 반응형 처리
+     ======================================= */
 @media (min-width: 768px) and (max-width: 1279px) {
   .profile-container {
-    max-width: 90%; /* 원하는 최대 너비로 조절 */
-    margin: 0 auto;   /* 중앙 정렬 */
+    max-width: 90%;
+    margin: 0 auto;
     padding-left: 32px;
     padding-right: 32px;
   }
@@ -379,34 +453,36 @@ textarea.invalid {
   }
 
   .left-panel .input-group label {
-    width: 60px !important;
+    width: 60px !important; /* 라벨 폭 축소 */
   }
 
-  .left-panel .input-group.double-input input[name="englishName"] {
-    margin-left: 12px !important;
+  /* double-input-field에서 -100px 제거 */
+  .double-input-field {
+    margin-left: 0 !important;
   }
 
   .title-group select[name="stage"] {
-    margin-left: 0 !important;  /* 라벨 정렬 맞춤 */
+    width: auto !important;
+    flex: 1 !important;
+    margin-left: 0 !important;
   }
+
   .title-group input[name="position"] {
-    width: auto !important;   /* 고정 290px 제거 */
-    flex: 1 !important;       /* 남는 공간을 차지 */
-    margin-left: 5px !important; /* stage 필드와 약간의 간격 유지 */
+    width: auto !important;
+    flex: 1 !important;
+    margin-left: 5px !important;
   }
 
   .skills-container {
-    width: 100% !important;      /* 고정 900px 대신 100%로 */
-    margin-left: 0 !important;   /* -25px 제거 */
+    width: 100% !important;
+    margin-left: 0 !important;
   }
-
 
   /* 오른쪽 패널(주요 경험)이 스킬셋 바로 아래에 위치하도록 여백 추가 */
   .right-panel {
-    margin-top: 20px; /* 원하는 간격으로 조정 */
+    margin-top: 20px;
   }
 
-  /* 오른쪽 패널의 주요 경험 영역 레이아웃을 수직 정렬로 변경 */
   .right-panel .input-group {
     display: grid !important;
     grid-template-columns: 150px 1fr;
@@ -415,7 +491,7 @@ textarea.invalid {
       "label textarea"
       "label charcount";
     align-items: start;
-    margin-left: 0 !important; /* 수평 정렬 보정 */
+    margin-left: 0 !important;
   }
 
   .right-panel .input-group label {
@@ -434,11 +510,11 @@ textarea.invalid {
 }
 
 /* =======================================
-     모바일(390px ~ 767px) 반응형 처리
-     ======================================= */
+       모바일(390px ~ 767px) 반응형 처리
+       ======================================= */
 @media (max-width: 767px) {
   .profile-container {
-    max-width: 90%; /* 필요에 따라 320px, 360px 등으로 지정 가능 */
+    max-width: 90%;
     margin: 0 auto;
     padding-left: 20px;
     padding-right: 20px;
@@ -467,10 +543,30 @@ textarea.invalid {
   }
 
   .input-group {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column !important;
+    align-items: flex-start !important; /* 수직으로 쌓이고, 왼쪽 정렬 */
+    text-align: left !important;        /* 혹시 상위에 center 정렬이 있으면 오버라이드 */
     gap: 8px;
     margin-bottom: 16px;
+  }
+
+  .input-group label {
+    width: auto !important; 
+    margin-left: 0 !important;
+    text-align: left !important;
+    margin-bottom: 4px;
+    display: block !important;   /* 인라인 성격이 남아있으면 block으로 강제 */
+  }
+
+  .double-input-field {
+    display: flex;
+    flex-direction: column; /* 이름, 영문이름 한 줄 */
+    gap: 8px;
+    width: 100%;
+    margin-left: 0 !important;
+  }
+  .double-input-field .input-wrapper {
+    width: 100%; /* 반반 */
   }
 
   .input-group input,
@@ -481,16 +577,25 @@ textarea.invalid {
     height: 44px;
   }
 
+  .title-group {
+    display: flex;
+    flex-direction: column; /* 한 줄에 2개 필드가 아니라 위아래로 배치하려면 column */
+    gap: 8px;
+    width: 100%;
+  }
+
   .title-group select[name="stage"],
   .title-group input[name="position"] {
+    flex: 1 !important; 
     width: 100% !important;
     margin-left: 0 !important;
+    min-width: 500px !important;
   }
 
   .right-panel textarea {
     width: 100% !important;
     margin-left: 0 !important;
-    min-height: 200px;
+    min-height: 314px;
     max-height: 314px;
   }
 
@@ -522,7 +627,7 @@ textarea.invalid {
 }
 
 .profile-container .input-group input:focus {
-  border: 1.4px solid #8995AB !important;
-  background: #ECEFF4;
+  border: 1.4px solid #8995ab !important;
+  background: #eceff4;
   outline: none !important;
 }
