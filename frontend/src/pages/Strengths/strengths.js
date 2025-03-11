@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import ProgressSteps from "../../components/ProgressSteps";
+import ProgressSteps from "../../components/progressSteps";
 import checkIcon from "../../assets/check.png";
 import checkWhiteIcon from "../../assets/check-white.png";
 import "./strengths.css";

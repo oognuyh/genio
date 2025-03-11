@@ -4,10 +4,10 @@ import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import resizer from "react-image-file-resizer";
 
-import colorPaletteImage from "../../assets/color-palette.png";
+import colorPaletteImage from "../../assets/colorpicker-icon.png";
 import popCloseImage from "../../assets/popup-close.png";
 
-import ProgressSteps from "../../components/ProgressSteps";
+import ProgressSteps from "../../components/progressSteps";
 
 import BasicPreview from "./Preview/basicPreview";
 import LinkedinPreview from "./Preview/linkedinPreview";
