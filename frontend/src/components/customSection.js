@@ -7,7 +7,7 @@ import customCloseImage from "../assets/popup-close.png";
 
 import "./customSection.css";
 
-const CustomSection = ({ plats, cols, setPlatform, setColor, setTypo }) => {
+const CustomSection = ({ platforms, colors, kitColor, kitPlatform, typo, setKitPlatform, setKitColor, setTypo, setIsShifted }) => {
     const icons = [
         templateIcon,
         colorPickerIcon,
@@ -19,20 +19,6 @@ const CustomSection = ({ plats, cols, setPlatform, setColor, setTypo }) => {
         "색상 팔레트",
         "타이포그래피"
     ];
-
-    const platforms = [
-        "기본",
-        "링크드인",
-        "인스타그램",
-        "포트폴리오",
-    ];
-
-    const colors = [
-        "#587ADB",
-        "#8995AB",
-        "#D03F44",
-        "#8D8EF6"
-    ]
 
     const typos = [
         "프리텐다드",
@@ -48,8 +34,6 @@ const CustomSection = ({ plats, cols, setPlatform, setColor, setTypo }) => {
     const [isCustomViewOpen, setIsCustomViewOpen] = useState(true); // 커스텀 영역 표출 플래그
 
     const [customTitle, setCustomTitle] = useState(titles[0]); // 커스텀 타이틀
-    const [kitPlatform, setKitPlatform] = useState(platforms[0]); // 선택 플랫폼
-    const [kitColor, setKitColor] = useState(colors[0]); // 선택 컬러
     const [kitTypo, setKitTypo] = useState(typos[0]); // 선택 타이포그래피
 
     const [titleIdx, setTitleIdx] = useState(0); // 선택된 타이틀 인덱스
@@ -60,11 +44,13 @@ const CustomSection = ({ plats, cols, setPlatform, setColor, setTypo }) => {
         setCustomTitle(title);
         setTitleIdx(selectedIdx);
         setIsCustomViewOpen(true);
+        setIsShifted(false);
     };
 
     const onClickClose = () => {
         setTitleIdx(-1);
         setIsCustomViewOpen(false);
+        setIsShifted(true);
     };
 
     return (
@@ -79,7 +65,7 @@ const CustomSection = ({ plats, cols, setPlatform, setColor, setTypo }) => {
                 <div className="custom-title-wrapper">
                     <p className="custom-title">{customTitle}</p>
                     <button className="custom-close-button"
-                    onClick={onClickClose}>
+                        onClick={onClickClose}>
                         <img src={customCloseImage} width="20px" height="20px" alt="close" />
                     </button>
                 </div>
@@ -109,8 +95,8 @@ const CustomSection = ({ plats, cols, setPlatform, setColor, setTypo }) => {
                 <div className={`typo-list-wrapper ${titleIdx === 2 ? "active" : ""}`}>
                     {typos.map((typo) => (
                         <p className={`typo-item ${typo === kitTypo ? "active" : ""}`}
-                            onClick={() => setKitTypo(typo)}
-                        >
+                            data-visible={typo === kitTypo ? "true" : "false"}
+                            onClick={() => setKitTypo(typo)}>
                             {typo}
                         </p>
                     ))}

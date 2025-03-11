@@ -55,7 +55,7 @@
     flex-grow: 0;
     margin: auto;
     margin-left: 101.68px; /* 1.5vw * 67.7846425419 */
-    margin-bottom: 510.81px; /* 14vh * 36.4864864865 */
+    margin-bottom: 239.81px; /* 14vh * 36.4864864865 */
 }
 
 .portfolio-hashtag-chip {
@@ -66,6 +66,7 @@
     align-items: center;
     gap: 25.11px; /* 0.3703vw * 67.7846425419 */
     padding: 7.3px 13.56px; /* 0.2vh→7.3px, 0.2vw→13.56px */
+    white-space: nowrap;
 
     /* Inside Auto Layout */
     flex: none;
@@ -82,4 +83,39 @@
     line-height: 140%;
     letter-spacing: 0%;
     text-align: left;
+}
+
+.portfolio-kit-contact-list {
+    display: flex;
+    flex-direction: column;
+
+    /* Inside Auto Layout */
+    margin-bottom: 101.97px; /* 2vh * 36.4864864865 */
+    margin-left: 101.68px; /* 1.5vw * 67.7846425419 */
+}
+
+.portfolio-kit-contact-title {
+    margin: 0;
+
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.portfolio-kit-url {
+    margin: 0;
+    margin-top: 25px;
+
+    font-size: 24px;
+}
+.portfolio-kit-tel {
+    margin: 0;
+    margin-top: 13px;
+
+    font-size: 24px;
+}
+.portfolio-kit-email {
+    margin: 0;
+    margin-top: 13px;
+
+    font-size: 24px;
 }

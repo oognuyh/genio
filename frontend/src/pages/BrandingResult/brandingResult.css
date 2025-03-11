@@ -12,6 +12,7 @@ body {
   position: absolute;
   width: 100vw;
   height: 91.11vh;
+  overflow-x: hidden;
 
   font-family: Pretendard;
 }
@@ -162,21 +163,31 @@ body {
   color: rgb(255, 255, 255);
 }
 
+.kit-custom-wrapper {
+  position: absolute;
+  top: 33.7398vh;
+  left: 16.7vw;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
 /* 브랜딩 키드 */
 .kit-box {
   /* background */
-  position: absolute;
-  width: 60.9375vw;
+  width: 56.9375vw;
   height: 42.6353vh;
-  left: 16.6666vw;
-  top: 43.7398vh;
   display: flex;
-  justify-content: center;
+  align-items: center;
   flex-direction: column;
 
   border-radius: 10px;
   /* White */
   background: rgb(255, 255, 255);
+  transition: transform 0.5s ease;
+}
+.kit-box.shifted {
+  transform: translateX(-195px);
 }
 
 /* 컬러 팔레트 스타일 */
@@ -264,6 +275,8 @@ body {
   font-weight: 600;
   color: rgb(255, 255, 255);
   white-space: nowrap;
+
+  cursor: pointer;
 }
 
 .save-button:hover {
@@ -361,4 +374,20 @@ body {
       #0e1221 78.7%,
       #121d31 106.07%);
   animation: gradientMove 3s infinite linear;
+}
+
+@media (min-width: 769px) and (max-width: 1279px) {
+  .kit-custom-wrapper {
+    top: 27.7398vh;
+    flex-direction: column;
+    gap: 0px;
+  }
+}
+
+@media (max-width: 768px) {
+  .kit-custom-wrapper {
+    top: 27.7398vh;
+    flex-direction: column;
+    gap: 0px;
+  }
 }

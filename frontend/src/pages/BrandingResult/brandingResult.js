@@ -4,8 +4,8 @@ import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import resizer from "react-image-file-resizer";
 
-import colorPaletteImage from "../../assets/colorpicker-icon.png";
 import popCloseImage from "../../assets/popup-close.png";
+import loadingImage2 from "../../assets/loading2.png";
 
 import ProgressSteps from "../../components/progressSteps";
 
@@ -18,7 +18,8 @@ import BasicKit from "../../components/Kits/basicKit";
 import LinkedinKit from "../../components/Kits/linkedinKit";
 import InstagramKit from "../../components/Kits/instagramKit";
 import PortfolioKit from "../../components/Kits/portfolioKit";
-import loadingImage2 from "../../assets/loading2.png";
+
+import CustomSection from "../../components/customSection";
 
 import "./brandingResult.css";
 
@@ -53,8 +54,9 @@ const BrandingResult = () => {
   const [fileExt, setFileExt] = useState("png");
   const [fileWidth, setFileWidth] = useState(1020);
   const [fileHeight, setFileHeight] = useState(306);
-  const [isGenerating, setIsGenerating] = useState(false)
-  const [isPreviewOpen, setIsPreviewOpen] = useState(false)
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [isShifted, setIsShifted] = useState(false);
 
   const biography = kitData.biography;
 
@@ -126,15 +128,15 @@ const BrandingResult = () => {
         domtoimage.toBlob(previewKit)
       ]);
 
-      
+
       setPopupImg(window.URL.createObjectURL(previewBlob));
       setIsGenerating(false)
-      
+
       saveAs(kitBlob, `${fileName}.${fileInfo.ext}`);
       setIsSaved(true);
     } catch (err) {
       console.log(err);
-    } 
+    }
   };
 
   const renderPreview = () => {
@@ -237,38 +239,15 @@ const BrandingResult = () => {
           </p>
         </div>
 
-        {/* 플랫폼 선택 버튼 */}
-        <div className="platform-btn-list">
-          {platforms.map((platform) => (
-            <button
-              className={`platform-btn${platform == kitPlatfrom ? " active" : ""
-                }`}
-              onClick={() => onClickPlatform(platform)}
-            >
-              {platform}
-            </button>
-          ))}
-        </div>
-
-        {/* 컬러 팔레트 */}
-        <div className="color-palette">
-          <buton className="color-palette-btn">
-            <img className="color-palette-icon" src={colorPaletteImage} />
-          </buton>
-          {colors.map((color) => (
-            <div
-              className={`color-chip${color == kitColor ? " active" : ""}`}
-              style={{
-                background: `linear-gradient(to left, ${color}, #ffffff 140%)`,
-              }}
-              onClick={() => setKitColor(color)}
-            />
-          ))}
-        </div>
-
-        <div className="kit-box">
-          {/* 조건부 키트 프리뷰 렌더링 */}
-          {renderPreview()}
+        <div className="kit-custom-wrapper">
+          <CustomSection platforms={platforms} colors={colors}
+            kitPlatform={kitPlatfrom} kitColor={kitColor}
+            setKitPlatform={setKitPlatform} setKitColor={setKitColor}
+            setIsShifted={setIsShifted} />
+          <div className={`kit-box ${isShifted ? "shifted" : ""}`}>
+            {/* 조건부 키트 프리뷰 렌더링 */}
+            {renderPreview()}
+          </div>
         </div>
 
         {/* 저장 버튼 */}
@@ -279,19 +258,21 @@ const BrandingResult = () => {
         {isPreviewOpen && (
           <div className="popup-overlay">
             <div className="popup-save-content">
-              <h3 className="popup-intro1">{ isGenerating ? '이미지 생성 중' : '이미지 저장 완료!' }</h3>
-              <h3 className="popup-intro2">{ isGenerating ? '제니오가 열심히 이미지를 만들고 있어요!' : `이제 자신있게 ${userName}님을 세상에 보여주세요 💫` }</h3>
+              <h3 className="popup-intro1">{isGenerating ? '이미지 생성 중' : '이미지 저장 완료!'}</h3>
+              <h3 className="popup-intro2">{isGenerating ? '제니오가 열심히 이미지를 만들고 있어요!' : `이제 자신있게 ${userName}님을 세상에 보여주세요 💫`}</h3>
               <button
                 onClick={() => setIsPreviewOpen(false)}
                 className="popup-close-button">
                 <img src={popCloseImage} width="20px" height="20px" alt="close" />
               </button>
 
-              {isGenerating ?   
+              {isGenerating ?
                 (<div>
-                  <img src={loadingImage2} alt="생성 중" className="loading-image1" style={{maxWidth: '80%',
+                  <img src={loadingImage2} alt="생성 중" className="loading-image1" style={{
+                    maxWidth: '80%',
                     maxHeight: '80%',
-                    objectFit: 'contain' }} />
+                    objectFit: 'contain'
+                  }} />
                 </div>) :
                 <img src={popupImg} alt="card" />}
 

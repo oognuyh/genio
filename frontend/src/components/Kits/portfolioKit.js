@@ -17,6 +17,12 @@ const PortfolioKit = ({ kitColor, tagline, hashtags }) => {
                         <div className="portfolio-hashtag-chip" style={{ color: kitColor }}>{hashtag}</div>
                     ))}
                 </div>
+                <div className="portfolio-kit-contact-list">
+                        <p className="portfolio-kit-contact-title">Contact</p>
+                        <p className="portfolio-kit-url">website url</p>
+                        <p className="portfolio-kit-tel">(+00) 000 0000 3137</p>
+                        <p className="portfolio-kit-email">email address</p>
+                    </div>
             </div>
         </div >
     );

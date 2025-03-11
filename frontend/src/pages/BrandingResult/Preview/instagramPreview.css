@@ -1,7 +1,7 @@
 /* 프로필 카드 스타일 */
 .instagram-kit-standard {
-    position: absolute;
-    left: 22.5vw;
+    position: relative;
+    right: 5.5vw;
     top: 3.75vh;
     font-size: 0.87vw;
 
@@ -10,11 +10,8 @@
 
 .instagram-preview-container {
     /* kit-basic */
-    position: absolute;
     width: 15.9375vw;
     height: 29.6vh;
-    left: 22.5vw;
-    top: 5.0vh;
 
     /* 자동 레이아웃 */
     margin-top: 1.75vw;
@@ -36,7 +33,7 @@
     width: 13vw;
     height: 5.8vh;
     margin: 0;
-    
+
     /* 자동 레이아웃 */
     font-size: 1vw;
     font-weight: 700;
@@ -97,6 +94,7 @@
     /* Inside Auto Layout */
     flex: none;
     flex-grow: 0;
+    white-space: nowrap;
 
     border-radius: 2.5px;
     /* White */
