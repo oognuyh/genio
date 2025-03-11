@@ -12,13 +12,30 @@ const SplashScreen = () => {
   const [animateLogo, setAnimateLogo] = useState(false);
   const [showText, setShowText] = useState(false);
 
+  // [추가] 3초마다 바뀔 그라디언트 배열 & 현재 인덱스
+  const gradients = [
+    "linear-gradient(90deg, #72C7CB 14%, #8381FC 100%)",
+    "linear-gradient(90deg, #EE7EB1 14%, #CF3E42 99%)",
+    "linear-gradient(90deg, #D8AAEB 14%, #8B8DF6 99%)"
+  ];
+  const [gradientIndex, setGradientIndex] = useState(0);
+
+  // [추가] 3초마다 배경 인덱스 순환
   useEffect(() => {
-    // 3초 후 로고 이동 & 회전 애니메이션 실행
+    const bgInterval = setInterval(() => {
+      setGradientIndex((prevIndex) => (prevIndex + 1) % gradients.length);
+    }, 3000);
+
+    return () => clearInterval(bgInterval);
+  }, []);
+
+  useEffect(() => {
+    // 1초 후 로고 이동 & 회전 애니메이션 실행
     const logoTimer = setTimeout(() => {
       setAnimateLogo(true);
       setTimeout(() => {
-        setShowText(true); // 로고 이동이 끝난 후 텍스트 페이드인
-      }, 1000); // 로고 이동 종료 1초 후부터 텍스트 등장
+        setShowText(true); // 로고 이동 끝난 뒤 텍스트 페이드인
+      }, 1000);
     }, 1000);
 
     // 3.5초 후 버튼 나타나기
@@ -32,7 +49,7 @@ const SplashScreen = () => {
     };
   }, []);
 
-  // 클릭 시 애니메이션 효과 후 페이지 이동
+  // 버튼 클릭 시 효과 후 페이지 이동
   const handleMouseDown = () => {
     setIsClicked(true);
   };
@@ -45,11 +62,20 @@ const SplashScreen = () => {
 
   return (
     <div className="splash-body">
+      {/* [추가] 그라디언트 오버레이 */}
+      <div
+        className="gradient-overlay"
+        style={{
+          background: gradients[gradientIndex],
+          opacity: 0.35,
+          transition: "background 1s ease"
+        }}
+      />
       <div className="splash-container">
         {/* 로고 애니메이션 적용 */}
         <div
           className="logo-wrapper"
-          style={{ position: "relative", display: "inline-block" }} // 수정된 부분
+          style={{ position: "relative", display: "inline-block" }}
         >
           <motion.img
             src={logoImage}
@@ -59,10 +85,10 @@ const SplashScreen = () => {
             animate={{
               opacity: 1,
               y: 0,
-              x: animateLogo ? -130 : 0, // 더 시원한 이동 느낌
-              rotate: animateLogo ? -90 : 0, // 시계 반대 방향으로 90도 회전
+              x: animateLogo ? -130 : 0,
+              rotate: animateLogo ? -90 : 0,
             }}
-            transition={{ duration: 1, ease: "easeInOut" }} // 부드러운 애니메이션 적용
+            transition={{ duration: 1, ease: "easeInOut" }}
           />
 
           {/* 로고 텍스트 (이동 완료 후 페이드인) */}
@@ -73,10 +99,10 @@ const SplashScreen = () => {
               className="logo-text"
               style={{
                 position: "absolute",
-                left: "calc(100% - 100px)", // 로고 이미지 오른쪽에 10px 간격
+                left: "calc(100% - 100px)",
                 top: "50%",
                 transform: "translateY(-50%)",
-              }} // 수정된 부분
+              }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, ease: "easeOut" }}

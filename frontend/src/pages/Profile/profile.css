@@ -94,7 +94,6 @@
   box-sizing: border-box;
   background-color: white;
   /* 데스크탑에서 약간 왼쪽으로 들여쓰기 (원하면 제거 가능) */
-  margin-left: -100px;
 }
 
 .input-group select {
@@ -132,7 +131,6 @@ select::-ms-expand {
   align-items: flex-start; /* 에러 메시지로 높이 달라져도 위쪽 정렬 */
   gap: 12px;
   flex: 1; /* 라벨 제외 나머지 공간 차지 */
-  margin-left: -100px; 
 }
 
 /* 각각의 필드를 세로로 쌓아 에러 메시지를 아래에 표시 */
@@ -172,15 +170,23 @@ select::-ms-expand {
 /* 영문이름 필드에 대한 border, padding 등은 기존과 동일 */
 
 /* 타이틀 그룹 (stage + position) */
-.title-group select[name="stage"] {
-  flex: none !important;
-  width: 120px !important;
-}
+@media (min-width: 1280px) {
+  .title-group select[name="stage"] {
+    flex: none;
+    width: 120px;
+  }
 
-.title-group input[name="position"] {
-  flex: none !important;
-  width: 290px !important;
-  margin-left: 5px !important;
+  .title-group input[name="position"] {
+    flex: none;
+    width: 290px;
+    margin-left: 5px;
+  }
+
+  .input-group input,
+  .input-group select,
+  .double-input-field {
+    margin-left: -100px; /* 데스크탑에서만 */
+  }
 }
 
 /* 오른쪽 패널 */
@@ -545,17 +551,17 @@ textarea.invalid {
   .input-group {
     flex-direction: column !important;
     align-items: flex-start !important; /* 수직으로 쌓이고, 왼쪽 정렬 */
-    text-align: left !important;        /* 혹시 상위에 center 정렬이 있으면 오버라이드 */
+    text-align: left !important; /* 혹시 상위에 center 정렬이 있으면 오버라이드 */
     gap: 8px;
     margin-bottom: 16px;
   }
 
   .input-group label {
-    width: auto !important; 
+    width: auto !important;
     margin-left: 0 !important;
     text-align: left !important;
     margin-bottom: 4px;
-    display: block !important;   /* 인라인 성격이 남아있으면 block으로 강제 */
+    display: block !important; /* 인라인 성격이 남아있으면 block으로 강제 */
   }
 
   .double-input-field {
@@ -565,6 +571,16 @@ textarea.invalid {
     width: 100%;
     margin-left: 0 !important;
   }
+
+  .double-input-field .input-wrapper input[name="name"],
+  .double-input-field .input-wrapper input[name="englishName"] {
+    font-size: 18px !important;
+    font-family: "Pretendard", sans-serif;
+    font-weight: 500;
+    line-height: 150%;
+    color: black;
+  }
+
   .double-input-field .input-wrapper {
     width: 100%; /* 반반 */
   }
@@ -579,17 +595,30 @@ textarea.invalid {
 
   .title-group {
     display: flex;
-    flex-direction: column; /* 한 줄에 2개 필드가 아니라 위아래로 배치하려면 column */
+    flex-direction: column;
     gap: 8px;
+    width: 100%;
+  }
+  /* 라벨은 한 줄 전체 사용 */
+  .title-group label {
+    width: 100%;
+  }
+
+  .input-group input,
+  .input-group select,
+  .double-input-field {
+    margin-left: 0 !important;
+  }
+
+  .title-group .input-wrapper {
     width: 100%;
   }
 
   .title-group select[name="stage"],
   .title-group input[name="position"] {
-    flex: 1 !important; 
     width: 100% !important;
+    flex: 1 !important;
     margin-left: 0 !important;
-    min-width: 500px !important;
   }
 
   .right-panel textarea {
@@ -624,10 +653,4 @@ textarea.invalid {
     padding: 12px 16px;
     box-sizing: border-box;
   }
-}
-
-.profile-container .input-group input:focus {
-  border: 1.4px solid #8995ab !important;
-  background: #eceff4;
-  outline: none !important;
 }
