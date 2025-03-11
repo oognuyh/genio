@@ -1,0 +1,138 @@
+.custom-container {
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+}
+
+/* 아이콘 */
+.custom-icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.custom-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+.custom-icon.active {
+    filter: brightness(87%);
+}
+
+/* 전체 커스텀 영역 */
+.custom-list-wrapper {
+    display: block;
+    position: relative;
+    top: -5px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease, opacity 0.5s ease;
+}
+.custom-list-wrapper.active {
+    max-height: 510px; /* 조정 가능 */
+    opacity: 1;
+}
+
+/* 커스텀 메뉴 타이틀 */
+.custom-title-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin-top: 0px;
+}
+
+.custom-title {
+    width: 137px;
+    height: 28px;
+
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.custom-close-button {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+}
+
+/* 플랫폼 리스트 */
+.platform-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.4s ease;
+}
+.platform-list-wrapper.active {
+    max-height: 300px;
+    opacity: 1;
+}
+
+.platform-item {
+    width: 173px;
+    font-size: 20px;
+
+    cursor: pointer;
+}
+.platform-item.active {
+    font-weight: 600;
+}
+
+/* 컬러 리스트 */
+.color-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+.color-list-wrapper.active {
+    max-height: 300px;
+    opacity: 1;
+}
+
+.color-item {
+    width: 173px;
+    height: 48px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+.color-item.active {
+    border-width: 1.3px;
+    border-style: solid;
+    border-color: blue;
+}
+
+/* 타이포 리스트 */
+.typo-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease, opacity 0.4s ease;
+}
+.typo-list-wrapper.active {
+    max-height: 510px;
+    opacity: 1;
+}
+
+.typo-item {
+    width: 173px;
+    font-size: 20px;
+
+    cursor: pointer;
+}
+.typo-item.active {
+    font-weight: 600;
+}

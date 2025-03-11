@@ -4,7 +4,7 @@ import FailIcon from "../../assets/fail.png";
 import FileIcon from "../../assets/file.png";
 import SuccessIcon from "../../assets/success.png";
 import LoadingScreen from "../../components/loadingScreen";
-import ProgressSteps from "../../components/ProgressSteps";
+import ProgressSteps from "../../components/progressSteps";
 import "./resumeUpload.css";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
