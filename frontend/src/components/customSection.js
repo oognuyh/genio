@@ -7,7 +7,7 @@ import customCloseImage from "../assets/popup-close.png";
 
 import "./customSection.css";
 
-const CustomSection = ({ currentStep }) => {
+const CustomSection = ({ plats, cols, setPlatform, setColor, setTypo }) => {
     const icons = [
         templateIcon,
         colorPickerIcon,
