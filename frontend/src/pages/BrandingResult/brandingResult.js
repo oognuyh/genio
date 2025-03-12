@@ -44,12 +44,14 @@ const BrandingResult = () => {
     "포트폴리오",
   ]);
   const [colors, setColors] = useState(kitData.colors.map((e) => e.value));
+
   const [hashtags, setHashtags] = useState(
     kitData.hashtags.map((e) => e.value)
   );
 
-  const [kitPlatfrom, setKitPlatform] = useState(platforms[0]);
-  const [kitColor, setKitColor] = useState(colors[0]);
+  const [kitPlatfrom, setKitPlatform] = useState(platforms[0]); // 선택 플랫폼
+  const [kitColor, setKitColor] = useState(colors[0]); // 선택 컬러
+  const [kitTypo, setKitTypo] = useState("Pretendard"); // 선택 타이포그래피
 
   const [fileExt, setFileExt] = useState("png");
   const [fileWidth, setFileWidth] = useState(1020);
@@ -241,53 +243,54 @@ const BrandingResult = () => {
 
         <div className="kit-custom-wrapper">
           <CustomSection platforms={platforms} colors={colors}
-            kitPlatform={kitPlatfrom} kitColor={kitColor}
-            setKitPlatform={setKitPlatform} setKitColor={setKitColor}
+            kitPlatform={kitPlatfrom} kitColor={kitColor} kitTypo={kitTypo}
+            setKitPlatform={setKitPlatform} setKitColor={setKitColor} setKitTypo={setKitTypo}
             setIsShifted={setIsShifted} />
-          <div className={`kit-box ${isShifted ? "shifted" : ""}`}>
-            {/* 조건부 키트 프리뷰 렌더링 */}
-            {renderPreview()}
+          <div className={`kit-box ${isShifted ? "shifted" : ""}`}
+            style={{"font-family": kitTypo}}>
+          {/* 조건부 키트 프리뷰 렌더링 */}
+          {renderPreview()}
+        </div>
+      </div>
+
+      {/* 저장 버튼 */}
+      <button className="save-button" onClick={onDownloadBtn}>
+        이미지로 저장하기
+      </button>
+
+      {isPreviewOpen && (
+        <div className="popup-overlay">
+          <div className="popup-save-content">
+            <h3 className="popup-intro1">{isGenerating ? '이미지 생성 중' : '이미지 저장 완료!'}</h3>
+            <h3 className="popup-intro2">{isGenerating ? '제니오가 열심히 이미지를 만들고 있어요!' : `이제 자신있게 ${userName}님을 세상에 보여주세요 💫`}</h3>
+            <button
+              onClick={() => setIsPreviewOpen(false)}
+              className="popup-close-button">
+              <img src={popCloseImage} width="20px" height="20px" alt="close" />
+            </button>
+
+            {isGenerating ?
+              (<div>
+                <img src={loadingImage2} alt="생성 중" className="loading-image1" style={{
+                  maxWidth: '80%',
+                  maxHeight: '80%',
+                  objectFit: 'contain'
+                }} />
+              </div>) :
+              <img src={popupImg} alt="card" />}
+
+            <button
+              onClick={() => navigate('/')}
+              className="popup-back-button">
+              처음으로 돌아가기
+            </button>
           </div>
         </div>
+      )}
 
-        {/* 저장 버튼 */}
-        <button className="save-button" onClick={onDownloadBtn}>
-          이미지로 저장하기
-        </button>
-
-        {isPreviewOpen && (
-          <div className="popup-overlay">
-            <div className="popup-save-content">
-              <h3 className="popup-intro1">{isGenerating ? '이미지 생성 중' : '이미지 저장 완료!'}</h3>
-              <h3 className="popup-intro2">{isGenerating ? '제니오가 열심히 이미지를 만들고 있어요!' : `이제 자신있게 ${userName}님을 세상에 보여주세요 💫`}</h3>
-              <button
-                onClick={() => setIsPreviewOpen(false)}
-                className="popup-close-button">
-                <img src={popCloseImage} width="20px" height="20px" alt="close" />
-              </button>
-
-              {isGenerating ?
-                (<div>
-                  <img src={loadingImage2} alt="생성 중" className="loading-image1" style={{
-                    maxWidth: '80%',
-                    maxHeight: '80%',
-                    objectFit: 'contain'
-                  }} />
-                </div>) :
-                <img src={popupImg} alt="card" />}
-
-              <button
-                onClick={() => navigate('/')}
-                className="popup-back-button">
-                처음으로 돌아가기
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* 이미지 저장을 위한 히든 컴포넌트 */}
-        {renderKit()}
-      </div>
+      {/* 이미지 저장을 위한 히든 컴포넌트 */}
+      {renderKit()}
+    </div >
     </>
   );
 };

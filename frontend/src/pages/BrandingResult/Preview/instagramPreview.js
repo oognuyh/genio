@@ -17,9 +17,6 @@ const InstagramInPreview = ({ kitColor, tagline, biography, hashtags }) => {
                             <div className="instagram-preview-hashtag-chip" style={{ color: kitColor }}>{hashtag}</div>
                         ))}
                     </div>
-                    <p className="instagram-preview-description">
-                        {biography}
-                    </p>
                 </div>
             </div>
         </>

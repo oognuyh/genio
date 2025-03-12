@@ -7,7 +7,7 @@ import customCloseImage from "../assets/popup-close.png";
 
 import "./customSection.css";
 
-const CustomSection = ({ platforms, colors, kitColor, kitPlatform, typo, setKitPlatform, setKitColor, setTypo, setIsShifted }) => {
+const CustomSection = ({ platforms, colors, kitColor, kitPlatform, kitTypo, setKitPlatform, setKitColor, setKitTypo, setIsShifted }) => {
     const icons = [
         templateIcon,
         colorPickerIcon,
@@ -21,20 +21,43 @@ const CustomSection = ({ platforms, colors, kitColor, kitPlatform, typo, setKitP
     ];
 
     const typos = [
-        "프리텐다드",
-        "노토 산스",
-        "나눔스퀘어",
-        "에스코어 드림",
-        "Roboto",
-        "Open Sans",
-        "Poppins",
-        "Lora"
-    ]
+        {
+            name: "프리텐다드",
+            font: "Pretendard"
+        },
+        {
+            name: "노토 산스",
+            font: "Noto Sans KR"
+        },
+        {
+            name: "나눔스퀘어",
+            font: "nanumsquare"
+        },
+        {
+            name: "에스코어 드림",
+            font: "sCoreDream"
+        },
+        // {
+        //     name: "Roboto",
+        //     font: "Roboto"
+        // },
+        // {
+        //     name: "Open Sans",
+        //     font: "Open Sans"
+        // },
+        // {
+        //     name: "Poppins",
+        //     font: "Poppins"
+        // },
+        // {
+        //     name: "Lora",
+        //     font: "Lora"
+        // }
+    ];
 
     const [isCustomViewOpen, setIsCustomViewOpen] = useState(true); // 커스텀 영역 표출 플래그
 
     const [customTitle, setCustomTitle] = useState(titles[0]); // 커스텀 타이틀
-    const [kitTypo, setKitTypo] = useState(typos[0]); // 선택 타이포그래피
 
     const [titleIdx, setTitleIdx] = useState(0); // 선택된 타이틀 인덱스
 
@@ -94,10 +117,10 @@ const CustomSection = ({ platforms, colors, kitColor, kitPlatform, typo, setKitP
                 {/* 타이포 선택 리스트 */}
                 <div className={`typo-list-wrapper ${titleIdx === 2 ? "active" : ""}`}>
                     {typos.map((typo) => (
-                        <p className={`typo-item ${typo === kitTypo ? "active" : ""}`}
-                            data-visible={typo === kitTypo ? "true" : "false"}
-                            onClick={() => setKitTypo(typo)}>
-                            {typo}
+                        <p className={`typo-item ${typo.font === kitTypo ? "active" : ""}`}
+                            data-visible={typo.font === kitTypo ? "true" : "false"}
+                            onClick={() => setKitTypo(typo.font)}>
+                            {typo.name}
                         </p>
                     ))}
                 </div>

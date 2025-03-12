@@ -9,9 +9,8 @@ body {
 
 .result-container {
   /* genkit-page-default */
-  position: absolute;
-  width: 100vw;
-  height: 91.11vh;
+  display: flex;
+  flex-direction: column;
   overflow-x: hidden;
 
   font-family: Pretendard;
@@ -244,26 +243,12 @@ body {
   /* button-01 */
   position: absolute;
   width: 16.5vw;
-  height: 5vh; /* 보통 5vh는 45px과 비슷한 크기 */
+  height: 5vh;
 
   left: 50%;
-  bottom: -47px;
+  bottom: 100px;
   transform: translate(-50%, 0);
-
-  /* 자동 레이아웃 */
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5208vw;
-  padding: 1.5686vh 4.1667vw;
-
-  /* Inside Auto Layout */
-  flex: none;
-  order: 0;
-  align-self: stretch;
-  flex-grow: 0;
-  margin: 0.5208vw 0;
+  margin-top: 50px;
 
   border: none;
   border-radius: 9px;

@@ -16,9 +16,6 @@ const InstagramKit = ({ kitColor, tagline, biography, hashtags }) => {
                         <div className="instagram-hashtag-chip" style={{ color: kitColor }}>{hashtag}</div>
                     ))}
                 </div>
-                <p className="instagram-kit-description">
-                    {biography}
-                </p>
             </div>
         </div >
     );
