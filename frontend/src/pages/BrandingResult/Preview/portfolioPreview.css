@@ -108,15 +108,100 @@
 
     font-size: 4px;
 }
+
 .portfolio-preview-tel {
     margin: 0;
     margin-top: 2px;
 
     font-size: 4px;
 }
+
 .portfolio-preview-email {
     margin: 0;
     margin-top: 2px;
 
     font-size: 4px;
+}
+
+@media (max-width: 768px) {
+
+    /* 프로필 카드 스타일 */
+    .portfolio-kit-standard {
+        margin-left: 45px;
+        margin-bottom: 3px;
+
+        font-size: 8.88px;
+    }
+
+    .portfolio-preview-container {
+        margin-left: 45px;
+        
+        width: 300px;
+        height: 197px;
+    }
+
+    .portfolio-preview-intro {
+        margin-top: 25.16px;
+        margin-left: 16.28px;
+
+        font-size: 8.88px;
+    }
+
+    .portfolio-preview-title {
+        /* 자동 레이아웃 */
+        width: 133.2px;
+        margin-top: 13.32px;
+        margin-left: 16.28px;
+
+        font-size: 11.84px;
+    }
+
+    /* 해쉬태그 영역 */
+    .portfolio-preview-hashtag-list {
+        /* chip_set (kit-portfolio) */
+        height: 19.24px;
+
+        gap: 2.22px;
+
+        margin-left: 16.28px;
+        margin-bottom: 49.58px;
+    }
+
+    .portfolio-preview-hashtag-chip {
+        gap: 3.7px;
+        padding: 1.48px 2.22px;
+
+        border-radius: 1.85px;
+
+        /* Typo */
+        font-size: 3.7px;
+    }
+
+    .portfolio-preview-contact-list {
+        margin-left: 16.28px;
+        margin-bottom: 18.5px;
+    }
+
+    .portfolio-preview-contact-title {
+        font-size: 3.7px;
+    }
+
+    .portfolio-preview-url {
+        margin-top: 4.44px;
+
+        font-size: 2.96px;
+    }
+
+    .portfolio-preview-tel {
+        margin-top: 1.48px;
+
+        font-size: 2.96px;
+    }
+
+    .portfolio-preview-email {
+        margin: 0;
+        margin-top: 1.48px;
+
+        font-size: 2.96px;
+    }
 }

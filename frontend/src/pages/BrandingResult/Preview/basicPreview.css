@@ -90,3 +90,58 @@
     font-weight: 600;
     line-height: 140%;
 }
+
+@media (max-width: 768px) {
+    .basic-kit-standard {
+        margin-left: 5px;
+        margin-bottom: 3px;
+    
+        font-size: 6px;
+    }
+
+    .basic-preview-container {
+        margin-left: 5px;
+        width: 380px;
+        height: 132.1px;
+    }
+
+    .basic-preview-content {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    
+    .basic-preview-title {
+        /* 자동 레이아웃 */
+        margin-top: 20px;
+    
+        font-size: 9px;
+    }
+    
+    .basic-preview-description {
+        /* 자동 레이아웃 */
+        margin-top: 0px;
+    
+        font-size: 5.5px;
+    }
+    
+    /* 해쉬태그 영역 */
+    .basic-preview-hashtag-list {
+        height: 13px;
+    
+        margin-left: 20px;
+        margin-bottom: 20px;
+    
+        gap: 4.2px;
+    }
+    
+    .basic-preview-hashtag-chip {
+        /* 자동 레이아웃 */
+        gap: 2.3px;
+        padding: 2.3px 2.8px;
+        
+        border-radius: 2px;
+    
+        /* Typo */
+        font-size: 4.3px;
+    }
+}

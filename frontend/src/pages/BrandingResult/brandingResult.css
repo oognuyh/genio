@@ -230,7 +230,7 @@ body {
   .intro-section {
     display: block;
 
-    width: 86%;
+    width: 335.4px;
     height: auto;
 
     gap: 0;
@@ -240,12 +240,12 @@ body {
   }
 
   .intro-text {
-    width: 100%;
+    width: 335.4px;
     font-size: 14px;
   }
 
   .kit-custom-wrapper {
-    width: 86%;
+    width: 335.4px;
     flex-direction: column;
 
     margin-top: 30px;
@@ -254,8 +254,10 @@ body {
 
   .kit-box {
     position: relative;
-    left: -7.5%;
-    width: 115%;
-    background-color: transparent;
+    width: 390px;
+    height: auto;
+    left: -28px;
+    align-items:flex-start;
+    padding: 10px 0px;
   }
 }
