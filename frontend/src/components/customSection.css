@@ -274,7 +274,7 @@
 
     .platform-list-wrapper {
         flex-direction: row;
-        width: 56.9375vw;
+        width: 100%;
         gap: 20px;
         overflow-x: auto;
         white-space: nowrap;
@@ -289,7 +289,7 @@
 
     .color-list-wrapper {
         flex-direction: row;
-        width: 56.9375vw;
+        width: 100%;
         gap: 12px;
         margin-top: 0px;
     }
@@ -305,13 +305,12 @@
     /* 타이포 리스트 */
     .typo-list-wrapper {
         flex-direction: row;
-        width: 56.9375vw;
+        width: 100%;
         gap: 20px;
-        overflow-x: overlay; /* 레이아웃 영향 없는 스크롤 */
+        overflow-x: overlay;
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
     }
-
     .platform-list-wrapper::-webkit-scrollbar,
     .typo-list-wrapper::-webkit-scrollbar {
         display: none;

@@ -1,20 +1,15 @@
 /* 프로필 카드 스타일 */
 .basic-kit-standard {
-    position: relative;
-    right: 24.2vw;
-    top: 3.75vh;
-    font-size: 0.87vw;
+    margin-bottom: 8px;
 
+    font-size: 13px;
     color: rgb(69, 84, 115);
 }
 
 .basic-preview-container {
     /* kit-basic */
-    width: 53.125vw;
-    height: 29.6vh;
-
-    /* 자동 레이아웃 */
-    margin-top: 1.75vw;
+    width: 765px;
+    height: 266px;
 }
 
 .basic-preview-kit {
@@ -31,15 +26,15 @@
     display: flex;
     flex-direction: column;
     
-    margin-left: 2.83vw;
-    margin-right: 2.83vw;
+    margin-left: 41px;
+    margin-right: 41px;
 }
 
 .basic-preview-title {
     /* 자동 레이아웃 */
-    margin-top: 2.83vw;
+    margin-top: 41px;
 
-    font-size: 1.29vw;
+    font-size: 19px;
     font-weight: 500;
     line-height: 140%;
 }
@@ -52,7 +47,7 @@
     /* 자동 레이아웃 */
     margin-top: 0px;
 
-    font-size: 0.845vw;
+    font-size: 12px;
     font-weight: 400;
     line-height: 165%;
 
@@ -63,22 +58,15 @@
 .basic-preview-hashtag-list {
     /* chip_set (kit-basic) */
     position: static;
-    height: 2.8431vh;
+    height: 26px;
 
     margin: auto;
-    margin-left: 2.83vw;
-    margin-bottom: 2.83vw;
+    margin-left: 41px;
+    margin-bottom: 41px;
 
     /* 자동 레이아웃 */
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 0.625vw;
-    padding: 0px;
-
-    /* Inside Auto Layout */
-    flex: none;
+    gap: 9px;
 }
 
 .basic-preview-hashtag-chip {
@@ -87,12 +75,9 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 0.3703vw;
-    padding: 0.5882vh 0.4167vw;
-
-    /* Inside Auto Layout */
-    flex: none;
-    flex-grow: 0;
+    gap: 5px;
+    padding: 5px 6px;
+    
     white-space: nowrap;
 
     border-radius: 4px;
@@ -101,9 +86,7 @@
     opacity: 0.8;
 
     /* Typo */
-    font-size: 0.62vw;
+    font-size: 9px;
     font-weight: 600;
     line-height: 140%;
-    letter-spacing: 0%;
-    text-align: left;
 }

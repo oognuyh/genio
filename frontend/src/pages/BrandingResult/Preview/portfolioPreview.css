@@ -1,20 +1,15 @@
 /* 프로필 카드 스타일 */
 .portfolio-kit-standard {
-    position: relative;
-    right: 11.8vw;
-    top: 3.78vh;
-    font-size: 0.84vw;
+    margin-bottom: 8px;
 
+    font-size: 12px;
     color: rgb(69, 84, 115);
 }
 
 .portfolio-preview-container {
     /* kit-portfolio */
-    width: 28.325vw;
-    height: 29.6vh;
-
-    /* 자동 레이아웃 */
-    margin-top: 1.75vw;
+    width: 408px;
+    height: 266px;
 }
 
 .portfolio-preview-kit {
@@ -29,22 +24,21 @@
 }
 
 .portfolio-preview-intro {
-    margin-top: 2.7vh;
-    margin-left: 1.5vw;
+    margin-top: 34px;
+    margin-left: 22px;
 
-    font-size: 0.842vw;
+    font-size: 12px;
     font-weight: 600;
     line-height: 140%;
 }
 
 .portfolio-preview-title {
     /* 자동 레이아웃 */
-    width: 12.5vw;
-    margin: auto;
-    margin-top: 2vh;
-    margin-left: 1.5vw;
+    width: 180px;
+    margin-top: 18px;
+    margin-left: 22px;
 
-    font-size: 1.1vw;
+    font-size: 16px;
     font-weight: 700;
     line-height: 140%;
 }
@@ -56,21 +50,18 @@
 /* 해쉬태그 영역 */
 .portfolio-preview-hashtag-list {
     /* chip_set (kit-portfolio) */
-    height: 2.8431vh;
+    height: 26px;
 
     /* 자동 레이아웃 */
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    gap: 0.2vw;
+    gap: 3px;
     padding: 0px;
 
-    /* Inside Auto Layout */
-    flex-grow: 0;
-    margin: auto;
-    margin-left: 1.5vw;
-    margin-bottom: 7.5vh;
+    margin-left: 22px;
+    margin-bottom: 67px;
 }
 
 .portfolio-preview-hashtag-chip {
@@ -79,12 +70,9 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 0.3703vw;
-    padding: 0.2vh 0.2vw;
+    gap: 5px;
+    padding: 2px 3px;
 
-    /* Inside Auto Layout */
-    flex: none;
-    flex-grow: 0;
     white-space: nowrap;
 
     border-radius: 2.5px;
@@ -93,11 +81,9 @@
     opacity: 0.8;
 
     /* Typo */
-    font-size: 0.37vw;
+    font-size: 5px;
     font-weight: 500;
     line-height: 140%;
-    letter-spacing: 0%;
-    text-align: left;
 }
 
 .portfolio-preview-contact-list {
@@ -105,32 +91,32 @@
     flex-direction: column;
 
     /* Inside Auto Layout */
-    margin-left: 1.5vw;
-    margin-bottom: 2.8vh;
+    margin-left: 22px;
+    margin-bottom: 25px;
 }
 
 .portfolio-preview-contact-title {
     margin: 0;
 
-    font-size: 0.37vw;
+    font-size: 5px;
     font-weight: 600;
 }
 
 .portfolio-preview-url {
     margin: 0;
-    margin-top: 0.4vw;
+    margin-top: 6px;
 
-    font-size: 0.3vw;
+    font-size: 4px;
 }
 .portfolio-preview-tel {
     margin: 0;
-    margin-top: 0.13vw;
+    margin-top: 2px;
 
-    font-size: 0.3vw;
+    font-size: 4px;
 }
 .portfolio-preview-email {
     margin: 0;
-    margin-top: 0.13vw;
+    margin-top: 2px;
 
-    font-size: 0.3vw;
+    font-size: 4px;
 }

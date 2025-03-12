@@ -1,20 +1,15 @@
 /* 프로필 카드 스타일 */
 .instagram-kit-standard {
-    position: relative;
-    right: 5.5vw;
-    top: 3.75vh;
-    font-size: 0.87vw;
+    margin-bottom: 8px;
 
+    font-size: 13px;
     color: rgb(69, 84, 115);
 }
 
 .instagram-preview-container {
     /* kit-basic */
-    width: 15.9375vw;
-    height: 29.6vh;
-
-    /* 자동 레이아웃 */
-    margin-top: 1.75vw;
+    width: 266px;
+    height: 266px;
 
     color: rgb(255, 255, 255);
 }
@@ -30,12 +25,11 @@
 }
 
 .instagram-preview-title {
-    width: 13vw;
-    height: 5.8vh;
+    width: 187px;
     margin: 0;
 
     /* 자동 레이아웃 */
-    font-size: 1vw;
+    font-size: 14px;
     font-weight: 700;
     line-height: 140%;
 
@@ -47,53 +41,41 @@
 }
 
 .instagram-preview-description {
-    width: 13vw;
-    height: 8vh;
+    width: 187px;
+    height: 72px;
 
     /* 자동 레이아웃 */
     margin-top: 0px;
-    margin-bottom: 3.8vh;
+    margin-bottom: 34px;
 
-    font-size: 0.545vw;
+    font-size: 8px;
     font-weight: 400;
     line-height: 165%;
 }
 
 /* 해쉬태그 영역 */
 .instagram-preview-hashtag-list {
-    /* chip_set (kit-instagram) */
-    position: static;
-    height: 2.8431vh;
+    height: 26px;
 
-    /* 자동 레이아웃 */
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    gap: 0.2vw;
+    gap: 3px;
     padding: 0px;
 
-    /* Inside Auto Layout */
-    flex: none;
-    flex-grow: 0;
-    margin-bottom: 0.8vh;
+    margin-bottom: 7px;
 }
 
 .instagram-preview-hashtag-chip {
-    /* chip (kit-instagram) */
-    position: static;
-
     /* 자동 레이아웃 */
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 0.3703vw;
-    padding: 0.2vh 0.2vw;
+    gap: 5px;
+    padding: 2px 3px;
 
-    /* Inside Auto Layout */
-    flex: none;
-    flex-grow: 0;
     white-space: nowrap;
 
     border-radius: 2.5px;
@@ -102,7 +84,7 @@
     opacity: 0.8;
 
     /* Typo */
-    font-size: 0.37vw;
+    font-size: 5px;
     font-weight: 500;
     line-height: 140%;
     letter-spacing: 0%;

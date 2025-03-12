@@ -4,7 +4,7 @@ import "./instagramPreview.css"
 
 const InstagramInPreview = ({ kitColor, tagline, biography, hashtags }) => {
     return (
-        <>
+        <div>
             <p className="instagram-kit-standard">1080 x 1080</p>
             <div className="instagram-preview-container">
                 <div id="branding-preview-kit" className="instagram-preview-kit"
@@ -19,7 +19,7 @@ const InstagramInPreview = ({ kitColor, tagline, biography, hashtags }) => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
