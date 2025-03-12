@@ -6,6 +6,7 @@ import com.pinkfactory.genio.infrastructure.adapter.out.resume.ResumeExtractingG
 import com.pinkfactory.genio.infrastructure.util.IDGenerator;
 import com.pinkfactory.genio.port.out.ResumeExtractor;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletionException;
@@ -25,7 +26,7 @@ public class LangGraph4jResumeExtractor implements ResumeExtractor {
 
         var result = graph.build().stream(Map.of("resumeId", resumeId, "resume", content));
 
-        State generation = new State(Map.of());
+        State generation = new State(new HashMap<>());
 
         try {
             for (var r : result) {

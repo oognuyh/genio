@@ -10,6 +10,7 @@ import com.pinkfactory.genio.infrastructure.adapter.out.card.CardGeneratingGraph
 import com.pinkfactory.genio.infrastructure.util.IDGenerator;
 import com.pinkfactory.genio.infrastructure.util.JsonUtil;
 import com.pinkfactory.genio.port.out.CardGenerator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -34,7 +35,7 @@ public class LangGraph4jCardGenerator implements CardGenerator {
 
         var result = graph.build().stream(Map.of("cardId", cardId, "resume", JsonUtil.serialize(resume)));
 
-        State generation = new State(Map.of());
+        State generation = new State(new HashMap<>());
 
         try {
             for (var r : result) {
