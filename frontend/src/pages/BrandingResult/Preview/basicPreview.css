@@ -1,147 +1,147 @@
 /* 프로필 카드 스타일 */
 .basic-kit-standard {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 
-    font-size: 13px;
-    color: rgb(69, 84, 115);
+  font-size: 13px;
+  color: rgb(69, 84, 115);
 }
 
 .basic-preview-container {
-    /* kit-basic */
-    width: 765px;
-    height: 266px;
+  /* kit-basic */
+  width: 765px;
+  height: 266px;
 }
 
 .basic-preview-kit {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .basic-preview-content {
-    display: flex;
-    flex-direction: column;
-    
-    margin-left: 41px;
-    margin-right: 41px;
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 41px;
+  margin-right: 41px;
 }
 
 .basic-preview-title {
-    /* 자동 레이아웃 */
-    margin-top: 41px;
+  /* 자동 레이아웃 */
+  margin-top: 41px;
 
-    font-size: 19px;
-    font-weight: 500;
-    line-height: 140%;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 140%;
 }
 
 .name-highlight {
-    font-weight: 720;
+  font-weight: 720;
 }
 
 .basic-preview-description {
-    /* 자동 레이아웃 */
-    margin-top: 0px;
+  /* 자동 레이아웃 */
+  margin-top: 0px;
 
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 165%;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 165%;
 
-    flex: none;
+  flex: none;
 }
 
 /* 해쉬태그 영역 */
 .basic-preview-hashtag-list {
-    /* chip_set (kit-basic) */
-    position: static;
-    height: 26px;
+  /* chip_set (kit-basic) */
+  position: static;
+  height: 26px;
 
-    margin: auto;
-    margin-left: 41px;
-    margin-bottom: 41px;
+  margin: auto;
+  margin-left: 41px;
+  margin-bottom: 41px;
 
-    /* 자동 레이아웃 */
-    display: flex;
-    gap: 9px;
+  /* 자동 레이아웃 */
+  display: flex;
+  gap: 9px;
 }
 
 .basic-preview-hashtag-chip {
-    /* 자동 레이아웃 */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    padding: 5px 6px;
-    
-    white-space: nowrap;
+  /* 자동 레이아웃 */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 6px;
 
-    border-radius: 4px;
-    /* White */
-    background: rgb(255, 255, 255);
-    opacity: 0.8;
+  white-space: nowrap;
 
-    /* Typo */
-    font-size: 9px;
-    font-weight: 600;
-    line-height: 140%;
+  border-radius: 4px;
+  /* White */
+  background: rgb(255, 255, 255);
+  opacity: 0.8;
+
+  /* Typo */
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 140%;
 }
 
 @media (max-width: 768px) {
-    .basic-kit-standard {
-        margin-left: 5px;
-        margin-bottom: 3px;
-    
-        font-size: 6px;
-    }
+  .basic-kit-standard {
+    margin-left: 5px;
+    margin-bottom: 3px;
 
-    .basic-preview-container {
-        margin-left: 5px;
-        width: 380px;
-        height: 132.1px;
-    }
+    font-size: 6px;
+  }
 
-    .basic-preview-content {
-        margin-left: 20px;
-        margin-right: 20px;
-    }
-    
-    .basic-preview-title {
-        /* 자동 레이아웃 */
-        margin-top: 20px;
-    
-        font-size: 9px;
-    }
-    
-    .basic-preview-description {
-        /* 자동 레이아웃 */
-        margin-top: 0px;
-    
-        font-size: 5.5px;
-    }
-    
-    /* 해쉬태그 영역 */
-    .basic-preview-hashtag-list {
-        height: 13px;
-    
-        margin-left: 20px;
-        margin-bottom: 20px;
-    
-        gap: 4.2px;
-    }
-    
-    .basic-preview-hashtag-chip {
-        /* 자동 레이아웃 */
-        gap: 2.3px;
-        padding: 2.3px 2.8px;
-        
-        border-radius: 2px;
-    
-        /* Typo */
-        font-size: 4.3px;
-    }
+  .basic-preview-container {
+    margin-left: 5px;
+    width: 380px;
+    height: 132.1px;
+  }
+
+  .basic-preview-content {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .basic-preview-title {
+    /* 자동 레이아웃 */
+    margin-top: 20px;
+
+    font-size: 9px;
+  }
+
+  .basic-preview-description {
+    /* 자동 레이아웃 */
+    margin-top: 0px;
+
+    font-size: 5.5px;
+  }
+
+  /* 해쉬태그 영역 */
+  .basic-preview-hashtag-list {
+    height: 13px;
+
+    margin-left: 20px;
+    margin-bottom: 20px;
+
+    gap: 4.2px;
+  }
+
+  .basic-preview-hashtag-chip {
+    /* 자동 레이아웃 */
+    gap: 2.3px;
+    padding: 2.3px 2.8px;
+
+    border-radius: 2px;
+
+    /* Typo */
+    font-size: 4.3px;
+  }
 }

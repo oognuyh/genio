@@ -1,207 +1,206 @@
 /* 프로필 카드 스타일 */
 .portfolio-kit-standard {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 
-    font-size: 12px;
-    color: rgb(69, 84, 115);
+  font-size: 12px;
+  color: rgb(69, 84, 115);
 }
 
 .portfolio-preview-container {
-    /* kit-portfolio */
-    width: 408px;
-    height: 266px;
+  /* kit-portfolio */
+  width: 408px;
+  height: 266px;
 }
 
 .portfolio-preview-kit {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 
-    width: 100%;
-    height: 100%;
-    color: rgb(255, 255, 255);
+  width: 100%;
+  height: 100%;
+  color: rgb(255, 255, 255);
 }
 
 .portfolio-preview-intro {
-    margin-top: 34px;
-    margin-left: 22px;
+  margin-top: 34px;
+  margin-left: 22px;
 
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 140%;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 140%;
 }
 
 .portfolio-preview-title {
-    /* 자동 레이아웃 */
-    width: 180px;
-    margin-top: 18px;
-    margin-left: 22px;
+  /* 자동 레이아웃 */
+  width: 180px;
+  margin-top: 18px;
+  margin-left: 22px;
 
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 140%;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 140%;
 }
 
 .name-highlight {
-    font-weight: 720;
+  font-weight: 720;
 }
 
 /* 해쉬태그 영역 */
 .portfolio-preview-hashtag-list {
-    /* chip_set (kit-portfolio) */
-    height: 26px;
+  /* chip_set (kit-portfolio) */
+  height: 26px;
 
-    /* 자동 레이아웃 */
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 3px;
-    padding: 0px;
+  /* 자동 레이아웃 */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 3px;
+  padding: 0px;
 
-    margin-left: 22px;
-    margin-bottom: 67px;
+  margin-left: 22px;
+  margin-bottom: 67px;
 }
 
 .portfolio-preview-hashtag-chip {
-    /* 자동 레이아웃 */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    padding: 2px 3px;
+  /* 자동 레이아웃 */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 3px;
 
-    white-space: nowrap;
+  white-space: nowrap;
 
-    border-radius: 2.5px;
-    /* White */
-    background: rgb(255, 255, 255);
-    opacity: 0.8;
+  border-radius: 2.5px;
+  /* White */
+  background: rgb(255, 255, 255);
+  opacity: 0.8;
 
-    /* Typo */
-    font-size: 5px;
-    font-weight: 500;
-    line-height: 140%;
+  /* Typo */
+  font-size: 5px;
+  font-weight: 500;
+  line-height: 140%;
 }
 
 .portfolio-preview-contact-list {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    /* Inside Auto Layout */
-    margin-left: 22px;
-    margin-bottom: 25px;
+  /* Inside Auto Layout */
+  margin-left: 22px;
+  margin-bottom: 25px;
 }
 
 .portfolio-preview-contact-title {
-    margin: 0;
+  margin: 0;
 
-    font-size: 5px;
-    font-weight: 600;
+  font-size: 5px;
+  font-weight: 600;
 }
 
 .portfolio-preview-url {
-    margin: 0;
-    margin-top: 6px;
+  margin: 0;
+  margin-top: 6px;
 
-    font-size: 4px;
+  font-size: 4px;
 }
 
 .portfolio-preview-tel {
-    margin: 0;
-    margin-top: 2px;
+  margin: 0;
+  margin-top: 2px;
 
-    font-size: 4px;
+  font-size: 4px;
 }
 
 .portfolio-preview-email {
-    margin: 0;
-    margin-top: 2px;
+  margin: 0;
+  margin-top: 2px;
 
-    font-size: 4px;
+  font-size: 4px;
 }
 
 @media (max-width: 768px) {
+  /* 프로필 카드 스타일 */
+  .portfolio-kit-standard {
+    margin-left: 45px;
+    margin-bottom: 3px;
 
-    /* 프로필 카드 스타일 */
-    .portfolio-kit-standard {
-        margin-left: 45px;
-        margin-bottom: 3px;
+    font-size: 8.88px;
+  }
 
-        font-size: 8.88px;
-    }
+  .portfolio-preview-container {
+    margin-left: 45px;
 
-    .portfolio-preview-container {
-        margin-left: 45px;
-        
-        width: 300px;
-        height: 197px;
-    }
+    width: 300px;
+    height: 197px;
+  }
 
-    .portfolio-preview-intro {
-        margin-top: 25.16px;
-        margin-left: 16.28px;
+  .portfolio-preview-intro {
+    margin-top: 25.16px;
+    margin-left: 16.28px;
 
-        font-size: 8.88px;
-    }
+    font-size: 8.88px;
+  }
 
-    .portfolio-preview-title {
-        /* 자동 레이아웃 */
-        width: 133.2px;
-        margin-top: 13.32px;
-        margin-left: 16.28px;
+  .portfolio-preview-title {
+    /* 자동 레이아웃 */
+    width: 133.2px;
+    margin-top: 13.32px;
+    margin-left: 16.28px;
 
-        font-size: 11.84px;
-    }
+    font-size: 11.84px;
+  }
 
-    /* 해쉬태그 영역 */
-    .portfolio-preview-hashtag-list {
-        /* chip_set (kit-portfolio) */
-        height: 19.24px;
+  /* 해쉬태그 영역 */
+  .portfolio-preview-hashtag-list {
+    /* chip_set (kit-portfolio) */
+    height: 19.24px;
 
-        gap: 2.22px;
+    gap: 2.22px;
 
-        margin-left: 16.28px;
-        margin-bottom: 49.58px;
-    }
+    margin-left: 16.28px;
+    margin-bottom: 49.58px;
+  }
 
-    .portfolio-preview-hashtag-chip {
-        gap: 3.7px;
-        padding: 1.48px 2.22px;
+  .portfolio-preview-hashtag-chip {
+    gap: 3.7px;
+    padding: 1.48px 2.22px;
 
-        border-radius: 1.85px;
+    border-radius: 1.85px;
 
-        /* Typo */
-        font-size: 3.7px;
-    }
+    /* Typo */
+    font-size: 3.7px;
+  }
 
-    .portfolio-preview-contact-list {
-        margin-left: 16.28px;
-        margin-bottom: 18.5px;
-    }
+  .portfolio-preview-contact-list {
+    margin-left: 16.28px;
+    margin-bottom: 18.5px;
+  }
 
-    .portfolio-preview-contact-title {
-        font-size: 3.7px;
-    }
+  .portfolio-preview-contact-title {
+    font-size: 3.7px;
+  }
 
-    .portfolio-preview-url {
-        margin-top: 4.44px;
+  .portfolio-preview-url {
+    margin-top: 4.44px;
 
-        font-size: 2.96px;
-    }
+    font-size: 2.96px;
+  }
 
-    .portfolio-preview-tel {
-        margin-top: 1.48px;
+  .portfolio-preview-tel {
+    margin-top: 1.48px;
 
-        font-size: 2.96px;
-    }
+    font-size: 2.96px;
+  }
 
-    .portfolio-preview-email {
-        margin: 0;
-        margin-top: 1.48px;
+  .portfolio-preview-email {
+    margin: 0;
+    margin-top: 1.48px;
 
-        font-size: 2.96px;
-    }
+    font-size: 2.96px;
+  }
 }

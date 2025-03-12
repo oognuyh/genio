@@ -10,7 +10,7 @@ const getTextColorForBackground = (backgroundColor) => {
   return yiq >= 190 ? "#000000" : "#ffffff";
 };
 
-const lightenColor = (hex, percent) => {
+export const lightenColor = (hex, percent) => {
   // 입력받은 HEX 코드에서 #를 제거하고 16진수로 변환
   let r = parseInt(hex.substring(1, 3), 16);
   let g = parseInt(hex.substring(3, 5), 16);
@@ -169,7 +169,13 @@ export const styles = {
   },
 };
 
-const EditableText = ({ value, onChange, style, canEdit = true }) => {
+export const EditableText = ({
+  className,
+  value,
+  onChange,
+  style,
+  canEdit = true,
+}) => {
   const divRef = useRef(null);
 
   useEffect(() => {
@@ -181,11 +187,11 @@ const EditableText = ({ value, onChange, style, canEdit = true }) => {
   return (
     <div
       ref={divRef}
+      className={className}
       contentEditable={canEdit}
       suppressContentEditableWarning
-      onChange={(e) => {
-        divRef.current.textContent = e.target.value;
-        onChange(e.target.value);
+      onInput={(e) => {
+        onChange(divRef.current.textContent);
       }}
       style={{
         ...style,
@@ -193,8 +199,6 @@ const EditableText = ({ value, onChange, style, canEdit = true }) => {
         display: "inline-block",
         whiteSpace: "pre-wrap",
         outline: "none",
-        border: "1px solid transparent",
-        padding: "2px",
       }}
     />
   );

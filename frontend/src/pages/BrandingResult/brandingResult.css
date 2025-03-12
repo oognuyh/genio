@@ -72,6 +72,7 @@ body {
 .kit-box {
   /* background */
   width: 820px;
+  max-height: 383.71px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -231,7 +232,7 @@ body {
   .intro-section {
     display: block;
 
-    width: 335.4px;
+    width: 86%;
     height: auto;
 
     gap: 0;
@@ -241,12 +242,12 @@ body {
   }
 
   .intro-text {
-    width: 335.4px;
+    width: 100%;
     font-size: 14px;
   }
 
   .kit-custom-wrapper {
-    width: 335.4px;
+    width: 86%;
     flex-direction: column;
 
     margin-top: 30px;
@@ -255,10 +256,8 @@ body {
 
   .kit-box {
     position: relative;
-    width: 390px;
-    height: auto;
-    left: -28px;
-    align-items:flex-start;
-    padding: 10px 0px;
+    left: -7.5%;
+    width: 115%;
+    background-color: transparent;
   }
 }

@@ -83,6 +83,7 @@ const CustomSection = ({
       <div className="custom-icon-wrapper">
         {icons.map((icon, index) => (
           <img
+            key={`custom-icons__${index}`}
             className={`custom-icon ${index === titleIdx ? "active" : ""}`}
             src={icon}
             onClick={() => onClickIcon(index)}
@@ -107,8 +108,9 @@ const CustomSection = ({
         <div
           className={`platform-list-wrapper ${titleIdx === 0 ? "active" : ""}`}
         >
-          {platforms.map((platform) => (
+          {platforms.map((platform, i) => (
             <p
+              key={`custom-platforms__${i}`}
               className={`platform-item ${
                 platform === kitPlatform ? "active" : ""
               }`}
@@ -120,8 +122,9 @@ const CustomSection = ({
         </div>
         {/* 컬러 선택 리스트 */}
         <div className={`color-list-wrapper ${titleIdx === 1 ? "active" : ""}`}>
-          {colors.map((color) => (
+          {colors.map((color, i) => (
             <div
+              key={`custom-colors__${i}`}
               className={`color-item ${color === kitColor ? "active" : ""}`}
               style={{
                 background: `linear-gradient(to left, ${color}, #ffffff 140%)`,
@@ -132,8 +135,9 @@ const CustomSection = ({
         </div>
         {/* 타이포 선택 리스트 */}
         <div className={`typo-list-wrapper ${titleIdx === 2 ? "active" : ""}`}>
-          {typos.map((typo) => (
+          {typos.map((typo, i) => (
             <p
+              key={`custom-typos__${i}`}
               className={`typo-item ${typo.font === kitTypo ? "active" : ""}`}
               data-visible={typo.font === kitTypo ? "true" : "false"}
               onClick={() => setKitTypo(typo.font)}

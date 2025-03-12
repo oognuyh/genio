@@ -20,7 +20,7 @@ import PortfolioKit from "../../components/Kits/portfolioKit";
 
 import CustomSection from "../../components/customSection";
 
-import { BrandingCardBox, styles } from "../../components/brandingCardBox";
+import { styles } from "../../components/brandingCardBox";
 import LoadingScreen from "../../components/loadingScreen";
 import "./brandingResult.css";
 
@@ -58,11 +58,6 @@ const BrandingResult = () => {
   ]);
 
   const [colors, setColors] = useState(kitData.colors.map((e) => e.value));
-
-  const [hashtags, setHashtags] = useState(
-    kitData.hashtags.map((e) => e.value)
-  );
-
   const [kitPlatfrom, setKitPlatform] = useState(platforms[0]); // 선택 플랫폼
   const [kitColor, setKitColor] = useState(colors[0]); // 선택 컬러
   const [kitTypo, setKitTypo] = useState("Pretendard"); // 선택 타이포그래피
@@ -72,8 +67,6 @@ const BrandingResult = () => {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isShifted, setIsShifted] = useState(false);
   const [isRegeneratingAlertOpen, setIsRegeneratingAlertOpen] = useState(false);
-
-  const biography = kitData.biography;
 
   useEffect(() => {
     console.log(kitData);
@@ -222,37 +215,103 @@ const BrandingResult = () => {
         return (
           <BasicPreview
             kitColor={kitColor}
-            tagline={tagline}
-            biography={biography}
-            hashtags={hashtags}
+            tagline={kitData.tagline}
+            hashtags={kitData.hashtags.map((hashtag) => hashtag.value)}
+            biography={kitData.biography}
+            onChange={(field, text) => {
+              console.log(field, text);
+              if (field.startsWith("hashtags")) {
+                const [_, i] = field.split(":");
+                const index = parseInt(i, 10);
+
+                const updatedHashtags = [...kitData.hashtags];
+
+                if (index >= 0 && index < updatedHashtags.length) {
+                  updatedHashtags[index] = text;
+                  setKitData({ ...kitData, hashtags: updatedHashtags });
+                }
+              } else {
+                setKitData({ ...kitData, [field]: text });
+              }
+            }}
           />
         );
       case 1:
         return (
           <LinkedinPreview
             kitColor={kitColor}
-            tagline={tagline}
-            position={position}
-            hashtags={hashtags}
+            tagline={kitData.tagline}
+            position={kitData.position}
+            hashtags={kitData.hashtags.map((hashtag) => hashtag.value)}
+            onChange={(field, text) => {
+              if (field.startsWith("hashtags")) {
+                const [_, i] = field.split(":");
+                const index = parseInt(i, 10);
+
+                const updatedHashtags = [...kitData.hashtags];
+
+                if (index >= 0 && index < updatedHashtags.length) {
+                  updatedHashtags[index] = text;
+                  setKitData({ ...kitData, hashtags: updatedHashtags });
+                }
+              } else {
+                setKitData({ ...kitData, [field]: text });
+              }
+            }}
           />
         );
       case 2:
         return (
           <InstagramPreview
             kitColor={kitColor}
-            tagline={tagline}
-            biography={biography}
-            hashtags={hashtags}
+            tagline={kitData.tagline}
+            hashtags={kitData.hashtags.map((hashtag) => hashtag.value)}
+            biography={kitData.biography}
+            onChange={(field, text) => {
+              if (field.startsWith("hashtags")) {
+                const [_, i] = field.split(":");
+                const index = parseInt(i, 10);
+
+                const updatedHashtags = [...kitData.hashtags];
+
+                if (index >= 0 && index < updatedHashtags.length) {
+                  updatedHashtags[index] = text;
+                  setKitData({ ...kitData, hashtags: updatedHashtags });
+                }
+              } else {
+                setKitData({ ...kitData, [field]: text });
+              }
+            }}
           />
         );
       case 3:
         return (
           <PortfolioPreview
             kitColor={kitColor}
-            tagline={tagline}
-            hashtags={hashtags}
+            tagline={kitData.tagline}
+            hashtags={kitData.hashtags.map((hashtag) => hashtag.value)}
+            website={kitData.website}
+            email={kitData.email}
+            phone={kitData.phone}
+            onChange={(field, text) => {
+              if (field.startsWith("hashtags")) {
+                const [_, i] = field.split(":");
+                const index = parseInt(i, 10);
+
+                const updatedHashtags = [...kitData.hashtags];
+
+                if (index >= 0 && index < updatedHashtags.length) {
+                  updatedHashtags[index] = text;
+                  setKitData({ ...kitData, hashtags: updatedHashtags });
+                }
+              } else {
+                setKitData({ ...kitData, [field]: text });
+              }
+            }}
           />
         );
+      default:
+        break;
     }
   };
 
@@ -264,37 +323,42 @@ const BrandingResult = () => {
         return (
           <BasicKit
             kitColor={kitColor}
-            tagline={tagline}
-            biography={biography}
-            hashtags={hashtags}
+            tagline={kitData.tagline}
+            hashtags={kitData.hashtags.map((hashtag) => hashtag.value)}
+            biography={kitData.biography}
           />
         );
       case 1:
         return (
           <LinkedinKit
             kitColor={kitColor}
-            tagline={tagline}
-            position={position}
-            hashtags={hashtags}
+            tagline={kitData.tagline}
+            position={kitData.position}
+            hashtags={kitData.hashtags.map((hashtag) => hashtag.value)}
           />
         );
       case 2:
         return (
           <InstagramKit
             kitColor={kitColor}
-            tagline={tagline}
-            biography={biography}
-            hashtags={hashtags}
+            tagline={kitData.tagline}
+            hashtags={kitData.hashtags.map((hashtag) => hashtag.value)}
+            biography={kitData.biography}
           />
         );
       case 3:
         return (
           <PortfolioKit
             kitColor={kitColor}
-            tagline={tagline}
-            hashtags={hashtags}
+            tagline={kitData.tagline}
+            hashtags={kitData.hashtags.map((hashtag) => hashtag.value)}
+            website={kitData.website}
+            email={kitData.email}
+            phone={kitData.phone}
           />
         );
+      default:
+        break;
     }
   };
 
@@ -328,25 +392,10 @@ const BrandingResult = () => {
           />
           <div
             className={`kit-box ${isShifted ? "shifted" : ""}`}
-            style={{ "font-family": kitTypo }}
+            style={{ fontFamily: kitTypo }}
           >
             {/* 조건부 키트 프리뷰 렌더링 */}
-            <BrandingCardBox
-              platform={kitPlatfrom}
-              kitColor={kitColor}
-              tagline={kitData.tagline}
-              biography={kitData.biography}
-              hashtags={kitData.hashtags.map((hashtag) => hashtag.value)}
-              name={kitData.name}
-              website={kitData.website}
-              fontFamily={kitTypo}
-              phone={kitData.phone}
-              email={kitData.email}
-              onChange={(field, text) => {
-                console.log(field, text);
-                setKitData({ ...kitData, [field]: text });
-              }}
-            />
+            {renderPreview()}
           </div>
         </div>
 
@@ -455,6 +504,8 @@ const BrandingResult = () => {
             </div>
           </div>
         )}
+
+        {renderKit()}
 
         {isRegenerating && (
           <LoadingScreen currentStep={4} message={progessMessage} />
