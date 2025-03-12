@@ -13,6 +13,7 @@
   align-items: center;
   height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 .gradient-overlay {
@@ -24,7 +25,7 @@
   z-index: 0;
 }
 
-/* 전체 컨테이너 */
+/* 전체 컨테이너 - 상단 로고와 버튼이 겹치지 않도록 아래쪽 여백 확보 */
 .splash-container {
   display: flex;
   flex-direction: column;
@@ -33,29 +34,28 @@
   height: 100vh;
   width: 100%;
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  padding-top: 100px; /* 위쪽 여백 추가 */
+  padding-bottom: 450px; /* 데스크톱용 여백 */
 }
 
-/* ✅ 로고와 텍스트를 감싸는  그룹 */
+/* ✅ 로고와 텍스트를 감싸는 그룹 */
 .logo-wrapper {
   display: flex;
   align-items: center;
 }
 
-/* ✅ 로고 이미지 (처음에는 가운데 정렬) */
 .splash-logo-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* ✅ 로고 이미지 */
 .splash-logo {
   width: 120px;
   height: 121px;
 }
 
-/* ✅ 로고 텍스트 */
 .logo-text {
   width: 250px;
   height: auto;
@@ -69,7 +69,7 @@
   font-family: Pretendard;
   font-size: 20px;
   font-weight: 500;
-  letter-spacing: 0%;
+  letter-spacing: 0;
   margin-top: 34px;
   margin-bottom: 20px;
 }
@@ -97,19 +97,19 @@
   width: 280px;
   height: 68px;
   background: #121d31;
-  color: rgb(255, 255, 255);
+  color: #fff;
   font-family: Pretendard;
   font-size: 20px;
   font-weight: 700;
   line-height: 140%;
-  letter-spacing: 0%;
+  letter-spacing: 0;
   transition: background 0.3s ease-in-out, transform 0.3s ease-in-out,
     box-shadow 0.3s;
 }
 
 .btn:hover {
   transform: scale(1.05);
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   background: linear-gradient(
     258.21deg,
     #121d31 -85.49%,
@@ -121,4 +121,223 @@
     #121d31 106.07%
   );
   animation: gradientMove 3s infinite linear;
+}
+
+/* ------------------------------
+   브랜드키트 미리보기 박스 (데스크톱)
+------------------------------ */
+.kit-basic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 73px;
+  gap: 36px;
+  width: 1220.59px;
+  height: auto;
+  border-radius: 12px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  max-height: calc(100vh - 600px);
+  overflow-y: none;
+}
+
+/* 텍스트 세트 */
+.kit-basic .text_set {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  gap: 14px;
+  width: 100%;
+}
+
+.kit-basic .title-text {
+  font-family: "Pretendard";
+  font-weight: 600;
+  font-size: 32.549px;
+  line-height: 140%;
+  color: #fff;
+  margin-top: 0;
+}
+
+.kit-basic .des-text {
+  font-family: "Pretendard";
+  font-weight: 500;
+  font-size: 21.6993px;
+  line-height: 160%;
+  color: #fff;
+  text-align: left;
+}
+
+/* 칩 세트 */
+.kit-basic .chip_set {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16.27px;
+  width: 100%;
+  margin-top: 56px;
+}
+
+/* 각 칩 */
+.kit-basic .chip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8.13726px 10.8497px;
+  background: #fff;
+  opacity: 0.8;
+  border-radius: 5.42484px;
+  width: 116.7px;
+  height: 39.27px;
+}
+
+/* 칩 라벨 */
+.kit-basic .chip .label-text {
+  font-family: "Pretendard";
+  font-weight: 600;
+  font-size: 16.2745px;
+  line-height: 140%;
+}
+
+/* ------------------------------
+   태블릿: 768px ~ 1279px
+------------------------------ */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .splash-logo {
+    width: 100px;
+    height: 101px;
+  }
+  .logo-text {
+    width: 200px;
+  }
+  .sp-message-container {
+    font-size: 18px;
+  }
+  .button-group .btn {
+    width: 240px;
+    height: 60px;
+    font-size: 18px;
+  }
+  .splash-container {
+    padding-bottom: 400px;
+  }
+  .kit-basic {
+    width: 80%;
+    padding: 40px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+  }
+  .kit-basic .title-text {
+    font-size: 24px;
+  }
+  .kit-basic .des-text {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .kit-basic .chip {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4.69333px 6.25778px;
+    gap: 5.56px;
+
+    min-width: 59.52px; /* 최소 너비만 지정 */
+    width: auto; /* 내용에 따라 늘어남 */
+    height: 22.39px;
+
+    /* White */
+    background: #ffffff;
+    opacity: 0.8;
+    border-radius: 3.12889px;
+
+    flex: 0 1 auto; /* 내용에 따라 크기가 조절됨 */
+    order: 3;
+    margin-top: -80px;
+  }
+  .kit-basic .chip .label-text {
+    font-size: 9.39px;
+  }
+}
+
+/* ------------------------------
+   모바일: 390px ~ 767px
+------------------------------ */
+@media (max-width: 767px) {
+  .splash-container {
+    height: auto;
+    padding: 20px;
+    padding-bottom: 300px; /* 모바일용 여백 */
+  }
+  .splash-logo {
+    width: 80px;
+    height: 81px;
+  }
+  .logo-text {
+    width: 180px;
+  }
+  .sp-message-container {
+    font-size: 16px;
+  }
+  .button-group .btn {
+    width: 200px;
+    height: 50px;
+    font-size: 16px;
+  }
+  .kit-basic {
+    width: calc(90% - 40px) !important;
+    padding: 20px;
+    min-height: 299px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    max-height: calc(100vh - 120px);
+    overflow-y: hidden;
+  }
+  .kit-basic .text_set {
+    align-items: center;
+    text-align: center;
+  }
+  .kit-basic .chip_set {
+    justify-content: center;
+    margin-top: -30px;
+  }
+  .kit-basic .title-text {
+    font-size: 23.33px;
+    margin-top: 126.13px;
+  }
+  .kit-basic .des-text {
+    display: none;
+  }
+  /* 모바일 칩 스타일을 아래 CSS로 적용 */
+  .kit-basic .chip {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 2.59259px 3.88889px;
+    gap: 3.53px;
+    width: 53.78px;
+    height: 16.19px;
+    background: #ffffff;
+    opacity: 0.8;
+    border-radius: 2.59259px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+  .kit-basic .chip .label-text {
+    font-size: 7.78px;
+  }
 }
