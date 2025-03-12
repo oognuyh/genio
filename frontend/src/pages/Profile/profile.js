@@ -82,6 +82,9 @@ const Profile = () => {
   );
   const [isCategoryLoaded, setIsCategoryLoaded] = useState(false);
 
+  // 직접 입력하기 여부 플래그
+  const fromDirectInput = resumeData.fromDirectInput === true;
+
   // 유효성 검사 상태 (영문이름, stage 필드 추가)
   const [isValid, setIsValid] = useState({
     name: true,
@@ -293,11 +296,23 @@ const Profile = () => {
     <div className="profile-body">
       <ProgressSteps currentStep={currentStep} />
       <div className="profile-container">
-        <h2 className="profile-title">프로필이 완성됐어요!</h2>
+        {/* ++ 제목/부제목 조건부 렌더링 */}
+        <h2 className="profile-title">
+          {fromDirectInput ? "프로필을 입력해주세요." : "프로필이 완성됐어요!"}
+        </h2>
         <p className="sub-text">
-          내용이 정확한지 확인해주세요. <br />
-          빠진 내용이 있거나 잘못된 정보가 있다면 각 항목을 직접 수정할 수
-          있어요.
+          {fromDirectInput ? (
+            <>
+              퍼스널 브랜딩 키트를 만들기 위해 프로필 정보가 필요해요. <br />각
+              항목을 모두 입력하면 제니오가 자동으로 분석해 입력해드릴게요.
+            </>
+          ) : (
+            <>
+              내용이 정확한지 확인해주세요. <br />
+              빠진 내용이 있거나 잘못된 정보가 있다면 각 항목을 직접 수정할 수
+              있어요.
+            </>
+          )}
         </p>
 
         <div className="form-container">
