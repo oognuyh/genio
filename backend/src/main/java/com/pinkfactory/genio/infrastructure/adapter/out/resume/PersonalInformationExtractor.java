@@ -12,6 +12,7 @@ import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -94,7 +95,12 @@ public class PersonalInformationExtractor implements NodeAction<State> {
                     NAME,
                     output.aiMessage().text());
 
-            return JsonUtil.deserialize(JsonUtil.repairJson(output.aiMessage().text()), new TypeReference<>() {});
+            var _output = JsonUtil.deserialize(
+                    JsonUtil.repairJson(output.aiMessage().text()), new TypeReference<HashMap<String, Object>>() {});
+
+            _output.replaceAll((k, v) -> v == null ? "" : v);
+
+            return _output;
         } catch (Exception e) {
 
             log.error("[{}][{}] {}", state.<String>value("resumeId").orElse("Unknown"), NAME, e.getMessage());
