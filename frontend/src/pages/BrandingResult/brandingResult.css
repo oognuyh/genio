@@ -4,14 +4,14 @@
 }
 
 body {
-  background: #F8F8F8;
+  background: #f8f8f8;
 }
 
 .result-container {
   /* genkit-page-default */
-  position: absolute;
-  width: 100vw;
-  height: 91.11vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 
   font-family: Pretendard;
 }
@@ -110,7 +110,7 @@ body {
 .platform-btn {
   /* chip-button-01 */
   position: static;
-  height: 35px;
+  height: 48px;
 
   /* 자동 레이아웃 */
   display: flex;
@@ -124,16 +124,16 @@ body {
   flex-grow: 0;
   margin: 0 0.8333vw;
 
-  background: #F8F8F8;
+  background: #f8f8f8;
   border: none;
   border-radius: 36px;
 
   cursor: pointer;
 
   /* Typo */
-  font-size: 15px;
-  font-weight: 650;
-  line-height: 140%;
+  font-size: 17px; /* 🔹 텍스트 크기 20px */
+  font-weight: 600; /* 🔹 Semibold 적용 */
+  line-height: 120%;
   text-align: center;
   color: rgb(137, 149, 171);
 }
@@ -162,21 +162,31 @@ body {
   color: rgb(255, 255, 255);
 }
 
+.kit-custom-wrapper {
+  position: absolute;
+  top: 33.7398vh;
+  left: 16.7vw;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
 /* 브랜딩 키드 */
 .kit-box {
   /* background */
-  position: absolute;
-  width: 60.9375vw;
+  width: 56.9375vw;
   height: 42.6353vh;
-  left: 16.6666vw;
-  top: 43.7398vh;
   display: flex;
-  justify-content: center;
+  align-items: center;
   flex-direction: column;
 
   border-radius: 10px;
   /* White */
   background: rgb(255, 255, 255);
+  transition: transform 0.5s ease;
+}
+.kit-box.shifted {
+  transform: translateX(-195px);
 }
 
 /* 컬러 팔레트 스타일 */
@@ -198,8 +208,8 @@ body {
 }
 
 .color-palette-icon {
-  width: 45px;
-  height: 45px;
+  width: 48px;
+  height: 48px;
 
   margin-bottom: 20px;
 }
@@ -233,26 +243,12 @@ body {
   /* button-01 */
   position: absolute;
   width: 16.5vw;
-  height: 45px;
+  height: 5vh;
 
   left: 50%;
-  bottom: -47px;
+  bottom: 100px;
   transform: translate(-50%, 0);
-
-  /* 자동 레이아웃 */
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5208vw;
-  padding: 1.5686vh 4.1667vw;
-
-  /* Inside Auto Layout */
-  flex: none;
-  order: 0;
-  align-self: stretch;
-  flex-grow: 0;
-  margin: 0.5208vw 0;
+  margin-top: 50px;
 
   border: none;
   border-radius: 9px;
@@ -261,8 +257,11 @@ body {
 
   /* Typo */
   font-size: 1.05vw;
-  font-weight: 700;
+  font-weight: 600;
   color: rgb(255, 255, 255);
+  white-space: nowrap;
+
+  cursor: pointer;
 }
 
 .save-button:hover {
@@ -360,4 +359,20 @@ body {
       #0e1221 78.7%,
       #121d31 106.07%);
   animation: gradientMove 3s infinite linear;
+}
+
+@media (min-width: 769px) and (max-width: 1279px) {
+  .kit-custom-wrapper {
+    top: 27.7398vh;
+    flex-direction: column;
+    gap: 0px;
+  }
+}
+
+@media (max-width: 768px) {
+  .kit-custom-wrapper {
+    top: 27.7398vh;
+    flex-direction: column;
+    gap: 0px;
+  }
 }

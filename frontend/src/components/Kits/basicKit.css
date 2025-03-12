@@ -68,4 +68,5 @@
     line-height: 140%;
     display: flex;
     align-items: center;
+    white-space: nowrap;
 }

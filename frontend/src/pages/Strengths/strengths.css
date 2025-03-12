@@ -3,43 +3,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* ✅ 상단 정렬 */
+  justify-content: flex-start; /* 상단 정렬 */
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: #f8f8f8;
-  padding-top: 40px; /* ✅ 상단 여백 추가 */
+  padding-top: 40px; /* 상단 여백 추가 */
 }
 
-/* ✅ 내부 컨테이너 */
 .strengths-container {
   max-width: 1280px;
   width: 100%;
-  text-align: left; /* ✅ 왼쪽 정렬 */
-  padding: 20px;
+  text-align: left; /* 왼쪽 정렬 */
+  padding: 20px;    
   background: #f8f8f8;
   box-shadow: none !important;
   border: none;
 }
 
-/* ✅ 진행 단계 스타일 */
-.progress-steps {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.progress-step {
-  font-size: 16px;
-  font-weight: 600;
-  color: #8995ab;
-}
-
-.progress-step.active {
-  color: #121d31;
-}
-
-/* ✅ 헤더 정렬 */
 .strengths-title {
   margin-top: 96px;
   color: rgb(23, 23, 23);
@@ -61,20 +41,20 @@
   margin-bottom: 30px;
 }
 
-/* ✅ 강점 선택 리스트 */
+/* 강점 리스트 컨테이너 */
 .strengths-list {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: 1280px;
+  width: 1280px; /* 데스크탑 기준 */
   margin-top: 100px;
-  max-height: 900px; /* ✅ 최대 높이 제한 */
-  overflow-y: auto; /* ✅ 세로 스크롤 활성화 */
-  padding-right: 30px; /* ✅ 스크롤바와 아이템 간 간격 */
+  max-height: 900px; /* 최대 높이 제한 */
+  overflow-y: auto;  
+  padding-right: 30px; 
   overflow-x: hidden;
 }
 
-/* ✅ 강점 선택 버튼 */
+/* 강점 선택 버튼 */
 .strength-item {
   display: flex;
   align-items: center;
@@ -91,13 +71,13 @@
   cursor: pointer;
   transition: background 0.3s;
   gap: 24px;
-  width: 1280px;
+  width: 1280px; /* 데스크탑에서 고정 너비 */
   height: 88px !important;
   outline: none;
   border: none;
 }
 
-/* ✅ 체크 아이콘 */
+/* 체크 아이콘 */
 .check-icon {
   width: 24px;
   height: 24px;
@@ -105,16 +85,15 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-/* ✅ 선택된 강점 스타일 */
+/* 선택된 강점 스타일 */
 .strength-item.selected {
   background: #121d31;
   color: white;
 }
 
-/* 🔹 다음 버튼 (기본적으로 숨김) */
+/* 다음 버튼 (position: fixed로 화면 하단에 고정) */
 .st-next-btn {
   margin-top: 40px;
-  width: 320px;
   height: 60px;
   padding: 16px 80px;
   border: none;
@@ -128,15 +107,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  /* 하단 고정 + 중앙 정렬 */
   position: fixed;
   z-index: 30;
   bottom: 52px;
-  left: 45%;
+  left: 50%;
+  transform: translateX(-50%);
+  /* 데스크탑 환경에서 원하는 기본 너비(예: 320px) 가능 */
+  width: 320px; /* 기본(데스크탑) 너비 */
 }
 
-/* ✅ 버튼 호버 효과 */
+/* 버튼 호버 효과 */
 .st-next-btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.05) translateX(-50%);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
   background: linear-gradient(
     258.21deg,
@@ -150,32 +134,72 @@
   );
 }
 
-@media (max-width: 768px) {
-  /* 내부 컨테이너 패딩 및 여백 조정 */
+/* =======================================
+   모바일(390px ~ 767px) 반응형 처리
+   ======================================= */
+@media (max-width: 767px) {
+  /* 모바일: 좌우 20px 여백 */
   .strengths-container {
-    padding: 10px;
+    margin: 0 auto !important;      /* 수평 중앙 정렬 */
+    padding: 0 20px !important;     /* 양옆 20px 여백 */
+    max-width: 100% !important;     /* 고정 너비 해제 */
   }
 
-  /* 강점 선택 리스트: 고정된 1280px 대신 100% 너비 사용 */
+  /* 강점 리스트: 100%로 */
   .strengths-list {
-    width: 100%;
-    max-width: 100%;
-    margin-top: 50px; /* 필요에 따라 조정 */
-    padding-right: 15px; /* 스크롤바 간격 줄임 */
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;      /* 혹시 남아있을 수 있는 음수 마진 제거 */
+    margin: 0 auto !important; 
   }
 
-  /* 강점 선택 버튼: 1280px 고정 대신 100% 너비로 */
+  /* 강점 선택 버튼: 100% */
   .strength-item {
     width: 100%;
     max-width: 100%;
   }
 
-  /* 다음 버튼: 중앙 고정 + 유동적 너비로 변경 */
+  /* 다음 버튼: 너비 350px로 고정 */
   .st-next-btn {
-    width: 90%; /* 필요에 따라 조정 (예: 320px 고정 대신) */
+    width: calc(100% - 40px); /* 좌우 20px씩 간격 */
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 20px; /* 화면 하단 여백 조정 */
-    padding: 16px 0; /* 좌우 패딩 제거해서 폭에 맞춤 */
+    margin-top: 0;
+    padding: 16px 0; 
+  }
+}
+
+/* =======================================
+   태블릿(768px ~ 1279px) 반응형 처리
+   ======================================= */
+@media (min-width: 768px) and (max-width: 1279px) {
+  /* 태블릿: 좌우 32px 여백 */
+  .strengths-container {
+    max-width: 90%; /* 필요에 따라 조정 */
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .strengths-list {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 60px;
+    padding-right: 15px; 
+  }
+
+  .strength-item {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* 다음 버튼: 너비 320px로 고정 */
+  .st-next-btn {
+    width: 320px !important; /* 태블릿에서 고정 너비 */
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0;
+    padding: 16px 0;
   }
 }

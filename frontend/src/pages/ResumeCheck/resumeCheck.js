@@ -1,61 +1,100 @@
+// ResumeCheck.jsx
+import PropTypes from "prop-types";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.png";
-import bgImage from "../../assets/resumeCheck-background.png";
-import bt1Image from "../../assets/resume-button.png";
 import bt2Image from "../../assets/direct-button.png";
+import logo from "../../assets/logo.png";
+import bt1Image from "../../assets/resume-button.png";
 import "./resumeCheck.css";
+
+const Card = ({ children }) => {
+  return <div className="resume-check-card">{children}</div>;
+};
+
+Card.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+Card.Image = ({ src, alt }) => {
+  return <img src={src} alt={alt} className="resume-check-card__image" />;
+};
+
+Card.Image.propTypes = {
+  src: PropTypes.node.isRequired,
+  alt: PropTypes.string.isRequired,
+};
+
+Card.Button = ({ children, ...props }) => {
+  return (
+    <button className="resume-check-card__button" {...props}>
+      {children}
+    </button>
+  );
+};
+
+Card.Button.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+Card.Description = ({ children, ...props }) => {
+  return (
+    <p className="resume-check-card__description" {...props}>
+      {children}
+    </p>
+  );
+};
+
+Card.Description.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 const ResumeCheck = () => {
   const navigate = useNavigate();
 
   return (
-    <div
-      className="resume-body"
-      style={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover" }}
-    >
-      {/* 최상단 중앙 로고 */}
-      <img src={logo} alt="logo" className="resume-logo" />
-
-      <div className="resume-container">
-        {/* 텍스트 박스 */}
-        <div className="header">
-          <div className="text-box">
-            <h2>프로필 작성 방법을 선택해주세요.</h2>
-            <p>
-              이력서 맡기기와 직접 작성하기 중 원하는 프로필 작성 방법을 고르면,{" "}
-              <br />
-              AI 브랜딩 파트너 제니오가 빠르게 나만의 퍼스널 브랜딩 키트를
-              생성해드릴게요!
-            </p>
-          </div>
-        </div>
-
-        {/* 카드 컨테이너 */}
-        <div className="card-container">
-          {/* 첫 번째 카드 */}
-          <div className="card">
-            <img src={bt1Image} alt="Upload Resume" />
-            <button onClick={() => navigate("/resume-upload")} className="btnF">
-              이력서 맡기기
-            </button>
-            <p className="card-desc">
-              이력서 파일을 업로드하면 프로필 정보를 자동으로 입력해줘요.
-            </p>
-          </div>
-
-          {/* 두 번째 카드 */}
-          <div className="card">
-            <img src={bt2Image} alt="Manual Entry" />
-            <button onClick={() => navigate("")} className="btnF">
-              직접 작성하기
-            </button>
-            <p className="card-desc">
-              직접 입력 기능은 준비중이에요. 곧 오픈되니 조금만 기다려주세요.
-            </p>
-          </div>
-        </div>
+    <div className="resume-check-page">
+      <div className="resume-check-appbar">
+        <img src={logo} alt="logo" className="resume-check-appbar__logo" />
       </div>
+
+      <main className="resume-check-main">
+        <div className="resume-check-header">
+          <h2 className="resume-check-header__title">
+            프로필 작성 방식을 선택해주세요.
+          </h2>
+          <p className="resume-check-header__subtitle">
+            이력서를 업로드하거나 직접 입력할 수 있어요. <br />
+            원하는 방법을 선택하면, 제니오가 맞춤형 퍼스널 브랜딩 키트를
+            만들어드릴게요.
+          </p>
+        </div>
+
+        <div className="resume-check-container">
+          <Card>
+            <Card.Image src={bt1Image} alt="Upload Resume" />
+            <Card.Button onClick={() => navigate("/resume-upload")}>
+              이력서 업로드하기
+            </Card.Button>
+            <Card.Description>
+              이력서를 업로드하면 프로필 정보가 자동으로 입력돼요.
+            </Card.Description>
+          </Card>
+
+          <Card>
+            <Card.Image src={bt2Image} alt="Manual Entry" />
+            <Card.Button
+              onClick={() =>
+                navigate("/profile", { state: { jobCategory: "개발" } })
+              }
+            >
+              직접 입력하기
+            </Card.Button>
+            <Card.Description>
+              이력서 없어도 직접 입력하면 프로필을 완성할 수 있어요.
+            </Card.Description>
+          </Card>
+        </div>
+      </main>
     </div>
   );
 };

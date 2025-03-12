@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import ProgressSteps from "../../components/ProgressSteps";
+import ProgressSteps from "../../components/progressSteps";
 import checkIcon from "../../assets/check.png";
 import checkWhiteIcon from "../../assets/check-white.png";
 import "./strengths.css";
@@ -59,9 +59,9 @@ const Strengths = () => {
       <ProgressSteps currentStep={currentStep} />
 
       <div className="strengths-container">
-        <h2 className="strengths-title">당신의 강점을 선택하세요</h2>
+        <h2 className="strengths-title">일할 때의 내 모습을 골라주세요.</h2>
         <p className="sub-text">
-          본인의 강점과 가장 가까운 항목을 선택해주세요.
+          가장 나를 잘 표현하는 문장을 2-3개 선택해주세요.
         </p>
 
         <div className="strengths-list">

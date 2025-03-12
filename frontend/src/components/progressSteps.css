@@ -3,24 +3,27 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 32px 0;
+  padding: 3.3vh 0;
   font-family: Arial, sans-serif;
   position: fixed;
   top: 0;
   left: 0;
+  background-color: #f8f8f8;
   z-index: 1000;
 }
 
-/* ✅ 진행 단계를 한 줄로 배치 */
+/* ✅ 진행 단계를 한 줄로 배치 (좌우 마진 320px 추가) */
 .step-wrapper {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: calc(100% - 80px);
+  width: 65vw;
+  /* 🔹 좌우 마진 320px (총 640px) */
+  margin: auto;
   max-width: 1280px;
   position: relative;
-  padding: 0 40px;
-  gap: 100px;
+  padding: 0 0;
+  gap: 5vw;
+  /* 🔹 각 스텝 간 간격 90px */
 }
 
 /* ✅ 개별 단계 */
@@ -57,12 +60,34 @@
 
 /* ✅ 체크 아이콘 스타일 */
 .step-icon {
-  width: 15px;
-  height: 15px;
-  background-color: #121d31;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  padding: 9px;
+  background-color: #121d31;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  z-index: 1;
+  transition: background 0.3s, color 0.3s;
 }
+
+/* .step-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #121d31;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  z-index: 1;
+  transition: background 0.3s, color 0.3s;
+} */
 
 /* ✅ 이미 지난 단계는 숫자를 숨기고 체크 아이콘 표시 */
 .step.completed .step-number {
@@ -76,6 +101,7 @@
 /* ✅ 현재 단계는 숫자를 유지하고 체크 아이콘 숨김 */
 .step.current .step-number {
   display: flex;
+  background-color: #455473;
 }
 
 .step.current .step-icon {
@@ -83,10 +109,10 @@
 }
 
 /* ✅ 현재 단계와 이전 단계까지 텍스트 강조 */
+.step-text,
 .step.completed .step-text,
 .step.current .step-text {
   color: rgb(69, 84, 115);
-  font-family: Pretendard;
   font-size: 18px;
   font-weight: 600;
   line-height: 160%;
@@ -97,3 +123,130 @@
 .step.completed .progress-bar {
   background-color: #121d31;
 }
+
+@media (min-width: 1279px) and (max-width: 1460px) {
+  .step-text,
+  .step.completed .step-text,
+  .step.current .step-text {
+    width: 6vw;
+    text-align: left;
+    font-size: 16.5px;
+  }
+}
+
+/* ✅ 반응형 - 작은 화면에서 스텝 간격 및 마진 조정 */
+@media (min-width: 769px) and (max-width: 1279px) {
+  .progress-container {
+    padding: 1.6vh 0;
+  }
+
+  .step-wrapper {
+    width: calc(100% - 160px);
+    /* 🔹 좌우 마진 80px씩 */
+    gap: 60px;
+    /* 🔹 스텝 간 간격 축소 */
+  }
+
+  .step {
+    flex-direction: column;
+    font-size: 16px;
+  }
+
+  .step-number {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .step-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .step-text,
+  .step.completed .step-text,
+  .step.current .step-text {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .progress-container {
+    padding: 1.8vh 0px;
+  }
+
+  .step-wrapper {
+    width: 90vw;
+    /* 🔹 좌우 마진 30px씩 */
+    margin: 0;
+    gap: 0;
+  }
+
+  .step {
+    flex-direction: column;
+    font-size: 16px;
+  }
+
+  .step-number {
+    width: 18vw;
+    height: 7px;
+    font-size: 0px;
+    border-radius: 0;
+    margin-top: 40px;
+    background-color: #ECEFF4;
+  }
+
+  .step.last .step-number {
+    border-radius: 0;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .step.first .step-number,
+  .step.first .step-icon {
+    border-radius: 0;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+  
+  .step-icon {
+    width: 18vw;
+    height: 7px;
+    font-size: 0px;
+    border-radius: 0;
+    margin-top: 40px;
+    background-color: #455473;
+  }
+
+  .step-text {
+    display: none;
+  }
+
+  .step.current .step-text {
+    display: flex;
+    width: 92px;
+    position: fixed;
+    left: 50vw;
+    transform: translate(-46px, 0);
+    font-size: 20px;
+  }
+}
+
+/* .step-number {
+  width: 18vw;
+  height: 7px;
+  font-size: 0px;
+  border-radius: 5%;
+  margin-top: 40px;
+  background-color: #ECEFF4;
+}
+
+.step-icon {
+  width: 18vw;
+  height: 7px;
+  font-size: 0px;
+  border-radius: 5%;
+  margin-top: 40px;
+  background-color: #455473;
+} */

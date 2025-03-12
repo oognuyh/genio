@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
-import ProgressSteps from "../../components/ProgressSteps";
+import ProgressSteps from "../../components/progressSteps";
 import LoadingScreen from "../../components/loadingScreen";
 
 import checkIcon from "../../assets/check.png";
@@ -22,6 +22,7 @@ const BrandingTone = () => {
 
   // ✅ 브랜드 톤 선택 상태 관리
   const [selectedTone, setSelectedTone] = useState(null);
+  const [progessMessage, setProgessMessage] = useState("");
   const [brandingTones, setBrandingTones] = useState([]);
 
   // ✅ Axios를 사용하여 브랜드 톤 리스트 가져오기
@@ -52,13 +53,91 @@ const BrandingTone = () => {
       setIsLoading(true);
 
       delete resumeData.resumeId;
-      console.log(resumeData);
 
-      const response = await axios.post("/api/v1/cards", resumeData);
-      console.log("[onGenerateKit] Server response:", response.data);
+      const messageQueue = [];
+      let isProcessing = false;
 
-      navigate("/branding-result", { state: response.data });
-    } catch(err) {
+      const response = await fetch(`/api/v1/cards/stream`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(resumeData)
+      })
+      const reader = response.body
+        .pipeThrough(new TextDecoderStream())
+        .getReader();
+       
+      // 지연 함수
+      const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+       
+      // 메시지 처리 함수
+      const processMessageQueue = async () => {
+ 
+         if (isProcessing || messageQueue.length === 0) return;
+         
+         isProcessing = true;
+ 
+         while (messageQueue.length > 0) {
+           const data = messageQueue.shift();
+           
+           try {
+             const response = JSON.parse(data);
+             console.log("파싱된 객체:", response);
+             
+             setProgessMessage(response.message);
+             
+             if (response.type === 'completed' || response.type === 'failed') {
+               
+               await delay(1500);
+               
+               setIsLoading(false);
+               
+               if (response.type === 'completed' && response.result) {
+                 navigate("/branding-result", { state: response.result });
+               }
+               
+               break;
+             }
+             
+             await delay(1500);
+             
+           } catch (err) {
+             console.error("메시지 처리 중 오류:", err);
+             setProgessMessage("알 수 없는 오류가 발생했어요. 다시 시도해주세요.");
+             await delay(1500);
+             
+             setIsLoading(false);
+             break;
+           }
+         }
+ 
+         isProcessing = false;
+      };
+
+      let buffer = '';
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        buffer += value;
+  
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || ''; 
+        
+        for (const line of lines) {
+          console.log(line)
+          if (line.startsWith('data:')) {
+              
+            messageQueue.push(line.substring(5));
+          }
+        }
+        if (!isProcessing) {
+          processMessageQueue();
+        }
+      }      
+    } catch (err) {
       setIsLoading(false);
       console.error("[onGenerateKit] 이력서 분석 중 오류 발생:", err);
     }
@@ -70,25 +149,38 @@ const BrandingTone = () => {
         <ProgressSteps currentStep={currentStep} />
 
         <div className="branding-tone-container">
-          <h2 className="branding-title">마지막으로 브랜딩 톤을 선택해주세요.</h2>
+          <h2 className="branding-title">
+            마지막으로 브랜딩 톤을 선택해주세요.
+          </h2>
           <p className="sub-text">
-            원하는 브랜딩 톤을 선택하세요. 제니오가 느낌을 잘 살려볼게요!
+            원하는 브랜딩 톤을 1개 골라주세요. 제니오가 느낌을 잘 살려볼게요!
           </p>
 
           <div className="branding-tone-list">
             {brandingTones.map((tone, index) => (
               <button
                 key={index}
-                className={`branding-tone-item ${selectedTone === tone ? "selected" : ""}`}
+                className={`branding-tone-item ${
+                  selectedTone === tone ? "selected" : ""
+                }`}
                 onClick={() => handleToneSelect(tone)}
               >
+                {/* ✅ 선택되었을 때 checkWhiteIcon으로 변경 */}
                 <img
-                  src={selectedTone === tone.title ? checkWhiteIcon : checkIcon}
+                  src={
+                    selectedTone?.title === tone.title
+                      ? checkWhiteIcon
+                      : checkIcon
+                  }
                   alt="check"
                   className="check-icon"
                 />
-                <div className="branding-tone-title">{tone.title}</div>
-                <div className="branding-tone-description">{tone.description}</div>
+                <div className="branding-tone-content">
+                  <div className="branding-tone-title">{tone.title}</div>
+                  <div className="branding-tone-description">
+                    {tone.description}
+                  </div>
+                </div>
               </button>
             ))}
           </div>
@@ -101,7 +193,7 @@ const BrandingTone = () => {
           )}
         </div>
       </div>
-      {isLoading && (<LoadingScreen currentStep={currentStep} />)}
+      {isLoading && <LoadingScreen currentStep={currentStep} message={progessMessage} />}
     </>
   );
 };

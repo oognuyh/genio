@@ -1,0 +1,325 @@
+.custom-container {
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+}
+
+/* 아이콘 */
+.custom-icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.custom-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.custom-icon.active {
+    filter: brightness(87%);
+}
+
+/* 전체 커스텀 영역 */
+.custom-list-wrapper {
+    display: block;
+    position: relative;
+    top: -5px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease, opacity 0.5s ease;
+}
+
+.custom-list-wrapper.active {
+    max-height: 510px;
+    /* 조정 가능 */
+    opacity: 1;
+}
+
+/* 커스텀 메뉴 타이틀 */
+.custom-title-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin-top: 0px;
+}
+
+.custom-title {
+    width: 117px;
+    height: 28px;
+
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.custom-close-button {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+}
+
+/* 플랫폼 리스트 */
+.platform-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.4s ease;
+}
+
+.platform-list-wrapper.active {
+    max-height: 300px;
+    opacity: 1;
+}
+
+.platform-item {
+    width: 153px;
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.platform-item.active {
+    font-weight: 600;
+}
+
+/* 컬러 리스트 */
+.color-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.color-list-wrapper.active {
+    max-height: 300px;
+    opacity: 1;
+}
+
+.color-item {
+    width: 153px;
+    height: 48px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.color-item.active {
+    border-width: 1.3px;
+    border-style: solid;
+    border-color: blue;
+}
+
+/* 타이포 리스트 */
+.typo-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease, opacity 0.4s ease;
+}
+
+.typo-list-wrapper.active {
+    max-height: 510px;
+    opacity: 1;
+}
+
+.typo-item {
+    width: 153px;
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.typo-item.active {
+    font-weight: 600;
+}
+
+@media (min-width: 769px) and (max-width: 1279px) {
+    .custom-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 10px;
+    }
+
+    /* 아이콘 */
+    .custom-icon-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 18px;
+    }
+
+    .custom-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    /* 커스텀 메뉴 타이틀 */
+    .custom-title-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        margin-top: 0px;
+    }
+
+    .custom-title {
+        width: 117px;
+        height: auto;
+        margin-bottom: 0px;
+
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .custom-close-button {
+        display: none;
+    }
+
+    .platform-list-wrapper {
+        flex-direction: row;
+        gap: 40px;
+    }
+
+    .platform-item {
+        width: auto;
+        margin-bottom: 0px;
+    }
+
+    .color-list-wrapper {
+        flex-direction: row;
+        width: 56.9375vw;
+        gap: 12px;
+        margin-top: 0px;
+    }
+
+    .color-item {
+        width: 106px;
+        height: 36px;
+
+        border-radius: 8px;
+        margin-top: 10px;
+    }
+
+    /* 타이포 리스트 */
+    .typo-list-wrapper {
+        flex-direction: row;
+        width: 56.9375vw;
+        gap: 40px;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .typo-list-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    .typo-item {
+        width: auto;
+        margin-bottom: 0px;
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 10px;
+    }
+
+    /* 아이콘 */
+    .custom-icon-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 18px;
+    }
+
+    .custom-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    /* 커스텀 메뉴 타이틀 */
+    .custom-title-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        margin-top: 0px;
+    }
+
+    .custom-title {
+        height: auto;
+        margin-bottom: 0px;
+
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .custom-close-button {
+        display: none;
+    }
+
+    .platform-list-wrapper {
+        flex-direction: row;
+        width: 56.9375vw;
+        gap: 20px;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .platform-item {
+        width: auto;
+        margin-bottom: 0px;
+        font-size: 14px;
+    }
+
+    .color-list-wrapper {
+        flex-direction: row;
+        width: 56.9375vw;
+        gap: 12px;
+        margin-top: 0px;
+    }
+
+    .color-item {
+        width: 56px;
+        height: 26px;
+
+        border-radius: 8px;
+        margin-top: 10px;
+    }
+
+    /* 타이포 리스트 */
+    .typo-list-wrapper {
+        flex-direction: row;
+        width: 56.9375vw;
+        gap: 20px;
+        overflow-x: overlay; /* 레이아웃 영향 없는 스크롤 */
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .platform-list-wrapper::-webkit-scrollbar,
+    .typo-list-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    .typo-item {
+        width: auto;
+        margin-bottom: 0px;
+        font-size: 14px;
+    }
+}

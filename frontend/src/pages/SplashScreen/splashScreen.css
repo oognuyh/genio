@@ -4,12 +4,24 @@
   text-align: center;
   margin: 0;
   padding: 0;
+  /*
   background: url("../../assets/splash-background.png") no-repeat center center;
+  */
   background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  position: relative;
+}
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
 /* 전체 컨테이너 */
@@ -20,9 +32,11 @@
   align-items: center;
   height: 100vh;
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
-/* ✅ 로고와 텍스트를 감싸는 그룹 */
+/* ✅ 로고와 텍스트를 감싸는  그룹 */
 .logo-wrapper {
   display: flex;
   align-items: center;

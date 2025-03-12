@@ -1,261 +1,247 @@
-/* ResumeCheck 페이지 --------------------------------------------- */
-
-.resume-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin: 0;
-  /* 상단 여백을 뷰포트 단위로 지정 */
-  padding-top: 15vh;
-  min-height: 110vh;
+.resume-check-page {
+  background-image: url("../../assets/resumeCheck-background.png");
   background-size: cover;
   background-position: center;
-  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.resume-logo {
+.resume-check-appbar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-block: 24px;
+}
+
+.resume-check-appbar__logo {
   width: 48px;
   height: 48px;
-  display: block;
-  margin: 0 auto;
-  position: absolute;
-  /* 로고의 위치도 뷰포트 단위로 조정 */
-  top: 2vh;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
-.resume-container {
+.resume-check-main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* 상단 여백만큼 컨텐츠를 아래로 밀어내도록 margin-top 추가 */
-  margin-top: 15vh;
-  min-height: calc(100vh - 15vh);
+  width: 100%;
+  margin-top: 64px;
+}
+
+.resume-check-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 64px;
+  width: 100%;
+  max-width: 900px;
   text-align: center;
-  padding: 10px 20px;
-  gap: 104px;
-  box-sizing: border-box;
 }
 
-/* 상단 로고 및 텍스트 정렬 */
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  margin-top: 88px;
-}
-
-.text-box {
-  width: 100%;
-  text-align: center; /* 중앙 정렬 */
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* 내부 요소 중앙 정렬 */
-  justify-content: center;
-}
-
-.text-box h2 {
-  margin: 0;
-  text-align: center; /* 중앙 정렬 */
-  width: 100%;
+.resume-check-header__title {
   color: rgb(23, 23, 23);
-  font-family: Pretendard;
-  font-size: 42px;
   font-weight: 700;
-  line-height: 140%;
-  letter-spacing: 0%;
-  margin-bottom: 24px;
+  line-height: 1.4;
+  margin: 0;
+  padding-inline: 8px;
+  font-size: 42px;
 }
 
-.text-box p {
-  margin: 5px 0 0;
-  text-align: center; /* 중앙 정렬 */
-  width: 100%;
+.resume-check-header__subtitle {
+  text-align: center;
   color: rgb(69, 84, 115);
-  font-family: Pretendard;
-  font-size: 20px;
   font-weight: 400;
-  line-height: 140%;
-  letter-spacing: 0%;
+  line-height: 1.4;
+  margin: 24px 0 0 0;
+  padding-inline: 8px;
+  font-size: 20px;
 }
 
-/* 카드 컨테이너 */
-.card-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 40px;
+.resume-check-container {
   width: 100%;
-  max-width: 940px;
-  margin-bottom: 200px;
+  display: flex;
+  max-width: 1020px;
+  gap: 40px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-block: 48px;
 }
 
-/* 개별 카드 */
-.card {
+.resume-check-card {
+  flex: 1;
   background: #eceff4;
-  padding: 30px;
+  padding: 24px;
   border-radius: 16px;
-  width: 455px !important;
-  height: 477px !important;
+  width: 100%;
+  max-width: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  justify-content: space-between;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
-  flex-shrink: 0;
   box-sizing: border-box;
 }
 
-/* 카드 안의 이미지 */
-.card img {
+.resume-check-card__image {
   width: 150px;
-  height: 150px;
-  margin-bottom: 70.03px;
-  margin-top: 100px;
+  margin: 64px 0;
+  aspect-ratio: 1;
   transition: filter 0.3s ease-in-out;
+  object-fit: contain;
 }
 
-/* 카드 내부 텍스트 */
-.card-title,
-.card-desc {
-  color: rgb(137, 149, 171);
-  font-family: Pretendard;
-  text-align: center;
-  transition: color 0.3s ease-in-out;
-}
-
-/* 카드 설명 */
-.card-desc {
-  font-family: Pretendard;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 140%;
-  letter-spacing: 0%;
-  cursor: default;
-}
-
-.card:hover .card-desc {
-  color: white !important;
-  background-color: transparent !important; /* 🔹 검은 배경이 생기지 않도록 강제 설정 */
-  text-shadow: 0 0 0 white; /* 🔹 폰트 번짐 방지 */
-  mix-blend-mode: normal; /* 🔹 배경과 글자 색상 자연스럽게 블렌딩 */
-}
-
-/* 버튼 */
-.btnF {
-  width: 320px;
-  height: 60px;
+.resume-check-card__button {
+  width: 100%;
+  max-width: 320px;
   padding: 12px;
   color: rgb(137, 149, 171);
-  font-family: Pretendard;
   font-size: 20px;
   font-weight: 600;
-  line-height: 140%;
-  letter-spacing: 0%;
-  text-align: center;
+  line-height: 1.4;
+  letter-spacing: 0;
   border: none;
   border-radius: 12px;
   cursor: pointer;
   background: white;
-  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
-  margin-bottom: 5px;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 16px;
 }
 
-/* 💡 카드나 버튼 위에 마우스를 올릴 때 동일한 효과 적용 */
-.card:hover,
-.card:hover .btnF,
-.btnF:hover,
-.card:hover .card-title,
-.card:hover .card-desc {
-  background: rgb(18, 29, 49); /* 카드 및 버튼 배경색 변경 */
-  color: white; /* 내부 텍스트 및 버튼 글자색 변경 */
+.resume-check-card__description {
+  color: rgb(137, 149, 171);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-align: center;
+  transition: color 0.3s ease-in-out;
+  margin: 0 0 16px 0;
 }
 
-/* 이미지 반전 효과 (카드, 버튼 호버 시 동일) */
-.card:hover img,
-.btnF:hover img {
+.resume-check-card:hover {
+  background: rgb(18, 29, 49);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.resume-check-card:hover .resume-check-card__button {
+  background: rgb(69, 84, 115);
+  color: white;
+}
+
+.resume-check-card:hover .resume-check-card__description {
+  color: white;
+}
+
+.resume-check-card:hover .resume-check-card__image {
   filter: brightness(0) invert(1);
 }
 
-/* 버튼 호버 시 버튼 배경 유지 */
-.card:hover .btnF,
-.btnF:hover {
+.resume-check-card__button:hover {
   background: rgb(69, 84, 115);
+  color: white;
+  transform: scale(1.03);
+}
+
+/* 모바일 터치 액션 처리 */
+.resume-check-card:active {
+  background: rgb(18, 29, 49);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.resume-check-card:active .resume-check-card__button {
+  background: rgb(69, 84, 115);
+  color: white;
+}
+
+.resume-check-card:active .resume-check-card__description {
+  color: white;
+}
+
+.resume-check-card:active .resume-check-card__image {
+  filter: brightness(0) invert(1);
+}
+
+.resume-check-card.touch-active {
+  background: rgb(18, 29, 49);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.resume-check-card.touch-active .resume-check-card__button {
+  background: rgb(69, 84, 115);
+  color: white;
+}
+
+.resume-check-card.touch-active .resume-check-card__description {
+  color: white;
+}
+
+.resume-check-card.touch-active .resume-check-card__image {
+  filter: brightness(0) invert(1);
 }
 
 @media (max-width: 768px) {
-  /* 전체 배경 및 컨테이너 */
-  .resume-body {
-    /* 상단 여백을 조금 줄이고, 최소 높이를 자동으로 */
-    padding-top: 10vh;
-    min-height: auto;
+  .resume-check-main {
+    margin-top: 32px;
   }
 
-  .resume-container {
-    /* 상단 마진 및 패딩을 줄여 내용이 너무 아래로 밀리지 않도록 함 */
-    margin-top: 10vh;
-    padding: 10px;
-    gap: 40px;
-    min-height: auto;
+  .resume-check-header {
+    margin-bottom: 32px;
   }
 
-  /* 텍스트 관련 */
-  .header {
-    margin-top: 40px;
+  .resume-check-header__title {
+    font-size: 24px;
   }
-  .text-box h2 {
-    font-size: 32px;
+
+  .resume-check-header__subtitle {
+    font-size: 12px;
+  }
+
+  .resume-check-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-block: 24px;
+    gap: 24px;
+  }
+
+  .resume-check-card {
+    background: #eceff4;
+    width: 90%;
+    padding: 24px;
+    border-radius: 16px;
+    max-width: 380px;
+  }
+  .resume-check-card__image {
+    width: 64px;
+    margin: 32px 0;
+  }
+
+  .resume-check-card__button {
+    width: 100%;
+    max-width: 224px;
+    padding: 12px;
+    color: rgb(137, 149, 171);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: white;
+    transition: all 0.3s ease-in-out;
     margin-bottom: 16px;
   }
-  .text-box p {
-    font-size: 16px;
-  }
 
-  /* 카드 컨테이너와 카드 */
-  .card-container {
-    flex-direction: column;
-    gap: 20px;
-    max-width: 100%;
-    margin-bottom: 100px;
-    padding: 0 10px;
-  }
-  .card {
-    width: 90% !important;
-    height: auto !important;
-    padding: 20px;
-  }
-  .card img {
-    /* 이미지 크기를 줄여 여백도 축소 */
-    width: 100px;
-    height: 100px;
-    margin-top: 30px;
-    margin-bottom: 20px;
-  }
-
-  /* 버튼 */
-  .btnF {
-    width: 90%;
-    height: 50px;
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-}
-
-/* 추가로 아주 작은 화면 대응 (예: 모바일 480px 이하) */
-@media (max-width: 480px) {
-  .text-box h2 {
-    font-size: 28px;
-  }
-  .text-box p {
-    font-size: 14px;
-  }
-  .btnF {
-    width: 95%;
-    height: 45px;
-    font-size: 14px;
+  .resume-check-card__description {
+    font-size: 10px;
   }
 }

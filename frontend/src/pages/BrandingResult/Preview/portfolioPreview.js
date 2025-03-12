@@ -18,6 +18,12 @@ const PortfolioPreview = ({ kitColor, tagline, hashtags }) => {
                             <div className="portfolio-preview-hashtag-chip" style={{ color: kitColor }}>{hashtag}</div>
                         ))}
                     </div>
+                    <div className="portfolio-preview-contact-list">
+                        <p className="portfolio-preview-contact-title">Contact</p>
+                        <p className="portfolio-preview-url">https://www.example.com/</p>
+                        <p className="portfolio-preview-tel">(+82) 10 XXXX XXXX</p>
+                        <p className="portfolio-preview-email">example@example.com</p>
+                    </div>
                 </div>
             </div>
         </>
