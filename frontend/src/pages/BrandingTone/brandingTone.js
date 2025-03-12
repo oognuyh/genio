@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import ProgressSteps from "../../components/progressSteps";
 import LoadingScreen from "../../components/loadingScreen";
+import ProgressSteps from "../../components/progressSteps";
 
-import checkIcon from "../../assets/check.png";
 import checkWhiteIcon from "../../assets/check-white.png";
+import checkIcon from "../../assets/check.png";
 
 import "./brandingTone.css";
 
@@ -58,85 +58,88 @@ const BrandingTone = () => {
       let isProcessing = false;
 
       const response = await fetch(`/api/v1/cards/stream`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(resumeData)
-      })
+        body: JSON.stringify(resumeData),
+      });
       const reader = response.body
         .pipeThrough(new TextDecoderStream())
         .getReader();
-       
+
       // 지연 함수
-      const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-       
+      const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
       // 메시지 처리 함수
       const processMessageQueue = async () => {
- 
-         if (isProcessing || messageQueue.length === 0) return;
-         
-         isProcessing = true;
- 
-         while (messageQueue.length > 0) {
-           const data = messageQueue.shift();
-           
-           try {
-             const response = JSON.parse(data);
-             console.log("파싱된 객체:", response);
-             
-             setProgessMessage(response.message);
-             
-             if (response.type === 'completed' || response.type === 'failed') {
-               
-               await delay(1500);
-               
-               setIsLoading(false);
-               
-               if (response.type === 'completed' && response.result) {
-                 navigate("/branding-result", { state: response.result });
-               }
-               
-               break;
-             }
-             
-             await delay(1500);
-             
-           } catch (err) {
-             console.error("메시지 처리 중 오류:", err);
-             setProgessMessage("알 수 없는 오류가 발생했어요. 다시 시도해주세요.");
-             await delay(1500);
-             
-             setIsLoading(false);
-             break;
-           }
-         }
- 
-         isProcessing = false;
+        if (isProcessing || messageQueue.length === 0) return;
+
+        isProcessing = true;
+
+        while (messageQueue.length > 0) {
+          const data = messageQueue.shift();
+
+          try {
+            const response = JSON.parse(data);
+            console.log("파싱된 객체:", response);
+
+            setProgessMessage(response.message);
+
+            if (response.type === "completed" || response.type === "failed") {
+              await delay(1500);
+
+              setIsLoading(false);
+
+              if (response.type === "completed" && response.result) {
+                navigate("/branding-result", {
+                  state: {
+                    resume: resumeData,
+                    kitData: response.result,
+                  },
+                });
+              }
+
+              break;
+            }
+
+            await delay(1500);
+          } catch (err) {
+            console.error("메시지 처리 중 오류:", err);
+            setProgessMessage(
+              "알 수 없는 오류가 발생했어요. 다시 시도해주세요."
+            );
+            await delay(1500);
+
+            setIsLoading(false);
+            break;
+          }
+        }
+
+        isProcessing = false;
       };
 
-      let buffer = '';
+      let buffer = "";
 
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
 
         buffer += value;
-  
-        const lines = buffer.split('\n');
-        buffer = lines.pop() || ''; 
-        
+
+        const lines = buffer.split("\n");
+        buffer = lines.pop() || "";
+
         for (const line of lines) {
-          console.log(line)
-          if (line.startsWith('data:')) {
-              
+          console.log(line);
+          if (line.startsWith("data:")) {
             messageQueue.push(line.substring(5));
           }
         }
         if (!isProcessing) {
           processMessageQueue();
         }
-      }      
+      }
     } catch (err) {
       setIsLoading(false);
       console.error("[onGenerateKit] 이력서 분석 중 오류 발생:", err);
@@ -193,7 +196,9 @@ const BrandingTone = () => {
           )}
         </div>
       </div>
-      {isLoading && <LoadingScreen currentStep={currentStep} message={progessMessage} />}
+      {isLoading && (
+        <LoadingScreen currentStep={currentStep} message={progessMessage} />
+      )}
     </>
   );
 };

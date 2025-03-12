@@ -11,7 +11,7 @@ body {
   /* genkit-page-default */
   display: flex;
   flex-direction: column;
-  
+
   overflow-x: hidden;
 
   padding: 150px 0px;
@@ -72,7 +72,6 @@ body {
 .kit-box {
   /* background */
   width: 820px;
-  height: 383.71px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -195,14 +194,16 @@ body {
 
 .popup-back-button:hover {
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(258.21deg,
-      #121d31 -85.49%,
-      #0e1221 -58.12%,
-      #455473 -30.76%,
-      #8995ab -3.39%,
-      #455473 39.61%,
-      #0e1221 78.7%,
-      #121d31 106.07%);
+  background: linear-gradient(
+    258.21deg,
+    #121d31 -85.49%,
+    #0e1221 -58.12%,
+    #455473 -30.76%,
+    #8995ab -3.39%,
+    #455473 39.61%,
+    #0e1221 78.7%,
+    #121d31 106.07%
+  );
   animation: gradientMove 3s infinite linear;
 }
 

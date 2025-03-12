@@ -1,26 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
-import resizer from "react-image-file-resizer";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import popCloseImage from "../../assets/popup-close.png";
 import loadingImage2 from "../../assets/loading2.png";
+import popCloseImage from "../../assets/popup-close.png";
 
 import ProgressSteps from "../../components/progressSteps";
 
 import BasicPreview from "./Preview/basicPreview";
-import LinkedinPreview from "./Preview/linkedinPreview";
 import InstagramPreview from "./Preview/instagramPreview";
+import LinkedinPreview from "./Preview/linkedinPreview";
 import PortfolioPreview from "./Preview/portfolioPreview";
 
 import BasicKit from "../../components/Kits/basicKit";
-import LinkedinKit from "../../components/Kits/linkedinKit";
 import InstagramKit from "../../components/Kits/instagramKit";
+import LinkedinKit from "../../components/Kits/linkedinKit";
 import PortfolioKit from "../../components/Kits/portfolioKit";
 
 import CustomSection from "../../components/customSection";
 
+import { BrandingCardBox, styles } from "../../components/brandingCardBox";
+import LoadingScreen from "../../components/loadingScreen";
 import "./brandingResult.css";
 
 const BrandingResult = () => {
@@ -28,7 +29,18 @@ const BrandingResult = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const kitData = location.state || [];
+  const [progessMessage, setProgessMessage] = useState("");
+  const [isRegenerating, setIsRegenerating] = useState(false);
+  const [kitData, setKitData] = useState(
+    location.state.kitData
+      ? {
+          ...location.state.kitData,
+          website: "Website URL",
+          phone: "(+00) 000 0000 0000",
+          email: "genio@pinkfactory.com",
+        }
+      : {}
+  );
 
   const [isSaved, setIsSaved] = useState(false);
   const [popupImg, setPopupImg] = useState(null);
@@ -36,6 +48,7 @@ const BrandingResult = () => {
   const userName = kitData.name;
   const position = kitData.position;
   const tagline = kitData.tagline;
+  const resume = location.state.resume || {};
 
   const [platforms, setPlatforms] = useState([
     "기본",
@@ -43,6 +56,7 @@ const BrandingResult = () => {
     "인스타그램",
     "포트폴리오",
   ]);
+
   const [colors, setColors] = useState(kitData.colors.map((e) => e.value));
 
   const [hashtags, setHashtags] = useState(
@@ -54,11 +68,10 @@ const BrandingResult = () => {
   const [kitTypo, setKitTypo] = useState("Pretendard"); // 선택 타이포그래피
 
   const [fileExt, setFileExt] = useState("png");
-  const [fileWidth, setFileWidth] = useState(1020);
-  const [fileHeight, setFileHeight] = useState(306);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [isShifted, setIsShifted] = useState(false);
+  const [isRegeneratingAlertOpen, setIsRegeneratingAlertOpen] = useState(false);
 
   const biography = kitData.biography;
 
@@ -66,78 +79,138 @@ const BrandingResult = () => {
     console.log(kitData);
   }, []);
 
-  const resizeFile = (file, fileInfo) =>
-    new Promise((resolve) => {
-      resizer.imageFileResizer(
-        file,
-        fileInfo.width,
-        fileInfo.height,
-        `${fileInfo.ext}`,
-        999,
-        0,
-        (uri) => {
-          resolve(uri);
-        },
-        "blob",
-        fileInfo.width,
-        fileInfo.height
-      );
-    });
-
-  const onClickPlatform = (platform) => {
-    setKitPlatform(platform);
-    const platformIdx = platforms.findIndex((e) => e == platform);
-
-    switch (platformIdx) {
-      case 0:
-        setFileWidth(1020);
-        setFileHeight(306);
-        break;
-      case 1:
-        setFileWidth(1584);
-        setFileHeight(396);
-        break;
-      case 2:
-        setFileWidth(1080);
-        setFileHeight(1080);
-        break;
-      case 3:
-        setFileWidth(1920);
-        setFileHeight(1080);
-        break;
-    }
-  };
-
   const onDownloadBtn = async () => {
     try {
-      setIsPreviewOpen(true)
+      setIsPreviewOpen(true);
 
       const kit = document.getElementById("branding-kit");
-      const previewKit = document.getElementById("branding-preview-kit");
 
       const fileName = "genio_kit";
       const fileInfo = {
         ext: fileExt,
-        width: previewKit.width * 0.1,
-        height: previewKit.height * 0.1,
       };
 
       setIsSaved(false);
-      setIsGenerating(true)
+      setIsGenerating(true);
 
-      const [kitBlob, previewBlob] = await Promise.all([
-        domtoimage.toBlob(kit),
-        domtoimage.toBlob(previewKit)
+      const [kitBlob] = await Promise.all([
+        domtoimage.toBlob(kit, {
+          width: styles[kitPlatfrom].width,
+          height: styles[kitPlatfrom].height,
+          style: {
+            transform: "scale(1)",
+            transformOrigin: "top left",
+            width: styles[kitPlatfrom].width,
+            height: styles[kitPlatfrom].height,
+          },
+        }),
       ]);
 
-
-      setPopupImg(window.URL.createObjectURL(previewBlob));
-      setIsGenerating(false)
+      setPopupImg(window.URL.createObjectURL(kitBlob));
+      setIsGenerating(false);
 
       saveAs(kitBlob, `${fileName}.${fileInfo.ext}`);
       setIsSaved(true);
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const regenerateCard = async () => {
+    try {
+      setIsRegenerating(true);
+
+      delete resume.resumeId;
+
+      const messageQueue = [];
+      let isProcessing = false;
+
+      const response = await fetch(`/api/v1/cards/stream`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(resume),
+      });
+      const reader = response.body
+        .pipeThrough(new TextDecoderStream())
+        .getReader();
+
+      // 지연 함수
+      const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+      // 메시지 처리 함수
+      const processMessageQueue = async () => {
+        if (isProcessing || messageQueue.length === 0) return;
+
+        isProcessing = true;
+
+        while (messageQueue.length > 0) {
+          const data = messageQueue.shift();
+
+          try {
+            const response = JSON.parse(data);
+            console.log("파싱된 객체:", response);
+
+            setProgessMessage(response.message);
+
+            if (response.type === "completed" || response.type === "failed") {
+              await delay(1500);
+
+              setIsRegenerating(false);
+
+              if (response.type === "completed" && response.result) {
+                setKitData({
+                  ...response.result,
+                  website: "Website URL",
+                  phone: "(+00) 000 0000 0000",
+                  email: "genio@pinkfactory.com",
+                });
+              }
+
+              break;
+            }
+
+            await delay(1500);
+          } catch (err) {
+            console.error("메시지 처리 중 오류:", err);
+            setProgessMessage(
+              "알 수 없는 오류가 발생했어요. 다시 시도해주세요."
+            );
+            await delay(1500);
+
+            setIsRegenerating(false);
+            break;
+          }
+        }
+
+        isProcessing = false;
+      };
+
+      let buffer = "";
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        buffer += value;
+
+        const lines = buffer.split("\n");
+        buffer = lines.pop() || "";
+
+        for (const line of lines) {
+          console.log(line);
+          if (line.startsWith("data:")) {
+            messageQueue.push(line.substring(5));
+          }
+        }
+        if (!isProcessing) {
+          processMessageQueue();
+        }
+      }
+    } catch (err) {
+      setIsRegenerating(false);
+      console.error("[onGenerateKit] 이력서 분석 중 오류 발생:", err);
     }
   };
 
@@ -242,55 +315,151 @@ const BrandingResult = () => {
         </div>
 
         <div className="kit-custom-wrapper">
-          <CustomSection platforms={platforms} colors={colors}
-            kitPlatform={kitPlatfrom} kitColor={kitColor} kitTypo={kitTypo}
-            setKitPlatform={setKitPlatform} setKitColor={setKitColor} setKitTypo={setKitTypo}
-            setIsShifted={setIsShifted} />
-          <div className={`kit-box ${isShifted ? "shifted" : ""}`}
-            style={{"font-family": kitTypo}}>
-          {/* 조건부 키트 프리뷰 렌더링 */}
-          {renderPreview()}
-        </div>
-      </div>
-
-      {/* 저장 버튼 */}
-      <button className="save-button" onClick={onDownloadBtn}>
-        이미지로 저장하기
-      </button>
-
-      {isPreviewOpen && (
-        <div className="popup-overlay">
-          <div className="popup-save-content">
-            <h3 className="popup-intro1">{isGenerating ? '이미지 생성 중' : '이미지 저장 완료!'}</h3>
-            <h3 className="popup-intro2">{isGenerating ? '제니오가 열심히 이미지를 만들고 있어요!' : `이제 자신있게 ${userName}님을 세상에 보여주세요 💫`}</h3>
-            <button
-              onClick={() => setIsPreviewOpen(false)}
-              className="popup-close-button">
-              <img src={popCloseImage} width="20px" height="20px" alt="close" />
-            </button>
-
-            {isGenerating ?
-              (<div>
-                <img src={loadingImage2} alt="생성 중" className="loading-image1" style={{
-                  maxWidth: '80%',
-                  maxHeight: '80%',
-                  objectFit: 'contain'
-                }} />
-              </div>) :
-              <img src={popupImg} alt="card" />}
-
-            <button
-              onClick={() => navigate('/')}
-              className="popup-back-button">
-              처음으로 돌아가기
-            </button>
+          <CustomSection
+            platforms={platforms}
+            colors={colors}
+            kitPlatform={kitPlatfrom}
+            kitColor={kitColor}
+            kitTypo={kitTypo}
+            setKitPlatform={setKitPlatform}
+            setKitColor={setKitColor}
+            setKitTypo={setKitTypo}
+            setIsShifted={setIsShifted}
+          />
+          <div
+            className={`kit-box ${isShifted ? "shifted" : ""}`}
+            style={{ "font-family": kitTypo }}
+          >
+            {/* 조건부 키트 프리뷰 렌더링 */}
+            <BrandingCardBox
+              platform={kitPlatfrom}
+              kitColor={kitColor}
+              tagline={kitData.tagline}
+              biography={kitData.biography}
+              hashtags={kitData.hashtags.map((hashtag) => hashtag.value)}
+              name={kitData.name}
+              website={kitData.website}
+              fontFamily={kitTypo}
+              phone={kitData.phone}
+              email={kitData.email}
+              onChange={(field, text) => {
+                console.log(field, text);
+                setKitData({ ...kitData, [field]: text });
+              }}
+            />
           </div>
         </div>
-      )}
 
-      {/* 이미지 저장을 위한 히든 컴포넌트 */}
-      {renderKit()}
-    </div >
+        {/* 저장 버튼 */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "16px",
+          }}
+        >
+          <button
+            className="save-button"
+            style={{
+              background: "#ECEFF4",
+              color: "#8995AB",
+            }}
+            onClick={() => setIsRegeneratingAlertOpen(true)}
+          >
+            재생성
+          </button>
+          <button className="save-button" onClick={onDownloadBtn}>
+            이미지로 저장하기
+          </button>
+        </div>
+
+        {isPreviewOpen && (
+          <div className="popup-overlay">
+            <div className="popup-save-content">
+              <h3 className="popup-intro1">
+                {isGenerating ? "이미지 생성 중" : "이미지 저장 완료!"}
+              </h3>
+              <h3 className="popup-intro2">
+                {isGenerating
+                  ? "제니오가 열심히 이미지를 만들고 있어요!"
+                  : `이제 자신있게 ${userName}님을 세상에 보여주세요 💫`}
+              </h3>
+              <button
+                onClick={() => setIsPreviewOpen(false)}
+                className="popup-close-button"
+              >
+                <img
+                  src={popCloseImage}
+                  width="20px"
+                  height="20px"
+                  alt="close"
+                />
+              </button>
+
+              {isGenerating ? (
+                <div>
+                  <img
+                    src={loadingImage2}
+                    alt="생성 중"
+                    className="loading-image1"
+                    style={{
+                      maxWidth: "80%",
+                      maxHeight: "80%",
+                      objectFit: "contain",
+                    }}
+                  />
+                </div>
+              ) : (
+                <img src={popupImg} alt="card" width="90%" />
+              )}
+
+              <button
+                onClick={() => navigate("/")}
+                className="popup-back-button"
+              >
+                처음으로 돌아가기
+              </button>
+            </div>
+          </div>
+        )}
+
+        {isRegeneratingAlertOpen && (
+          <div className="popup-overlay">
+            <div className="popup-save-content">
+              <h3 className="popup-intro1">
+                재생성을 선택하면 이전 퍼스널 브랜딩 키트는 지워져요.
+                <br />
+                그래도 괜찮으신가요?
+              </h3>
+              <button
+                onClick={() => setIsRegeneratingAlertOpen(false)}
+                className="popup-close-button"
+              >
+                <img
+                  src={popCloseImage}
+                  width="20px"
+                  height="20px"
+                  alt="close"
+                />
+              </button>
+
+              <button
+                onClick={() => {
+                  setIsRegeneratingAlertOpen(false);
+                  regenerateCard();
+                }}
+                className="popup-back-button"
+              >
+                재생성
+              </button>
+            </div>
+          </div>
+        )}
+
+        {isRegenerating && (
+          <LoadingScreen currentStep={4} message={progessMessage} />
+        )}
+      </div>
     </>
   );
 };
