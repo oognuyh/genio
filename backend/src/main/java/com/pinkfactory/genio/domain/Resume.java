@@ -19,6 +19,8 @@ public class Resume {
 
     private String jobCategory;
 
+    private String englishName;
+
     private String position;
 
     private String stage;

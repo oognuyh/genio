@@ -12,6 +12,7 @@ import java.util.List;
 @Schema(description = "Card generation request parameters")
 public record GenerateCardRequest(
         @Schema(description = "Name of the person", example = "John Doe") @NotBlank(message = "Name is required") String name,
+        String englishName,
         @Schema(description = "Career stage of the person", example = "Junior") String stage,
         @Schema(description = "Job category of the person", example = "Development") String jobCategory,
         @Schema(description = "Current or most recent position", example = "Full Stack Developer")

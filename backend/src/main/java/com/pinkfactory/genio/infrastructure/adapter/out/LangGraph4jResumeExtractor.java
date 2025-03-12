@@ -43,6 +43,10 @@ public class LangGraph4jResumeExtractor implements ResumeExtractor {
                         .<String>value("name")
                         .map(name -> name.replace("null", "").trim())
                         .orElse(null))
+                .englishName(generation
+                        .<String>value("englishName")
+                        .map(name -> name.replace("null", "").trim())
+                        .orElse(null))
                 .jobCategory(generation
                         .<String>value("jobCategory")
                         .map(name -> name.replace("null", "").trim())
