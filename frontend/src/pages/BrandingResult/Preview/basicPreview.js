@@ -4,7 +4,7 @@ import "./basicPreview.css"
 
 const BasicPreview = ({ kitColor, tagline, biography, hashtags }) => {
     return (
-        <>
+        <div>
             <p className="basic-kit-standard">1020 x 306</p>
             <div className="basic-preview-container">
                 <div id="branding-preview-kit" className="basic-preview-kit"
@@ -24,7 +24,7 @@ const BasicPreview = ({ kitColor, tagline, biography, hashtags }) => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

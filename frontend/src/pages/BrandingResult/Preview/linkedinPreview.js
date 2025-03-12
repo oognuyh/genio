@@ -4,7 +4,7 @@ import "./linkedinPreview.css"
 
 const LinkedInPreview = ({ kitColor, tagline, position, hashtags }) => {
     return (
-        <>
+        <div>
             <p className="linkedin-kit-standard">1584 x 396</p>
             <div className="linkedin-preview-container">
                 <div id="branding-preview-kit" className="linkedin-preview-kit"
@@ -24,7 +24,7 @@ const LinkedInPreview = ({ kitColor, tagline, position, hashtags }) => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
