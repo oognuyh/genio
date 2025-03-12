@@ -276,7 +276,7 @@
   .splash-container {
     height: auto;
     padding: 20px;
-    padding-bottom: 300px; /* 모바일용 여백 */
+    padding-bottom: 200px; /* 모바일용 여백 */
   }
   .splash-logo {
     width: 80px;
@@ -296,7 +296,7 @@
   .kit-basic {
     width: calc(90% - 40px) !important;
     padding: 20px;
-    min-height: 299px;
+    min-height: 150px;
     position: fixed;
     bottom: 0;
     left: 50%;
@@ -315,7 +315,7 @@
   }
   .kit-basic .title-text {
     font-size: 23.33px;
-    margin-top: 126.13px;
+    margin-top: 50px;
   }
   .kit-basic .des-text {
     display: none;
